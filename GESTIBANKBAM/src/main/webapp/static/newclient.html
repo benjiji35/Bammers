@@ -5,14 +5,14 @@
 	<meta http-equiv="Content-Language" content="fr" />
 	<meta name="author" content="Les Bammers" />
 	<link href ="style/css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="home.css" rel="stylesheet" media="all" type="text/css"> 
+	<link href="style/css/home.css" rel="stylesheet" media="all" type="text/css"> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Devenir client</title>
 </head>
 <header>
 <a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
-	<nav class="navbar navbarnavbar">
+	<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
     <ul class="nav navbar-nav">
@@ -22,67 +22,120 @@
       <li><a href="#">Services</a></li>
       <li><a href="#">Actualités</a></li>
     </ul>
+    </div>
   </div>
+  
 </nav>
-	<form id="connexion" class ="navbar - form pull - right ">
-		<button type =" submit " class ="btn btn - primary btn -xs">
-			<span class =" glyphicon glyphicon -eye - open "></span>
-			Devenir client
-		</button>
-		<button type =" submit " class ="btn btn - primary btn -xs">
-			<span class =" glyphicon glyphicon -eye - open "></span>
-			Se connecter
-		</button>
-	</form>
+	<div id="connexion" class ="navbar">
+		<input type="button" value="Devenir client" class ="btn btn-default"   onclick="javascript:location.href='newclient.html'">
+		<input type="button" value="Connexion" class ="btn btn-default"   onclick="javascript:location.href='#'">
+	</div>
 </header>
 <body>
-<div class="container">
-  <h2>Devenir client</h2>
-  <form class="form-horizontal">
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="nom">Nom</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="prenom">Prénom</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
-    </div>
-  	</div>
-  	<div class="form-group">
-    <label class="control-label col-sm-2" for="prenom">Prénom</label>
-    <div class="col-sm-3">
-      <input class="datepicker" data-date-format="mm/dd/yyyy">
-    </div>
-  	</div>
-
-	<div class="form-group">
-	  <label class="control-label col-sm-2" for="email">Email:</label>
-	  <div class="col-sm-3">
-	    <input type="email" class="form-control" id="email" placeholder="Enter email">
-	  </div>
-	</div>
-	<div class="form-group">
-	  <label class="control-label col-sm-2" for="pwd">Password:</label>
-	  <div class="col-sm-3">          
-	    <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-	  </div>
-	</div>
-	<div class="form-group">        
-	  <div class="col-sm-offset-2 col-sm-10">
-	    <div class="checkbox">
-	      <label><input type="checkbox"> Remember me</label>
+	<div class="container">
+	  <h2>Devenir client</h2>
+	  <form class="form-horizontal">
+	   <div class="form-group">
+	        <label class="control-label col-sm-2" for="nom">Nom</label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
 	    </div>
 	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="prenom">Prénom</label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+	    </div>
+  		</div>	
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="date">Date de naissance : </label>
+	    <div class="col-sm-3">
+	      <input type="date" class="form-control" id="date" placeholder="Entrez votre date de naissance">
+	    </div>
+  		</div>	
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="adresse">Adresse : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse">
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="date">Ville : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville">
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="date">Code Postal : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="date" placeholder="Entrez votre code postal">
+	    </div>
+  		</div>
+  		<div class="form-group">
+		  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
+		  <div class="col-sm-3">
+		    <select class="form-control" id="sm">
+	        <option>Célibataire</option>
+	        <option>Marié(e)</option>
+	        <option>Divorcé(e)</option>
+	        <option>veuf(ve)</option>
+	      </select>
+		  </div>
+		</div>
+		<div class="form-group">
+	    <label class="control-label col-sm-2" for="enfants">Nombre d'enfants : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants">
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="pro">Profession : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="pro" placeholder="Entrez votre profession">
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="revenus">Vos revenus mensuels : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="revenus" placeholder="Entrez vos revenus mensuelss">
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="file">Vos 3 derniers bulletins de salaire : </label>
+	    <div class="col-sm-3">
+	      <input type="file" class="form-control" id="file" value="fichiers" multiple>
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="dom">Votre justificatif de domicile : </label>
+	    <div class="col-sm-3">
+	      <input type="file" class="form-control" id="dom">
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="cni">Votre pièce d'identité : </label>
+	    <div class="col-sm-3">
+	      <input type="file" class="form-control" id="cni">
+	    </div>
+  		</div>
+		<div class="form-group">
+		  <label class="control-label col-sm-2" for="email">Email:</label>
+		  <div class="col-sm-3">
+		    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : ">
+		  </div>
+		</div>
+		<div class="form-group">
+		  <label class="control-label col-sm-2" for="pwd">Mot de passe : </label>
+		  <div class="col-sm-3">          
+		    <input type="password" class="form-control" id="pwd" placeholder="Entrez votre mot de passe : ">
+		  </div>
+		</div>
+		<div class="form-group">        
+		  <div class="col-sm-offset-2 col-sm-10">
+		    <button type="submit" class="btn btn-default">Valider ma demande</button>
+		  </div>
+		</div>
+	  </form>
 	</div>
-	<div class="form-group">        
-	  <div class="col-sm-offset-2 col-sm-10">
-	    <button type="submit" class="btn btn-default">Submit</button>
-	  </div>
-	</div>
-  </form>
-</div>
 </body>
 </html>

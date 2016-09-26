@@ -3,23 +3,31 @@ header{
 	background-color: #CC1D2A;
 	display: flex;
 	justify-content: center;
+	
 }
 #logo{
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 140px;
+	max-width:140px ;
 	height: auto;
 	}
 
-.navbar-header{
+nav.navbar{
+	margin-top: auto;
+	margin-bottom: auto;
 	background-color: white;
-	margin: auto;
-	margin : auto 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
-body{
-	display: block;
+.navbar-header{
+	
 }
+
+#connexion.navbar{
+	padding-top: 120px;
+}
+
 
 #titre{
 	text-align: center;
@@ -44,4 +52,8 @@ body{
 	display: flex;
 	justify-content: center;
 	padding: 20px;
+}
+
+h2{
+	color: blue;
 }
