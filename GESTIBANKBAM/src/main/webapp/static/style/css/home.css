@@ -1,0 +1,47 @@
+
+header{
+	background-color: #CC1D2A;
+	display: flex;
+	justify-content: center;
+}
+#logo{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 140px;
+	height: auto;
+	}
+
+.navbar-header{
+	background-color: white;
+	margin: auto;
+	margin : auto 10px;
+}
+
+body{
+	display: block;
+}
+
+#titre{
+	text-align: center;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  width: 20%;
+  margin: auto;
+}
+
+
+
+#change{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+
+}
+
+#resultat{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
