@@ -1,0 +1,24 @@
+h2{
+	color:blue;
+	font-family: myFirstFont;
+}
+
+#Logo
+{
+    /*background: rgba(76, 120, 150, 0.5);*/
+	position: relative;
+	width: 1140px; 	
+	height: 100px;
+}
+
+#Identifiant{
+	background: rgba(76, 175, 80, 0.25);
+	Position: relative;
+	width: 380px;
+
+}
+#MotedePasse{
+	background: rgba(76, 175, 80, 0.25);
+	position: relative;
+	width: 380px;
+}

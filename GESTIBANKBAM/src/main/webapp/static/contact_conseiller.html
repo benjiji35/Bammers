@@ -1,0 +1,62 @@
+<!DOCTYPE Html>
+
+<html>
+    <head>
+        <title>Contact Conseiller</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel= "stylesheet" type="text/css" href="CSS/bootstrap.css">
+        <link rel= "stylesheet" type="text/css" href="CSS/navigation_bar.css">
+    </head>
+    
+    <body class=container>
+        <header>
+            <img src="Images/Logo_TV_2015.png" alt="Logo de Banque"  class="img-circle"/>
+
+            <nav class="navbar navbar-inverse">                               
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Accueil</a></li>
+                        <li><a href="#">A Propos</a></li>
+                        <li><a href="#">Actualites</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div> 
+            </nav>  
+        </header>
+
+        <label>Vous etes ici->Accueil->Acceder a vos comptes-><a>Contacter</a></label> 
+        <br><br>
+        <h2>CONTACT VOTRE CONSIELLER</h2>
+        <br><br>
+
+        <form class="form-horizontal">
+
+        <p>
+            <label for="n1"><h3>Sujet</h3></label>
+            <select name="Sujet" class = "form-inline">
+                <option value="rdv">Rendez vous</option>
+                <option value="demande">Demande de overture de compte</option>
+                <option value="demande">Services</option>
+                <option value="demande">Autres</option>
+            </select>
+        </p>
+       
+        <p>
+            <label for="n2"><h3>Message</h3></label>
+            <textarea id="t3" name="msg" maxlength="200" rows="5" cols="40"></textarea>           
+        </p>
+        <br>
+        <p>
+            <input type="file" id="mesFichers"/>
+        </p>
+
+        <p>
+            <br><br>
+            <button type="button" class= "btn btn-success btn-sm">Envoyer</button>
+        </p>
+
+    </form>      
+    </body>
+</html>    
