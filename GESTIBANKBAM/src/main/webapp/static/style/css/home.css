@@ -18,6 +18,7 @@ nav.navbar{
 	background-color: white;
 	margin-left: 10px;
 	margin-right: 10px;
+	color:#CC1D2A;
 }
 
 .navbar-header{
@@ -56,4 +57,29 @@ nav.navbar{
 
 h2{
 	color: blue;
+	margin : 10px;
+}
+
+#newcl{
+	margin-top: 10px;
+}
+
+#gp_converted a{
+	color:white;
+}
+
+#webservice{
+	max-width : 400px;
+	margin:auto;
+	display:block;
+	justify-content:center; 
+	text-align: center;
+}
+
+#resultat{
+	
+	justify-content:center; 
+	margin:auto;
+	text-align: center;
+	font-size: 16;
 }
