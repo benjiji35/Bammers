@@ -1,0 +1,66 @@
+/* A APPLIQUER A L'ESPACE CLIENT, CONSEILLER et ADMIN */
+
+@CHARSET "ISO-8859-1";
+
+/* BLOC DE CONTROLE */
+
+body {
+	background-color: #CC1D2A;
+}
+
+#bloc_page {
+	margin: auto;
+}
+
+#bloc_control
+{
+	position: fixed;
+    width: 20%;
+    margin-top: 10px;
+    /*background-color: #CC1D2A;*/
+    display:flex;
+    justify-content: center;
+}
+
+header{
+	background-color: #CC1D2A;
+	display: flex;
+	/*justify-content: center; */
+}
+
+#logo{
+	float: left; 
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 140px;
+	height: auto;
+}
+
+#ctrl_nav {
+	background-color: #white;
+}
+
+section {
+	background-color: blue;
+}
+
+#disconnect {
+	position: fixed;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+
+
+#main_view {
+	position: relative;
+	background-color: white;
+}
+
+#navigation_help {
+	position: absolute;
+	padding-left: 200px;
+	margin-left: 200px;
+	display: flex;
+	justify-content: right;
+}

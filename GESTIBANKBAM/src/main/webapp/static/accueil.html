@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href ="style/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="style/css/control.css" rel="stylesheet" media="all" type="text/css"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" ></script>
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" >
+	<!--<script src="bower_components/angular-route/angular-route.min.js"></script> -->
+	<script src="bower_components/angular-route/angular-route.js"></script>
+
+	<script src="js/app.js"></script>
+	<script src="js/controller-route.js"></script>
+	<script src="js/config-route.js"></script>
+
+	<title>BamBank - Accueil</title>
+</head>
+<body nb-app="myApp">
+<header>
+<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
+<div class ="navbar - form pull - right">
+		<div id="disconnect" class="container">
+			<div class="row">
+				<div class="col-lg-11">&nbsp;</div>
+				<div class="col-lg-1">
+					<button type="submit" class ="btn btn - primary btn -xs">
+						<span class="glyphicon glyphicon -eye - open"></span>
+						Déconnexion
+					</button>
+				</div>
+			</div>
+		</div>
+</div>
+
+</header>
+<div id="bloc_page">
+	<div class="bloc_control">
+		<nav id="ctrl_nav">
+			<div class="container-fluid">
+				<ul class="nav navbar-default navbar-left">
+				<!-- <ul class="nav nav-pills nav-stacked"> -->
+					<li class="active"><a href="#">Mes comptes</a></li>
+					<li><a href="#">Virements</a></li>
+					<li><a href="#">Notifications</a></li>
+					<li><a href="#">Effectuer une demande</a></li>
+					<li><a href="#">RIB</a></li>
+					<li><a href="#">Mes informations</a></li>
+					<li><a href="#">Contacter mon conseiller</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<section>
+		<div id="navigation_help">
+			<ul class="breadcrumb">
+				<li><a href="#">Accueil</a></li>
+				<li class="active">Mes comptes</li>
+			</ul>
+		</div>
+			<aside>
+				<div id="main_view"></div>
+			</aside>
+	</section>
+	
+</div>
+</body>
+</html>
