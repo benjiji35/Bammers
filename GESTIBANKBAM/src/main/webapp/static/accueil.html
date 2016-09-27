@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" ></script>
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" >
+	<!--  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" >-->
 	<!--<script src="bower_components/angular-route/angular-route.min.js"></script> -->
 	<script src="bower_components/angular-route/angular-route.js"></script>
 
@@ -21,30 +21,17 @@
 
 	<title>BamBank - Accueil</title>
 </head>
-<body nb-app="myApp">
 <header>
 <a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
-<div class ="navbar - form pull - right">
-		<div id="disconnect" class="container">
-			<div class="row">
-				<div class="col-lg-11">&nbsp;</div>
-				<div class="col-lg-1">
-					<button type="submit" class ="btn btn - primary btn -xs">
-						<span class="glyphicon glyphicon -eye - open"></span>
-						Déconnexion
-					</button>
-				</div>
-			</div>
-		</div>
-</div>
-
+<button type="submit" class ="btn btn - primary btn -xs" id="#deco">Déconnexion</button>
 </header>
-<div id="bloc_page">
+<body nb-app="myApp">
+<!--  <div id="bloc_page">
 	<div class="bloc_control">
 		<nav id="ctrl_nav">
 			<div class="container-fluid">
 				<ul class="nav navbar-default navbar-left">
-				<!-- <ul class="nav nav-pills nav-stacked"> -->
+				<ul class="nav nav-pills nav-stacked"> 
 					<li class="active"><a href="#">Mes comptes</a></li>
 					<li><a href="#">Virements</a></li>
 					<li><a href="#">Notifications</a></li>
@@ -69,6 +56,75 @@
 			</aside>
 	</section>
 	
-</div>
+</div>-->
+ <div class="row col-sm-12" id="contenu">
+        <nav class="col-sm-2" id="menu">          
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#">Mes comptes</a></li>
+			<li><a href="#">Virements</a></li>
+			<li><a href="#">Notifications</a></li>
+			<li><a href="#">Effectuer une demande</a></li>
+			<li><a href="#">RIB</a></li>
+			<li><a href="#">Mes informations</a></li>
+			<li><a href="#">Contacter mon conseiller</a></li>
+          </ul>
+        </nav>
+        <section class="col-sm-10">
+          <div class="panel panel-default">
+            <div class="panel-header">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#">Accueil</a></li>
+						<li class="active">Mes comptes</li>
+					</ul>
+				</div>
+	            <div class="panel-body">
+	            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+
+eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas 
+
+sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, 
+
+qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore 
+
+magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut 
+
+aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, 
+
+vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+
+              <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+
+eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia 
+
+voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro 
+
+quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut 
+
+labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit 
+
+laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil 
+
+molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+
+              <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+
+eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia 
+
+voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro 
+
+quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut 
+
+labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit 
+
+laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam 
+
+nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+	            </div>
+	        </div>
+          </div>
+        </section>
+      </div>
+    </div>
 </body>
 </html>

@@ -4,8 +4,11 @@
 
 /* BLOC DE CONTROLE */
 
-body {
+html{
 	background-color: #CC1D2A;
+}
+body{
+	height:80%;
 }
 
 #bloc_page {
@@ -24,25 +27,20 @@ body {
 
 header{
 	background-color: #CC1D2A;
-	display: flex;
+   	width: 100%;
+    margin: auto;
+    padding : 10px;
 	/*justify-content: center; */
 }
 
 #logo{
 	float: left; 
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	width: 140px;
+	max-width:140px ;
 	height: auto;
 }
 
 #ctrl_nav {
 	background-color: #white;
-}
-
-section {
-	background-color: blue;
 }
 
 #disconnect {
@@ -51,16 +49,30 @@ section {
 	margin-right: 10px;
 }
 
+nav{
+	padding : 10px;
+	background-color: #CC1D2A;
+	min-height:100vh;
+}
 
-#main_view {
-	position: relative;
+nav ul{
 	background-color: white;
 }
 
-#navigation_help {
-	position: absolute;
-	padding-left: 200px;
-	margin-left: 200px;
-	display: flex;
-	justify-content: right;
+a{
+	color :#CC1D2A;
+}
+#contenu{
+	min-height:80%;
+	background-color: #CC1D2A;
+	display:inline-block;
+
+}
+
+header input{
+	float:right;
+}
+
+section{
+	padding:10px;
 }
