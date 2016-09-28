@@ -6,23 +6,25 @@
 	Il incombe à chaque développeur de mettre à jour la liste des commandes 
 	définie ci-dessous et de veiller d’éviter tout conflit.
 
-+====================================================+=======+================+
-|    Description                                     | CODE  |    VERB        |
-+====================================================+=======+================+
-| Contacter un conseiller	                         |   0   |  contact       |
-| Se connecter                                       |   1   |  connect       |
-| Inscription nouveau client                         |   2   |  register      |
-| Ajout nouveau conseiller	                         |   3   |  add           |
-| Demander des informations additionnelles	         |   4   |  ask           |
-| Voir le détail des comptes du client  	         |   5   |  see           |
-| Effectuer un virement  	                         |   6   |  transfer      |
-| Consulter la liste des notifications               |   7   |  notify        |
-| Effectuer une demande                              |   8   |  request       |
-| Impression de RIB                                  |   9   |  print         |
-| Consulter et mettre à jour les nfos personnelles   |  10   |  update        |
-| Effectuer une recherche (espace Conseiller)        |  11   |  search_ag     |
-| Effectuer une recherche (espace Admin)             |  12   |  search_ad     |
-+====================================================+=======+================+
++===================================================================+=======+================+
+|     Description                                                   | CODE  |    VERB        |
++===================================================================+=======+================+
+| Contacter un conseiller                                           |   0   |  contact       |
+| Se connecter                                                      |   1   |  connect       |
+| Inscription nouveau client                                        |   2   |  register      |
+| Ajout nouveau conseiller                                          |   3   |  add           |
+| Demander des informations additionnelles                          |   4   |  ask           |
+| Voir le détail des comptes du client                              |   5   |  see           |
+| Effectuer un virement                                             |   6   |  transfer      |
+| Consulter la liste des notifications                              |   7   |  notify        |
+| Effectuer une demande                                             |   8   |  request       |
+| Impression de RIB                                                 |   9   |  print         |
+| Consulter et/ou mettre à jour les informations personnelles       |  10   |  update        |
+| Effectuer une recherche (espace Conseiller)                       |  11   |  search_ag     |
+| Effectuer une recherche (espace Admin)                            |  12   |  search_ad     |
+| Consulter la liste des demandes en attente (espace Conseiller)    |  13   |  consult_ag    |
+| Consulter la liste des demandes en attente (espace Admin)         |  14   |  consult_ad    |
++===================================================================+=======+================+
 */
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -66,6 +68,13 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/search_ad', {
 			templateUrl: 'views/search_ad.html',
 			controller: 'search_adCtrl'})
+		.when('/consult_ag', {
+			templateUrl: 'views/consult_ag.html',
+			controller: 'search_adCtrl'})
+		.when('/search_ad', {
+			templateUrl: 'views/search_ad.html',
+			controller: 'search_adCtrl'})
+
 		.otherwise({redirectTo: '/'})
 }]);
 /*
