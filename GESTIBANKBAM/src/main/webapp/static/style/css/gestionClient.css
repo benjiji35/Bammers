@@ -1,7 +1,3 @@
-div{
-    margin: 0px;
-    padding: 0px;
-}
 .parent{
     width: auto;
     display: block;
@@ -12,15 +8,5 @@ div{
     width: 50%;
     float: left;
     height: 400px;
-}
-.c1{
-}
-.c2{
-}
-
-.colonne input{
-    width: 40%;
-}
-.colonne select{
-    width: 40%;
+    padding : 5px;
 }
