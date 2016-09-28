@@ -2,29 +2,30 @@
 	CONVENTION UTILISEE POUR LES COMMANDES DE ROUTAGE.
 
 	Pour l'instant seul le verbe de la commande est utilisé (cf. colonne VERB).
+	Le champs 'REVOKED' indique que la fonctionnalité a été révoquée (si positionné à 'yes').
 
 	Il incombe à chaque développeur de mettre à jour la liste des commandes 
 	définie ci-dessous et de veiller d’éviter tout conflit.
 
-+===================================================================+=======+================+
-|     Description                                                   | CODE  |    VERB        |
-+===================================================================+=======+================+
-| Contacter un conseiller                                           |   0   |  contact       |
-| Se connecter                                                      |   1   |  connect       |
-| Inscription nouveau client                                        |   2   |  register      |
-| Ajout nouveau conseiller                                          |   3   |  add           |
-| Demander des informations additionnelles                          |   4   |  ask           |
-| Voir le détail des comptes du client                              |   5   |  see           |
-| Effectuer un virement                                             |   6   |  transfer      |
-| Consulter la liste des notifications                              |   7   |  notify        |
-| Effectuer une demande                                             |   8   |  request       |
-| Impression de RIB                                                 |   9   |  print         |
-| Consulter et/ou mettre à jour les informations personnelles       |  10   |  update        |
-| Effectuer une recherche (espace Conseiller)                       |  11   |  search_ag     |
-| Effectuer une recherche (espace Admin)                            |  12   |  search_ad     |
-| Consulter la liste des demandes en attente (espace Conseiller)    |  13   |  consult_ag    |
-| Consulter la liste des demandes en attente (espace Admin)         |  14   |  consult_ad    |
-+===================================================================+=======+================+
++===================================================================+=======+================+=========+
+|     Description                                                   | CODE  |    VERB        | REVOKED |
++===================================================================+=======+================+=========+
+| Contacter un conseiller                                           |   0   |  contact       |   no    |
+| Se connecter                                                      |   1   |  connect       |   yes   |
+| Inscription nouveau client                                        |   2   |  register      |   no    |
+| Ajout nouveau conseiller                                          |   3   |  add           |   no    |
+| Demander des informations additionnelles                          |   4   |  ask           |   no    |
+| Voir le détail des comptes du client                              |   5   |  see           |   no    |
+| Effectuer un virement                                             |   6   |  transfer      |   no    |
+| Consulter la liste des notifications                              |   7   |  notify        |   no    |
+| Effectuer une demande                                             |   8   |  request       |   no    |
+| Impression de RIB                                                 |   9   |  print         |   no    |
+| Consulter et/ou mettre à jour les informations personnelles       |  10   |  update        |   no    |
+| Effectuer une recherche (espace Conseiller)                       |  11   |  search_ag     |   no    |
+| Effectuer une recherche (espace Admin)                            |  12   |  search_ad     |   no    |
+| Consulter la liste des demandes en attente (espace Conseiller)    |  13   |  consult_ag    |   no    |
+| Consulter la liste des demandes en attente (espace Admin)         |  14   |  consult_ad    |   no    |
++===================================================================+=======+================+=========+
 */
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -32,9 +33,9 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/contact', {
 			templateUrl: 'views/contact.html',
 			controller: 'contactCtrl'})
-		.when('/connect', {
+/*		.when('/connect', {
 			templateUrl: 'views/connect.html',
-			controller: 'connectCtrl'})
+			controller: 'connectCtrl'}) */
 		.when('/register', {
 			templateUrl: 'views/register.html',
 			controller: 'registerCtrl'})
@@ -77,7 +78,8 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/', {
 			templateUrl: 'views/see.html',
 			controller: 'search_seeCtrl'})
-		.otherwise({redirectTo: ''})
+
+		.otherwise({redirectTo: '/'})
 }]);
 /*
 app.config(['$routeProvider', function($routeProvider) {
