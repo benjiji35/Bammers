@@ -1,0 +1,75 @@
+<div class="panel-header">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#">Accueil</a></li>
+						<li class="active">Details Comptes</li>
+					</ul>
+				</div>
+</div>
+<div class="panel-body">
+	<legend>Fiche Client</legend>
+	<div class="parent">
+	    <div class="colonne c1">
+		    <label class="control-label" for="nom">Nom</label>
+		    <input type="text" class="form-control" id="nom" placeholder="">
+		    <label class="control-label" for="prenom">Prénom</label>
+		    <input type="text" class="form-control" id="prenom" placeholder="">
+		    <label class="control-label" for="date">Date de naissance : </label>
+		    <input type="date" class="form-control" id="date" placeholder="">
+		    <label class="control-label" for="adresse">Adresse : </label>
+		    <input type="text" class="form-control" id="adresse" placeholder="">
+		    <label class="control-label" for="ville">Ville : </label>
+		    <input type="text" class="form-control" id="ville" placeholder="">
+		    <label class="control-label" for="cp">Code Postal : </label>
+		    <input type="text" class="form-control" id="cp" placeholder="">
+	    </div>
+	    <div class="colonne c2">
+	    	<label class="control-label" for="sm">Situation matrimoniale : </label>
+		    <select class="form-control" id="sm">
+		        <option>Célibataire</option>
+		        <option>Marié(e)</option>
+		        <option>Divorcé(e)</option>
+		        <option>veuf(ve)</option>
+		    </select>
+		    <label class="control-label" for="enfants">Nombre d'enfants : </label>
+		    <input type="text" class="form-control" id="enfants" placeholder="">
+		    <label class="control-label" for="pro">Profession : </label>
+		    <input type="text" class="form-control" id="pro" placeholder="">
+		    <label class="control-label" for="revenus">Vos revenus mensuels : </label>
+		    <input type="text" class="form-control" id="revenus" placeholder="">
+		    <h4>Documents : </h4>
+		    <a href="#">Fiche de salaire 1</a><br>
+		    <a href="#">Fiche de salaire 2</a><br>
+		    <a href="#">Fiche de salaire 3</a><br>
+		    <a href="#">Justificatif de domicile</a><br>
+		    <a href="#">Justificatif d'identité</a>
+		</div>
+	</div>
+	 <div class="table-responsive">          
+	  <table class="table">
+	  <caption>Liste des comptes</caption>
+	    <thead>
+	      <tr>
+			<th>Compte</th>
+			<th>Numéro</th>
+			<th>Solde</th>
+			<th>Modifier découvert</th>
+			<th>Modifier seuil d'intérêts</th>
+			<th>Chéquier</th>
+			<th>Virement</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td>1</td>
+	        <td>001</td>
+	        <td>35€</td>
+	        <td><a href="#">500€</a></td>
+	        <td><a href="#">500€</a></td>
+	        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
+	        <td><input type='button' onClick='' value = 'Virement' class="btn btn-default"/></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	 </div>
+</div>

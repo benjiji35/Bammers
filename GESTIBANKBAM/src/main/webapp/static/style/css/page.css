@@ -16,5 +16,17 @@ tr:nth-child(even){background-color: darkgrey}
 
 h4{
 	color: red;
+}
 
+.parent{
+    width: auto;
+    display: block;
+    overflow: hidden;
+    box-shadow: 0px 1px 2px 0px #333;
+}
+.colonne{
+    width: 50%;
+    float: left;
+    height: 400px;
+    padding : 5px;
 }
