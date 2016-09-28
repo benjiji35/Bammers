@@ -40,6 +40,7 @@ app.controller('askCtrl', ['$scope', '$location',
 app.controller('seeCtrl', ['$scope', '$location', 
 	function($scope, $location) {
 		// todo
+	//$location.url("views/see.html");
 	}]);
 
 //transfer 

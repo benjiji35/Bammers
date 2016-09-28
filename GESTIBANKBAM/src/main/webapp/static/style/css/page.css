@@ -1,0 +1,20 @@
+legend{
+    color:blue;
+    font-family: myFirstFont;
+}
+
+ h3{
+    color:blue;
+    font-family: myFirstFont;
+}
+th {
+	background-color:  #CC1D2A;
+	color: white;
+}
+tr:nth-child(odd){background-color: lightgrey}
+tr:nth-child(even){background-color: darkgrey}
+
+h4{
+	color: red;
+
+}

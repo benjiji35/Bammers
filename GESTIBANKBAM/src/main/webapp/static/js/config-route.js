@@ -74,8 +74,10 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/search_ad', {
 			templateUrl: 'views/search_ad.html',
 			controller: 'search_adCtrl'})
-
-		.otherwise({redirectTo: '/'})
+		.when('/', {
+			templateUrl: 'views/see.html',
+			controller: 'search_seeCtrl'})
+		.otherwise({redirectTo: ''})
 }]);
 /*
 app.config(['$routeProvider', function($routeProvider) {
