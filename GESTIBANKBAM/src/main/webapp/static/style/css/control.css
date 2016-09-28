@@ -76,3 +76,41 @@ header input{
 section{
 	padding:10px;
 }
+legend{
+    color:blue;
+    font-family: myFirstFont;
+}
+
+ h3{
+    color:blue;
+    font-family: myFirstFont;
+}
+.tab{
+   	border-collapse: collapse;
+   	width: 100%;
+}
+
+th, td {
+   	text-align: left;
+   	padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.parent{
+    width: auto;
+    display: block;
+    overflow: hidden;
+    box-shadow: 0px 1px 2px 0px #333;
+}
+.colonne{
+    width: 50%;
+    float: left;
+    height: 400px;
+    padding : 5px;
+}
