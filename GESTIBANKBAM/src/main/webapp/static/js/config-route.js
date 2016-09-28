@@ -25,6 +25,8 @@
 | Effectuer une recherche (espace Admin)                            |  12   |  search_ad     |   no    |
 | Consulter la liste des demandes en attente (espace Conseiller)    |  13   |  consult_ag    |   no    |
 | Consulter la liste des demandes en attente (espace Admin)         |  14   |  consult_ad    |   no    |
+| Consulter la liste des clients (espace Conseiller)                |  15   |  list_ag       |   no    |
+| Consulter la liste des conseillers (espace Admin)                 |  16   |  list_ad       |   no    |
 +===================================================================+=======+================+=========+
 */
 
@@ -75,9 +77,15 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/search_ad', {
 			templateUrl: 'views/search_ad.html',
 			controller: 'search_adCtrl'})
+		.when('/list_ag', {
+			templateUrl: 'views/list_ag.html',
+			controller: 'list_agCtrl'})
+		.when('/list_ad', {
+			templateUrl: 'views/list_ad.html',
+			controller: 'list_adCtrl'})
 		.when('/', {
-			templateUrl: 'views/see.html',
-			controller: 'search_seeCtrl'})
+			templateUrl: 'views/root.html',
+			controller: 'rootCtrl'})
 
 		.otherwise({redirectTo: '/'})
 }]);

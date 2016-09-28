@@ -40,7 +40,8 @@ app.controller('askCtrl', ['$scope', '$location',
 app.controller('seeCtrl', ['$scope', '$location', 
 	function($scope, $location) {
 		// todo
-	//$location.url("views/see.html");
+		//$location.url("views/see.html");
+		$scope.role = 1;
 	}]);
 
 //transfer 
@@ -84,3 +85,44 @@ app.controller('search_adCtrl', ['$scope', '$location',
 	function($scope, $location) {
 		// todo
 	}]);
+
+//list_agCtrl
+app.controller('list_agCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+    	// todo
+		$scope.role = 2;
+    }]);
+
+
+//list_adCtrl
+app.controller('list_agCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+    	// todo
+		$scope.role = 3;
+    }]);
+
+//rootCtrl
+app.controller('rootCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+    	// todo
+		var role = sessionStorage.user.role;
+		var thePath = "/connect";
+
+		switch (role) {
+		case 1:
+			thePath = "/see";
+			break;
+		case 2:
+			thePath = "/list_ag";
+			break;
+		case 3:
+			thePath = "/list_ad";
+			break;
+		default:
+		}
+		console.log("rootCtrl::");
+		console.log("rootCtrl:: role="+role);
+		console.log("rootCtrl:: thePath="+thePath);
+		console.log("=============");
+		$location.path(thePath);
+    }]);

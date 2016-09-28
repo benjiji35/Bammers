@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href ="style/css/bootstrap.min.css" rel="stylesheet"/>
 	<link href="style/css/control.css" rel="stylesheet" media="all" type="text/css"> 
+	<link href="style/css/page.css" rel="stylesheet" media="all" type="text/css"> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -27,11 +28,13 @@
 </header>
 <body ng-app="myApp">
 <div class="row col-sm-12" id="contenu">
-        <nav class="col-sm-2" id="menu">          
+        <nav class="col-sm-2" id="menu">
+          <input type="hidden" ng-model="role" value="2">          
           <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#see">Demandes en cours</a></li>
-			<li><a href="#transfer">Mon profil</a></li>
-			<li><a href="#notify">Recherche</a></li>
+            <li class="active"><a href="#see">Clients</a></li>
+            <li><a href="#consult_ag">Demandes en attente</a></li>
+			<li><a href="#search_ag">Recherche</a></li>
+			<li><a href="#update">Mon profil</a></li>
           </ul>
         </nav>
         <section class="col-sm-10">
