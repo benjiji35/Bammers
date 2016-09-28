@@ -3,56 +3,58 @@
 <html>
 	<head>
 		<title>Page de connexion</title>
-		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel= "stylesheet" type="text/css" href="css/bootstrap.css">
-		<link rel= "stylesheet" type="text/css" href="css/se_connecter.css">
+		<meta http-equiv="Content-Type" content="charset=utf-8" />
+		<meta http-equiv="Content-Language" content="fr" />
+        <link rel= "stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel= "stylesheet" type="text/css" href="style/css/se_connecter.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
-<body class=container>
-	<div id="Logo">	
-		<header>                
-            <img src="Images/Logo_TV_2015.png" alt="Logo de Banque"  class="img-circle"/>   
-        </header>
-    </div> 
-   
-
-		<label>Vous etes ici->Accueil-><a>Acceder a vos comptes</a></label>
-		<br><br>
-		<h2>BIENVENUE SUR L'ESPACE DE CONNEXION</h2>
-		<br><br><br><br>
-	
-	<form class="form-horizontal">
-
+	  	
+			<header>
+				<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
+			</header>
+<body>
+		
+		<ul class =" breadcrumb ">
+            <li ><a href ="index.html">Accueil </a></li >
+            <li class =" active " >Acceder a vos comptes</li >
+        </ul >
+		<br><br><br>
+		
+	<div id="formulaire">
+	<form>
+		<legend>BIENVENUE SUR L'ESPACE DE CONNEXION</legend>
 		<p>
-			<label for="n1">1. Saissez votre identifiant</label>
-			<br><br>
+			<label for="n1"><h4>1. Saisissez votre identifiant</h4></label>
+			<br>
 			<div id="Identifiant">
-				<input placeholder="Identifiant" class= "form-inline" type="text" name="username" id="username" required>&nbsp &nbsp &nbsp &nbsp 
-				<a href="url">Identifiant oublie?</a><br><br>
-				<input type="checkbox">&nbsp Memoriser mon identifiant sur mon navigateur
+				<input placeholder="Identifiant" class= "form-inline" type="text" name="username" id="username" required>&nbsp; &nbsp; &nbsp; &nbsp; 
+				<a href="url">Identifiant oublié?</a><br><br>
+				<input type="checkbox">&nbsp; Memoriser mon identifiant sur mon navigateur
 			</div>
 		</p>
 		<br><br>
 
 		<p>
-			<label for="n2">2. Saissez votre mote de passe</label>
-			<br><br>
-			<div id=MotedePasse>
-				<input placeholder="Mote de passe" class= "form-inline" type="password" name="password" id="password" required> &nbsp &nbsp &nbsp &nbsp 
-				<a href="url">Mote de passe oublie?</a><br><br>
-				<button type="button" class="btn btn-danger  btn-xs">effacer</button>
+			<label for="n2"><h4>2. Saisissez votre mot de passe</h4></label>
+			<br>
+			<div id=MotdePasse>
+				<input placeholder="Mot de passe" class= "form-inline" type="password" name="password" id="password" required> &nbsp; &nbsp; &nbsp; &nbsp;
+				<a href="url">Mote de passe oublié?</a><br><br>
+				<button type="button" class="btn btn-danger  btn-xs">Effacer</button>
 			</div>
 		</p>
 		<br><br><br>
 
 		<p>
-			<label for="n3">3. Acceder a votre espace</label>
-			<br><br>
-			<button type="button" class= "btn btn-success btn-sm">Acceder</button>
+			<label for="n3"><h4>3. Accéder à votre espace</h4></label>
+			<br>
+			<button type="button" class= "btn btn-success btn-sm">Accéder</button>
 		</p>
 
 	</form>
-
+	</div>
 </body>
 </html>
 

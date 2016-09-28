@@ -76,3 +76,28 @@ header input{
 section{
 	padding:10px;
 }
+legend{
+    color:blue;
+    font-family: myFirstFont;
+}
+
+ h3{
+    color:blue;
+    font-family: myFirstFont;
+}
+.tab{
+   	border-collapse: collapse;
+   	width: 100%;
+}
+
+th, td {
+   	text-align: left;
+   	padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}

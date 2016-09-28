@@ -1,14 +1,11 @@
-h2{
+legend{
 	color:blue;
 	font-family: myFirstFont;
 }
 
-#Logo
-{
-    /*background: rgba(76, 120, 150, 0.5);*/
-	position: relative;
-	width: 1140px; 	
-	height: 100px;
+h4{
+	color:blue;
+	font-family: myFirstFont;
 }
 
 #Identifiant{
@@ -17,8 +14,30 @@ h2{
 	width: 380px;
 
 }
-#MotedePasse{
+#MotdePasse{
 	background: rgba(76, 175, 80, 0.25);
 	position: relative;
 	width: 380px;
 }
+
+header{
+	background-color: #CC1D2A;
+	display: flex;
+	justify-content: left;
+}
+#logo{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 140px;
+	height: auto;
+	}
+
+body{
+	display: block;
+}
+
+/*#formulaire{
+	margin-right: 500px;
+}/*
+
+

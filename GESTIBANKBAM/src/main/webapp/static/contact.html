@@ -1,0 +1,126 @@
+<!DOCTYPE Html>
+
+<html>
+    <head>
+        <title>Contacter BAM</title>
+        <meta http-equiv="Content-Type" content="charset=utf-8" />
+        <meta http-equiv="Content-Language" content="fr" />
+        <link rel= "stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel= "stylesheet" type="text/css" href="style/css/contacter.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+        
+        <header>
+            <a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
+                <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="index.html">Accueil</a></li>
+                            <li><a href="#">A propos</a></li>
+                            <li><a href="#">Actualités</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Actualités</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                         </ul>
+                     </div>
+                </div>
+                </nav>
+        <div id="connexion" class ="navbar">
+            <input type="button" value="Devenir client" class ="btn btn - primary btn -xs"   onclick="javascript:location.href='newclient.html'">
+            <input type="button" value="Connexion" class ="btn btn - primary btn -xs"   onclick="javascript:location.href='se_connecter'">
+        </div>
+        </header>
+        
+    
+    <body class="container">
+
+        <ul class =" breadcrumb ">
+            <li ><a href ="index.html">Accueil </a></li >
+            <li class =" active ">Contact</li >
+        </ul >
+        
+       
+        <br><br>
+
+       <form class="form-horizontal">
+
+        <legend>LAISSEZ-NOUS UN MESSAGE</legend>
+
+        
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="civil">Civilité:</label>
+            <div class="col-sm-3">
+                <label class="radio-inline"><input type="radio" id="civil">M</label>
+                <label class="radio-inline"><input type="radio" id="civil">Mme</label>
+                <label class="radio-inline"><input type="radio" id="civil">Mlle</label>
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="nom">Nom:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="prenom">Prénom:</label>
+            <div class="col-sm-3">
+                 <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email:</label>
+            <div class="col-sm-3">
+                <input type="email" class="form-control" id="email" placeholder="Entrez votre email : ">
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="telephone">Télephone:</label>
+            <div class="col-sm-3">
+                <input type="email" class="form-control" id="télephone" placeholder="Entrez votre numéro de télephone : ">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="sm">Sujet de votre message: </label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="sm">
+                        <option value="rdv">Rendez vous</option>
+                        <option value="demande">Demande de overture de compte</option>
+                        <option value="demande">Services</option>
+                        <option value="demande">Autres</option>
+                    </select>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="sm">Votre message: </label>
+                <div class="col-sm-3">
+                    <textarea id="t3" class="form-control" name="msg" maxlength="200" rows="6"></textarea>
+                </div>
+        </div>
+
+         <div class="form-group">
+            <label class="control-label col-sm-2" for="sm">Etes-vous titulaire d'un compte BAM?</label>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-default btn-xs">Oui</button>
+                    <button type="submit" class="btn btn-default btn-xs">Non</button>
+                </div>
+        </div>
+        <br><br>
+        <div class="form-group">        
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success btn-sm">Envoyer</button>
+            </div>
+        </div>
+        
+    </form>
+
+</body>
+</html>
