@@ -27,6 +27,7 @@
 | Consulter la liste des demandes en attente (espace Admin)         |  14   |  consult_ad    |   no    |
 | Consulter la liste des clients (espace Conseiller)                |  15   |  list_ag       |   no    |
 | Consulter la liste des conseillers (espace Admin)                 |  16   |  list_ad       |   no    |
+| Affectation de conseiller							                |  17   |  affect	     |   no    |
 +===================================================================+=======+================+=========+
 */
 
@@ -35,9 +36,9 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/contact', {
 			templateUrl: 'views/contact.html',
 			controller: 'contactCtrl'})
-/*		.when('/connect', {
-			templateUrl: 'views/connect.html',
-			controller: 'connectCtrl'}) */
+		/*.when('/connect', {
+			//templateUrl: 'views/connect.html',
+			controller: 'connectCtrl'}) */		
 		.when('/register', {
 			templateUrl: 'views/register.html',
 			controller: 'registerCtrl'})
