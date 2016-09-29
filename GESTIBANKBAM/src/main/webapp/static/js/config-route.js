@@ -27,6 +27,7 @@
 | Consulter la liste des demandes en attente (espace Admin)         |  14   |  consult_ad    |   no    |
 | Consulter la liste des clients (espace Conseiller)                |  15   |  list_ag       |   no    |
 | Consulter la liste des conseillers (espace Admin)                 |  16   |  list_ad       |   no    |
+| Affectation de conseiller							                |  17   |  affect	     |   no    |
 +===================================================================+=======+================+=========+
 */
 
@@ -35,10 +36,9 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/contact', {
 			templateUrl: 'views/contact.html',
 			controller: 'contactCtrl'})
-/*		.when('/connect', {
-			templateUrl: 'views/connect.html',
-			controller: 'connectCtrl'}) */
-		
+		/*.when('/connect', {
+			//templateUrl: 'views/connect.html',
+			controller: 'connectCtrl'}) */		
 		.when('/register', {
 			templateUrl: 'views/register.html',
 			controller: 'registerCtrl'})
@@ -74,21 +74,21 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'search_adCtrl'})
 		.when('/consult_ag', {
 			templateUrl: 'views/consult_ag.html',
-			controller: 'search_adCtrl'})
-		.when('/search_ad', {
-			templateUrl: 'views/search_ad.html',
-			controller: 'search_adCtrl'})
+			controller: 'consult_agCtrl'})
 		.when('/list_ag', {
 			templateUrl: 'views/list_ag.html',
 			controller: 'list_agCtrl'})
 		.when('/list_ad', {
 			templateUrl: 'views/list_ad.html',
 			controller: 'list_adCtrl'})
+		.when('/affect', {
+			templateUrl: 'views/affect.html',
+			controller: 'affectCtrl'})
 		.when('/', {
-			templateUrl: 'views/root.html',
+			//templateUrl: 'views/see.html',
 			controller: 'rootCtrl'})
 
-		.otherwise({redirectTo: '/'})
+		//.otherwise({redirectTo: '/'})
 }]);
 /*
 app.config(['$routeProvider', function($routeProvider) {

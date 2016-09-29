@@ -11,11 +11,11 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location',
 }]);
 
 
-app.controller('connectCtrl', ['$scope', '$location', 
+/*app.controller('connectCtrl', ['$scope', '$location', 
 	function($scope, $location) {
 		//$location.url('/tpl');
 		console.log("connectCtrl::=");
-	}]);
+	}]);*/
 
 // register : no params
 app.controller('registerCtrl', ['$scope', '$location', 
@@ -41,7 +41,7 @@ app.controller('seeCtrl', ['$scope', '$location',
 	function($scope, $location) {
 		// todo
 		//$location.url("views/see.html");
-		$scope.role = 1;
+		//$scope.role = 1;
 	}]);
 
 //transfer 
@@ -86,40 +86,49 @@ app.controller('search_adCtrl', ['$scope', '$location',
 		// todo
 	}]);
 
+//consult_ag
+app.controller('consult_agCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+                             		
+    }]);
+
 //list_agCtrl
 app.controller('list_agCtrl', ['$scope', '$location', 
     function($scope, $location) {
     	// todo
-		$scope.role = 2;
+		//$scope.role = 2;
     }]);
 
 
 //list_adCtrl
-app.controller('list_agCtrl', ['$scope', '$location', 
+app.controller('list_adCtrl', ['$scope', '$location', 
     function($scope, $location) {
     	// todo
-		$scope.role = 3;
+		//$scope.role = 3;
     }]);
-
+//affectCtrl
+app.controller('affectCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+                             		
+    }]);
 //rootCtrl
 app.controller('rootCtrl', ['$scope', '$location', 
     function($scope, $location) {
-    	// todo
-		var role = sessionStorage.user.role;
-		var thePath = "/connect";
+    	
+		var role = sessionStorage.getItem("username");
+		
+		var thePath = "/";
 
-		switch (role) {
-		case 1:
+		if (role.startsWith("C")) {
 			thePath = "/see";
-			break;
-		case 2:
-			thePath = "/list_ag";
-			break;
-		case 3:
-			thePath = "/list_ad";
-			break;
-		default:
+		}	
+		else if (role.startsWith("X")){
+			thePath = "/search_ag.html";
 		}
+		else if (role.startsWith("A")){
+			thePath = "/affect.html";
+		}
+		
 		console.log("rootCtrl::");
 		console.log("rootCtrl:: role="+role);
 		console.log("rootCtrl:: thePath="+thePath);
