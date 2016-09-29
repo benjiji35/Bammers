@@ -1,18 +1,39 @@
-<div class="panel-header">
+<div class="panel-header" ng-app="">
             	<div id="navigation_help">
 					<ul class="breadcrumb">
 						<li><a href="#">Accueil</a></li>
 						<li class="active">Details Comptes</li>
 					</ul>
 				</div>
-
+</div>
 <div class="panel-body">
-<legend>COMPTES DETAILS</legend><br><br>
-	<form>
-		 <div class="table-responsive">
-	
-	<pre><h4>Type: Compte Ordinaire </h4></pre>
-	
+	<legend>COMPTES DETAILS</legend><br><br>
+	<pre><h4><a href="" ng-click="choix=1">Type: Compte Ordinaire </a></h4></pre>
+	<div class="table-responsive" ng-show="choix==1">
+		<table class="table">
+ 			<thead>
+		 		<tr>
+		    		<th>Libellé</th>
+		    		<th>Débit</th>
+		    		<th>Crédit</th>
+		    		<th>Date</th>
+		    		
+		  		</tr>
+	  		</thead>
+  			<tbody>
+		  		<tr>
+		    		<td></td>
+		   			<td></td>
+		    		<td></td>
+		    		<td></td>
+		   		</tr>
+  			</tbody>
+  		</table>
+  	<pre><h4>Solde : $300</h4></pre>
+ </div>
+<br><br>
+ <pre><h4><a href="" ng-click="choix=2">Type: Compte R&eacute;num&eacute;r&eacute;</a></h4></pre>
+	<div class="table-responsive" ng-show="choix==2">
 	<table class="table">
 		
  		<thead>
@@ -26,90 +47,18 @@
   		</thead>
 
   		<tbody>
-  		<tr>
-    		<td>Credit</td>
-   			<td>-</td>
-    		<td>$200</td>
-    		<td>17/12/2015</td>
-   		</tr>
-  		
-  		<tr>
-    		<td>Debit</td>
-   			<td>$500</td>
-    		<td>-</td>
-    		<td>17/03/2016</td>
-   		</tr>
-
-  		<tr>
-    		<td>D&eacute;bit</td>
-   			<td>$2400</td>
-    		<td>-</td>
-    		<td>23/09/2016</td>
-   		</tr>
-
-  		<tr>
-    		<td>Cr&eacute;dit</td>
-   			<td>-</td>
-    		<td>$4800</td>
-    		<td>12/10/2016</td>
-   		</tr>
-  		
-  		</tbody>
+		  		<tr>
+		    		<td></td>
+		   			<td></td>
+		    		<td></td>
+		    		<td></td>
+		   		</tr>
+  			</tbody>
 
   	</table>
   	
   	<pre><h4>Solde : $300</h4></pre>
- 
-<br><br><br><br>
- <pre><h4>Type: Compte R&eacute;num&eacute;r&eacute;</h4></pre>
 	
-	<table class="table">
-		
- 		<thead>
- 		<tr>
-    		<th>Libelle</th>
-    		<th>Debit</th>
-    		<th>Credit</th>
-    		<th>date</th>
-    		
-  		</tr>
-  		</thead>
-
-  		<tbody>
-  		<tr>
-    		<td>Credit</td>
-   			<td>-</td>
-    		<td>$600</td>
-    		<td>17/12/2015</td>
-   		</tr>
-  		
-  		<tr>
-    		<td>Debit</td>
-   			<td>$800</td>
-    		<td>-</td>
-    		<td>17/03/2016</td>
-   		</tr>
-
-  		<tr>
-    		<td>D&eacute;bit</td>
-   			<td>$250</td>
-    		<td>-</td>
-    		<td>23/09/2016</td>
-   		</tr>
-
-  		<tr>
-    		<td>Cr&eacute;dit</td>
-   			<td>-</td>
-    		<td>$480</td>
-    		<td>12/10/2016</td>
-   		</tr>
-  		
-  		</tbody>
-
-  	</table>
-  	
-  	<pre><h4>Solde : $300</h4></pre>
-	</form>
-	
+</div>
 </div>	
 	

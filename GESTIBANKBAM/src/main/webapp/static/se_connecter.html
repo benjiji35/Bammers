@@ -9,6 +9,17 @@
 		<link rel= "stylesheet" type="text/css" href="style/css/se_connecter.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" ></script>
+		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
+		<!--  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" >-->
+		<!--<script src="bower_components/angular-route/angular-route.min.js"></script> -->
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		
+		<script src="js/app.js"></script>
+		<script src="js/controller-route.js"></script>
+		<script src="js/config-route.js"></script>
 	</head>
 	  	
 			<header>
@@ -29,7 +40,7 @@
 			<label for="n1"><h4>1. Saisissez votre identifiant</h4></label>
 			<br>
 			<div id="Identifiant">
-				<input placeholder="Identifiant" class= "form-inline" type="text" name="username" id="username" required>&nbsp; &nbsp; &nbsp; &nbsp; 
+				<input type="text" ng-model="id" name="username" class= "form-inline" placeholder="Identifiant" required>&nbsp; &nbsp; &nbsp; &nbsp; 
 				<a href="url">Identifiant oublié?</a><br><br>
 				<input type="checkbox">&nbsp; Memoriser mon identifiant sur mon navigateur
 			</div>
@@ -40,8 +51,8 @@
 			<label for="n2"><h4>2. Saisissez votre mot de passe</h4></label>
 			<br>
 			<div id=MotdePasse>
-				<input placeholder="Mot de passe" class= "form-inline" type="password" name="password" id="password" required> &nbsp; &nbsp; &nbsp; &nbsp;
-				<a href="url">Mote de passe oublié?</a><br><br>
+				<input ng-model="password" placeholder="Mot de passe" class= "form-inline" type="password" name="password"  required> &nbsp; &nbsp; &nbsp; &nbsp;
+				<a href="url">Mot de passe oublié?</a><br><br>
 				<button type="button" class="btn btn-danger  btn-xs">Effacer</button>
 			</div>
 		</p>
@@ -50,7 +61,7 @@
 		<p>
 			<label for="n3"><h4>3. Accéder à votre espace</h4></label>
 			<br>
-			<button type="button" class= "btn btn-success btn-sm">Accéder</button>
+			<button button ng-click="myForm.$valid && identificationUtilisateur()" class= "btn btn-success btn-sm">Accéder</button>
 		</p>
 
 	</form>

@@ -8,49 +8,43 @@
             </div>      
                
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="prenom" placeholder="prénom">
-            </div>   
-
-            <div class="col-sm-2">
-                <input type="date de naissance" class="form-control" id="date de naissance" placeholder="date de naissance">
-            </div>      
+                <input type="text" class="form-control" id="prenom" placeholder="prÃ©nom">
+            </div>         
                 
             <div class="col-sm-2">
-                <input type="ville" class="form-control" id="ville" placeholder="ville">
-            </div>          
-                
-            <div class="col-sm-2">
-                <input type="numéro de compte" class="form-control" id="numéro de compte" placeholder="numéro de compte">
+                <input type="text" class="form-control" id="numero de compte" placeholder="numÃ©ro de compte">
             </div>
-    <br><br><br><br><br><br>  
+            <input type="submit" value="Rechercher" class="btn btn-default"/>
+         </form>
+    <br><br><br> 
     <div class="table-responsive">      
 	<table class="table">
-		<caption>1 résultat correspondent à votre recherche</caption>
+		<caption>1 rÃ©sultat correspondent Ã  votre recherche</caption>
  		<thead>
  		<tr>
  			<th>Nom</th>
-    		<th>Prénom</th>
+    		<th>PrÃ©nom</th>
     		<th>Date de Naissance</th>
     		<th>Ville</th>
-    		<th>Téléphone</th>
+    		<th>TÃ©lÃ©phone</th>
     		<th>Fiche client</th>
    		</tr>
    		</thead>
    		
    		<tbody>
-  		<tr>
-  			<td>Peter</td>
-   			<td>Griffin</td>
-    		<td>17/12/1988</td>
-    		<td>Paris</td>
-    		<td>07 83 14 59 57</td>
-    		<td><a href="#">Details</a></td>
+  		<tr  ng-repeat="">
+    		<td ng-bind=""></td>
+   			<td ng-bind=""></td>
+    		<td ng-bind=""></td>
+    		<td ng-bind=""></td>
+    		<td ng-bind=""></td>
+    		<td><a href="#">DÃ©tails</a></td>
   		</tr>
   		</tbody>
   		
   	</table>
 	</div>
-        </form>
+
     </body>
 </html>
     

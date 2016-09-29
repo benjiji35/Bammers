@@ -1,1 +1,159 @@
-Request
+<div class="panel-header" ng-app="">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#">Accueil</a></li>
+						<li class="active">Demande</li>
+						<li class="active" ng-show="choix==1">Commande chéquier</li>
+						<li class="active" ng-show="choix==2">Changer de type de compte</li>
+						<li class="active" ng-show="choix==3">Ouvrir un nouveau compte</li>
+					</ul>
+				</div>
+</div>
+<div class="panel-body">
+	<label class="control-label" for="demande">Que souhaitez-vous faire?</label>
+    <select class="form-control" ng-model="choix">
+    	<option value="1">Commander un chéquier</option>
+    	<option value="2">Changer de type de compte</option>
+    	<option value="3">Ouvrir un nouveau compte</option>
+    </select>
+    <div ng-show="choix==1">
+	    <h4>Commander un chéquier</h4>
+	    <div class="table-responsive">          
+		  <table class="table">
+		  <caption>Liste des comptes</caption>
+		    <thead>
+		      <tr>
+				<th>Compte</th>
+				<th>Numéro</th>
+				<th>Solde</th>
+				<th>Chéquier</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="">
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		 </div>
+	</div>
+	<div ng-show="choix==2">
+		<h4>Changer de type de compte</h4>
+		<div class="table-responsive">          
+		  <table class="table">
+		  <caption>Liste des comptes</caption>
+		    <thead>
+		      <tr>
+				<th>Compte</th>
+				<th>Numéro</th>
+				<th>Solde</th>
+				<th>Type</th>
+				<th>Demander la modification de type</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="">
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td><input type='button' onClick='' value = 'Modifier' class="btn btn-default"/></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		 </div>
+	</div>
+	<div ng-show="choix==3">
+		<h4>Ouvrir un nouveau compte</h4>
+		<div class="container" id="newcl">
+		  <form class="form-horizontal">
+		   <div class="form-group">
+		        <label class="control-label col-sm-2" for="nom">Nom</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="prenom">Prénom</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+		    </div>
+	  		</div>	
+	  		<div class="form-group">
+		    <label class="control-label col-sm-2" for="date">Date de naissance : </label>
+		    <div class="col-sm-3">
+		      <input type="date" class="form-control" id="date" placeholder="Entrez votre date de naissance">
+		    </div>
+	  		</div>	
+	  		<div class="form-group">
+		    <label class="control-label col-sm-2" for="adresse">Adresse : </label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse">
+		    </div>
+	  		</div>
+	  		<div class="form-group">
+		    <label class="control-label col-sm-2" for="ville">Ville : </label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville">
+		    </div>
+	  		</div>
+	  		<div class="form-group">
+		    <label class="control-label col-sm-2" for="cp">Code Postal : </label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal">
+		    </div>
+	  		</div>
+	  		<div class="form-group">
+			  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
+			  <div class="col-sm-3">
+			    <select class="form-control" id="sm">
+		        <option>Célibataire</option>
+		        <option>Marié(e)</option>
+		        <option>Divorcé(e)</option>
+		        <option>veuf(ve)</option>
+		      </select>
+			  </div>
+			</div>
+			<div class="form-group">
+		    <label class="control-label col-sm-2" for="enfants">Nombre d'enfants : </label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants">
+		    </div>
+	  		</div>
+	  		<div class="form-group">
+		    <label class="control-label col-sm-2" for="pro">Votre profession : </label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="pro" placeholder="Entrez votre profession">
+		    </div>
+	  		</div>
+	  		<div class="form-group">
+		    <label class="control-label col-sm-2" for="revenus">Vos revenus mensuels : </label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="revenus" placeholder="Entrez vos revenus mensuelss">
+		    </div>
+	  		</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="email">Email:</label>
+			  <div class="col-sm-3">
+			    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : ">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="pwd">Mot de passe : </label>
+			  <div class="col-sm-3">          
+			    <input type="password" class="form-control" id="pwd" placeholder="Entrez votre mot de passe : ">
+			  </div>
+			</div>
+			<div class="form-group">        
+			  <div class="col-sm-offset-2 col-sm-10">
+			    <button type="submit" class="btn btn-default">Valider ma demande</button>
+			  </div>
+			</div>
+		  </form>
+		</div>
+	</div>
+</div>
+</div>

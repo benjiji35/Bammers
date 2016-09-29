@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="charset=utf-8" />
-	<meta http-equiv="Content-Language" content="fr" />
-	<meta name="author" content="Les Bammers" />
-	<link href ="../style/css/bootstrap.min.css" rel="stylesheet"/>
-	<link href ="../style/css/page.css" rel="stylesheet"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title>Accueil BamBank</title>
-</head>
-<body>
+<div class="panel-header" ng-app="">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#">Accueil</a></li>
+						<li class="active">Affectation</li>
+					</ul>
+				</div>
+</div>
+<div class="panel-body">
 	<legend>Affectation</legend>
- <form action="">
  <div class="table-responsive">          
   <table class="table">
   <caption>Vous avez ${{x}} demandes en attentes d'affectation</caption>
@@ -23,26 +18,23 @@
 		<th>Détails</th>
 		<th>Etat dossier</th>
 		<th>Conseiller</th>
+		<th>Validation</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>TEST</td>
-        <td>test</td>
-        <td><a href="#">détails</a></td>
-        <td><input type="checkbox" checked="checked" class="form-control"></td>
-        <td>
-        	<select class="form-control">
-        		<option>KERVIEL Jérome</option>
-        		<option>MALTESE Corto</option>
-        		<option>POUTINE Vladimir</option>
+      <tr ng-repeat="">
+        <td ng-bind=""></td>
+        <td ng-bind=""></td>
+        <td ng-bind=""><a href="#">Détails</a></td>
+        <td ng-bind=""><input type="checkbox" class="form-control"></td>
+        <td ng-bind="">
+        	<select class="form-control" >
+        		<option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
         	</select>
         </td>
+        <td ng-bind=""><input type ="button" class="btn btn-default" value="Valider"></td>
       </tr>
     </tbody>
   </table>
   </div>
-  <input type ="submit" class="btn btn-default" value="Valider affectations">
-  </form>
-</body>
-</html>
+</div>

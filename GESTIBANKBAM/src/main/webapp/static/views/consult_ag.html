@@ -1,2 +1,68 @@
-consult_ag
-Consultation des informations personnelles du Conseiller
+<div class="panel-header" ng-app="">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#">Accueil</a></li>
+						<li class="active">Demande</li>
+						<li class="active" ng-show="choix==1">Messages <span class="badge">1</span></li>
+						<li class="active" ng-show="choix==2">Ouvertures à valider <span class="badge">1</span></li>
+
+					</ul>
+				</div>
+</div>
+<div class="panel-body">
+<legend>Demandes</legend>
+	<label class="control-label" for="demande">Que souhaitez-vous faire?</label>
+    <select class="form-control" ng-model="choix">
+    	<option value="1">Messages</option>
+    	<option value="2">Ouvertures à valider</option>
+    </select>
+    <div ng-show="choix==1">
+	    <h4>Messages</h4>
+	    <div class="table-responsive">          
+		  <table class="table">
+		    <thead>
+		      <tr>
+				<th>Auteur</th>
+				<th>Sujet</th>
+				<th>Date</th>
+				<th>Supprimer</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="">
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td><input type ="button" class="btn btn-default" value="Supprimer"></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		 </div>
+	</div>
+	<div ng-show="choix==2">
+		<h4>Ouvertures à valider</h4>
+		<div class="table-responsive">          
+		  <table class="table">
+		    <thead>
+		      <tr>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Détails</th>
+				<th>Etat dossier</th>				<th>Conseiller</th>
+				<th>Validation</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="">
+		        <td ng-bind=""></td>
+		        <td ng-bind=""></td>
+		        <td ng-bind=""><a href="#">Détails</a></td>
+		        <td ng-bind=""><input type="checkbox" class="form-control"></td>
+		        <td ng-bind=""><input type ="button" class="btn btn-default" value="Valider"></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		 </div>
+	</div>
+
+</div>
