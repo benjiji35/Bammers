@@ -38,6 +38,7 @@ app.config(['$routeProvider', function($routeProvider) {
 /*		.when('/connect', {
 			templateUrl: 'views/connect.html',
 			controller: 'connectCtrl'}) */
+		
 		.when('/register', {
 			templateUrl: 'views/register.html',
 			controller: 'registerCtrl'})
