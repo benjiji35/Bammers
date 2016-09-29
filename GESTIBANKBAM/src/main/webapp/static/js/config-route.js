@@ -84,6 +84,9 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/affect', {
 			templateUrl: 'views/affect.html',
 			controller: 'affectCtrl'})
+		.when('/list_ag', {
+			templateUrl: 'views/list_ag.html',
+			controller: 'affectCtrl'})
 		.when('/', {
 			//templateUrl: 'views/see.html',
 			controller: 'rootCtrl'})
