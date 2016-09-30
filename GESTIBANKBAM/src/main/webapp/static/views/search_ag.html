@@ -2,30 +2,49 @@
 <legend>RECHERCHER CLIENT</legend>
 
 <div ng-app="myApp" ng-controller="clientsCtrl"> 
-
-<table class="table table-hover">
-                      <thead>
-                          <tr>
-                              <th>ID.</th>
-                              <th>Nom</th>
-                              <th>Adresse</th>
-                              <th>Email</th>
-                              <th width="20%"></th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr ng-repeat="u in clientsCtrl">
-                              <td><span ng-bind="u.id"></span></td>
-                              <td><span ng-bind="u.nom"></span></td>
-                              <td><span ng-bind="u.prenom"></span></td>
-                              <td><span ng-bind="u.type"></span></td>
-                              <td>
-                              <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Modifier</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Supprimer</button>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-
+        <form>         
+            <br><br>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="nom" placeholder="nom">
+            </div>      
+               
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="prenom" placeholder="prénom">
+            </div>         
+                
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="numero de compte" placeholder="numéro de compte">
+            </div>
+            <input type="submit" value="Rechercher" class="btn btn-default"/>
+         </form>
+    <br><br><br> 
+    <div class="table-responsive">      
+	<table class="table">
+		<caption>1 résultat correspondent à votre recherche</caption>
+ 		<thead>
+ 		<tr>
+ 			<th>Nom</th>
+    		<th>Prénom</th>
+    		<th>Date de Naissance</th>
+    		<th>Ville</th>
+    		<th>Téléphone</th>
+    		<th>Fiche client</th>
+   		</tr>
+   		</thead>
+   		
+   		<tbody>
+  		<tr  ng-repeat="">
+    		<td ng-bind=""></td>
+   			<td ng-bind=""></td>
+    		<td ng-bind=""></td>
+    		<td ng-bind=""></td>
+    		<td ng-bind=""></td>
+    		<td><a href="#">Détails</a></td>
+  		</tr>
+  		</tbody>
+  		
+  	</table>
+	</div>
 <script>
 //var app = angular.module('myApp', []);
 app.controller('clientsCtrl', function($scope, $http) {
