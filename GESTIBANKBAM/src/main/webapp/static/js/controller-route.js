@@ -75,16 +75,15 @@ app.controller('updateCtrl', ['$scope', '$location',
 	}]);
 
 //search_ag     
-app.controller('search_agCtrl', ['$scope', '$location', 
-	function($scope, $location) {
-		// todo
+app.controller('search_agCtrl',  ['$scope', '$location', 
+   function($scope, $location) {
 	}]);
 
 //search_ad
 app.controller('search_adCtrl', ['$scope', '$location', 
-	function($scope, $location) {
-		// todo
-	}]);
+    function($scope, $location) {
+		
+}]);
 
 //consult_ag
 app.controller('consult_agCtrl', ['$scope', '$location', 
@@ -96,7 +95,6 @@ app.controller('consult_agCtrl', ['$scope', '$location',
 app.controller('list_agCtrl', ['$scope', '$location', 
     function($scope, $location) {
     	// todo
-		//$scope.role = 2;
     }]);
 
 
@@ -114,24 +112,7 @@ app.controller('affectCtrl', ['$scope', '$location',
 //rootCtrl
 app.controller('rootCtrl', ['$scope', '$location', 
     function($scope, $location) {
-    	
-		var role = sessionStorage.getItem("username");
-		
-		var thePath = "/";
-
-		if (role.startsWith("C")) {
-			thePath = "/see";
-		}	
-		else if (role.startsWith("X")){
-			thePath = "/search_ag.html";
-		}
-		else if (role.startsWith("A")){
-			thePath = "/affect.html";
-		}
-		
+    			
 		console.log("rootCtrl::");
-		console.log("rootCtrl:: role="+role);
-		console.log("rootCtrl:: thePath="+thePath);
 		console.log("=============");
-		$location.path(thePath);
     }]);

@@ -56,11 +56,12 @@
 				<configuration>
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 					<warName>SpringAngularStartProject</warName>
+					<!--  <warName>GestiBankBAMRestControler</warName> -->
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
-		<!-- <finalName>SpringAngularStartProject</finalName> -->
-		<finalName>GestiBankBAMRestControler</finalName>
+		<finalName>SpringAngularStartProject</finalName>
+		<!-- <finalName>GestiBankBAMRestControler</finalName> -->
 	</build>
 </project>

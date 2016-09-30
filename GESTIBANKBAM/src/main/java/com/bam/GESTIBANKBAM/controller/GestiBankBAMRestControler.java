@@ -47,6 +47,7 @@ public class GestiBankBAMRestControler {
             System.out.println("Client with id " + id + " not found");
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
+        System.out.println("Client founded :"+client.toString());
         return new ResponseEntity<Client>(client, HttpStatus.OK);
     }
  
@@ -55,7 +56,7 @@ public class GestiBankBAMRestControler {
     //-------------------Create a Client--------------------------------------------------------
      
     @RequestMapping(value = "/client/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createUser(@RequestBody Client client,    UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createClient(@RequestBody Client client,    UriComponentsBuilder ucBuilder) {
         System.out.println("Creating Client " + client.getNom() + " - " + client.getPrenom());
  
         if (clientService.isClientExist(client)) {
@@ -75,7 +76,7 @@ public class GestiBankBAMRestControler {
     //------------------- Update a Client --------------------------------------------------------
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Client> updateUser(@PathVariable("id") String id, @RequestBody Client client) {
+    public ResponseEntity<Client> updateClient(@PathVariable("id") String id, @RequestBody Client client) {
         System.out.println("Updating User " + id);
          
         Client currentClient = clientService.findById(id);
@@ -106,7 +107,7 @@ public class GestiBankBAMRestControler {
  
         Client client = clientService.findById(id);
         if (client == null) {
-            System.out.println("Unable to delete. User with id " + id + " not found");
+            System.out.println("Unable to delete. Client with id " + id + " not found");
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
  
@@ -119,7 +120,7 @@ public class GestiBankBAMRestControler {
     //------------------- Delete All Clients --------------------------------------------------------
      
     @RequestMapping(value = "/client/", method = RequestMethod.DELETE)
-    public ResponseEntity<Client> deleteAllUsers() {
+    public ResponseEntity<Client> deleteAllClients() {
         System.out.println("Deleting All Clients");
  
         clientService.deleteAllClients();

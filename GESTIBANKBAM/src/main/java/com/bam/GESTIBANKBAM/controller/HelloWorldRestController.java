@@ -17,16 +17,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.bam.GESTIBANKBAM.model.User;
 import com.bam.GESTIBANKBAM.service.UserService;
  
-@RestController
+//@RestController
 public class HelloWorldRestController {
  
-    @Autowired
+    //@Autowired
     UserService userService;  //Service which will do all data retrieval/manipulation work
  
     
     //-------------------Retrieve All Users--------------------------------------------------------
      
-    @RequestMapping(value = "/user/", method = RequestMethod.GET)
+    //@RequestMapping(value = "/user/", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
         List<User> users = userService.findAllUsers();
         if(users.isEmpty()){
@@ -39,7 +39,7 @@ public class HelloWorldRestController {
     
     //-------------------Retrieve Single User--------------------------------------------------------
      
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    //@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
         System.out.println("Fetching User with id " + id);
         User user = userService.findById(id);
@@ -54,7 +54,7 @@ public class HelloWorldRestController {
      
     //-------------------Create a User--------------------------------------------------------
      
-    @RequestMapping(value = "/user/", method = RequestMethod.POST)
+    //@RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
         System.out.println("Creating User " + user.getUsername());
  
@@ -74,7 +74,7 @@ public class HelloWorldRestController {
      
     //------------------- Update a User --------------------------------------------------------
      
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    //@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         System.out.println("Updating User " + id);
          
@@ -97,7 +97,7 @@ public class HelloWorldRestController {
     
     //------------------- Delete a User --------------------------------------------------------
      
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    //@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting User with id " + id);
  
@@ -115,7 +115,7 @@ public class HelloWorldRestController {
     
     //------------------- Delete All Users --------------------------------------------------------
      
-    @RequestMapping(value = "/user/", method = RequestMethod.DELETE)
+    //@RequestMapping(value = "/user/", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteAllUsers() {
         System.out.println("Deleting All Users");
  
