@@ -74,7 +74,10 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'search_adCtrl'})
 		.when('/consult_ag', {
 			templateUrl: 'views/consult_ag.html',
-			controller: 'consult_agCtrl'})
+			controller: 'search_adCtrl'})
+		.when('/search_ad', {
+			templateUrl: 'views/search_ad.html',
+			controller: 'search_adCtrl'})
 		.when('/list_ag', {
 			templateUrl: 'views/list_ag.html',
 			controller: 'list_agCtrl'})
@@ -84,11 +87,14 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/affect', {
 			templateUrl: 'views/affect.html',
 			controller: 'affectCtrl'})
+		.when('/list_ag', {
+			templateUrl: 'views/list_ag.html',
+			controller: 'affectCtrl'})
 		.when('/', {
-			//templateUrl: 'views/see.html',
+			templateUrl: 'views/root.html',
 			controller: 'rootCtrl'})
 
-		//.otherwise({redirectTo: '/'})
+		.otherwise({redirectTo: '/'})
 }]);
 /*
 app.config(['$routeProvider', function($routeProvider) {

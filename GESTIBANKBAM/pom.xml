@@ -60,6 +60,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>SpringAngularStartProject</finalName>
+		<!-- <finalName>SpringAngularStartProject</finalName> -->
+		<finalName>GestiBankBAMRestControler</finalName>
 	</build>
 </project>
