@@ -7,7 +7,7 @@ var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/
 var factory = {
 		fetchAllClients: fetchAllClients
 }
-
+return factory;
 /*recherche de tous les utilisateurs */
 function fetchAllClients() {
     var deferred = $q.defer();
