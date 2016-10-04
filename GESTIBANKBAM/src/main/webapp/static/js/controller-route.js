@@ -1,14 +1,27 @@
 app.controller('mainCtrl', function($scope) {});
-app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q', 
-	function($scope, $routeParams, $location,$q) {
-		$scope.sujet = $routeParams.sujet;
+app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 
+	function($scope, $routeParams, $location,$q, ClientService) {
+    var self = this;
+    self.users=[];
+
+    self.submit = submit;
+    self.edit = edit;
+    self.remove = remove;
+    self.reset = reset;
+
+
+    fetchAllUsers();
+		/*$scope.sujet = $routeParams.sujet;
 		$scope.msg = $routeParams.msg;
 		//$scope.absUrl  = $location.absUrl();
 		$scope.fichiers = $routeParams.fichiers;
 		/*console.log("contactCtrl::sujet="+$routeParams.sujet);
 		console.log("contactCtrl::msg="+$routeParams.msg);
-		console.log("contactCtrl::files="+$routeParams.files);*/
+		console.log("contactCtrl::files="+$routeParams.files);*/                               
 }]);
+
+
+
 
 
 app.controller('connectCtrl', ['$scope', '$location', 
@@ -75,22 +88,21 @@ app.controller('updateCtrl', ['$scope', '$location',
 	}]);
 
 //search_ag     
-app.controller('search_agCtrl',  ['$scope', '$location', 
-  function fetchAllClients() {
-	console.log("test");
-    var deferred = $q.defer();
-    $http.get(REST_SERVICE_URI)
+app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
+  function($scope, $location, ClientService){
+	console.log("hello");
+	ClientService.fetchAllClients()
         .then(
-        function (response) {
-            deferred.resolve(response.data);
+        function(d) {
+            self.users = d;
+            $scope.users=d;
         },
         function(errResponse){
             console.error('Error while fetching Users');
-            deferred.reject(errResponse);
         }
     );
-    return deferred.promise;
-}]);
+}
+]);
 
 //search_ad
 app.controller('search_adCtrl', ['$scope', '$location', 

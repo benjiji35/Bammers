@@ -1,7 +1,7 @@
 <br>
 <legend>RECHERCHER CLIENT</legend>
+<div> 
 
-<div ng-controller="contactCtrl"> 
         <form>         
             <br><br>
             <div class="col-sm-2">
@@ -18,9 +18,9 @@
             <input type="submit" value="Rechercher" class="btn btn-default"/>
          </form>
     <br><br><br> 
-    <div class="table-responsive">      
+    <div class="table-responsive">     
 	<table class="table">
-		<caption>1 résultat correspondent à votre recherche</caption>
+		<caption>{{users.length}} résultats correspondent à votre recherche</caption>
  		<thead>
  		<tr>
  			<th>Nom</th>
@@ -33,13 +33,13 @@
    		</thead>
    		
    		<tbody>
-  		<tr  ng-repeat="">
-    		<td ng-bind=""></td>
-   			<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-    		<td><a href="#">Détails</a></td>
+  		<tr  ng-repeat="c in users">
+    		<td>{{c.nom}}</td>
+   			<td>{{c.prenom}}</td>
+    		<td>{{c.ddn}}</td>
+    		<td>{{c.adresse.ville}}</td>
+    		<td>{{c.adresse.telephone}}</td>
+    		<td><a ng-href="#seecl/{{c.id}}">Détails</a></td>
   		</tr>
   		</tbody>
   		

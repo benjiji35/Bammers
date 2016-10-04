@@ -2,6 +2,7 @@ package com.bam.GESTIBANKBAM.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -52,11 +53,11 @@ public class PersonneServiceImpl implements PersonneService {
 		return personne;
 	}
 
-	private static Calendar createCalendar(String date) {
+	private static Date createCalendar(String date) {
 		Calendar cal = Calendar.getInstance();
 
 		cal.set(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10)));
-		return cal;
+		return cal.getTime();
 	}
 
 	private static Adresse createDummyAdresse(String mail) {
