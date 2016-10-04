@@ -29,7 +29,7 @@
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
      <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
   </head>
-  <body ng-app="myApp" class="ng-cloak">
+  <body ng-app="App2" class="ng-cloak">
       <div class="generic-container" ng-controller="UserController as ctrl">
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">Formulaire Inscription</span></div>
