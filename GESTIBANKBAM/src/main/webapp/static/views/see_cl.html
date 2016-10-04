@@ -1,4 +1,4 @@
-<div class="panel-header" ng-app="">
+<div class="panel-header">
             	<div id="navigation_help">
 					<ul class="breadcrumb">
 						<li><a href="#">Accueil</a></li>
@@ -6,22 +6,22 @@
 					</ul>
 				</div>
 </div>
-<div class="panel-body">
+<div class="panel-body" >
 	<legend>Fiche Client</legend>
 	<div class="parent">
 	    <div class="colonne c1">
 		    <label class="control-label" for="nom">Nom</label>
-		    <input type="text" class="form-control" id="nom" placeholder="">
+		    <input class="form-control" ng-value ="user.nom" disabled>
 		    <label class="control-label" for="prenom">Prénom</label>
-		    <input type="text" class="form-control" id="prenom" placeholder="">
+		    <input class="form-control" ng-value ="user.prenom" disabled>
 		    <label class="control-label" for="date">Date de naissance : </label>
-		    <input type="date" class="form-control" id="date" placeholder="">
+		    <input class="form-control" ng-value ="user.ddn" disabled>
 		    <label class="control-label" for="adresse">Adresse : </label>
-		    <input type="text" class="form-control" id="adresse" placeholder="">
+		    <input class="form-control" ng-value ="user.adresse.numero + user.adresse.rue" disabled>
 		    <label class="control-label" for="ville">Ville : </label>
-		    <input type="text" class="form-control" id="ville" placeholder="">
+		    <input class="form-control" ng-value ="user.adresse.ville" disabled>
 		    <label class="control-label" for="cp">Code Postal : </label>
-		    <input type="text" class="form-control" id="cp" placeholder="">
+		    <input class="form-control" ng-value ="user.adresse.codePostal" disabled>
 	    </div>
 	    <div class="colonne c2">
 	    	<label class="control-label" for="sm">Situation matrimoniale : </label>

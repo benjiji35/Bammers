@@ -10,7 +10,6 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','Clien
     self.reset = reset;
 
 
-    fetchAllUsers();
 		/*$scope.sujet = $routeParams.sujet;
 		$scope.msg = $routeParams.msg;
 		//$scope.absUrl  = $location.absUrl();
@@ -56,7 +55,19 @@ app.controller('seeCtrl', ['$scope', '$location',
 		//$location.url("views/see.html");
 		//$scope.role = 1;
 	}]);
-
+app.controller('see_clCtrl', ['$scope', '$location','ClientService', '$routeParams',
+   function($scope, $location, ClientService, $routeParams){
+	ClientService.searchClient($routeParams.id)
+        .then(
+        function(d) {
+            self.user = d;
+            $scope.user=d;
+        },
+        function(errResponse){
+            console.error('Error while fetching Users');
+        }
+    );
+}]);
 //transfer 
 app.controller('transferCtrl', ['$scope', '$location', 
 	function($scope, $location) {
