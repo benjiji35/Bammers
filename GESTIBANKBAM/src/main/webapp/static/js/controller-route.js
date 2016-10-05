@@ -22,13 +22,13 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','Clien
 
 
 
-
+/*
 app.controller('connectCtrl', ['$scope', '$location', 
 	function($scope, $location) {
 		//$location.url('/tpl');
 		console.log("connectCtrl::=");
 	}]);
-
+*/
 // register : no params
 app.controller('registerCtrl', ['$scope', '$location', 
 	function($scope, $location) {
