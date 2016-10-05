@@ -7,9 +7,8 @@ angular
 				[
 						'$scope',
 						'$window',
-						'$sessionStorage',
 						'PersonneService',
-						function($scope, $window, $sessionStorage, PersonneService, ) {
+						function($scope, $window, PersonneService) {
 
 							$scope.valid = function() {
 
