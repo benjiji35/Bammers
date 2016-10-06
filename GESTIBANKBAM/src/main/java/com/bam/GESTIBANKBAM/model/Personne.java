@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class Personne {
+public class Personne implements Cloneable {
 	public static final int ROLE_UNAUTHENTICATED_USER = 1;
 	public static final int ROLE_CLIENT = 2;
 	public static final int ROLE_CONSEILLER = 4;
@@ -38,6 +38,21 @@ public class Personne {
 		this.hashMdp = hashMdp;
 		this.adresse = adresse;
 		this.setType(type);
+	}
+
+	protected Personne copyFrom(Personne p) {
+		Personne np = new Personne();
+		Adresse a = p.getAdresse();
+
+		np.setCivilite(p.getCivilite());
+		np.setNom(p.getNom());
+		np.setPrenom(p.getPrenom());
+		np.setDdn(new Date(p.getDdn().getTime()));
+		np.setId(p.getId());
+		np.setHashMdp(p.getHashMdp());
+		np.setType(p.getType());
+		np.setAdresse(new Adresse(a.getNumero(), a.getRue(), a.getVille(), a.getCodePostal(), a.getTelephone(), a.getMail()));
+		return np;
 	}
 
 	public String getCivilite() {
@@ -104,6 +119,87 @@ public class Personne {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+
+	public int getNumero() {
+		return getAdresse().getNumero();
+	}
+	public void setNumero(int numero) {
+		Adresse a = getAdresse();
+
+		if (a == null) {
+			a = new Adresse();
+		} else {
+			a = new Adresse(numero, a.getRue(), a.getVille(), a.getCodePostal(), a.getTelephone(), a.getMail());
+		}
+		a.setNumero(numero);
+		setAdresse(a);
+	}
+	public String getRue() {
+		return getAdresse().getRue();
+	}
+	public void setRue(String rue) {
+		Adresse a = getAdresse();
+
+		if (a == null) {
+			a = new Adresse();
+		} else {
+			a = new Adresse(a.getNumero(), rue, a.getVille(), a.getCodePostal(), a.getTelephone(), a.getMail());
+		}
+		setAdresse(a);
+	}
+	public String getVille() {
+		return getAdresse().getVille();
+	}
+	public void setVille(String ville) {
+		Adresse a = getAdresse();
+
+		if (a == null) {
+			a = new Adresse();
+		} else {
+			a = new Adresse(a.getNumero(), a.getRue(), ville, a.getCodePostal(), a.getTelephone(), a.getMail());
+		}
+		setAdresse(a);
+	}
+	public String getCodePostal() {
+		return getAdresse().getCodePostal();
+	}
+	public void setCodePostal(String codePostal) {
+		Adresse a = getAdresse();
+
+		if (a == null) {
+			a = new Adresse();
+		} else {
+			a = new Adresse(a.getNumero(), a.getRue(), a.getVille(), codePostal, a.getTelephone(), a.getMail());
+		}
+		setAdresse(a);
+	}
+	public String getTelephone() {
+		return getAdresse().getTelephone();
+	}
+	public void setTelephone(String telephone) {
+		Adresse a = getAdresse();
+
+		if (a == null) {
+			a = new Adresse();
+		} else {
+			a = new Adresse(a.getNumero(), a.getRue(), a.getVille(), a.getCodePostal(), telephone, a.getMail());
+		}
+		setAdresse(a);
+	}
+	public String getMail() {
+		return getAdresse().getMail();
+	}
+	public void setMail(String mail) {
+		Adresse a = getAdresse();
+
+		if (a == null) {
+			a = new Adresse();
+		} else {
+			a = new Adresse(a.getNumero(), a.getRue(), a.getVille(), a.getCodePostal(), a.getTelephone(), mail);
+		}
+		setAdresse(a);
+	}
+
 
 	@Override
 	public String toString() {
@@ -174,5 +270,13 @@ public class Personne {
 		if (type != other.type)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Personne p = (Personne) super.clone();
+		Personne np = copyFrom(p);
+
+		return np;
 	}
 }

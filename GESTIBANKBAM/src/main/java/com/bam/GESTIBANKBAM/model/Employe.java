@@ -22,6 +22,21 @@ public class Employe extends Personne {
 		this.notifications = notifications;
 	}
 
+	public Employe(Personne p) {
+		this();
+		if (p == null) {
+			return;
+		}
+		super.setId(p.getId());
+		super.setCivilite(p.getCivilite());
+		super.setNom(p.getNom());
+		super.setPrenom(p.getPrenom());
+		super.setType(p.getType());
+		super.setHashMdp(p.getHashMdp());
+		super.setAdresse(p.getAdresse());
+		super.setDdn(p.getDdn());
+	}
+
 	public Calendar getDateEntree() {
 		return dateEntree;
 	}

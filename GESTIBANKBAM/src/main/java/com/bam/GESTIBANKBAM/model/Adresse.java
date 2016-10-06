@@ -1,6 +1,6 @@
 package com.bam.GESTIBANKBAM.model;
 
-public class Adresse {
+public class Adresse implements Cloneable {
 	private int numero;
 	private String rue;
 	private String ville;
@@ -116,5 +116,10 @@ public class Adresse {
 		} else if (!ville.equals(other.ville))
 			return false;
 		return true;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

@@ -16,6 +16,21 @@ public class Client extends Personne {
 		setId(idClient);
 	}
 
+	public Client(Personne p) {
+		this();
+		if (p == null) {
+			return;
+		}
+		super.setId(p.getId());
+		super.setCivilite(p.getCivilite());
+		super.setNom(p.getNom());
+		super.setPrenom(p.getPrenom());
+		super.setType(p.getType());
+		super.setHashMdp(p.getHashMdp());
+		super.setAdresse(p.getAdresse());
+		super.setDdn(p.getDdn());
+	}
+
 	
 	public ArrayList<Compte> getComptes() {
 		return comptes;
