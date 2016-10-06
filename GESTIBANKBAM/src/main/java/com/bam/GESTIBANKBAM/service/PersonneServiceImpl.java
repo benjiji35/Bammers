@@ -7,8 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.stereotype.Service;
+
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Personne;
+
+@Service("personneService")
 
 public class PersonneServiceImpl implements PersonneService {
 	
@@ -53,12 +57,13 @@ public class PersonneServiceImpl implements PersonneService {
 		return personne;
 	}
 
-	private static Date createCalendar(String date) {
+	private static Calendar createCalendar(String date) {
 		Calendar cal = Calendar.getInstance();
 
 		cal.set(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10)));
-		return cal.getTime();
+		return cal;
 	}
+
 
 	private static Adresse createDummyAdresse(String mail) {
 		int numero = ((int)Math.round((Math.random()*1000))) % 1000;

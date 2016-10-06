@@ -13,10 +13,11 @@
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" ></script>
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
-		
-		<script src="js/conn.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- 		<script src="js/conn.js"></script> -->
 		<script src="js/app.js"></script>
-		<script src="js/controller-route.js"></script>
+		<script src="js/service/validation_service.js"></script>
+		<script src="js/controller/validation_controller.js"></script>
 		<script src="js/config-route.js"></script>
 				
 
@@ -51,7 +52,7 @@
 			<label for="n2"><h4>2. Saisissez votre mot de passe</h4></label>
 			<br>
 			<div id=MotdePasse>
-				<input ng-model="password" placeholder="Mot de passe" class= "form-inline" type="password" name="password"  required> &nbsp; &nbsp; &nbsp; &nbsp;
+				<input ng-model="mdp" placeholder="Mot de passe" class= "form-inline" type="password" name="password"  required> &nbsp; &nbsp; &nbsp; &nbsp;
 				<a href="url">Mot de passe oublié?</a><br><br>
 				<button type="button" class="btn btn-danger  btn-xs">Effacer</button>
 			</div>
@@ -61,7 +62,7 @@
 		<p>
 			<label for="n3"><h4>3. Accéder à votre espace</h4></label>
 			<br>
-			<button type="button" id="add" value="Add to Storage" onclick="Javascript:save()" class= "btn btn-success btn-sm">Accéder</button>
+			<button type="submit"  ng-click= "valid()" class= "btn btn-success btn-sm">Accéder</button>
 		</p>
 
 	</form>

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Personne;
 import com.bam.GESTIBANKBAM.service.ClientService;
+import com.bam.GESTIBANKBAM.service.PersonneService;
 
 @RestController
 public class GestiBankBAMRestControler {
@@ -23,6 +25,8 @@ public class GestiBankBAMRestControler {
     @Autowired
     ClientService clientService;  //Service which will do all data retrieval/manipulation work
  
+    @Autowired
+    PersonneService personneService;  //Service which will do all data retrieval/manipulation work
     
     //-------------------Retrieve All Clients--------------------------------------------------------
      
@@ -75,7 +79,7 @@ public class GestiBankBAMRestControler {
      
     //------------------- Update a Client --------------------------------------------------------
      
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/client/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Client> updateClient(@PathVariable("id") String id, @RequestBody Client client) {
         System.out.println("Updating User " + id);
          
@@ -126,5 +130,24 @@ public class GestiBankBAMRestControler {
         clientService.deleteAllClients();
         return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
     }
+ //----------------------------------Authenticate Personne---------------------------------------
+    
+    @RequestMapping(value = "/personne/id-{id}-mdp-{mdp}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+      public ResponseEntity<Personne> getPersonne(@PathVariable("id") String id, @PathVariable("mdp") String mdp) {
+        System.out.println("Fetching personne with id"+" "+ id);
+        Personne pers = personneService.findById(id);
+        if (pers == null) {
+            System.out.println("Client with id " + id + " not found");
+            return new ResponseEntity<Personne>(HttpStatus.NOT_FOUND);
+        }
+        if (pers.getHashMdp().equals(mdp)){
+        	return new ResponseEntity<Personne>(pers, HttpStatus.OK);        	
+        }
+        else {
+        	System.out.println("The mdp " + mdp +" "+ "is invalid");
+        	return new ResponseEntity<Personne>(HttpStatus.NOT_FOUND);
+        }
+    }
+     
  
 }
