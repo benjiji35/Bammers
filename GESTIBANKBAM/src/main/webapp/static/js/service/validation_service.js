@@ -1,4 +1,6 @@
 'use strict';
+// declaration de module
+
 
 app.factory(
 				'PersonneService',

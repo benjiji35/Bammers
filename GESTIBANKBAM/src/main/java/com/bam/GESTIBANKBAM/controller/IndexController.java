@@ -11,7 +11,8 @@ public class IndexController {
 	  @RequestMapping(method = RequestMethod.GET)
 	    public String getIndexPage() {
 	        //return "UserManagement";
-		  return "ClientManagement";
+		  	// return "ClientManagement";
+		  return "se_connecter";
 	    }
 
 }
