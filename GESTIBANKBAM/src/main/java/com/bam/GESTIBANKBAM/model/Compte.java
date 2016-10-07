@@ -71,12 +71,16 @@ public class Compte implements Cloneable {
 			fireBAMEvent(new BAMEvent(this, t, BAMEvent.TYPE.NEW_TRANSACTION));
 			for (Transaction tt : transactions) {
 				if (! tt.isSealed()) {
-					
+					// TODO
 				}
 			}
 			return true;
 		}
 		return false;
+	}
+
+	public void commanderChequier() {
+		// TODO
 	}
 
 	private boolean checkIt(Transaction t) {

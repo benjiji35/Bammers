@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
+import com.bam.GESTIBANKBAM.data.BAMData;
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Personne;
 
@@ -20,7 +21,13 @@ public class PersonneServiceImpl implements PersonneService {
 	private static final AtomicLong counter = new AtomicLong();
 	
 	static{
-		personnes= populateDummyPersonnes();
+		//personnes= populateDummyPersonnes();
+		try {
+			personnes = BAMData.getPersonnes();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace(System.err);
+			throw new ExceptionInInitializerError(e);
+		}
 	}
 	
 	@Override
@@ -57,11 +64,11 @@ public class PersonneServiceImpl implements PersonneService {
 		return personne;
 	}
 
-	private static Calendar createCalendar(String date) {
+	private static Date createCalendar(String date) {
 		Calendar cal = Calendar.getInstance();
 
 		cal.set(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10)));
-		return cal;
+		return cal.getTime();
 	}
 
 

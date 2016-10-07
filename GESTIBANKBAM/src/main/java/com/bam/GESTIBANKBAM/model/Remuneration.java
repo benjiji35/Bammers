@@ -19,8 +19,9 @@ public class Remuneration implements Transaction {
 
 	private double taux;
 
-	public Remuneration(double delta, double seuil, double taux, Date dateDebut) throws BAMException {
+	public Remuneration(Compte cpte, double delta, double seuil, double taux, Date dateDebut) throws BAMException {
 		super();
+		this.cpte = cpte;
 		this.delta = delta;
 		this.seuilMin = seuil;
 		this.taux = taux;

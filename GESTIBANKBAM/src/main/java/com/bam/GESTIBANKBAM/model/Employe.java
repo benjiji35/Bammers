@@ -1,10 +1,10 @@
 package com.bam.GESTIBANKBAM.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 
 public class Employe extends Personne {
-	private Calendar dateEntree;
+	private Date dateEntree;
 	private ArrayList<String> fonctions;
 
 	private ArrayList<Notification> notifications; //(Not in constructor ?)
@@ -14,7 +14,7 @@ public class Employe extends Personne {
 		fonctions = new ArrayList<String>();
 	}
 
-	public Employe(String matricule, Calendar dateEntree, ArrayList<String> fonctions,
+	public Employe(String matricule, Date dateEntree, ArrayList<String> fonctions,
 			ArrayList<Notification> notifications) {
 		this();
 		this.dateEntree = dateEntree;
@@ -37,11 +37,11 @@ public class Employe extends Personne {
 		super.setDdn(p.getDdn());
 	}
 
-	public Calendar getDateEntree() {
+	public Date getDateEntree() {
 		return dateEntree;
 	}
 
-	public void setDateEntree(Calendar dateEntree) {
+	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
 	}
 
@@ -77,13 +77,15 @@ public class Employe extends Personne {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Employe [getDateEntree=");
+		builder.append("Employe [getDateEntree()=");
 		builder.append(getDateEntree());
-		builder.append(", getFonctions=");
+		builder.append(", getFonctions()=");
 		builder.append(getFonctions());
-		builder.append(", getNotifications=");
+		builder.append(", getNotifications()=");
 		builder.append(getNotifications());
-		builder.append(", toString=");
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", toString()=");
 		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();

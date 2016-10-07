@@ -1,6 +1,8 @@
 package com.bam.GESTIBANKBAM.model;
 
-import java.util.Calendar;
+import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class Personne implements Cloneable {
 	public static final int ROLE_UNAUTHENTICATED_USER = 1;
@@ -11,7 +13,7 @@ public class Personne implements Cloneable {
 	private String civilite;
 	private String nom;
 	private String prenom;
-	private Calendar ddn;
+	private Date ddn;
 	private int type;
 	private String id;
 	private String hashMdp;
@@ -25,7 +27,7 @@ public class Personne implements Cloneable {
 		setId(id);
 	}
 
-	public Personne(String civilite, String nom, String prenom, Calendar ddn, int type, String id, String hashMdp,
+	public Personne(String civilite, String nom, String prenom, Date ddn, int type, String id, String hashMdp,
 			Adresse adresse) {
 		this();
 		this.civilite = civilite;
@@ -76,12 +78,13 @@ public class Personne implements Cloneable {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
-	public Calendar getDdn() {
+	
+    @JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
+	public Date getDdn() {
 		return ddn;
 	}
 
-	public void setDdn(Calendar ddn) {
+	public void setDdn(Date ddn) {
 		this.ddn = ddn;
 	}
 
@@ -90,7 +93,7 @@ public class Personne implements Cloneable {
 	}
 
 	public void setType(int type) {
-		this.type = type & ROLE_UNAUTHENTICATED_USER & ROLE_CLIENT & ROLE_CONSEILLER & ROLE_ADMIN;
+		this.type = type & (ROLE_UNAUTHENTICATED_USER | ROLE_CLIENT | ROLE_CONSEILLER | ROLE_ADMIN);
 	}
 
 	public String getId() {
