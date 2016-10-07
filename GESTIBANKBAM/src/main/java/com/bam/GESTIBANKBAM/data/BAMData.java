@@ -48,6 +48,36 @@ public class BAMData {
 		counter  -= conseillers.size();
 		admins = populateDummyAdmins(personnes, 1);
 		counter--;
+		synchronizeDummies();
+	}
+
+	private static void synchronizeDummies() {
+		for (Employe a : admins) {
+			for (Personne p : personnes) {
+				if (a.getId().equals(p.getId())) {
+					p.setType(a.getType());
+					break;
+				}
+			}
+		}
+
+		for (Employe c : conseillers) {
+			for (Personne p : personnes) {
+				if (c.getId().equals(p.getId())) {
+					p.setType(c.getType());
+					break;
+				}
+			}
+		}
+
+		for (Client clt : clients) {
+			for (Personne p : personnes) {
+				if (clt.getId().equals(p.getId())) {
+					p.setType(clt.getType());
+					break;
+				}
+			}
+		}
 	}
 
 	private static List<Personne> populateDummyPersonnes(final int limite) throws ParseException {

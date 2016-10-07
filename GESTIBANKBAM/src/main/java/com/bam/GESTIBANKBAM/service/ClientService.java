@@ -1,6 +1,5 @@
 package com.bam.GESTIBANKBAM.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.bam.GESTIBANKBAM.model.Client;

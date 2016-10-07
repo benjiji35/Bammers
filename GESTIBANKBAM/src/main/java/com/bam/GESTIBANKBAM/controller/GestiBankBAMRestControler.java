@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Personne;
 import com.bam.GESTIBANKBAM.service.ClientService;
+import com.bam.GESTIBANKBAM.service.EmployeService;
 import com.bam.GESTIBANKBAM.service.PersonneService;
 
 @RestController
@@ -28,6 +29,15 @@ public class GestiBankBAMRestControler {
     @Autowired
     PersonneService personneService;  //Service which will do all data retrieval/manipulation work
     
+    //@Autowired
+    //ConseillerService conseillerService;  //Service which will do all data retrieval/manipulation work
+
+    //@Autowired
+    //AdminService adminService;  //Service which will do all data retrieval/manipulation work
+
+    @Autowired
+    EmployeService employeService;  //Service which will do all data retrieval/manipulation work
+
     //-------------------Retrieve All Clients--------------------------------------------------------
      
     @RequestMapping(value = "/client/", method = RequestMethod.GET)
