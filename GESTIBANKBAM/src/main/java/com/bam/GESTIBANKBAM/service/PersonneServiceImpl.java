@@ -83,7 +83,7 @@ public class PersonneServiceImpl implements PersonneService {
 	@Override
 	public List<Personne> findAllPersonnes() {
 		// TODO Auto-generated method stub
-		return null;
+		return personnes;
 	}
 
 	@Override

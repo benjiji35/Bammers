@@ -35,8 +35,8 @@ public class GestiBankBAMRestControler {
     //@Autowired
     //AdminService adminService;  //Service which will do all data retrieval/manipulation work
 
-    @Autowired
-    EmployeService employeService;  //Service which will do all data retrieval/manipulation work
+    //@Autowired
+    //EmployeService employeService;  //Service which will do all data retrieval/manipulation work
 
     //-------------------Retrieve All Clients--------------------------------------------------------
      
@@ -140,6 +140,16 @@ public class GestiBankBAMRestControler {
         clientService.deleteAllClients();
         return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
     }
+  //-------------------Retrieve All Personnes--------------------------------------------------------
+    
+    @RequestMapping(value = "/personne/", method = RequestMethod.GET)
+    public ResponseEntity<List<Personne>> listAllPersonnes() {
+        List<Personne> personnes = personneService.findAllPersonnes();
+        if(personnes.isEmpty()){
+            return new ResponseEntity<List<Personne>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Personne>>(personnes, HttpStatus.OK);
+    }
  //----------------------------------Authenticate Personne---------------------------------------
     
     @RequestMapping(value = "/personne/id-{id}-mdp-{mdp}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -149,6 +159,9 @@ public class GestiBankBAMRestControler {
         if (pers == null) {
             System.out.println("Client with id " + id + " not found");
             return new ResponseEntity<Personne>(HttpStatus.NOT_FOUND);
+        }
+        else {
+        	System.out.println("Bienvenue chez BamBank");
         }
         if (pers.getHashMdp().equals(mdp)){
         	return new ResponseEntity<Personne>(pers, HttpStatus.OK);        	
