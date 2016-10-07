@@ -40,6 +40,17 @@ public class Personne implements Cloneable {
 		this.setType(type);
 	}
 
+	public Personne(Personne p) throws CloneNotSupportedException {
+		this.civilite = new String(p.getCivilite());
+		this.nom      = new String(p.getNom());
+		this.nom      = new String(p.getPrenom());
+		this.ddn      = new Date(p.getDdn().getTime());
+		this.type     = p.getType();
+		this.id       = p.getId();
+		this.hashMdp  = new String(p.getHashMdp());
+		this.adresse  = (Adresse) p.getAdresse().clone();
+	}
+
 	protected Personne copyFrom(Personne p) {
 		Personne np = new Personne();
 		Adresse a = p.getAdresse();
@@ -273,7 +284,7 @@ public class Personne implements Cloneable {
 	}
 
 	@Override
-	public Object clone() throws CloneNotSupportedException {
+	protected Object clone() throws CloneNotSupportedException {
 		Personne p = (Personne) super.clone();
 		Personne np = copyFrom(p);
 

@@ -30,19 +30,16 @@ public class BAMData {
 
 	static {
 		try {
-			personnes = new ArrayList<Personne>();//populateDummyPersonnes();
-			clients = new ArrayList<Client>();
-			conseillers = new ArrayList<Employe>();
-			admins = new ArrayList<Employe>();
-			assignDummyClientsAndConseillersAndAdmins(personnes, clients, conseillers, admins);
+			System.out.println("BAMData:: DEBUT creation personnes, clients, conseillers et admins...");
+			assignDummyClientsAndConseillersAndAdmins();
+			System.out.println("BAMData:: FIN >>> creation personnes, clients, conseillers et admins...");
 		} catch (ParseException pe) {
 			pe.printStackTrace(System.err);
 			throw new ExceptionInInitializerError(pe);
 		}
 	};
 
-	private static void assignDummyClientsAndConseillersAndAdmins(List<Personne> personnes, List<Client> clients, 
-			List<Employe> employes, List<Employe> admins) throws ParseException {
+	private static void assignDummyClientsAndConseillersAndAdmins() throws ParseException {
 		int counter = 3000;
 		personnes = populateDummyPersonnes(counter);
 		clients   = populateDummyClients(personnes, counter - 30);
@@ -57,11 +54,63 @@ public class BAMData {
 		if (personnes == null){
 			personnes = new ArrayList<Personne>();
 			String nom[] = { "Hajji", "Adnan", "Gauthier", "Mahboubi", "Zidane", "Patel", "Platini", "Pele", "Maradona",
-					"Chirac", "Hollande", "Mitterand", "Obama", "Ming", "Egbo", "Schillacci", "Dropsi", "Le petit", "Leberre"};
+					"Chirac", "Hollande", "Mitterand", "Obama", "Ming", "Egbo", "Schillacci", "Dropsi", "Le petit", "Leberre",
+					"Patron", "PAPAZIAN", "AGOPIAN", "JAKUBOWICZ", "KAC", "CUKIERMAN", "VARTANIAN", "FUKS", "ROZENBLUM", "ROZENBAUM",
+					"SARKISSIAN", "GRYNBERG", "BALIAN", "BOGHOSSIAN", "ROZENCWAJG", "ZYSMAN", "ZYLBERBERG", "GUERREIRO", "WAJNBERG", 
+					"BURSZTYN", "LEWKOWICZ", "CHAHINIAN", "NAJMAN", "WOJCIK", "KEVORKIAN", "TOROSSIAN", "MATTIOCCO", "BERBERIAN", 
+					"MARDIROSSIAN", "CUKIER", "DERDERIAN", "ZAKARIAN", "CARDOSO", "AKIERMAN", "GOLDSZTEJN", "SZWARC", "OHANESSIAN", 
+					"ZAOUI", "BORENSZTEJN", "MARKOWICZ", "ROZENBLAT", "FRENKIEL", "ZERBIB", "KAZANDJIAN", "APRAHAMIAN", "VARGA", "HADDAD", 
+					"ZYLBERMAN", "VIEGAS", "BARBOSA", "CYMBLER", "ARONOWICZ", "CHIRINIAN", "GRINBAUM", "MAGANA", "PEREDA", "SZERMAN", "MIKAELIAN", 
+					"KRIKORIAN", "FRANZIL", "GRYNSZPAN", "DOUKHAN", "TOSOLINI", "MARKARIAN", "PIRES", "ROTBART", "HERCBERG", "TOFFOLON", "LUSTMAN", 
+					"BASMADJIAN", "KUREK", "AFONSO", "RUBINSZTEJN", "DAWIDOWICZ", "FAJGENBAUM", "JABLONKA", "ZYLBERSZTEJN", "TOPALIAN", 
+					"SZULMAN", "LAHCENE", "SEBBAH", "BENHAMOU", "AMRAM", "BIERNAT", "WOLKOWICZ", "AZOUZ", "SOCROUN", "FEDERMAN", "MASLIAH", 
+					"SINANIAN", "KALAIDJIAN", "HATCHADOURIAN", "SZTERN", "MELKONIAN", "CHOUKROUN", "VOLKOFF", "ZAMOLO", "MINC", "ZEMMOUR", 
+					"KUDLA", "PABLOS", "YAHIAOUI", "WOJTOWICZ", "KOGUT", "TACHDJIAN", "SEFERIAN", "DAHMANI", "ZALCMAN", "GUTERMAN", "BLUMENTAL", 
+					"GOLDSZTAJN", "LENCZNER", "GUTMACHER", "ALVO", "WAJSBROT", "PAMERLON", "PICKER", "BORENSZTEIN", "STUDENY", "HAROUTUNIAN", 
+					"HUBERMAN", "BIRENBAUM", "ARAMA", "YAHIA", "NACCACHE", "MENAHEM", "KARAYAN", "ARABIAN", "LIPSZYC", "DAVIDIAN", "KOUYOUMDJIAN", 
+					"JAMGOTCHIAN", "ZAJDMAN", "SAYAGH", "LANCHAS", "FRYDE", "LAHOUSSINE", "VAQUERO", "KECHICHIAN", "KOVAC", "CORREIA", "MAXIMOFF", 
+					"SIEMIATYCKI", "NUDELMAN", "GARNEK", "ZACCARINI", "CAMBIANICA", "MALDJIAN", "WAJEMAN", "RAJZMAN", "DIAMENT", "MOUTAFIAN", 
+					"ZLOTNIK", "NAVON", "SCHWARCZ", "YERAMIAN", "VAJDA", "TERZIAN", "FISZMAN", "ABDELAZIZ", "SUISSA", "AVAKIAN", "TAKVORIAN", 
+					"GEORGIOU", "MOSSERI", "ABDERRAHMANE", "OHANIAN", "WIERZBA", "GAGO", "DRISS", "SOKOL", "LIWER", "FACCA", "MOUSSAOUI",
+					"DE SOUSA", "BENGUIGUI", "KUPERBERG", "GLIKSMAN", "FRAJMAN", "FAIBIS", "DJAMENT", "RADZYNSKI", "ACHDJIAN", "KANTOROWICZ",
+					"TOPOR", "SZTARKMAN", "MONSZAJN", "KOPELMAN", "EJZENBERG", "WAJCMAN", "SZWARCBERG", "LEONOFF", "SZPIRGLAS", "ANDREASSIAN", 
+					"PITCHO", "SZPIRO", "PACHULSKI", "ICKOWICZ", "BONALUMI", "RECHTMAN", "BOCOS", "MOULAI", "HATCHIKIAN", "DONIKIAN", "SKORUPKA", 
+					"BEN LOULOU", "ORDAS", "MILOCHEVITCH", "BAGDASSARIAN", "ASSADOURIAN", "KHATCHADOURIAN", "BEN SAID", "COLACICCO", "AVEDIKIAN", 
+					"SZAFRAN", "KLIMENKO", "FIKMAN", "D'OLIVEIRA", "AREZKI", "TAHAR", "LUIZ", "GREATTI", "FONSECA", "DE JESUS", "SLIMANI", 
+					"RICCETTI", "PIOVESAN", "MEZIANE", "WAJNFELD", "TUCHBAND", "LIWERANT", "SQUELARD", "ARIRA", "ZALCBERG", "BERNEMAN", "FISCHMAN", 
+					"TOUAZI", "PLISKINE", "WALDMAN", "JEDWAB", "JAKOBOWICZ", "GRYNBLAT", "FINKIELSZTEJN", "DERER", "NAITYCHIA", "PSZENICA", 
+					"OUZOUNIAN", "NISENBAUM", "BEZDIKIAN", "MITCHOVITCH", "ALGAZI", "MANSUTTI", "CAMBOURIS", "AZADIAN", "ODDONO", "PERETZ", 
+					"KASZEMACHER", "HAMMOUMA", "MAYGNAN", "KARADJIAN", "GHIRARDELLO", "TORRICE", "HAMICHE", "FASCIONE", "DI SOTTO", "CARAQUIN", 
+					"TOMASSIAN", "IOLI", "ARTINIAN", "PALATCHI", "PETROPOULOS", "JELEN", "GASPARETTO", "SKRZYPEK", "VLASSOFF", "SERI", "MALOSSI", 
+					"LEHOUSSINE", "KIZIRIAN", "HOVNANIAN", "BACRY", "AZIZA", "NIGOGHOSSIAN", "BABIKIAN", "SOLARZ", "SAMELE", "MADJARIAN", "KALOUSTIAN", 
+					"BEDIKIAN", "SZNAJDER", "STRUGO", "NALBANDIAN", "ABITBOL", "CISINSKI", "CAPPELLESSO", "SILVENTE", "AJZENBERG", "JEDYNAK", 
+					"ZOLTY", "KLAJMAN", "CZARNY", "CHETRIT", "KOZLOFF", "PONOMARENKO", "DE AZEVEDO", "AIT SAADA", "MOURGLIA", "FACCHETTI", 
+					"YOUNSI", "CHUDY", "BEDNAR", "NICOLOSO", "FURMAN", "AKLI", "SZEWCZYK", "MATUSIAK", "GAMEIRO", "DEGRAEUWE", "BRONES", 
+					"PAJAK", "JANIK", "CROATTO", "KOLASA", "TUREK", "ARSLANIAN", "KELECHIAN", "HAMMOU", "BACHIR", "TORDJMAN", "YANG", "SOBRADO", 
+					"LEONARDUZZI", "KAVAFIAN", "BIHI", "AMARA", "AISSA", "MLYNARCZYK", "CALKA", "BOCCANFUSO", "WOLKOWSKI", "RUDOWICZ", "HONIGMAN", 
+					"AUFMAN", "DAVITTI", "WINTERMAN", "GICHT", "WELGER", "SZWIMER", "HERSZLIKOWICZ", "GALISTINOS", "LAJZEROWICZ", "NORYNBERG", 
+					"HORYN", "FERSZT", "LIBESKIND", "TSITOGLOU", "STOLER", "FRIDLANDER", "SOKOLSKI", "ROZENTAL", "ROSEMBLUM", "GRYN", "CALLOUSTIAN", 
+					"MILATOS", "JACOBACCI", "GRAJCAR", "TOPOUZIAN", "LINDWASSER", "SWAGTEN", "PENOUEL", "CYGLER", "STRINGHETTA", "HOYOS", "DURANCER", 
+					"PAGANARDI", "FARAONI", "ERNER", "BONDAREFF", "LINDENBAUM", "TOROSANI", "SZLAMOWICZ", "CANELLIS", "DUNI-GERMAIN", "CICCODICOLA", 
+					"FERAZZA", "MILSZTAJN", "MARTYNOFF", "LANGMAN", "KERTESZ", "FRYDMANN", "FRANCOIS-PONCET", "CHARCOSSEY", "ANTRANIKIAN", 
+					"TCHIBOUKDJIAN", "DJAD", "RAMAJO", "HAMADACHE", "FERREOL-RAGOTIN", "BORNSZTEJN", "KRAJKA", "SARMIR", "KASIMIR" 
+					};
 			String masculin[] = { "Wajih", "SP", "Benjamin", "Mohammed", "Vika", "Jacques", "Kong", "Papy", "Camacho", "Robert", 
-					"Denis", "Toto", "Franck", "Karim", "Ahmed", "Song", "Prosper", "Abdel"};
+					"Denis", "Toto", "Franck", "Karim", "Ahmed", "Song", "Prosper", "Abdel",
+					"Adam", "Alex", "Alexandre", "Alexis", "Anthony", "Antoine", "Cédric", "Charles", "Christopher", "David", "Dylan",
+					"Édouard", "Elliot", "Émile", "Étienne", "Félix", "Gabriel", "Guillaume", "Hugo", "Isaac", "Jacob", "Jérémy", "Jonathan",
+					"Julien", "Justin", "Léo", "Logan", "Loïc", "Louis", "Lucas", "Ludovic", "Malik", "Mathieu", "Mathis", "Maxime",
+					"Michaël", "Nathan", "Nicolas", "Noah", "Olivier", "Philippe", "Raphaël", "Samuel", "Simon", "Thomas", "Tommy", "Tristan",
+					"Flavian"
+					};
 			String feminin[] = { "Coralie", "Stephanie", "Valeria", "Sonia", "Michelle", "Nah", "Milouda", "Camille", "Tifane", "Celine",
-					"Nolwene", "Charlotte", "Claire", "Sabrina", "Kamiliya", "Jessica"};
+					"Nolwene", "Charlotte", "Claire", "Sabrina", "Kamiliya", "Jessica",
+					"Alexia", "Alice", "Alicia", "Amélie", "Anaïs", "Annabelle", "Arianne", "Audrey", "Aurélie", "Camille", "Catherine",
+					"Charlotte", "Chloé", "Clara", "Coralie", "Daphnée", "Delphine", "Elizabeth", "Élodie", "Émilie", "Emma", "Emy", "Ève",
+					"Florence", "Gabrielle", "Jade", "Juliette", "Justine", "Laurence", "Laurie", "Léa", "Léanne", "Maélie", "Maéva", "Maika",
+					"Marianne", "Marilou", "Maude", "Maya", "Mégan", "Mélodie", "Mia", "Noémie", "Océane", "Olivia", "Rosalie", "Rose",
+					"Sarah", "Sofia", "Victoria", "Monika"
+					};
 			String mdp[] = {"k1ll3r123", "t1k3r123", "m1m3r123", "g1k3r123", "k1m3r123", "j1g3r123", "k1h3r123"};
 			String titre;
 			String prenom;
@@ -73,37 +122,38 @@ public class BAMData {
 			int mois;
 			int jour;
 			String ddn_str;
+			Random rnd = new Random();
 			
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			sdf.setLenient(false);
 
 			for (int i = 0; i < limite; i++) {
-				sexe = Integer.parseInt((Math.round(Math.random()*1000)+"").substring(0, 4)) % 2;
-				i_nom = Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)) % nom.length;
+				sexe = rnd.nextInt(10000) % 2;
+				i_nom =  rnd.nextInt(10000) % nom.length;
 				if (sexe == 0) {
-					i_prenom = Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)) % masculin.length;
+					i_prenom = rnd.nextInt(10000) % masculin.length;
 					prenom = masculin[i_prenom];
 					titre = "Mr";
 				} else {
-					i_prenom = Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)) % feminin.length;
+					i_prenom = rnd.nextInt(10000) % feminin.length;
 					prenom = feminin[i_prenom];
 					titre = "Mme";
 				}
-				annee = Integer.parseInt(((Math.random()*1000)+"").substring(0, 2)) + 1950;
-				mois  = 1 + Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)) % 12;
-				jour  = 1 + Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)) % 28;
+				annee = rnd.nextInt(45) + 1950;
+				mois  = 1 + rnd.nextInt(10000) % 12;
+				jour  = 1 + rnd.nextInt(10000) % 28;
 				ddn_str = (jour < 10? "0"+jour: ""+jour) + "-" +
 						(mois < 10? "0"+mois: ""+mois) + "-" +
 						(annee);
-				i_mdp = Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)) % mdp.length;
+				i_mdp = rnd.nextInt(10000) % mdp.length;
 				personnes.add(createNewPersonne("C"+counter.incrementAndGet(),
 						titre,
 						nom[i_nom],
 						prenom,
 						sdf.parse(ddn_str),
-						mdp[i_mdp] + Integer.parseInt(((Math.random()*1000)+"").substring(0, 4)), 
-						nom[i_nom] + "." + prenom + "@acme.com"));
+						mdp[i_mdp] + rnd.nextInt(100) + "" + rnd.nextInt(100) + rnd.nextInt(100))); 
+						//nom[i_nom] + "." + prenom + "@acme.com"));
 			}
 		}
 		return personnes;
@@ -152,7 +202,7 @@ public class BAMData {
 		List<Personne> pers = new ArrayList<Personne>();
 
 		for (Iterator<Personne> it= personnes.iterator(); it.hasNext();) {
-			pers.add((Personne) it.next().clone());
+			pers.add( new Personne (it.next()) );
 		}
 		return pers;
 	}
@@ -161,7 +211,7 @@ public class BAMData {
 		List<Client> clts = new ArrayList<Client>();
 
 		for (Iterator<Client> it= clients.iterator(); it.hasNext();) {
-			clts.add((Client) it.next().clone());
+			clts.add( new Client (it.next()) );
 		}
 		return clts;		
 	}
@@ -170,7 +220,7 @@ public class BAMData {
 		List<Employe> agts = new ArrayList<Employe>();
 
 		for (Iterator<Employe> it= conseillers.iterator(); it.hasNext();) {
-			agts.add((Employe) it.next().clone());
+			agts.add( new Employe (it.next()) );
 		}
 		return agts;		
 	}
@@ -179,7 +229,7 @@ public class BAMData {
 		List<Employe> adms = new ArrayList<Employe>();
 
 		for (Iterator<Employe> it= admins.iterator(); it.hasNext();) {
-			adms.add((Employe) it.next().clone());
+			adms.add( new Employe (it.next()) );
 		}
 		return adms;		
 	}
@@ -227,7 +277,7 @@ public class BAMData {
 		Random rnd = new Random();
 		int year = 20 + rnd.nextInt(20);
 		int month =  1 + rnd.nextInt(12);
-		int days = 1 + rnd.nextInt(29);
+		int days = 1 + rnd.nextInt(28);
 		ArrayList<String> fcts = new ArrayList<String>(); 
 
 		fcts.add("conseiller");
@@ -235,17 +285,19 @@ public class BAMData {
 		c.setType(Personne.ROLE_CONSEILLER);
 		c.setDateEntree(BAMTools.addToCalendar(c.getDdn(), year, month, days));
 		c.setFonctions(fcts);
+		System.out.println("creation conseiller="+c);
 		return c;
 	}
 
-	private static Personne createNewPersonne(String id, String civilite, String nom, String prenom, Date ddn, String mdp, String mail) {
+	private static Personne createNewPersonne(String id, String civilite, String nom, String prenom, Date ddn, String mdp) {//, String mail) {
 		Personne pers = new Personne();
 		pers.setId(id);
 		pers.setCivilite(civilite);
 		pers.setNom(nom);
 		pers.setPrenom(prenom);
 		pers.setDdn(ddn);
-		pers.setAdresse(createDummyAdresse(mail));
+		//pers.setAdresse(createDummyAdresse(mail));
+		pers.setAdresse(createDummyAdresse(nom.trim().toLowerCase()+"."+prenom.trim().toLowerCase()));
 		pers.setHashMdp(mdp);
 		System.out.println("creation nouvelle personne: "+pers);
 
@@ -275,7 +327,7 @@ public class BAMData {
 		fcts.add("banquier");
 		adm.setDateEntree(BAMTools.addToCalendar(adm.getDdn(), year, month, day));
 		adm.setFonctions(fcts);
-
+		System.out.println("creation admin="+adm);
 		return adm;
 	}
 
@@ -320,10 +372,22 @@ public class BAMData {
 	}
 
 	public static Adresse createDummyAdresse(String mail) {
-		int numero = ((int)Math.round((Math.random()*1000))) % 1000;
+		Random rnd = new Random();
+		int numero = rnd.nextInt(10000) % 1000;
 		int rue_idx;
 		int ville_idx;
 		int phone_idx;
+		int email_idx;
+		
+		String[] emails_suffixes = {
+				"@acme.com",
+				"@abc.com",
+				"@tiko.com",
+				"@toto.com",
+				"@tito.com",
+				"@bito.com"
+		};
+
 		String [] rues = new String[] {
 			"rue des sardines",
 			"rue des mouettes",
@@ -353,6 +417,11 @@ public class BAMData {
 		codes_postaux.put("le mans", "72000");
 		codes_postaux.put("montpellier", "34000");
 		codes_postaux.put("grenoble", "38000");
+		codes_postaux.put("perpignan", "66000");
+		codes_postaux.put("carcasonne", "11000");
+		codes_postaux.put("nimes", "32000");
+		codes_postaux.put("montauban", "82000");
+		codes_postaux.put("amiens", "80000");
 		
 		String[] villes = new String[codes_postaux.size()];
 		for (int i=0; i<villes.length; i++) {
@@ -362,16 +431,17 @@ public class BAMData {
 			phones[i] = gen_phone(9);
 		}
 
-		rue_idx = ((int)Math.round(Math.random()*1000)) % rues.length;
-		ville_idx = ((int)Math.round(Math.random()*1000)) % villes.length;
-		phone_idx = ((int)Math.round(Math.random()*1000)) % rues.length;
+		email_idx = rnd.nextInt(10000) % emails_suffixes.length;
+		rue_idx = rnd.nextInt(10000) % rues.length;
+		ville_idx = rnd.nextInt(10000) % villes.length;
+		phone_idx = rnd.nextInt(10000) % rues.length;
 
 		return new Adresse(numero, 
 				rues[rue_idx], 
 				villes[ville_idx], 
 				codes_postaux.get(villes[ville_idx]), 
 				phones[phone_idx],
-				mail);
+				mail + emails_suffixes[email_idx]);
 	}
 
 	public static String gen_phone(int limit) {
