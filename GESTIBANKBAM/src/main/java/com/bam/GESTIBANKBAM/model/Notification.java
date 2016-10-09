@@ -1,16 +1,17 @@
 package com.bam.GESTIBANKBAM.model;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Notification {
 	private String message;
-	private Calendar date;
+	private Date date;
 
 	public Notification() {
 		
 	}
 
-	public Notification(String message, Calendar date) {
+	public Notification(String message, Date date) {
 		super();
 		this.message = message;
 		this.date = date;
@@ -24,17 +25,17 @@ public class Notification {
 		this.message = message;
 	}
 
-	public Calendar getDate() {
-		return date;
-	}
-
-	public void setDate(Calendar date) {
-		this.date = date;
-	}
-
 	@Override
 	public String toString() {
-		return "Notification [message=" + message + ", date=" + date + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Notification [getMessage()=");
+		builder.append(getMessage());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", getDate()=");
+		builder.append(getDate());
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override
@@ -66,5 +67,13 @@ public class Notification {
 		} else if (!message.equals(other.message))
 			return false;
 		return true;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Date getDate() {
+		return date;
 	}
 }

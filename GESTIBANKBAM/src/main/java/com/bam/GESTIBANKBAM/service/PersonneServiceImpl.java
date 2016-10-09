@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.data.BAMData;
+import com.bam.GESTIBANKBAM.data.BAMDataFactory;
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Personne;
 
@@ -17,16 +18,13 @@ import com.bam.GESTIBANKBAM.model.Personne;
 
 public class PersonneServiceImpl implements PersonneService {
 	
+	private static BAMData bd;
 	private static List<Personne> personnes;
 	
 	static{
-		try {
-			personnes = BAMData.getPersonnes();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace(System.err);
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+		bd = BAMDataFactory.getBAMData();
+		personnes = bd.getPersonnes();
+	};
 	
 	@Override
 	public Personne findById(String id) {
@@ -83,7 +81,7 @@ public class PersonneServiceImpl implements PersonneService {
 	@Override
 	public List<Personne> findAllPersonnes() {
 		// TODO Auto-generated method stub
-		return personnes;
+		return null;
 	}
 
 	@Override

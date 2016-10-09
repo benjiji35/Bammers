@@ -25,7 +25,7 @@ public class Client extends Personne {
 		super.setCivilite(p.getCivilite());
 		super.setNom(p.getNom());
 		super.setPrenom(p.getPrenom());
-		super.setType(p.getType());
+		super.setType(ROLE_CLIENT);
 		super.setHashMdp(p.getHashMdp());
 		super.setAdresse(p.getAdresse());
 		super.setDdn(p.getDdn());

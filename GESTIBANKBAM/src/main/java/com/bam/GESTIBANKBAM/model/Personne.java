@@ -31,24 +31,25 @@ public class Personne implements Cloneable {
 			Adresse adresse) {
 		this();
 		this.civilite = civilite;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.ddn = ddn;
-		this.id = id;
-		this.hashMdp = hashMdp;
-		this.adresse = adresse;
+		this.nom      = nom;
+		this.prenom   = prenom;
+		this.ddn      = ddn;
+		this.id       = id;
+		this.hashMdp  = hashMdp;
+		this.adresse  = adresse;
 		this.setType(type);
 	}
 
 	public Personne(Personne p) throws CloneNotSupportedException {
-		this.civilite = new String(p.getCivilite());
-		this.nom      = new String(p.getNom());
-		this.nom      = new String(p.getPrenom());
-		this.ddn      = new Date(p.getDdn().getTime());
-		this.type     = p.getType();
-		this.id       = p.getId();
-		this.hashMdp  = new String(p.getHashMdp());
-		this.adresse  = (Adresse) p.getAdresse().clone();
+		Personne np = copyFrom(p);
+		this.civilite = np.getCivilite();
+		this.nom      = np.getNom();
+		this.prenom   = np.getPrenom();
+		this.ddn      = np.getDdn();
+		this.type     = np.getType();
+		this.id       = np.getId();
+		this.hashMdp  = np.getHashMdp();
+		this.adresse  = np.getAdresse();
 	}
 
 	protected Personne copyFrom(Personne p) {
@@ -104,7 +105,12 @@ public class Personne implements Cloneable {
 	}
 
 	public void setType(int type) {
-		this.type = type & (ROLE_UNAUTHENTICATED_USER | ROLE_CLIENT | ROLE_CONSEILLER | ROLE_ADMIN);
+		int t = type & (ROLE_UNAUTHENTICATED_USER | ROLE_CLIENT | ROLE_CONSEILLER | ROLE_ADMIN);
+
+		if (t == (ROLE_UNAUTHENTICATED_USER | ROLE_CLIENT | ROLE_CONSEILLER | ROLE_ADMIN)) {
+			t = ROLE_UNAUTHENTICATED_USER;
+		}
+		this.type = t; 
 	}
 
 	public String getId() {

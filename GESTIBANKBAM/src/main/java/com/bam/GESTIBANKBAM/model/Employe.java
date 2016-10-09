@@ -63,7 +63,12 @@ public class Employe extends Personne {
 
 	@Override
 	public void setType(int type) {
-		super.setType(type & ROLE_CONSEILLER & ROLE_ADMIN);
+		int t = type & (ROLE_CONSEILLER | ROLE_ADMIN);
+
+		if (t == (ROLE_CONSEILLER | ROLE_ADMIN)) {
+			t = ROLE_CONSEILLER;
+		}
+		super.setType(t);
 	}
 
 	public void setConseiller() {
