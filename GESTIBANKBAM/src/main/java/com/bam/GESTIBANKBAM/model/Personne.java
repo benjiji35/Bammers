@@ -145,10 +145,10 @@ public class Personne implements Cloneable {
 
 		if (a == null) {
 			a = new Adresse();
+			a.setNumero(numero);
 		} else {
 			a = new Adresse(numero, a.getRue(), a.getVille(), a.getCodePostal(), a.getTelephone(), a.getMail());
 		}
-		a.setNumero(numero);
 		setAdresse(a);
 	}
 	public String getRue() {
@@ -159,6 +159,7 @@ public class Personne implements Cloneable {
 
 		if (a == null) {
 			a = new Adresse();
+			a.setRue(rue);
 		} else {
 			a = new Adresse(a.getNumero(), rue, a.getVille(), a.getCodePostal(), a.getTelephone(), a.getMail());
 		}
@@ -172,6 +173,7 @@ public class Personne implements Cloneable {
 
 		if (a == null) {
 			a = new Adresse();
+			a.setVille(ville);
 		} else {
 			a = new Adresse(a.getNumero(), a.getRue(), ville, a.getCodePostal(), a.getTelephone(), a.getMail());
 		}
@@ -185,6 +187,7 @@ public class Personne implements Cloneable {
 
 		if (a == null) {
 			a = new Adresse();
+			a.setCodePostal(codePostal);
 		} else {
 			a = new Adresse(a.getNumero(), a.getRue(), a.getVille(), codePostal, a.getTelephone(), a.getMail());
 		}
@@ -198,6 +201,7 @@ public class Personne implements Cloneable {
 
 		if (a == null) {
 			a = new Adresse();
+			a.setTelephone(telephone);
 		} else {
 			a = new Adresse(a.getNumero(), a.getRue(), a.getVille(), a.getCodePostal(), telephone, a.getMail());
 		}
@@ -211,6 +215,7 @@ public class Personne implements Cloneable {
 
 		if (a == null) {
 			a = new Adresse();
+			a.setMail(mail);
 		} else {
 			a = new Adresse(a.getNumero(), a.getRue(), a.getVille(), a.getCodePostal(), a.getTelephone(), mail);
 		}

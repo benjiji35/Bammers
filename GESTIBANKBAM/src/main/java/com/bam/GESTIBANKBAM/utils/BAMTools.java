@@ -4,11 +4,32 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class BAMTools {
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+	public static Date parseDate(String s) {
+		Date d = null;
+
+		if (s != null) {
+			try {
+				d = dateFormat.parse(s);
+			} catch (ParseException e) {
+				e.printStackTrace(System.err);
+			}
+		}
+		return d;
+	}
+
+	public static String format(Date d) {
+		return dateFormat.format(d);
+	}
+
 	public static long getDiffInMillis(Date d1, Date d2) {
 		return d1.getTime() - d2.getTime();
 	}

@@ -1,8 +1,7 @@
 package com.bam.GESTIBANKBAM.service;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -11,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.data.BAMData;
 import com.bam.GESTIBANKBAM.data.BAMDataFactory;
-import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Compte;
+import com.bam.GESTIBANKBAM.utils.BAMTools;
 
 @Service("clientService")
 public class ClientServiceImpl implements ClientService {
@@ -29,7 +28,7 @@ public class ClientServiceImpl implements ClientService {
 	};
 
 	public List<Client> findAllClients() {
-		BAMTools
+		//BAMTools.print(new File("c:\\findAllClients.txt"), clients);
 		return clients;
 	}
 	

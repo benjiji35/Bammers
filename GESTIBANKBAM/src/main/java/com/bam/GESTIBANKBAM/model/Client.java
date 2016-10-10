@@ -1,6 +1,7 @@
 package com.bam.GESTIBANKBAM.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Client extends Personne {
 	private ArrayList<Compte> comptes;
@@ -36,6 +37,7 @@ public class Client extends Personne {
 		return comptes;
 	}
 	public void setComptes(ArrayList<Compte> comptes) {
+		System.out.println("Client.setCompte(comptes)="+comptes.size());
 		this.comptes = comptes;
 	}
 
@@ -47,8 +49,16 @@ public class Client extends Personne {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Client [getComptes=");
-		builder.append(getComptes());
+		List<Compte> lc = getComptes();
+		final int len = lc.size();
+		builder.append("Client [getComptes=[");
+		for (int i = 0; i < len-1; i++) {
+			builder.append(lc.get(i)).append(',');
+		}
+		if (len > 0) {
+			builder.append(lc.get(len-1));
+		}
+		builder.append(']');
 		builder.append(", toString=");
 		builder.append(super.toString());
 		builder.append("]");

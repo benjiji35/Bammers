@@ -1,5 +1,6 @@
 package com.bam.GESTIBANKBAM.data;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,8 +11,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
-
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
@@ -42,6 +41,13 @@ public class BAMDataFake implements BAMData {
 		try {
 			System.out.println("BAMData:: DEBUT creation personnes, clients, conseillers et admins...");
 			bd = new BAMDataFake(null);
+//			File fa = new File ("c:\\bamdatafake-admins.txt");
+//			File fadm = new File ("c:\\bamdatafake-admins.txt");
+//			File fagt = new File ("c:\\bamdatafake-conseillers.txt");
+//			File fclt = new File ("c:\\bamdatafake-clients.txt");
+//			BAMTools.print(fadm, bd.getAdmins());
+//			BAMTools.print(fagt, bd.getConseillers());
+//			BAMTools.print(fclt, bd.getClients());
 			System.out.println("BAMData:: FIN >>> creation personnes, clients, conseillers et admins...");
 		} catch (ParseException pe) {
 			pe.printStackTrace(System.err);
@@ -51,19 +57,87 @@ public class BAMDataFake implements BAMData {
 
 	private BAMDataFake (Properties p) throws ParseException {
 		this.props = p;
-		assignDummyClientsAndConseillersAndAdmins();
+		fillWithDummies();
+		//assignDummyClientsAndConseillersAndAdmins();
 	}
 
 	public static BAMData getBAMData() {
 		return bd;
 	}
 
+	private void fillWithDummies() {
+		personnes   = new ArrayList<Personne>();
+		clients     = new ArrayList<Client>();
+		conseillers = new ArrayList<Employe>();
+		admins      = new ArrayList<Employe>();
+
+		personnes.add(new Personne(
+				"Mr", "AKLI", "Abdel", BAMTools.parseDate("25-03-1968"), Personne.ROLE_CLIENT, "C1", "m1m3r123908652",
+				new Adresse(859, "place jean jaures", "nantes", "44000", "+33656961528", "akli.abdel@tiko.com")));
+
+		personnes.add(new Personne(
+				"Mme", "JANIK", "Émilie", BAMTools.parseDate("04-08-1970"), Personne.ROLE_CLIENT, "C3", "k1h3r12356571",
+				new Adresse(1, "cours gambetta", "nimes", "32000", "+33784283626", "janik.émilie@tiko.com")));
+
+		personnes.add(new Personne(
+				"Mr", "ZALCBERG", "Mathis", BAMTools.parseDate("17-01-1951"), Personne.ROLE_CLIENT, "C5", "g1k3r12303480",
+				new Adresse(172, "avenue foch", "lille", "59000", "+33619357656", "zalcberg.mathis@bito.com")));
+
+		personnes.add(new Personne(
+				"Mr", "Mitterand", "Lucas", BAMTools.parseDate("15-02-1950"), Personne.ROLE_CLIENT, "C7", "t1k3r12392556",
+				new Adresse(390, "avenue du docteur long", "carcasonne", "11000", "+33744587413", "mitterand.lucas@abc.com")));
+		
+		personnes.add(new Personne(
+				"Mr", "BEDIKIAN", "Tristan", BAMTools.parseDate("13-08-1969"), Personne.ROLE_CLIENT, "C9", "g1k3r123468070",
+				new Adresse(479, "route de bayonne", "lyon", "69000", "+33781554541", "bedikian.tristan@tito.com")));
+
+		personnes.add(new Personne(
+				"Mme", "Platini", "Sofia", BAMTools.parseDate("26-12-1990"), Personne.ROLE_CLIENT, "C11", "k1h3r123799726",
+				new Adresse(264, "cours gambetta", "nimes", "32000", "+33775476831", "platini.sofia@bito.com")));
+
+		personnes.add(new Personne(
+				"Mr", "Patel", "Tommy", BAMTools.parseDate("06-11-1955"), Personne.ROLE_CLIENT, "C13", "j1g3r123341539",
+				new Adresse(422, "alles jules guesdes", "montpellier", "34000", "+33642697233", "patel.tommy@toto.com")));
+
+		personnes.add(new Personne(
+				"Mme", "AFONSO", "Stephanie", BAMTools.parseDate("20-11-1958"), Personne.ROLE_CLIENT, "C15", "m1m3r12337584",
+				new Adresse(169, "cours laplace", "lyon", "69000", "+33757691287", "afonso.stephanie@toto.com")));
+
+		personnes.add(new Personne(
+				"Mme", "WINTERMAN", "Alicia", BAMTools.parseDate("20-01-1980"), Personne.ROLE_CLIENT, "C17", "j1g3r123161922",
+				new Adresse(766, "rue des tulipes", "grenoble", "38000", "+33666326755", "winterman.alicia@bito.com")));
+
+		personnes.add(new Personne(
+				"Mr", "Chirac", "Toto", BAMTools.parseDate("16-02-1957"), Personne.ROLE_CLIENT, "C19", "g1k3r123142832",
+				new Adresse(51, "avenue foch", "carcasonne", "11000", "+33688223746", "chirac.toto@tiko.com")));
+
+		// Conseillers
+		personnes.add(new Personne(
+				"Mr", "BEZDIKIAN", "Édouard", BAMTools.parseDate("12-08-1960"), Personne.ROLE_CONSEILLER, "C21", "m1m3r123912558",
+				new Adresse(185, "route de bayonne", "montauban", "82000", "+33771317258", "bezdikian.édouard@bito.com")));
+
+		personnes.add(new Personne(
+				"Mme", "KEVORKIAN", "Arianne", BAMTools.parseDate("27-01-1990"), Personne.ROLE_CONSEILLER, "C23", "m1m3r123526496",
+				new Adresse(524, "alles jules guesdes", "rennes", "35000", "+33728753383", "kevorkian.arianne@tito.com")));
+
+		personnes.add(new Personne(
+				"Mr", "MALOSSI", "Simon", BAMTools.parseDate("24-12-1951"), Personne.ROLE_CONSEILLER, "C27", "k1h3r123722356", 
+				new Adresse(328, "rue des sardines", "montauban", "82000", "+33789295523", "malossi.simon@bito.com")));
+
+		// Admins
+		personnes.add(new Personne(
+				"Mme", "SOLARZ", "Alicia", BAMTools.parseDate("18-12-1979"), Personne.ROLE_ADMIN, "C25", "j1g3r123305972", 
+				new Adresse(658, "place jean jaures", "le mans", "72000", "+33728744142", "solarz.alicia@tito.com")));
+
+		
+	}
+
 	private void assignDummyClientsAndConseillersAndAdmins() throws ParseException {
-		int counter = 3000;
+		int counter = 30;//3000;
 		personnes = populateDummyPersonnes(counter);
-		clients   = populateDummyClients(personnes, counter - 30);
+		clients   = populateDummyClients(personnes, counter - 3);//populateDummyClients(personnes, counter - 30);
 		counter  -= clients.size(); 
-		conseillers = populateDummyConseillers(personnes, counter - 1);
+		conseillers = populateDummyConseillers(personnes, counter - 1);//populateDummyConseillers(personnes, counter - 1);
 		counter  -= conseillers.size();
 		admins = populateDummyAdmins(personnes, 1);
 		counter--;
@@ -209,11 +283,10 @@ public class BAMDataFake implements BAMData {
 
 	private ArrayList<Client> populateDummyClients(List<Personne> personnes, int count) {
 		ArrayList<Client> clts = new ArrayList<Client>();
-		int idx = 0;
 		final int len = personnes.size(); 
 		Personne p;
 
-		for (int i=0; i < count && idx < len; i++) {
+		for (int idx=0; idx < count && idx < len; idx++) {
 			p = personnes.get(idx++);
 			clts.add(createNewClient(p));
 		}
@@ -222,11 +295,10 @@ public class BAMDataFake implements BAMData {
 
 	private ArrayList<Employe> populateDummyConseillers(List<Personne> personnes, int count) {
 		ArrayList<Employe> agts = new ArrayList<Employe>();
-		int idx = 0;
 		final int len = personnes.size();
 		Personne p;
 
-		for (int i=0; i < count && idx < len; i++) {
+		for (int idx=0; idx < count && idx < len; idx++) {
 			p = personnes.get(idx++);
 			agts.add(createNewConseiller(p));
 		}
@@ -235,11 +307,10 @@ public class BAMDataFake implements BAMData {
 
 	private ArrayList<Employe> populateDummyAdmins(List<Personne> personnes, int count) {
 		ArrayList<Employe> adms = new ArrayList<Employe>();
-		int idx = 0;
 		final int len = personnes.size();
 		Personne p;
 
-		for (int i=0; i < count && idx < len; i++) {
+		for (int idx=0; idx < count && idx < len; idx++) {
 			p = personnes.get(idx++);
 			adms.add(createNewAdmin(p));
 		}
