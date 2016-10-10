@@ -59,13 +59,13 @@ public class BAMTools {
 		return cal1.getTime();
 	}
 
-	public void print(PrintStream out, List l) {
+	public static void print(PrintStream out, List l) {
 		for (Object item : l) {
 			out.println(item);
 		}
 	}
 
-	public void print(File f, List l) {
+	public static void print(File f, List l) {
 		try (PrintStream out =
                 new PrintStream(new FileOutputStream(f))) {
 			print(out, l);

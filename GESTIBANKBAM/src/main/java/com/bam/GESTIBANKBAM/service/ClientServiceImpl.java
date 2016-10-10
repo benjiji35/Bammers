@@ -29,6 +29,7 @@ public class ClientServiceImpl implements ClientService {
 	};
 
 	public List<Client> findAllClients() {
+		BAMTools
 		return clients;
 	}
 	
@@ -41,6 +42,7 @@ public class ClientServiceImpl implements ClientService {
 				return client;
 			}
 		}
+		
 		return null;
 	}
 
