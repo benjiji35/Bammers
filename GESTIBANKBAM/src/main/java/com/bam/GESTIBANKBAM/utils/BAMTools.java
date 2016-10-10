@@ -1,7 +1,12 @@
 package com.bam.GESTIBANKBAM.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class BAMTools {
 	public static long getDiffInMillis(Date d1, Date d2) {
@@ -52,5 +57,20 @@ public class BAMTools {
 		cal1.add(Calendar.DAY_OF_MONTH, cal2.get(Calendar.DAY_OF_MONTH));
 
 		return cal1.getTime();
+	}
+
+	public void print(PrintStream out, List l) {
+		for (Object item : l) {
+			out.println(item);
+		}
+	}
+
+	public void print(File f, List l) {
+		try (PrintStream out =
+                new PrintStream(new FileOutputStream(f))) {
+			print(out, l);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace(System.err);
+		}	
 	}
 }

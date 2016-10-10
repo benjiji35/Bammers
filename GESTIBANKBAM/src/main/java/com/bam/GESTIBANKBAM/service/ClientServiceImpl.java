@@ -250,7 +250,10 @@ public class ClientServiceImpl implements ClientService {
 
 	public void updateClient(Client client) {
 		int index = clients.indexOf(client);
-		clients.set(index, client);
+
+		if (index != -1) {
+			clients.set(index, client);
+		}
 	}
 
 	public void deleteClientById(String id) {
@@ -266,7 +269,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	public boolean isClientExist(Client client) {
-		return findByNomAndPrenom(client.getNom(), client.getPrenom())!=null;
+		//return findByNomAndPrenom(client.getNom(), client.getPrenom())!=null;
+		return findById(client.getId()) != null;
 	}
 	
 	public void deleteAllClients(){

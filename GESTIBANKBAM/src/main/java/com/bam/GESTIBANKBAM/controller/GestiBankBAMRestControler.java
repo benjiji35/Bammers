@@ -46,15 +46,17 @@ public class GestiBankBAMRestControler {
         if(clients.isEmpty()){
             return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
+        
         return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
     }
+
  
  
     
     //-------------------Retrieve Single Client--------------------------------------------------------
      
     @RequestMapping(value = "/client/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Client> getUser(@PathVariable("id") String id) {
+    public ResponseEntity<Client> getClient(@PathVariable("id") String id) {
         System.out.println("Fetching User with id " + id);
         Client client = clientService.findById(id);
         if (client == null) {
