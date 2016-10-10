@@ -152,3 +152,21 @@ app.controller('rootCtrl', ['$scope', '$location',
 		console.log("rootCtrl::");
 		console.log("=============");
     }]);
+
+app.controller('newClCtrl', ['$scope', '$location', 
+                              function($scope, $location) {
+	$scope.client = {};
+
+    $scope.submit = function(client) {
+      console.log(client);
+    };
+
+    $scope.reset = function() {
+      $scope.user = angular.copy($scope.master);
+    };
+
+    $scope.reset();
+}]);
+
+
+

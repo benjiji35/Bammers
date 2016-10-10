@@ -8,6 +8,13 @@
 	<link href="style/css/home.css" rel="stylesheet" media="all" type="text/css"> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>	
+	
+	<script src="js/app.js"></script>
+	<script src="js/config-route.js"></script>
+    <script src="js/service/client_service.js" />"></script>
+    <script src="js/controller-route.js"></script>
 	<title>Devenir client</title>
 </head>
 <header>
@@ -32,50 +39,50 @@
 		<input type="button" value="Connexion" class ="btn btn-default"   onclick="javascript:location.href='#'">
 	</div>
 </header>
-<body>
-	<div class="container" id="newcl">
+<body ng-app="myApp">
+	<div class="container" id="newcl" ng-controller="newClCtrl as ctrl">
 	  <h2>Devenir client</h2>
-	  <form class="form-horizontal">
+	  <form class="form-horizontal" name="myForm" ng-submit="submit(client)">
 	   <div class="form-group">
 	        <label class="control-label col-sm-2" for="nom">Nom</label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+	      <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom" ng-model="client.nom" required>
 	    </div>
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label col-sm-2" for="prenom">Prénom</label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+	      <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom" ng-model="client.prenom" required>
 	    </div>
   		</div>	
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="date">Date de naissance : </label>
 	    <div class="col-sm-3">
-	      <input type="date" class="form-control" id="date" placeholder="Entrez votre date de naissance">
+	      <input type="date" class="form-control" id="date" placeholder="Entrez votre date de naissance" ng-model="client.ddn" required>
 	    </div>
   		</div>	
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="adresse">Adresse : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse">
+	      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse"ng-model="client.adresse" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="ville">Ville : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville">
+	      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville" ng-model="client.ville" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="cp">Code Postal : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal">
+	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.codePostal" required>
 	    </div>
   		</div>
   		<div class="form-group">
 		  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
 		  <div class="col-sm-3">
-		    <select class="form-control" id="sm">
+		    <select class="form-control" id="sm" ng-model="client.ssm" required>
 	        <option>Célibataire</option>
 	        <option>Marié(e)</option>
 	        <option>Divorcé(e)</option>
@@ -86,19 +93,19 @@
 		<div class="form-group">
 	    <label class="control-label col-sm-2" for="enfants">Nombre d'enfants : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants">
+	      <input type="text" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants" ng-model="client.enfants" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="pro">Votre profession : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="pro" placeholder="Entrez votre profession">
+	      <input type="text" class="form-control" id="pro" placeholder="Entrez votre profession" ng-model="client.pro" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="revenus">Vos revenus mensuels : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="revenus" placeholder="Entrez vos revenus mensuelss">
+	      <input type="text" class="form-control" id="revenus" placeholder="Entrez vos revenus mensuels" ng-model="client.salaire" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -122,13 +129,13 @@
 		<div class="form-group">
 		  <label class="control-label col-sm-2" for="email">Email:</label>
 		  <div class="col-sm-3">
-		    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : ">
+		    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : " ng-model="client.mail" required>
 		  </div>
 		</div>
 		<div class="form-group">
 		  <label class="control-label col-sm-2" for="pwd">Mot de passe : </label>
 		  <div class="col-sm-3">          
-		    <input type="password" class="form-control" id="pwd" placeholder="Entrez votre mot de passe : ">
+		    <input type="password" class="form-control" id="pwd" placeholder="Entrez votre mot de passe : " ng-model="client.mdp" required>
 		  </div>
 		</div>
 		<div class="form-group">        
