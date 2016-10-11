@@ -41,13 +41,13 @@ public class BAMDataFake implements BAMData {
 		try {
 			System.out.println("BAMData:: DEBUT creation personnes, clients, conseillers et admins...");
 			bd = new BAMDataFake(null);
-//			File fa = new File ("c:\\bamdatafake-admins.txt");
-//			File fadm = new File ("c:\\bamdatafake-admins.txt");
-//			File fagt = new File ("c:\\bamdatafake-conseillers.txt");
-//			File fclt = new File ("c:\\bamdatafake-clients.txt");
-//			BAMTools.print(fadm, bd.getAdmins());
-//			BAMTools.print(fagt, bd.getConseillers());
-//			BAMTools.print(fclt, bd.getClients());
+			File fa = new File ("d:\\bamdatafake-admins.txt");
+			File fadm = new File ("d:\\bamdatafake-admins.txt");
+			File fagt = new File ("d:\\bamdatafake-conseillers.txt");
+			File fclt = new File ("d:\\bamdatafake-clients.txt");
+			BAMTools.print(fadm, bd.getAdmins(), ">>> Admins:");
+			BAMTools.print(fagt, bd.getConseillers(), ">>> Conseillers:");
+			BAMTools.print(fclt, bd.getClients(), ">>> Clients:");
 			System.out.println("BAMData:: FIN >>> creation personnes, clients, conseillers et admins...");
 		} catch (ParseException pe) {
 			pe.printStackTrace(System.err);
@@ -129,15 +129,33 @@ public class BAMDataFake implements BAMData {
 				"Mme", "SOLARZ", "Alicia", BAMTools.parseDate("18-12-1979"), Personne.ROLE_ADMIN, "C25", "j1g3r123305972", 
 				new Adresse(658, "place jean jaures", "le mans", "72000", "+33728744142", "solarz.alicia@tito.com")));
 
-		
+		for (Personne p : personnes) {
+			switch (p.getType()) {
+				case Personne.ROLE_CLIENT:
+					clients.add(createNewClient(p));
+					System.out.println("FAKE::"+clients.get(clients.size()-1));
+					break;
+				case Personne.ROLE_CONSEILLER:
+					conseillers.add(createNewConseiller(p));
+					break;
+				case Personne.ROLE_ADMIN:
+					admins.add(createNewAdmin(p));
+					break;
+				default:
+					System.out.println("init Personnes::"+p);
+			}
+		}
 	}
 
 	private void assignDummyClientsAndConseillersAndAdmins() throws ParseException {
-		int counter = 30;//3000;
-		personnes = populateDummyPersonnes(counter);
-		clients   = populateDummyClients(personnes, counter - 3);//populateDummyClients(personnes, counter - 30);
+		int counter = 3000;//30;
+		int div_clt = 10;
+		int div_agt = 2;
+		personnes = populateDummyPersonnes(counter/div_clt);
+		//clients   = populateDummyClients(personnes, counter - 3);
+		clients   = populateDummyClients(personnes, counter - 30/div_agt);
 		counter  -= clients.size(); 
-		conseillers = populateDummyConseillers(personnes, counter - 1);//populateDummyConseillers(personnes, counter - 1);
+		conseillers = populateDummyConseillers(personnes, counter - 1);
 		counter  -= conseillers.size();
 		admins = populateDummyAdmins(personnes, 1);
 		counter--;
@@ -145,6 +163,10 @@ public class BAMDataFake implements BAMData {
 	}
 
 	private void synchronizeDummies() {
+		Employe emp;
+		Random rnd = new Random();
+		int idx;
+
 		for (Employe a : admins) {
 			for (Personne p : personnes) {
 				if (a.getId().equals(p.getId())) {
@@ -170,6 +192,10 @@ public class BAMDataFake implements BAMData {
 					break;
 				}
 			}
+			idx = rnd.nextInt(conseillers.size());
+			emp = conseillers.get(idx);
+			emp.addClient(clt);
+			clt.setConseiller(emp);
 		}
 	}
 
@@ -318,44 +344,48 @@ public class BAMDataFake implements BAMData {
 	}
 
 	public List<Personne> getPersonnes() {
-		List<Personne> pers = new ArrayList<Personne>();
-
-		for (Iterator<Personne> it= personnes.iterator(); it.hasNext();) {
-			try {
-				pers.add( new Personne (it.next()) );
-			} catch (CloneNotSupportedException e) {
-				e.printStackTrace(System.err);
-				throw new RuntimeException(e);
-			}
-		}
-		return pers;
+//		List<Personne> pers = new ArrayList<Personne>();
+//
+//		for (Iterator<Personne> it= personnes.iterator(); it.hasNext();) {
+//			try {
+//				pers.add( new Personne (it.next()) );
+//			} catch (CloneNotSupportedException e) {
+//				e.printStackTrace(System.err);
+//				throw new RuntimeException(e);
+//			}
+//		}
+//		return pers;
+		return personnes;
 	}
 
 	public List<Client> getClients() {
-		List<Client> clts = new ArrayList<Client>();
-
-		for (Iterator<Client> it= clients.iterator(); it.hasNext();) {
-			clts.add( new Client (it.next()) );
-		}
-		return clts;		
+//		List<Client> clts = new ArrayList<Client>();
+//
+//		for (Iterator<Client> it= clients.iterator(); it.hasNext();) {
+//			clts.add( new Client (it.next()) );
+//		}
+//		return clts;
+		return clients;
 	}
 
 	public List<Employe> getConseillers() {
-		List<Employe> agts = new ArrayList<Employe>();
-
-		for (Iterator<Employe> it= conseillers.iterator(); it.hasNext();) {
-			agts.add( new Employe (it.next()) );
-		}
-		return agts;		
+//		List<Employe> agts = new ArrayList<Employe>();
+//
+//		for (Iterator<Employe> it= conseillers.iterator(); it.hasNext();) {
+//			agts.add( new Employe (it.next()) );
+//		}
+//		return agts;
+		return conseillers;
 	}
 
 	public List<Employe> getAdmins() {
-		List<Employe> adms = new ArrayList<Employe>();
-
-		for (Iterator<Employe> it= admins.iterator(); it.hasNext();) {
-			adms.add( new Employe (it.next()) );
-		}
-		return adms;		
+//		List<Employe> adms = new ArrayList<Employe>();
+//
+//		for (Iterator<Employe> it= admins.iterator(); it.hasNext();) {
+//			adms.add( new Employe (it.next()) );
+//		}
+//		return adms;
+		return admins;
 	}
 
 	private Employe createNewConseiller(Personne p) {

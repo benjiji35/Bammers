@@ -6,12 +6,13 @@ import java.util.Date;
 public class Employe extends Personne {
 	private Date dateEntree;
 	private ArrayList<String> fonctions;
+	private ArrayList<Client> clients; 
 
 	private ArrayList<Notification> notifications; //(Not in constructor ?)
 
 	public Employe() {
 		this.setType(ROLE_CONSEILLER | ROLE_ADMIN);
-		fonctions = new ArrayList<String>();
+		configure();
 	}
 
 	public Employe(String matricule, Date dateEntree, ArrayList<String> fonctions,
@@ -37,6 +38,21 @@ public class Employe extends Personne {
 		super.setDdn(p.getDdn());
 	}
 
+	private void configure() {
+		if (getType() == Personne.ROLE_CONSEILLER) {
+			clients = new ArrayList<Client>();
+		}
+		fonctions = new ArrayList<String>();
+	}
+
+	public boolean addClient(Client c) {
+		if (getType() == Personne.ROLE_CONSEILLER) {
+			clients.add(c);
+			return true;
+		}
+		return false;
+	}
+
 	public Date getDateEntree() {
 		return dateEntree;
 	}
@@ -55,6 +71,10 @@ public class Employe extends Personne {
 
 	public ArrayList<Notification> getNotifications() {
 		return notifications;
+	}
+
+	public void addNotification(Notification ntf) {
+		notifications.add(ntf);
 	}
 
 	public void setNotifications(ArrayList<Notification> notifications) {

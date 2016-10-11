@@ -35,8 +35,8 @@ public class GestiBankBAMRestControler {
     //@Autowired
     //AdminService adminService;  //Service which will do all data retrieval/manipulation work
 
-    //@Autowired
-    //EmployeService employeService;  //Service which will do all data retrieval/manipulation work
+    @Autowired
+    EmployeService employeService;  //Service which will do all data retrieval/manipulation work
 
     //-------------------Retrieve All Clients--------------------------------------------------------
      

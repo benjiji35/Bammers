@@ -28,7 +28,6 @@ public class ClientServiceImpl implements ClientService {
 	};
 
 	public List<Client> findAllClients() {
-		//BAMTools.print(new File("c:\\findAllClients.txt"), clients);
 		return clients;
 	}
 	

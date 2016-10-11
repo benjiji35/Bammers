@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Client extends Personne {
 	private ArrayList<Compte> comptes;
+	private Employe conseiller;
 
 	public Client() {
 		super();
@@ -32,6 +33,14 @@ public class Client extends Personne {
 		super.setDdn(p.getDdn());
 	}
 
+	public void setConseiller(Employe e) {
+		this.conseiller = e;
+	}
+
+	public Employe getConseiller() {
+		return conseiller;
+	}
+
 	
 	public ArrayList<Compte> getComptes() {
 		return comptes;
@@ -49,17 +58,13 @@ public class Client extends Personne {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		List<Compte> lc = getComptes();
-		final int len = lc.size();
-		builder.append("Client [getComptes=[");
-		for (int i = 0; i < len-1; i++) {
-			builder.append(lc.get(i)).append(',');
-		}
-		if (len > 0) {
-			builder.append(lc.get(len-1));
-		}
-		builder.append(']');
-		builder.append(", toString=");
+		builder.append("Client [getConseiller()=");
+		builder.append(getConseiller());
+		builder.append(", getComptes()=");
+		builder.append(getComptes());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", toString()=");
 		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
@@ -70,6 +75,7 @@ public class Client extends Personne {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((comptes == null) ? 0 : comptes.hashCode());
+		result = prime * result + ((conseiller == null) ? 0 : conseiller.hashCode());
 		return result;
 	}
 
@@ -86,6 +92,11 @@ public class Client extends Personne {
 			if (other.comptes != null)
 				return false;
 		} else if (!comptes.equals(other.comptes))
+			return false;
+		if (conseiller == null) {
+			if (other.conseiller != null)
+				return false;
+		} else if (!conseiller.equals(other.conseiller))
 			return false;
 		return true;
 	}

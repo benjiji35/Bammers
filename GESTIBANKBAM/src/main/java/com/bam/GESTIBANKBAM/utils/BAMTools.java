@@ -80,16 +80,19 @@ public class BAMTools {
 		return cal1.getTime();
 	}
 
-	public static void print(PrintStream out, List l) {
+	public static void print(PrintStream out, List l, String message) {
+		if (message != null) {
+			out.println(message);
+		}
 		for (Object item : l) {
 			out.println(item);
 		}
 	}
 
-	public static void print(File f, List l) {
+	public static void print(File f, List l, String message) {
 		try (PrintStream out =
                 new PrintStream(new FileOutputStream(f))) {
-			print(out, l);
+			print(out, l, message);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace(System.err);
 		}	
