@@ -245,7 +245,8 @@ public class ClientServiceImpl implements ClientService {
 
 	public void saveClient(Client client) {
 		client.setId("C"+counter.incrementAndGet());
-		clients.add(client);
+		//clients.add(client);
+		bd.createClient(client);
 	}
 
 	public void updateClient(Client client) {
@@ -276,4 +277,15 @@ public class ClientServiceImpl implements ClientService {
 	public void deleteAllClients(){
 		clients.clear();
 	}
+
+	@Override
+	public List<Client> findAllNewClients() {
+		List<Client> client = null;
+			for (Client cli : clients) {
+				client.add(cli);
+			}
+		return client;
+	}
+	
+	
 }

@@ -50,7 +50,17 @@ public class GestiBankBAMRestControler {
         return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
     }
 
- 
+    //-------------------Retrieve All New Clients--------------------------------------------------------
+    
+    @RequestMapping(value = "/client/news/", method = RequestMethod.GET)
+    public ResponseEntity<List<Client>> listAllNewClients() {
+        List<Client> clients = clientService.findAllNewClients();
+        if(clients.isEmpty()){
+            return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        
+        return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
+    }
  
     
     //-------------------Retrieve Single Client--------------------------------------------------------

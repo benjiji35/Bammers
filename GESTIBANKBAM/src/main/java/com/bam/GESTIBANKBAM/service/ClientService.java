@@ -21,6 +21,8 @@ public interface ClientService {
 	void updateClient(Client client);
 	
 	void deleteClientById(String id);
+	
+	List<Client> findAllNewClients(); 
 
 	List<Client> findAllClients(); 
 	

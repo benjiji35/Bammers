@@ -162,11 +162,6 @@ app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
       ClientService.createClient(client);
     };
 
-    $scope.reset = function() {
-      $scope.user = angular.copy($scope.master);
-    };
-
-    $scope.reset();
 }]);
 
 

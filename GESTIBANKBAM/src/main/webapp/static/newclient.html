@@ -71,23 +71,41 @@
 	    </div>
   		</div>	
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="adresse">Adresse : </label>
+	    <label class="control-label col-sm-2" for="num">Numéro de rue : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse"ng-model="client.adresse" required>
+	      <input type="text" class="form-control" id="num" placeholder="Entrez votre numéro de rue"ng-model="client.adresse.num" >
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="adresse">Rue : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="rue" placeholder="Entrez votre rue"ng-model="client.adresse.rue" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="ville">Ville : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville" ng-model="client.ville" required>
+	      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville" ng-model="client.adresse.ville" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="cp">Code Postal : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.codePostal" required>
+	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.codePostal" required>
 	    </div>
   		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="cp">Téléphone </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.telephone" required>
+	    </div>
+  		</div>
+  		<div class="form-group">
+		  <label class="control-label col-sm-2" for="email">Email:</label>
+		  <div class="col-sm-3">
+		    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : " ng-model="client.adresse.mail" required>
+		  </div>
+		</div>
   		<div class="form-group">
 		  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
 		  <div class="col-sm-3">
@@ -135,18 +153,6 @@
 	      <input type="file" class="form-control" id="cni">
 	    </div>
   		</div>
-		<div class="form-group">
-		  <label class="control-label col-sm-2" for="email">Email:</label>
-		  <div class="col-sm-3">
-		    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : " ng-model="client.mail" required>
-		  </div>
-		</div>
-		<div class="form-group">
-		  <label class="control-label col-sm-2" for="pwd">Mot de passe : </label>
-		  <div class="col-sm-3">          
-		    <input type="password" class="form-control" id="pwd" placeholder="Entrez votre mot de passe : " ng-model="client.mdp" required>
-		  </div>
-		</div>
 		<div class="form-group">        
 		  <div class="col-sm-offset-2 col-sm-10">
 		    <button type="submit" class="btn btn-default">Valider ma demande</button>
