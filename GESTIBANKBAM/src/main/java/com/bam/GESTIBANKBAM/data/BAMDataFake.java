@@ -113,20 +113,20 @@ public class BAMDataFake implements BAMData {
 
 		// Conseillers
 		personnes.add(new Personne(
-				"Mr", "BEZDIKIAN", "Édouard", BAMTools.parseDate("12-08-1960"), Personne.ROLE_CONSEILLER, "C21", "m1m3r123912558",
+				"Mr", "BEZDIKIAN", "Édouard", BAMTools.parseDate("12-08-1960"), Personne.ROLE_CONSEILLER, "A21", "m1m3r123912558",
 				new Adresse(185, "route de bayonne", "montauban", "82000", "+33771317258", "bezdikian.édouard@bito.com")));
 
 		personnes.add(new Personne(
-				"Mme", "KEVORKIAN", "Arianne", BAMTools.parseDate("27-01-1990"), Personne.ROLE_CONSEILLER, "C23", "m1m3r123526496",
+				"Mme", "KEVORKIAN", "Arianne", BAMTools.parseDate("27-01-1990"), Personne.ROLE_CONSEILLER, "A23", "m1m3r123526496",
 				new Adresse(524, "alles jules guesdes", "rennes", "35000", "+33728753383", "kevorkian.arianne@tito.com")));
 
 		personnes.add(new Personne(
-				"Mr", "MALOSSI", "Simon", BAMTools.parseDate("24-12-1951"), Personne.ROLE_CONSEILLER, "C27", "k1h3r123722356", 
+				"Mr", "MALOSSI", "Simon", BAMTools.parseDate("24-12-1951"), Personne.ROLE_CONSEILLER, "A27", "k1h3r123722356", 
 				new Adresse(328, "rue des sardines", "montauban", "82000", "+33789295523", "malossi.simon@bito.com")));
 
 		// Admins
 		personnes.add(new Personne(
-				"Mme", "SOLARZ", "Alicia", BAMTools.parseDate("18-12-1979"), Personne.ROLE_ADMIN, "C25", "j1g3r123305972", 
+				"Mme", "SOLARZ", "Alicia", BAMTools.parseDate("18-12-1979"), Personne.ROLE_ADMIN, "X25", "j1g3r123305972", 
 				new Adresse(658, "place jean jaures", "le mans", "72000", "+33728744142", "solarz.alicia@tito.com")));
 
 		for (Personne p : personnes) {
@@ -144,6 +144,21 @@ public class BAMDataFake implements BAMData {
 				default:
 					System.out.println("init Personnes::"+p);
 			}
+		}
+		// assigning Clients to Conseillers
+		Random rnd = new Random();
+		int idx;
+		for (Client clt : clients) {
+			for (Personne p : personnes) {
+				if (clt.getId().equals(p.getId())) {
+					p.setType(clt.getType());
+					break;
+				}
+			}
+			idx = rnd.nextInt(conseillers.size());
+			Employe emp = conseillers.get(idx);
+			emp.addClient(clt);
+			clt.setConseiller(emp);
 		}
 	}
 
