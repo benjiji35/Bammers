@@ -278,14 +278,14 @@ public class ClientServiceImpl implements ClientService {
 		clients.clear();
 	}
 
-	@Override
-	public List<Client> findAllNewClients() {
-		List<Client> client = null;
-			for (Client cli : clients) {
-				client.add(cli);
-			}
-		return client;
-	}
-	
+//	@Override
+//	public List<Client> findAllNewClients() {
+//		List<Client> client = null;
+//			for (Client cli : clients) {
+//				client.add(cli);
+//			}
+//		return client;
+//	}
+//	
 	
 }

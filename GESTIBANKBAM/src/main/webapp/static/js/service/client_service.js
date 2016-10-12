@@ -26,21 +26,21 @@ function fetchAllClients() {
     return deferred.promise;
 }
 
-/*recherche de tous les nouveaux utilisateurs */
-function fetchAllClients() {
-    var deferred = $q.defer();
-    $http.get(CLIENTS_REST_SERVICE_URI+'/news/')
-        .then(
-        function (response) {
-            deferred.resolve(response.data);
-        },
-        function(errResponse){
-            console.error('Error while fetching Users');
-            deferred.reject(errResponse);
-        }
-    );
-    return deferred.promise;
-}
+///*recherche de tous les nouveaux utilisateurs */
+//function fetchAllNewsClients() {
+//    var deferred = $q.defer();
+//    $http.get(CLIENTS_REST_SERVICE_URI'/news/')
+//        .then(
+//        function (response) {
+//            deferred.resolve(response.data);
+//        },
+//        function(errResponse){
+//            console.error('Error while fetching Users');
+//            deferred.reject(errResponse);
+//        }
+//    );
+//    return deferred.promise;
+//}
 
 function searchClient(id) {
     var deferred = $q.defer();

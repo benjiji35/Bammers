@@ -22,7 +22,7 @@ public interface ClientService {
 	
 	void deleteClientById(String id);
 	
-	List<Client> findAllNewClients(); 
+//	List<Client> findAllNewClients(); 
 
 	List<Client> findAllClients(); 
 	
