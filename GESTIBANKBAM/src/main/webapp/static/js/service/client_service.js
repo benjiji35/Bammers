@@ -6,7 +6,8 @@ var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/
 
 var factory = {
 		fetchAllClients: fetchAllClients,
-		searchClient: searchClient
+		searchClient: searchClient,
+		createClient: createClient
 };
 return factory;
 /*recherche de tous les utilisateurs */
@@ -34,6 +35,21 @@ function searchClient(id) {
         },
         function(errResponse){
             console.error('Error while finding User');
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
+}
+
+function createClient(client) {
+    var deferred = $q.defer();
+    $http.post(CLIENTS_REST_SERVICE_URI, client)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
+        },
+        function(errResponse){
+            console.error('Error while creating User');
             deferred.reject(errResponse);
         }
     );

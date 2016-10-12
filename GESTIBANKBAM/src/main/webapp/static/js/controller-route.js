@@ -153,12 +153,13 @@ app.controller('rootCtrl', ['$scope', '$location',
 		console.log("=============");
     }]);
 
-app.controller('newClCtrl', ['$scope', '$location', 
-                              function($scope, $location) {
+app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
+                              function($scope, $location, ClientService) {
 	$scope.client = {};
 
     $scope.submit = function(client) {
       console.log(client);
+      ClientService.createClient(client);
     };
 
     $scope.reset = function() {
