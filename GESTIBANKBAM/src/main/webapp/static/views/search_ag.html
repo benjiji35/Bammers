@@ -2,20 +2,23 @@
 <legend>RECHERCHER CLIENT</legend>
 <div> 
 
-        <form>         
+        <form ng-controller= "searchNomCtrl" ng-submit="src(client)">         
             <br><br>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="nom" placeholder="nom">
+                <input type="text" class="form-control" ng-model="client.nom" placeholder="nom">
             </div>      
                
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="prenom" placeholder="prénom">
+                <input type="text" class="form-control" ng-model="client.prenom" placeholder="prénom">
             </div>         
                 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="numero de compte" placeholder="numéro de compte">
+                <input type="text" class="form-control" ng-model="client.cpte" placeholder="numéro de compte">
             </div>
-            <input type="submit" value="Rechercher" class="btn btn-default"/>
+<!--             <a href="#search_nom/{{nom}}" class="btn btn-default">Recherche</a>  -->
+
+			<button type="submit" class= "btn btn-success btn-sm">Rechercher</button>
+			
          </form>
     <br><br><br> 
     <div class="table-responsive">     
@@ -47,8 +50,8 @@
 	</div>
 <script>
 //var app = angular.module('myApp', []);
-app.controller('clientsCtrl', function($scope, $http) {
-    $http.get("http://localhost:8080/SpringAngularStartProject/client/")
-    .then(function (response) {$scope.names = response.data.clients;});
-});
+// app.controller('clientsCtrl', function($scope, $http) {
+//     $http.get("http://localhost:8080/SpringAngularStartProject/client/")
+//     .then(function (response) {$scope.names = response.data.clients;});
+// });
 </script>

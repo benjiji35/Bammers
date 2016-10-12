@@ -90,9 +90,18 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/list_ag', {
 			templateUrl: 'views/list_ag.html',
 			controller: 'affectCtrl'})
-		$routeProvider.when('/see_cl/:id', {
+		.when('/see_cl/:id', {
 			templateUrl: 'views/see_cl.html',
 			controller: 'see_clCtrl'})
+//		.when('/search_nom/:nom', {
+//			templateUrl: 'views/search_ag.html',
+//			controller: 'searchNomCtrl'})
+//		.when('/search_nom/:prenom', {
+//			templateUrl: 'views/nom.html',
+//			controller: 'searchPrenomCtrl'})
+//		.when('/search_nom/:nom/:prenom', {
+//			templateUrl: 'views/nom.html',
+//			controller: 'searchNomPrenomCtrl'})
 		.when('/', {
 			templateUrl: 'views/root.html',
 			controller: 'rootCtrl'})

@@ -7,20 +7,30 @@
 		<meta http-equiv="Content-Language" content="fr" />
         <link rel= "stylesheet" type="text/css" href="css/bootstrap.css">
 		<link rel= "stylesheet" type="text/css" href="style/css/se_connecter.css">
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" ></script>
+		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		
+		<script src="js/app.js"></script>
 	</head>
 	  	
 			<header>
 				<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
 			</header>
-<body>
- <center><legend>Vous etes deconnecte</legend></center><br><br><br>
- <center><h4>Merci de votre visite</h4></center>
+<body ng-app="myApp">
+	<script type="text/javascript">sessionStorage.clear();</script>
+	
+ 	<center><legend>Vous etes deconnecte</legend></center><br><br><br>
+ 	<center><h4>Merci de votre visite</h4></center>
         <br><br><br>
         
-<center><h4>Vous etes rediriger vers la page d'accueil</h4></center>
-<p>&nbsp;</p>
+	<center><a href="index.html">Page d'accueil</center>
+	<p>&nbsp;</p>
 
 </body>
 </html>

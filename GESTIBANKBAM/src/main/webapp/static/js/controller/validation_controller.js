@@ -21,7 +21,13 @@ app.controller(
 															.log("Valid mot de passe et id");
 													
 
-													//sessionStorage.setItem("type",$scope.personne.type);
+													sessionStorage.setItem("pers",JSON.stringify($scope.personne));
+													
+//													sessionStorage.personne = JSON.stringify($scope.personne);
+//													$scope.personne = JSON.parse(sessionStorage.personne);
+													
+													//var data = sessionStorage.getItem("pers");
+													
 																									
 													switch ($scope.personne.type){
 														case 1:
@@ -29,12 +35,15 @@ app.controller(
 															break;
 														case 2:
 															$window.location = 'accueil.html#/see';
+															console.log(pers);
 															break;
 														case 4:
 															$window.location = 'accueil_ag.html#/search_ag';
+															console.log(pers);
 															break;
 														case 8:
 															$window.location = 'accueil_ad.html#/affect';
+															console.log(pers);
 															break;
 														default:
 															$window.location = 'se_connecter.html';
