@@ -168,6 +168,80 @@ app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
 
     $scope.reset();
 }]);
+app.controller(
+
+'searchNomCtrl',
+[
+		'$scope',
+		'$location',
+		'ClientService',
+		
+		function($scope, $location, ClientService) {
+			$scope.client = {};
+			
+			$scope.src = function(client){
+			console.log(client);
+			
+			ClientService.srcClient(client) 
+						.then
+							(function(d) {
+									$scope.users = d;													
+									console
+											.log($scope.users);
+																						
+								},
+								function(errResponse) {
+									console.error = ("Invalid entry");
+								});						
+
+			}} ]);
+
+//app.controller(
+//
+//'searchPrenomCtrl',
+//[
+//		'$scope',
+//		'$location',
+//		'ClientService',
+//		'$routeParams',
+//		function($scope, $location, ClientService,$routeParams) {
+//			console.log("hello");
+//			ClientService.srcClientPrenom($routeParams.prenom) 
+//						.then
+//							(function(d) {
+//									$scope.nm = d;													
+//									console
+//											.log($scope.nm);
+//																						
+//								},
+//								function(errResponse) {
+//									console.error = ("Invalid entry");
+//								});						
+//
+//		} ]);
+//app.controller(
+//
+//'searchNomPrenomCtrl',
+//[
+//		'$scope',
+//		'$location',
+//		'ClientService',
+//		'$routeParams',
+//		function($scope, $location, ClientService,$routeParams) {
+//			console.log("hello");
+//			ClientService.srcClientNomPrenom($routeParams.nom , $routeParams.prenom) 
+//						.then
+//							(function(d) {
+//									$scope.nm = d;													
+//									console
+//											.log($scope.nm);
+//																						
+//								},
+//								function(errResponse) {
+//									console.error = ("Invalid entry");
+//								});						
+//
+//		} ]);
 
 
 
