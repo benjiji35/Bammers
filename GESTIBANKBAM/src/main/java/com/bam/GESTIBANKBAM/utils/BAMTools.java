@@ -6,9 +6,12 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import net.sf.jnetparse.security.PasswordGenerator;
 
 public class BAMTools {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -96,5 +99,12 @@ public class BAMTools {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace(System.err);
 		}	
+	}
+
+	public List<String> genPassword(int qt) {
+		//boolean lowercases, boolean uppercases, boolean arabicdigits, boolean hexa, boolean punct, int passwordLength
+		PasswordGenerator pg = new PasswordGenerator(true, true, true, true, true, qt);
+
+		return pg.next(qt);
 	}
 }

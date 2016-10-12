@@ -14,7 +14,23 @@
 		<jackson.version>2.7.5</jackson.version>
 	</properties>
 
+<!--  Use of JavaMail -->
+ <repositories>
+    <repository>
+  	<id>Java.Net</id>
+  	<url>http://download.java.net/maven/2/</url>
+    </repository>
+  </repositories>
+
+
 	<dependencies>
+		<!-- Java Mail API -->
+	    <dependency>
+		 <groupId>javax.mail</groupId>
+		 <artifactId>mail</artifactId>
+		 <version>1.4.3</version>
+	    </dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>

@@ -10,6 +10,13 @@ public class Personne implements Cloneable {
 	public static final int ROLE_CONSEILLER = 4;
 	public static final int ROLE_ADMIN = 8;
 
+	public enum SITUATION {
+		SINGLE,
+		MARRIED,
+		DIVORCED,
+		WIDOWED
+	};
+
 	private String civilite;
 	private String nom;
 	private String prenom;
@@ -18,6 +25,10 @@ public class Personne implements Cloneable {
 	private String id;
 	private String hashMdp;
 	private Adresse adresse;
+	private SITUATION situationMatrimoniale;
+	private String profession;
+	private int nbEnfants;
+	private double income;
 
 	public Personne() {
 		this("0");
@@ -225,9 +236,47 @@ public class Personne implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "Personne civilite=" + getCivilite() + ", nom=" + getNom() + ", prenom=" + getPrenom()
-				+ ", ddn=" + getDdn() + ", type=" + getType() + ", id=" + getId()
-				+ ", hashMdp=" + getHashMdp() + ", adresse=" + getAdresse() + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Personne [getCivilite()=");
+		builder.append(getCivilite());
+		builder.append(", getNom()=");
+		builder.append(getNom());
+		builder.append(", getPrenom()=");
+		builder.append(getPrenom());
+		builder.append(", getDdn()=");
+		builder.append(getDdn());
+		builder.append(", getType()=");
+		builder.append(getType());
+		builder.append(", getId()=");
+		builder.append(getId());
+		builder.append(", getHashMdp()=");
+		builder.append(getHashMdp());
+		builder.append(", getAdresse()=");
+		builder.append(getAdresse());
+		builder.append(", getNumero()=");
+		builder.append(getNumero());
+		builder.append(", getRue()=");
+		builder.append(getRue());
+		builder.append(", getVille()=");
+		builder.append(getVille());
+		builder.append(", getCodePostal()=");
+		builder.append(getCodePostal());
+		builder.append(", getTelephone()=");
+		builder.append(getTelephone());
+		builder.append(", getMail()=");
+		builder.append(getMail());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", getSituationMatrimoniale()=");
+		builder.append(getSituationMatrimoniale());
+		builder.append(", getNbEnfants()=");
+		builder.append(getNbEnfants());
+		builder.append(", getIncome()=");
+		builder.append(getIncome());
+		builder.append(", getProfession()=");
+		builder.append(getProfession());
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override
@@ -239,8 +288,14 @@ public class Personne implements Cloneable {
 		result = prime * result + ((ddn == null) ? 0 : ddn.hashCode());
 		result = prime * result + ((hashMdp == null) ? 0 : hashMdp.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(income);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + nbEnfants;
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((profession == null) ? 0 : profession.hashCode());
+		result = prime * result + ((situationMatrimoniale == null) ? 0 : situationMatrimoniale.hashCode());
 		result = prime * result + type;
 		return result;
 	}
@@ -279,6 +334,10 @@ public class Personne implements Cloneable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (Double.doubleToLongBits(income) != Double.doubleToLongBits(other.income))
+			return false;
+		if (nbEnfants != other.nbEnfants)
+			return false;
 		if (nom == null) {
 			if (other.nom != null)
 				return false;
@@ -288,6 +347,13 @@ public class Personne implements Cloneable {
 			if (other.prenom != null)
 				return false;
 		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (profession == null) {
+			if (other.profession != null)
+				return false;
+		} else if (!profession.equals(other.profession))
+			return false;
+		if (situationMatrimoniale != other.situationMatrimoniale)
 			return false;
 		if (type != other.type)
 			return false;
@@ -300,5 +366,37 @@ public class Personne implements Cloneable {
 		Personne np = copyFrom(p);
 
 		return np;
+	}
+
+	public SITUATION getSituationMatrimoniale() {
+		return situationMatrimoniale;
+	}
+
+	public void setSituationMatrimoniale(SITUATION situationMatrimoniale) {
+		this.situationMatrimoniale = situationMatrimoniale;
+	}
+
+	public int getNbEnfants() {
+		return nbEnfants;
+	}
+
+	public void setNbEnfants(int nbEnfants) {
+		this.nbEnfants = nbEnfants;
+	}
+
+	public double getIncome() {
+		return income;
+	}
+
+	public void setIncome(double income) {
+		this.income = income;
+	}
+
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
 	}
 }

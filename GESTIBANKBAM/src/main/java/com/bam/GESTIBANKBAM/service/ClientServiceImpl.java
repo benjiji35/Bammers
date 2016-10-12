@@ -245,7 +245,8 @@ public class ClientServiceImpl implements ClientService {
 
 	public void saveClient(Client client) {
 		client.setId("C"+counter.incrementAndGet());
-		clients.add(client);
+		//clients.add(client);
+		bd.createClient(client);
 	}
 
 	public void updateClient(Client client) {
