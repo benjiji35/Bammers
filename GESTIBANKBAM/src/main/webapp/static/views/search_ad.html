@@ -24,36 +24,36 @@
                 <input type="text" class="form-control" id="matricule" placeholder="matricule">
 
             </div>
-           	<input type="submit" value="Rechercher" class="btn btn-default"/>
+            <input type="submit" value="Rechercher" class="btn btn-default"/>
          </form>
     <br><br><br><br><br><br>
     <div class="table-responsive">         
-	<table class="table">
-		<caption>1 résultat correspondent à votre recherche</caption>
-		<thead>
- 		<tr>
- 			<th>Matricule</th>
-    		<th>Nom</th>
-    		<th>Prénom</th>
-    		<th>Date de Naissance</th>
-    		<th>Ville</th>
-    		<th>Téléphone</th>
-    		<th>Informations personelles</th>
-  		</tr>
-  		</thead>		
-  		<tbody>
-  		<tr  ng-repeat="">
-  			<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-   			<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-    		<td ng-bind=""></td>
-    		<td><a href="#">Détails</a></td>
-  		</tr>
-  		</tbody>
-  	</table>
-	</div>
+  <table class="table">
+    <caption>{{cons.length}}résultat correspondent à votre recherche</caption>
+    <thead>
+    <tr>
+      <th>Matricule</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de Naissance</th>
+        <th>Ville</th>
+        <th>Téléphone</th>
+        <th>Informations personelles</th>
+      </tr>
+      </thead>    
+      <tbody>
+      <tr ng-repeat="c in cons">
+        <td>{{c.matricule}}</td>
+        <td>{{c.nom}}</td>
+        <td>{{c.prenom}}</td>
+        <td>{{c.ddn}}</td>
+        <td>{{c.adresse.ville}}</td>
+        <td>{{c.adresse.telephone}}</td>
+        <td><a href="#">Détails</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
     </body>
 </html>
     

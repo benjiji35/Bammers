@@ -1,5 +1,7 @@
 package com.bam.GESTIBANKBAM.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Employe;
 import com.bam.GESTIBANKBAM.model.Personne;
 import com.bam.GESTIBANKBAM.service.ClientService;
 import com.bam.GESTIBANKBAM.service.EmployeService;
 import com.bam.GESTIBANKBAM.service.PersonneService;
+import com.bam.GESTIBANKBAM.utils.BAMTools;
 
 @RestController
 public class GestiBankBAMRestControler {
@@ -50,18 +54,40 @@ public class GestiBankBAMRestControler {
         return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
     }
 
-//    //-------------------Retrieve All New Clients--------------------------------------------------------
-//    
-//    @RequestMapping(value = "/client/news/", method = RequestMethod.GET)
-//    public ResponseEntity<List<Client>> listAllNewClients() {
-//        List<Client> clients = clientService.findAllNewClients();
-//        if(clients.isEmpty()){
-//            return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
-//        }
-//        
-//        return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
-//    }
+  //-------------------Retrieve All New Clients--------------------------------------------------------
+    
+    @RequestMapping(value = "/newClient/", method = RequestMethod.GET)
+    public ResponseEntity<List<Client>> listNewClient() {
+        
+        List<Client> client = clientService.findAllClients();
+                
+        if(client.isEmpty()){
+            return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        List<Client> clientsSansConseiller = new ArrayList<>();
+        for (Client c:client){
+            if (c.getConseiller()==null){
+            //System.out.println(c);
+            clientsSansConseiller.add(c);
+            }
+        }
+        
+        return new ResponseEntity<List<Client>>(clientsSansConseiller, HttpStatus.OK);
+    }
  
+//-------------------Retrieve Single New Client By nom--------------------------------------------------
+    
+    @RequestMapping(value = "/newClient/nom-{nom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity <List<Client>> getUser3(@PathVariable("nom") String nom) {
+        System.out.println("Fetching User with nom"+" " + nom);
+        List<Client> client = clientService.findByNom(nom);
+        if (client == null) {
+            System.out.println("Client with nom " + nom + " not found");
+            return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
+        }
+        System.out.println("Client found :"+client.toString());
+        return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
+    }  
     
     //-------------------Retrieve Single Client--------------------------------------------------------
      
@@ -126,13 +152,15 @@ public class GestiBankBAMRestControler {
         System.out.println("Creating Client " + client.getNom() + " - " + client.getPrenom());
  
         if (clientService.isClientExist(client)) {
-        	System.out.println("A Client with name " + client.getNom() + " " + client.getPrenom() + " already exist");
+            System.out.println("A Client with name " + client.getNom() + " " + client.getPrenom() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
+        
         if (client.getConseiller() == null){
         clientService.saveClient(client);
+        System.out.println(">>> "+client);
         }
- 
+       
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/client/{id}").buildAndExpand(client.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -153,12 +181,14 @@ public class GestiBankBAMRestControler {
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
  
-        currentClient.setCivilite(client.getCivilite());
-        currentClient.setNom(client.getNom());
-        currentClient.setPrenom(client.getPrenom());
-        currentClient.setDdn(client.getDdn());
-        currentClient.setHashMdp(client.getHashMdp());
-        currentClient.setAdresse(client.getAdresse());
+//        currentClient.setCivilite(client.getCivilite());
+//        currentClient.setNom(client.getNom());
+//        currentClient.setPrenom(client.getPrenom());
+//        currentClient.setDdn(client.getDdn());
+//        currentClient.setHashMdp(client.getHashMdp());
+//        currentClient.setAdresse(client.getAdresse());
+        currentClient.setConseiller(client.getConseiller());
+        
          
         clientService.updateClient(currentClient);
         return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
@@ -214,17 +244,33 @@ public class GestiBankBAMRestControler {
           return new ResponseEntity<Personne>(HttpStatus.NOT_FOUND);
       }
       else {
-      	System.out.println("Bienvenue chez BamBank");
+        System.out.println("Bienvenue chez BamBank");
       }
       if (pers.getHashMdp().equals(mdp)){
-      	return new ResponseEntity<Personne>(pers, HttpStatus.OK);        	
+        return new ResponseEntity<Personne>(pers, HttpStatus.OK);           
       }
       else {
-      	System.out.println("The mdp " + mdp +" "+ "is invalid");
-      	return new ResponseEntity<Personne>(HttpStatus.NOT_FOUND);
+        System.out.println("The mdp " + mdp +" "+ "is invalid");
+        return new ResponseEntity<Personne>(HttpStatus.NOT_FOUND);
       }
-  }
-   
-     
- 
+  } 
+
+
+//-------------------Retrieve All Conseiller--------------------------------------------------------
+
+@RequestMapping(value = "/conseiller/", method = RequestMethod.GET)
+public ResponseEntity<List<Employe>> listAllConseiller() {
+    List<Employe> emp = employeService.findAllEmployes();
+    if(emp.isEmpty()){
+        return new ResponseEntity<List<Employe>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+    }
+    List<Employe> Conseiller = new ArrayList<>();
+    for (Employe e:emp){
+        if (e.getType()==4){
+        System.out.println(e);
+        Conseiller.add(e);
+        }
+    }
+    return new ResponseEntity<List<Employe>>(emp, HttpStatus.OK);
+}
 }

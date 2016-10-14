@@ -1,38 +1,38 @@
-<div class="panel-header" ng-app="">
-            	<div id="navigation_help">
-					<ul class="breadcrumb">
-						<li><a href="#">Accueil</a></li>
-						<li class="active">Affectation</li>
-					</ul>
-				</div>
+<div class="panel-header">
+              <div id="navigation_help">
+          <ul class="breadcrumb">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Affectation</li>
+          </ul>
+        </div>
 </div>
 <div class="panel-body">
-	<legend>Affectation</legend>
+  <legend>Affectation</legend>
  <div class="table-responsive">          
   <table class="table">
-  <caption>Vous avez ${{x}} demandes en attentes d'affectation</caption>
+  <caption>Vous avez {{users.length}} liste de client</caption>
     <thead>
       <tr>
-		<th>Nom</th>
-		<th>Prénom</th>
-		<th>Détails</th>
-		<th>Etat dossier</th>
-		<th>Conseiller</th>
-		<th>Validation</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Détails</th>
+    <th>Etat dossier</th>
+    <th>Conseiller</th>
+    <th>Validation</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="">
-        <td ng-bind=""></td>
-        <td ng-bind=""></td>
-        <td ng-bind=""><a href="#">Détails</a></td>
-        <td ng-bind=""><input type="checkbox" class="form-control"></td>
-        <td ng-bind="">
-        	<select class="form-control" >
-        		<option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-        	</select>
+      <tr ng-repeat="c in users">
+        <td>{{c.nom}}</td>
+        <td>{{c.prenom}}</td>
+        <td><a ng-href="#see_cl/{{c.id}}">Détails</a></td>
+    <td><input type="checkbox" class="form-control"></td> 
+<!--         <td> {{c.conseiller.prenom}}-{{c.conseiller.nom}}</td> -->
+        <td><select class="form-control"  ng-controller= "search_adCtrl">
+            <option ng-repeat="option in cons" value="{{option.id}}">{{option.nom}}</option>
+          </select>
         </td>
-        <td ng-bind=""><input type ="button" class="btn btn-default" value="Valider"></td>
+        <td><input type ="button" class="btn btn-default" ng-controller= "valid_Ctrl" ng-click = "Valid(c)" value="Valider"></td>
       </tr>
     </tbody>
   </table>

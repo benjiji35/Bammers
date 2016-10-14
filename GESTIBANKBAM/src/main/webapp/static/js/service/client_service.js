@@ -8,7 +8,8 @@ var factory = {
 		fetchAllClients: fetchAllClients,
 		searchClient: searchClient,
 		createClient: createClient,
-		srcClient : srcClient
+		srcClient : srcClient,
+        updateClient : updateClient
 //		srcClientPrenom : srcClientPrenom,
 //		srcClientNomPrenom : srcClientNomPrenom
 };
@@ -134,6 +135,19 @@ function srcClient(nom) {
 //       }
 //    );
 //}
-
+function updateClient(users,id) {
+    var deferred = $q.defer();
+    $http.put(REST_SERVICE_URI+id, users)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
+        },
+        function(errResponse){
+            console.error('Error while updating User');
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
+}
 
 }]);

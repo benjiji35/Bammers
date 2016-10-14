@@ -71,15 +71,15 @@
 	    </div>
   		</div>	
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="num">Numéro de rue : </label>
+	    <label class="control-label col-sm-2" for="adresse">Numero : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="num" placeholder="Entrez votre numéro de rue"ng-model="client.adresse.num" >
+	      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse"ng-model="client.adresse.numero" required>
 	    </div>
   		</div>
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="adresse">Rue : </label>
+	    <label class="control-label col-sm-2" for="rue">Rue : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="rue" placeholder="Entrez votre rue"ng-model="client.adresse.rue" required>
+	      <input type="text" class="form-control" id="rue" placeholder="Entrez votre rue" ng-model="client.adresse.rue" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -95,9 +95,9 @@
 	    </div>
   		</div>
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="cp">Téléphone </label>
+	    <label class="control-label col-sm-2" for="telephone">Telephone : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.telephone" required>
+	      <input type="text" class="form-control" id="telephone" placeholder="Entrez votre telephone" ng-model="client.adresse.telephone" required>
 	    </div>
   		</div>
   		<div class="form-group">

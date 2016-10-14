@@ -89,10 +89,16 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'affectCtrl'})
 		.when('/list_ag', {
 			templateUrl: 'views/list_ag.html',
-			controller: 'affectCtrl'})
+			controller: 'listCtrl'})
 		.when('/see_cl/:id', {
 			templateUrl: 'views/see_cl.html',
 			controller: 'see_clCtrl'})
+		.when('/see_newCl/:nom', {
+			templateUrl: 'views/see_cl.html',
+			controller: 'see_newClCtrl'})
+		.when('/valid/:id', {
+			template: 'Vous avez updated the client',
+			controller: 'valid_Ctrl'})
 //		.when('/search_nom/:nom', {
 //			templateUrl: 'views/search_ag.html',
 //			controller: 'searchNomCtrl'})
