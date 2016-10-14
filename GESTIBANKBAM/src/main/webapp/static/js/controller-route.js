@@ -152,8 +152,8 @@ app.controller('valid_Ctrl', ['$scope', '$location','ClientService','$routeParam
 									}]);
                         
 //consult_agCtrl
-app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService',
-		function($scope, $location, ClientMdpService) {
+app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','ClientServiceAff','$routeParams',
+		function($scope, $location, ClientMdpService,ClientServiceAff,$routeParams) {
 			console.log("helloMdp");
 			ClientMdpService.fetchMdpClient().then(function(d) {
 				self.user = d;
@@ -162,6 +162,11 @@ app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService',
 			}, function(errResponse) {
 				console.error('Error while fetching Users');
 			});
+			console.log("hello id");
+        	$scope.valid= function(client, id){
+        		console.log(client);
+        		ClientServiceAff.validUser(client, id);
+                }
 		} ]);
 //affectCtrl
 app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService','ClientServiceNew','$routeParams',

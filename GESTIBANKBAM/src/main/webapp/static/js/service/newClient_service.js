@@ -7,8 +7,7 @@ var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/
 var factory = {
 		fetchNewClients : fetchNewClients,
 		srcClient : srcClient,
-		updateUser
-		
+		updateUser : updateUser
 };
 return factory;
 
@@ -57,4 +56,5 @@ function srcClient(nom) {
     );
     return deferred.promise;
 }
+
 }]);

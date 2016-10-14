@@ -21,7 +21,7 @@ app.factory(
 								
 								$http
 										.get(
-												REST_SERVICE_URI + 'id-' + id+ '-mdp-' + mdp)
+												REST_SERVICE_URI + 'id-' + id+ '/mdp-' + mdp)
 										.then(
 												function(response) {
 													deferred

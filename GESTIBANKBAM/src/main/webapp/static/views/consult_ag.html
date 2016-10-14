@@ -60,7 +60,7 @@
 		        <td><a href="#see_cl/{{c.id}}">Détails</a></td>
 		        <td><input type="checkbox" class="form-control"></td>
 		        <td>{{c.conseiller.nom}}</td>
-		        <td><input type ="button" class="btn btn-default" value="Valider"></td>
+		        <td><input type ="button" class="btn btn-default" ng-click = "valid(c, c.id)" value="Valider"></td>
 		      </tr>
 		    </tbody>
 		  </table>
