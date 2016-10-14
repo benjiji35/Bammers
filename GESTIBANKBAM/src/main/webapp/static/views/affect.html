@@ -29,10 +29,10 @@
     <td><input type="checkbox" class="form-control"></td> 
 <!--         <td> {{c.conseiller.prenom}}-{{c.conseiller.nom}}</td> -->
         <td><select class="form-control"  ng-controller= "search_adCtrl">
-            <option ng-repeat="option in cons" value="{{option.id}}">{{option.nom}}</option>
+            <option ng-repeat="option in cons" ng-model="conseiller" value="{{option.id}}">{{option.nom}}</option>
           </select>
         </td>
-        <td><input type ="button" class="btn btn-default" ng-controller= "valid_Ctrl" ng-click = "Valid(c)" value="Valider"></td>
+        <td><input type ="button" class="btn btn-default" ng-click = "submit(c.id, conseiller)" value="Valider"></td>
       </tr>
     </tbody>
   </table>

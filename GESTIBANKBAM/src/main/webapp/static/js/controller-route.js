@@ -152,21 +152,7 @@ app.controller('search_adCtrl', ['$scope', '$location','EmployeService',
 app.controller('valid_Ctrl', ['$scope', '$location','ClientService','$routeParams',
                              	 function($scope, $location, ClientService,$routeParams)
                              	 {
-									console.log("hello id");
-									$scope.valid= function(users){
-										console.log("test");
-									ClientService.updateClient(users,$routeParams.id)
-									.then(
-											function(d) {
-												self.users= d;
-												$scope.users=d;
-												console.log($scope.users);
-											},
-											function(errResponse){
-												console.error('Error while Updating Users');
-											}
-									);
-									}}]);
+									}]);
                         
 //consult_ag
 app.controller('consult_agCtrl', ['$scope', '$location', 
@@ -189,20 +175,35 @@ app.controller('list_adCtrl', ['$scope', '$location',
     }]);
 //affectCtrl
 app.controller('affectCtrl',  ['$scope', '$location','ClientService',
-                                  function($scope, $location, ClientService){
-                                	console.log("welcome");
-                                	ClientService.fetchNewClients()
-                                        .then(
-                                        function(d) {
-                                            self.users = d;
-                                            $scope.users=d;
-                                        },
-                                        function(errResponse){
-                                            console.error('Error while fetching Users');
-                                        }
-                                    );
-                                }
-                                ]);
+          function($scope, $location, ClientService){
+        	console.log("welcome");
+        	ClientService.fetchNewClients()
+                .then(
+                function(d) {
+                    self.users = d;
+                    $scope.users=d;
+                },
+                function(errResponse){
+                    console.error('Error while fetching Users');
+                }
+            );
+        	console.log("hello id");
+        	$scope.submit= function(uid, cid){
+        		console.log("test");
+        		console.log(uid + " " + cid)
+        	ClientService.updateClient(users,$routeParams.uid.cid)
+        	.then(
+        			function(d) {
+        				self.users= d;
+        				$scope.users=d;
+        				console.log($scope.users);
+        			},
+        			function(errResponse){
+        				console.error('Error while Updating Users');
+        			}
+        	)};
+        }]);
+
 //rootCtrl
 app.controller('rootCtrl', ['$scope', '$location', 
     function($scope, $location) {
