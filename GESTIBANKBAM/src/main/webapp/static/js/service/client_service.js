@@ -6,10 +6,11 @@ var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/
 
 var factory = {
 		fetchAllClients: fetchAllClients,
-		searchClient: searchClient,
+		//searchClient: searchClient,
 		createClient: createClient,
 		srcClient : srcClient,
         updateClient : updateClient
+        
 //		srcClientPrenom : srcClientPrenom,
 //		srcClientNomPrenom : srcClientNomPrenom
 };
@@ -30,6 +31,7 @@ function fetchAllClients() {
     return deferred.promise;
 }
 
+
 ///*recherche de tous les nouveaux utilisateurs */
 //function fetchAllNewsClients() {
 //    var deferred = $q.defer();
@@ -46,20 +48,20 @@ function fetchAllClients() {
 //    return deferred.promise;
 //}
 
-function searchClient(id) {
-    var deferred = $q.defer();
-    $http.get(CLIENTS_REST_SERVICE_URI+id)
-        .then(
-        function (response) {
-            deferred.resolve(response.data);
-        },
-        function(errResponse){
-            console.error('Error while finding User');
-            deferred.reject(errResponse);
-        }
-    );
-    return deferred.promise;
-}
+//function searchClient(id) {
+//    var deferred = $q.defer();
+//    $http.get(CLIENTS_REST_SERVICE_URI+id)
+//        .then(
+//        function (response) {
+//            deferred.resolve(response.data);
+//        },
+//        function(errResponse){
+//            console.error('Error while finding User');
+//            deferred.reject(errResponse);
+//        }
+//    );
+//    return deferred.promise;
+//}
 
 function createClient(client) {
     var deferred = $q.defer();
@@ -93,7 +95,7 @@ function createClient(client) {
 
 function srcClient(nom) {
     var deferred = $q.defer();
-    $http.get(CLIENTS_REST_SERVICE_URI+ 'nom-'+client.nom+'/prenom-'+client.prenom+'/cpte'+client.cpte)
+    $http.get(CLIENTS_REST_SERVICE_URI+ 'nom-'+nom)
         .then( 
         function (response) {
             deferred.resolve(response.data);
@@ -135,9 +137,9 @@ function srcClient(nom) {
 //       }
 //    );
 //}
-function updateClient(users,id) {
+function updateClient(c,id) {
     var deferred = $q.defer();
-    $http.put(REST_SERVICE_URI+id, users)
+    $http.put(REST_SERVICE_URI+id, c)
         .then(
         function (response) {
             deferred.resolve(response.data);

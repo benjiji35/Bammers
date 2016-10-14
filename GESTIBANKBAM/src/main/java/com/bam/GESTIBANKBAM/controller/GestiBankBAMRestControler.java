@@ -53,7 +53,26 @@ public class GestiBankBAMRestControler {
         
         return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
     }
-
+ //-------------------Retrieve All Clients--------------------------------------------------------
+    
+    @RequestMapping(value = "/mdpClient/", method = RequestMethod.GET)
+    public ResponseEntity<List<Client>> listMdpClient() {
+        List<Client> clients = clientService.findAllClients();
+        if(clients.isEmpty()){
+            return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        
+        List<Client> clientsSansMdp = new ArrayList<>();
+        for (Client c:clients){
+            if (c.getHashMdp()==null){
+            	if(c.getConseiller()!=null)
+            //System.out.println(c);
+            clientsSansMdp.add(c);
+            }
+        }
+        
+        return new ResponseEntity<List<Client>>(clientsSansMdp, HttpStatus.OK);
+    }
   //-------------------Retrieve All New Clients--------------------------------------------------------
     
     @RequestMapping(value = "/newClient/", method = RequestMethod.GET)

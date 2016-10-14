@@ -2,7 +2,7 @@
 <legend>RECHERCHER CLIENT</legend>
 <div> 
 
-        <form ng-controller= "searchNomCtrl" ng-submit="src(client)">         
+        <form>         
             <br><br>
             <div class="col-sm-2">
                 <input type="text" class="form-control" ng-model="client.nom" placeholder="nom">
@@ -15,9 +15,9 @@
             <div class="col-sm-2">
                 <input type="text" class="form-control" ng-model="client.cpte" placeholder="numéro de compte">
             </div>
-<!--             <a href="#search_nom/{{nom}}" class="btn btn-default">Recherche</a>  -->
+            <a href="#search_nom/{{client.nom}}" class="btn btn-default">Recherche</a> 
 
-			<button type="submit" class= "btn btn-success btn-sm">Rechercher</button>
+			
 			
          </form>
     <br><br><br> 

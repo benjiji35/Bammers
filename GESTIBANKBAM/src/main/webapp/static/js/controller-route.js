@@ -55,29 +55,26 @@ app.controller('seeCtrl', ['$scope', '$location',
 		//$location.url("views/see.html");
 		//$scope.role = 1;
 	}]);
-app.controller('see_clCtrl', ['$scope', '$location','ClientService', '$routeParams',
-   function($scope, $location, ClientService, $routeParams){
-	console.log("hello id");
-	ClientService.searchClient($routeParams.id)
-        .then(
-        function(d) {
-            self.user = d;
-            $scope.user=d;
-            console.log($scope.user);
-        },
-        function(errResponse){
-            console.error('Error while fetching Users');
-        }
-    );
-}]);
+app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
+                       		'$routeParams',
+                       		function($scope, $location, ClientIdService, $routeParams) {
+                       			console.log("hello id");
+                       			ClientIdService.searchClient($routeParams.id).then(function(d) {
+                       				self.user = d;
+                       				$scope.user = d;
+                       				console.log($scope.user);
+                       			}, function(errResponse) {
+                       				console.error('Error while fetching Users');
+                       			});
+                       		} ]);
 app.controller('see_newClCtrl', ['$scope', '$location','ClientService', '$routeParams',
                               function($scope, $location, ClientService, $routeParams){
                            	ClientService.srcClient($routeParams.nom)
                                    .then(
                                    function(d) {
-                                       self.user = d;
-                                       $scope.user=d;
-                                       console.log($scope.user)
+                                       self.users = d;
+                                       $scope.users=d;
+                                       console.log($scope.users)
                                    },
                                    function(errResponse){
                                        console.error('Error while fetching Users');
@@ -154,25 +151,18 @@ app.controller('valid_Ctrl', ['$scope', '$location','ClientService','$routeParam
                              	 {
 									}]);
                         
-//consult_ag
-app.controller('consult_agCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-                             		
-    }]);
-
-//list_agCtrl
-app.controller('list_agCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-    	// todo
-    }]);
-
-
-//list_adCtrl
-app.controller('list_adCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-    	// todo
-		//$scope.role = 3;
-    }]);
+//consult_agCtrl
+app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService',
+		function($scope, $location, ClientMdpService) {
+			console.log("helloMdp");
+			ClientMdpService.fetchMdpClient().then(function(d) {
+				self.user = d;
+				$scope.user = d;
+				console.log($scope.user);
+			}, function(errResponse) {
+				console.error('Error while fetching Users');
+			});
+		} ]);
 //affectCtrl
 app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService','ClientServiceNew','$routeParams',
           function($scope, $location, ClientService,EmployeService,ClientServiceNew,$routeParams){

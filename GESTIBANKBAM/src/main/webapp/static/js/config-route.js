@@ -74,7 +74,7 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'search_adCtrl'})
 		.when('/consult_ag', {
 			templateUrl: 'views/consult_ag.html',
-			controller: 'search_adCtrl'})
+			controller: 'consult_agCtrl'})
 		.when('/search_ad', {
 			templateUrl: 'views/search_ad.html',
 			controller: 'search_adCtrl'})
@@ -93,15 +93,13 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/see_cl/:id', {
 			templateUrl: 'views/see_cl.html',
 			controller: 'see_clCtrl'})
-		.when('/see_newCl/:nom', {
-			templateUrl: 'views/see_cl.html',
+		.when('/search_nom/:nom', {
+			templateUrl: 'views/search_ag.html',
 			controller: 'see_newClCtrl'})
 		.when('/valid/:id', {
 			template: 'Vous avez updated the client',
 			controller: 'valid_Ctrl'})
-//		.when('/search_nom/:nom', {
-//			templateUrl: 'views/search_ag.html',
-//			controller: 'searchNomCtrl'})
+		
 //		.when('/search_nom/:prenom', {
 //			templateUrl: 'views/nom.html',
 //			controller: 'searchPrenomCtrl'})
