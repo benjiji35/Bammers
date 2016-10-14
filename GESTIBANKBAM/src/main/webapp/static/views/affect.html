@@ -28,11 +28,11 @@
         <td><a ng-href="#see_cl/{{c.id}}">Détails</a></td>
     <td><input type="checkbox" class="form-control"></td> 
 <!--         <td> {{c.conseiller.prenom}}-{{c.conseiller.nom}}</td> -->
-        <td><select class="form-control"  ng-controller= "search_adCtrl">
-            <option ng-repeat="option in cons" ng-model="conseiller" value="{{option.id}}">{{option.nom}}</option>
+        <td><select class="form-control" ng-options="option.nom for option in cons" ng-model="cid">
+            <option ng-value={{option.id}} ></option>
           </select>
         </td>
-        <td><input type ="button" class="btn btn-default" ng-click = "submit(c.id, conseiller)" value="Valider"></td>
+        <td><input type ="button" class="btn btn-default" ng-click = "submit(c.id,cid.id)" value="Valider"></td>
       </tr>
     </tbody>
   </table>

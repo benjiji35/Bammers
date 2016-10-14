@@ -174,8 +174,8 @@ app.controller('list_adCtrl', ['$scope', '$location',
 		//$scope.role = 3;
     }]);
 //affectCtrl
-app.controller('affectCtrl',  ['$scope', '$location','ClientService',
-          function($scope, $location, ClientService){
+app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService',
+          function($scope, $location, ClientService,EmployeService){
         	console.log("welcome");
         	ClientService.fetchNewClients()
                 .then(
@@ -187,6 +187,18 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService',
                     console.error('Error while fetching Users');
                 }
             );
+        	console.log("hello2");
+			EmployeService.fetchConseiller()
+		        .then(
+		        function(d) {
+		            self.cons = d;
+		            $scope.cons=d;
+		            console.log($scope.cons);
+		        },
+		        function(errResponse){
+		            console.error('Error while fetching Users');
+		        }
+		    );	
         	console.log("hello id");
         	$scope.submit= function(uid, cid){
         		console.log("test");
