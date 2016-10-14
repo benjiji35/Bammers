@@ -58,7 +58,7 @@ public class GestiBankBAMRestControler {
     
     @RequestMapping(value = "/newClient/", method = RequestMethod.GET)
     public ResponseEntity<List<Client>> listNewClient() {
-        
+        System.out.println("test" );
         List<Client> client = clientService.findAllClients();
                 
         if(client.isEmpty()){
@@ -170,24 +170,26 @@ public class GestiBankBAMRestControler {
      
     //------------------- Update a Client --------------------------------------------------------
      
-    @RequestMapping(value = "/client/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/newClient/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Client> updateClient(@PathVariable("id") String id, @RequestBody Client client) {
         System.out.println("Updating User " + id);
          
         Client currentClient = clientService.findById(id);
-         
+         System.out.println("on tient le bon bout");
         if (currentClient==null) {
             System.out.println("Client with id " + id + " not found");
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
- 
-//        currentClient.setCivilite(client.getCivilite());
-//        currentClient.setNom(client.getNom());
-//        currentClient.setPrenom(client.getPrenom());
-//        currentClient.setDdn(client.getDdn());
-//        currentClient.setHashMdp(client.getHashMdp());
-//        currentClient.setAdresse(client.getAdresse());
+        
+        currentClient.setCivilite(client.getCivilite());
+        currentClient.setNom(client.getNom());
+        currentClient.setPrenom(client.getPrenom());
+        System.out.println("client DDN::"+client.getDdn());
+        currentClient.setDdn(client.getDdn());
+        currentClient.setHashMdp(client.getHashMdp());
+        currentClient.setAdresse(client.getAdresse());
         currentClient.setConseiller(client.getConseiller());
+        System.out.println("client::"+currentClient);
         
          
         clientService.updateClient(currentClient);

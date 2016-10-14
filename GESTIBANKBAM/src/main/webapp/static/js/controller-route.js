@@ -1,6 +1,6 @@
 app.controller('mainCtrl', function($scope) {});
-app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 
-	function($scope, $routeParams, $location,$q, ClientService) {
+app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 'ClientServiceNew',
+	function($scope, $routeParams, $location,$q, ClientService,ClientServiceNew) {
     var self = this;
     self.users=[];
 
@@ -174,10 +174,10 @@ app.controller('list_adCtrl', ['$scope', '$location',
 		//$scope.role = 3;
     }]);
 //affectCtrl
-app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService',
-          function($scope, $location, ClientService,EmployeService){
+app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService','ClientServiceNew','$routeParams',
+          function($scope, $location, ClientService,EmployeService,ClientServiceNew,$routeParams){
         	console.log("welcome");
-        	ClientService.fetchNewClients()
+        	ClientServiceNew.fetchNewClients()
                 .then(
                 function(d) {
                     self.users = d;
@@ -200,20 +200,10 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
 		        }
 		    );	
         	console.log("hello id");
-        	$scope.submit= function(uid, cid){
-        		console.log("test");
-        		console.log(uid + " " + cid)
-        	ClientService.updateClient(users,$routeParams.uid.cid)
-        	.then(
-        			function(d) {
-        				self.users= d;
-        				$scope.users=d;
-        				console.log($scope.users);
-        			},
-        			function(errResponse){
-        				console.error('Error while Updating Users');
-        			}
-        	)};
+        	$scope.submit= function(client, id){
+        		console.log("on y croit : " + client.id);
+        		ClientServiceNew.updateUser(client, id);
+                }
         }]);
 
 //rootCtrl

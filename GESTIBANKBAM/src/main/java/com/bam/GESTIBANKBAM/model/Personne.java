@@ -2,6 +2,7 @@ package com.bam.GESTIBANKBAM.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class Personne implements Cloneable {
@@ -106,7 +107,8 @@ public class Personne implements Cloneable {
 	public Date getDdn() {
 		return ddn;
 	}
-
+    
+    @JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
 	public void setDdn(Date ddn) {
 		this.ddn = ddn;
 	}

@@ -27,4 +27,5 @@ public class JsonBAMSerialiser extends JsonSerializer<Date> {
 
 	}
 
+	
 }

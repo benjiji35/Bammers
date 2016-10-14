@@ -28,11 +28,11 @@
         <td><a ng-href="#see_cl/{{c.id}}">Détails</a></td>
     <td><input type="checkbox" class="form-control"></td> 
 <!--         <td> {{c.conseiller.prenom}}-{{c.conseiller.nom}}</td> -->
-        <td><select class="form-control" ng-options="option.nom for option in cons" ng-model="cid">
+        <td><select class="form-control" ng-options="option.nom for option in cons" ng-model="c.conseiller">
             <option ng-value={{option.id}} ></option>
           </select>
         </td>
-        <td><input type ="button" class="btn btn-default" ng-click = "submit(c.id,cid.id)" value="Valider"></td>
+        <td><input type ="button" class="btn btn-default" ng-click = "submit(c, c.id)" value="Valider"></td>
       </tr>
     </tbody>
   </table>
