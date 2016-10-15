@@ -1,7 +1,5 @@
 package com.bam.GESTIBANKBAM.controller;
 
-import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,55 +27,32 @@ import com.bam.GESTIBANKBAM.utils.BAMTools;
 public class GestiBankBAMRestControler {
 
 	@Autowired
-	ClientService clientService; // Service which will do all data
-									// retrieval/manipulation work
+	ClientService clientService; 
 
 	@Autowired
-	PersonneService personneService; // Service which will do all data
-										// retrieval/manipulation work
-
-	// @Autowired
-	// ConseillerService conseillerService; //Service which will do all data
-	// retrieval/manipulation work
-
-	// @Autowired
-	// AdminService adminService; //Service which will do all data
-	// retrieval/manipulation work
+	PersonneService personneService; 
 
 	@Autowired
-	EmployeService employeService; // Service which will do all data
-									// retrieval/manipulation work
+	EmployeService employeService; 
 
-	// -------------------Retrieve All
-	// Clients--------------------------------------------------------
+	// -------------------Retrieve All Clients--------------------------------------------------------
 
 	@RequestMapping(value = "/client/", method = RequestMethod.GET)
 	public ResponseEntity<List<Client>> listAllClients() {
 		List<Client> clients = clientService.findAllClients();
 		if (clients.isEmpty()) {
-			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);// You
-																			// many
-																			// decide
-																			// to
-																			// return
-																			// HttpStatus.NOT_FOUND
+			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
 
 		return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
 	}
-	// -------------------Retrieve All
-	// Clients--------------------------------------------------------
+	// -------------------Retrieve All Clients--------------------------------------------------------
 
 	@RequestMapping(value = "/mdpClient/", method = RequestMethod.GET)
 	public ResponseEntity<List<Client>> listMdpClient() {
 		List<Client> clients = clientService.findAllClients();
 		if (clients.isEmpty()) {
-			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);// You
-																			// many
-																			// decide
-																			// to
-																			// return
-																			// HttpStatus.NOT_FOUND
+			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
 
 		List<Client> clientsSansMdp = new ArrayList<>();
@@ -91,8 +66,7 @@ public class GestiBankBAMRestControler {
 
 		return new ResponseEntity<List<Client>>(clientsSansMdp, HttpStatus.OK);
 	}
-	// -------------------Retrieve All New
-	// Clients--------------------------------------------------------
+	// -------------------Retrieve All New Clients--------------------------------------------------------
 
 	@RequestMapping(value = "/newClient/", method = RequestMethod.GET)
 	public ResponseEntity<List<Client>> listNewClient() {
@@ -100,12 +74,7 @@ public class GestiBankBAMRestControler {
 		List<Client> client = clientService.findAllClients();
 
 		if (client.isEmpty()) {
-			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);// You
-																			// many
-																			// decide
-																			// to
-																			// return
-																			// HttpStatus.NOT_FOUND
+			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
 		List<Client> clientsSansConseiller = new ArrayList<>();
 		for (Client c : client) {
@@ -118,23 +87,7 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<List<Client>>(clientsSansConseiller, HttpStatus.OK);
 	}
 
-	// -------------------Retrieve Single New Client By
-	// nom--------------------------------------------------
-
-	@RequestMapping(value = "/newClient/nom-{nom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Client>> getUser3(@PathVariable("nom") String nom) {
-		System.out.println("Fetching User with nom" + " " + nom);
-		List<Client> client = clientService.findByNom(nom);
-		if (client == null) {
-			System.out.println("Client with nom " + nom + " not found");
-			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
-		}
-		System.out.println("Client found :" + client.toString());
-		return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
-	}
-
-	// -------------------Retrieve Single
-	// Client--------------------------------------------------------
+	// -------------------Retrieve Single Client--------------------------------------------------------
 
 	@RequestMapping(value = "/client/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Client> getClient(@PathVariable("id") String id) {
@@ -148,55 +101,36 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}
 
-	// -------------------Retrieve Single Client By
-	// prenom--------------------------------------------------
 
-	@RequestMapping(value = "/client/prenom-{prenom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Client>> getUser1(@PathVariable("prenom") String prenom) {
-		System.out.println("Fetching User with prenom" + " " + prenom);
-		List<Client> client = clientService.findByPrenom(prenom);
-		if (client == null) {
-			System.out.println("Client with prenom " + prenom + " not found");
+//	// -------------------Retrieve Single Client By nom--------------------------------------------------
+//
+//	@RequestMapping(value = "/client/nom-{nom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<List<Client>> getUser2(@PathVariable("nom") String nom) {
+//		System.out.println("Fetching User with nom" + " " + nom);
+//		List<Client> client = clientService.findByNom(nom);
+//		if (client == null) {
+//			System.out.println("Client with nom " + nom + " not found");
+//			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
+//		}
+//		System.out.println("Client found :" + client.toString());
+//		return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
+//	}
+
+	// -------------------Retrieve Single Client By nom and prenom and cpte-------------------------------
+
+	@RequestMapping(value = "/client/nom-{client}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Client>> getUser3(@PathVariable("client") String[] client) {
+		System.out.println("Fetching Client with parameters" + " " + client[0]);
+		List<Client> cl = new ArrayList<>();
+		//List<Client> cl = clientService.findByNomAndPrenomAndCompte(client.get(0),client.get(1),client.get(2));
+		if (cl == null) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
 		}
 		System.out.println("Client found :" + client.toString());
-		return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
-	}
-	// -------------------Retrieve Single Client By
-	// nom--------------------------------------------------
-
-	@RequestMapping(value = "/client/nom-{nom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Client>> getUser2(@PathVariable("nom") String nom) {
-		System.out.println("Fetching User with nom" + " " + nom);
-		List<Client> client = clientService.findByNom(nom);
-		if (client == null) {
-			System.out.println("Client with nom " + nom + " not found");
-			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
-		}
-		System.out.println("Client found :" + client.toString());
-		return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
+		return new ResponseEntity<List<Client>>(cl, HttpStatus.OK);
 	}
 
-	// -------------------Retrieve Single Client By nom and
-	// prenom-------------------------------------------
-
-	@RequestMapping(value = "/client/nom-{nom}/prenom-{prenom}/cpte-{cpte}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Client>> getUser3(@PathVariable("nom") String nom, @PathVariable("prenom") String prenom,
-			@PathVariable("cpte") String cpte) {
-		System.out.println("Fetching User with nom" + " " + nom + " And fetching user with prenom" + " " + prenom
-				+ " And fetching user with cpte" + " " + cpte);
-		List<Client> client = clientService.findByNomAndPrenomAndCompte(nom, prenom, cpte);
-		if (client == null) {
-			System.out.println("Client with nom " + nom + " not found" + ", client with prenom" + prenom + " "
-					+ "not found" + "and client with cpte" + cpte + " " + "not found");
-			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
-		}
-		System.out.println("Client found :" + client.toString());
-		return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
-	}
-
-	// -------------------Create a
-	// Client--------------------------------------------------------
+	// -------------------Create a Client--------------------------------------------------------
 
 	@RequestMapping(value = "/client/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
@@ -217,8 +151,7 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	// ------------------- Update a Client
-	// --------------------------------------------------------
+	// ------------------- Update a Client --------------------------------------------------------
 
 	@RequestMapping(value = "/newClient/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Client> updateClient(@PathVariable("id") String id, @RequestBody Client client) {
@@ -245,8 +178,7 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
 	}
 
-	// ------------------- Validate a Client
-	// --------------------------------------------------------
+	// ------------------- Validate a Client --------------------------------------------------------
 
 	@RequestMapping(value = "/affClient/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Client> validClient(@PathVariable("id") String id, @RequestBody Client client) {
@@ -265,8 +197,7 @@ public class GestiBankBAMRestControler {
 		System.out.println("client DDN::" + client.getDdn());
 		currentClient.setDdn(client.getDdn());
 		if (client.getHashMdp() == null) {
-			BAMTools ps = new BAMTools();
-			String password = ps.genPassword(1).get(0);
+			String password = BAMTools.genPassword(1).get(0);
 			currentClient.setHashMdp(password);
 		}
 		currentClient.setAdresse(client.getAdresse());
@@ -277,8 +208,7 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
 	}
 
-	// ------------------- Delete a Client
-	// --------------------------------------------------------
+	// ------------------- Delete a Client --------------------------------------------------------
 
 	@RequestMapping(value = "/client/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Client> deleteClient(@PathVariable("id") String id) {
@@ -294,8 +224,7 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
 	}
 
-	// ------------------- Delete All Clients
-	// --------------------------------------------------------
+	// ------------------- Delete All Clients --------------------------------------------------------
 
 	@RequestMapping(value = "/client/", method = RequestMethod.DELETE)
 	public ResponseEntity<Client> deleteAllClients() {
@@ -304,24 +233,17 @@ public class GestiBankBAMRestControler {
 		clientService.deleteAllClients();
 		return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
 	}
-	// -------------------Retrieve All
-	// Personnes--------------------------------------------------------
+	// -------------------Retrieve All Personnes--------------------------------------------------------
 
 	@RequestMapping(value = "/personne/", method = RequestMethod.GET)
 	public ResponseEntity<List<Personne>> listAllPersonnes() {
 		List<Personne> personnes = personneService.findAllPersonnes();
 		if (personnes.isEmpty()) {
-			return new ResponseEntity<List<Personne>>(HttpStatus.NO_CONTENT);// You
-																				// many
-																				// decide
-																				// to
-																				// return
-																				// HttpStatus.NOT_FOUND
+			return new ResponseEntity<List<Personne>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Personne>>(personnes, HttpStatus.OK);
 	}
-	// ----------------------------------Authenticate
-	// Personne---------------------------------------
+	// ----------------------------------Authenticate Personne---------------------------------------
 
 	@RequestMapping(value = "/personne/id-{id}/mdp-{mdp}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Personne> getPersonne(@PathVariable("id") String id, @PathVariable("mdp") String mdp) {
@@ -341,19 +263,13 @@ public class GestiBankBAMRestControler {
 		}
 	}
 
-	// -------------------Retrieve All
-	// Conseiller--------------------------------------------------------
+	// -------------------Retrieve All Conseiller--------------------------------------------------------
 
 	@RequestMapping(value = "/conseiller/", method = RequestMethod.GET)
 	public ResponseEntity<List<Employe>> listAllConseiller() {
 		List<Employe> emp = employeService.findAllEmployes();
 		if (emp.isEmpty()) {
-			return new ResponseEntity<List<Employe>>(HttpStatus.NO_CONTENT);// You
-																			// many
-																			// decide
-																			// to
-																			// return
-																			// HttpStatus.NOT_FOUND
+			return new ResponseEntity<List<Employe>>(HttpStatus.NO_CONTENT);
 		}
 		List<Employe> Conseiller = new ArrayList<>();
 		for (Employe e : emp) {

@@ -101,7 +101,7 @@ public class BAMTools {
 		}	
 	}
 
-	public List<String> genPassword(int qt) {
+	public static List<String> genPassword(int qt) {
 		//boolean lowercases, boolean uppercases, boolean arabicdigits, boolean hexa, boolean punct, int passwordLength
 		PasswordGenerator pg = new PasswordGenerator(true, true, true, true, true, qt);
 
