@@ -14,6 +14,10 @@ import java.util.List;
 import net.sf.jnetparse.security.PasswordGenerator;
 
 public class BAMTools {
+	public static boolean isUndefined(String field) {
+		return field == null || field.equals("undefined");
+	}
+
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	public static Date parseDate(String s) {

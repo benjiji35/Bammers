@@ -102,31 +102,18 @@ public class GestiBankBAMRestControler {
 	}
 
 
-//	// -------------------Retrieve Single Client By nom--------------------------------------------------
-//
-//	@RequestMapping(value = "/client/nom-{nom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<List<Client>> getUser2(@PathVariable("nom") String nom) {
-//		System.out.println("Fetching User with nom" + " " + nom);
-//		List<Client> client = clientService.findByNom(nom);
-//		if (client == null) {
-//			System.out.println("Client with nom " + nom + " not found");
-//			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
-//		}
-//		System.out.println("Client found :" + client.toString());
-//		return new ResponseEntity<List<Client>>(client, HttpStatus.OK);
-//	}
-
 	// -------------------Retrieve Single Client By nom and prenom and cpte-------------------------------
 
-	@RequestMapping(value = "/client/nom-{client}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Client>> getUser3(@PathVariable("client") String[] client) {
-		System.out.println("Fetching Client with parameters" + " " + client[0]);
-		List<Client> cl = new ArrayList<>();
-		//List<Client> cl = clientService.findByNomAndPrenomAndCompte(client.get(0),client.get(1),client.get(2));
+	@RequestMapping(value = "/client/nom-{nom}/prenom-{prenom}/cpte-{cpte}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Client>> getUser3(@PathVariable("nom") String nom, @PathVariable("prenom") String prenom, @PathVariable("cpte") String cpte) {
+		
+		System.out.println("Fetching Client with nom" + " " + nom+" "+"Fetching Client with prenom" + " " +prenom+" "+"Fetching Client with cpte" + " " +cpte);
+		
+		List<Client> cl = clientService.findByNomAndPrenomAndCompte(nom,prenom,cpte);
 		if (cl == null) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
 		}
-		System.out.println("Client found :" + client.toString());
+		System.out.println("Client found :" + cl.toString());
 		return new ResponseEntity<List<Client>>(cl, HttpStatus.OK);
 	}
 
@@ -279,5 +266,19 @@ public class GestiBankBAMRestControler {
 			}
 		}
 		return new ResponseEntity<List<Employe>>(Conseiller, HttpStatus.OK);
+	}
+	
+	// -------------------Retrieve All Conseiller by ID--------------------------------------------------------
+
+	@RequestMapping(value = "/conseiller/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employe> getConseiller(@PathVariable("id") String id) {
+		System.out.println("Fetching Conseiller with id " + id);
+		Employe employe = employeService.findById(id);
+		if (employe == null) {
+			System.out.println("Client with id " + id + " not found");
+			return new ResponseEntity<Employe>(HttpStatus.NOT_FOUND);
+		}
+		System.out.println("Client founded :" + employe.toString());
+		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
 	}
 }

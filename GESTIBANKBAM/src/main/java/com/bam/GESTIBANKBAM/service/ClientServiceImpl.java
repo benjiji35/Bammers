@@ -96,14 +96,14 @@ public class ClientServiceImpl implements ClientService {
 		String target_nom;
 		String target_prenom;
 
-		if (nom == null) {
-			if (prenom == null) {
+		if (BAMTools.isUndefined(nom)) {
+			if (BAMTools.isUndefined(prenom)) {
 				return findAllClients();
 			} else {
 				return findByPrenom(prenom);
 			} 
 		} else {
-			if (prenom == null) {
+			if (BAMTools.isUndefined(prenom)) {
 				return findByNom(nom);
 			}
 		}
@@ -126,13 +126,13 @@ public class ClientServiceImpl implements ClientService {
 		String target_nom;
 		String target_cpte;
 
-		if (nom == null) {
-			if (cpte == null) {
+		if (BAMTools.isUndefined(nom)) {
+			if (BAMTools.isUndefined(cpte)) {
 				return findAllClients();
 			} else {
 				return findByCompte(cpte);
 			}
-		} else if (cpte == null) {
+		} else if (BAMTools.isUndefined(cpte)) {
 			return findByNom(nom);
 		}
 		nom = nom.trim().toLowerCase();
@@ -160,13 +160,13 @@ public class ClientServiceImpl implements ClientService {
 		String target_prenom;
 		String target_cpte;
 
-		if (prenom == null) {
-			if (cpte == null) {
+		if (BAMTools.isUndefined(prenom)) {
+			if (BAMTools.isUndefined(cpte)) {
 				return findAllClients();
 			} else {
 				return findByCompte(cpte);
 			}
-		} else if (cpte == null) {
+		} else if (BAMTools.isUndefined(cpte)) {
 			return findByNom(prenom);
 		}
 		prenom = prenom.trim().toLowerCase();
@@ -195,29 +195,29 @@ public class ClientServiceImpl implements ClientService {
 		String target_cpte;
 		List<Compte> lesComptes;
 
-		if (nom == null) {
-			if (prenom == null) {
-				if (cpte == null) {
+		if (BAMTools.isUndefined(nom)) {
+			if (BAMTools.isUndefined(prenom)) {
+				if (BAMTools.isUndefined(cpte)) {
 					return findAllClients();
 				} else {
 					return findByCompte(cpte);
 				}
 			} else {
-				if (cpte == null) {
+				if (BAMTools.isUndefined(cpte)) {
 					return findByPrenom(prenom);
 				} else {
 					return findByPrenomAndCompte(prenom, cpte);
 				}
 			}
 		} else {
-			if (prenom == null) {
-				if (cpte == null) {
+			if (BAMTools.isUndefined(prenom)) {
+				if (BAMTools.isUndefined(cpte)) {
 					return findByNom(nom);
 				} else {
 					return findByNomAndCompte(nom, cpte);
 				}
 			} else {
-				if (cpte == null) {
+				if (BAMTools.isUndefined(cpte)) {
 					return findByNomAndPrenom(nom, prenom);
 				}
 			}

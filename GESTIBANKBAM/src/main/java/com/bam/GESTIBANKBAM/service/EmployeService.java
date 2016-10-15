@@ -12,7 +12,7 @@ public interface EmployeService {
 	List<Employe> findByPrenom(String prenom);
 
 	List<Employe> findByNomAndPrenom(String nom, String prenom);
-	List<Employe> findByPrenomAndCompte(String prenom, String cpte);
+	List<Employe> findByPrenomAndID(String prenom, String id);
 	
 	void saveEmploye(Employe emp);
 	

@@ -67,20 +67,19 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
                        				console.error('Error while fetching Users');
                        			});
                        		} ]);
-app.controller('see_newClCtrl', ['$scope', '$location','ClientService', '$routeParams',
-                              function($scope, $location, ClientService, $routeParams){
-                           	ClientService.srcClient($routeParams.nom)
-                                   .then(
-                                   function(d) {
-                                       self.users = d;
-                                       $scope.users=d;
-                                       console.log($scope.users)
-                                   },
-                                   function(errResponse){
-                                       console.error('Error while fetching Users');
-                                   }
-                               );
-                           }]);
+
+app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService',
+                          		'$routeParams',
+                          		function($scope, $location, EmployeService, $routeParams) {
+                          			console.log("hello id");
+                          			EmployeService.searchCons($routeParams.id).then(function(d) {
+                          				self.cons = d;
+                          				$scope.cons = d;
+                          				console.log($scope.user);
+                          			}, function(errResponse) {
+                          				console.error('Error while fetching Users');
+                          			});
+                          		} ]);
 //transfer 
 app.controller('transferCtrl', ['$scope', '$location', 
 	function($scope, $location) {
@@ -114,7 +113,7 @@ app.controller('updateCtrl', ['$scope', '$location',
 //search_ag     
 app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
   function($scope, $location, ClientService){
-	console.log("hello");
+	console.log("fetching All Clients");
 	ClientService.fetchAllClients()
         .then(
         function(d) {
@@ -125,8 +124,43 @@ app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
             console.error('Error while fetching Users');
         }
     );
+	console.log("Entered");	
+	$scope.sm = function (nom,prenom,cpte){
+	ClientService.srcClient(nom,prenom,cpte)
+	.then(
+	        function(d) {
+	            self.users = d;
+	            $scope.users=d;
+	            console.log($scope.users);
+	            $window.location = 'accueil_ag.html#/search_ag';
+	        },
+	        function(errResponse){
+	            console.error('Error while fetching Users');
+	        }
+	    );
+	}
 }
 ]);
+//app.controller('sm_ctrlr',  ['$scope', '$location','ClientService','$routeParams','$window',
+//                                  function($scope, $location, ClientService,$routeParams,$window){
+//							console.log("Recherche");
+//							
+//							$scope.sm = function (nom,prenom,cpte){
+//								console.log("Entered");	
+//							ClientService.srcClient(nom,prenom,cpte)
+//							.then(
+//							        function(d) {
+//							            self.users = d;
+//							            $scope.users=d;
+//							            console.log($scope.users);
+//							            $window.location = 'accueil_ag.html#/search_ag';
+//							        },
+//							        function(errResponse){
+//							            console.error('Error while fetching Users');
+//							        }
+//							    );
+//							}}
+//]);
 
 //search_ad
 app.controller('search_adCtrl', ['$scope', '$location','EmployeService',

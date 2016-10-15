@@ -93,37 +93,16 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/see_cl/:id', {
 			templateUrl: 'views/see_cl.html',
 			controller: 'see_clCtrl'})
-		.when('/search_nom/:nom', {
-			templateUrl: 'views/search_ag.html',
-			controller: 'see_newClCtrl'})
-		.when('/valid/:id', {
-			template: 'Vous avez updated the client',
-			controller: 'valid_Ctrl'})
-		
-//		.when('/search_nom/:prenom', {
-//			templateUrl: 'views/nom.html',
-//			controller: 'searchPrenomCtrl'})
-//		.when('/search_nom/:nom/:prenom', {
-//			templateUrl: 'views/nom.html',
-//			controller: 'searchNomPrenomCtrl'})
+		.when('/see_con/:id', {
+			templateUrl: 'views/see_con.html',
+			controller: 'see_conCtrl'})
+//		.when('/search_nom/:nom/:prenom/:cpte', {
+//			templateUrl: 'views/search_ag.html',
+//			controller: 'sm_ctrlr'})
 		.when('/', {
 			templateUrl: 'views/root.html',
 			controller: 'rootCtrl'})
 
 		.otherwise({redirectTo: '/'})
 }]);
-/*
-app.config(['$routeProvider', function($routeProvider) {
-	$routeProvider
-		.when('/register', {
-			templateUrl: 'views/tpl.html',
-			controller: 'secondCtrl'})
-		.when('/todo/:id', {
-			templateUrl: 'views/tpl.html',
-			controller: 'secondCtrl'})
-		.when('/other', {
-			template: '<h2> Other </h2>',
-			controller: 'otherCtrl'})
-		.otherwise({redirectTo: '/'})
-}]);
-*/
+
