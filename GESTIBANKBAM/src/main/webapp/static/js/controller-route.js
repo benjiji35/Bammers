@@ -154,26 +154,6 @@ app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
 	}
 }
 ]);
-//app.controller('sm_ctrlr',  ['$scope', '$location','ClientService','$routeParams','$window',
-//                                  function($scope, $location, ClientService,$routeParams,$window){
-//							console.log("Recherche");
-//							
-//							$scope.sm = function (nom,prenom,cpte){
-//								console.log("Entered");	
-//							ClientService.srcClient(nom,prenom,cpte)
-//							.then(
-//							        function(d) {
-//							            self.users = d;
-//							            $scope.users=d;
-//							            console.log($scope.users);
-//							            $window.location = 'accueil_ag.html#/search_ag';
-//							        },
-//							        function(errResponse){
-//							            console.error('Error while fetching Users');
-//							        }
-//							    );
-//							}}
-//]);
 
 //search_ad
 app.controller('search_adCtrl', ['$scope', '$location','EmployeService',
@@ -212,7 +192,19 @@ app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','Cl
 			console.log("hello id");
         	$scope.valid= function(client, id){
         		console.log(client);
-        		ClientServiceAff.validUser(client, id);
+        		ClientServiceAff.validUser(client, id)
+                    .then(
+                    		ClientMdpService.fetchMdpClient() 
+                		.then(
+                				function(d) {
+                					self.user = d;
+                					$scope.user=d;
+                },
+                				function(errResponse){
+                					console.error('Error while fetching Users');
+                }
+            ));
+        		
                 }
 		} ]);
 //affectCtrl
@@ -244,13 +236,25 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
         	console.log("hello id");
         	$scope.submit= function(client, id){
         		console.log("on y croit : " + client.id);
-        		ClientServiceNew.updateUser(client, id);
+        		
+        		ClientServiceNew.updateUser(client, id)		
+                .then(
+                   		ClientServiceNew.fetchNewClients() 
+                		.then(
+                				function(d) {
+                					self.users = d;
+                					$scope.users=d;
+                },
+                				function(errResponse){
+                					console.error('Error while fetching Users');
+                }
+            ));
                 }
         }]);
 
 //rootCtrl
-app.controller('rootCtrl', ['$scope', '$location', 
-    function($scope, $location) {
+app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService',
+    function($scope, $location,ClientMdpService) {
        	var d =sessionStorage.getItem("pers");
        	var pers = JSON.parse(d);
        	$scope.util=pers;

@@ -58,9 +58,9 @@
 		        <td>{{c.nom}}</td>
 		        <td>{{c.prenom}}</td>
 		        <td><a href="#see_cl/{{c.id}}">Détails</a></td>
-		        <td><input type="checkbox" class="form-control"></td>
+		        <td><input type="checkbox" class="form-control" ng-model="checked" ng-init="checked=true"></td>
 		        <td>{{c.conseiller.nom}}</td>
-		        <td><input type ="button" class="btn btn-default" ng-click = "valid(c, c.id)" value="Valider"></td>
+		        <td><input ng-disabled="checked" type ="button" class="btn btn-default" ng-click = "valid(c, c.id)" value="Valider"></td>
 		      </tr>
 		    </tbody>
 		  </table>
