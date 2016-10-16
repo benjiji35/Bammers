@@ -8,41 +8,34 @@
 </div>
 <div class="panel-body">
 	<legend>Fiche Client</legend>
-	<div class="parent">
+	<div >
 	    <div class="colonne c1">
 		    <label class="control-label" for="nom">Nom</label>
-		    <input type="text" class="form-control" id="nom" value="{{option.id}}">
+		    <input class="form-control" ng-value ="util.nom" disabled>
 		    <label class="control-label" for="prenom">Prénom</label>
-		    <input type="text" class="form-control" id="prenom" value="{{option.id}}">
+		    <input class="form-control" ng-value ="util.prenom" disabled>
 		    <label class="control-label" for="date">Date de naissance : </label>
-		    <input type="date" class="form-control" id="date" value="{{option.id}}">
+		    <input class="form-control" ng-value ="util.ddn" disabled>
 		    <label class="control-label" for="adresse">Adresse : </label>
-		    <input type="text" class="form-control" id="adresse" value="{{option.id}}">
+		    <input class="form-control" ng-value ="util.adresse.numero + ' ' + user.adresse.rue" disabled>
 		    <label class="control-label" for="ville">Ville : </label>
-		    <input type="text" class="form-control" id="ville" value="{{option.id}}">
+		    <input class="form-control" ng-value ="util.adresse.ville" disabled>
 		    <label class="control-label" for="cp">Code Postal : </label>
-		    <input type="text" class="form-control" id="cp" value="{{option.id}}">
+		    <input class="form-control" ng-value ="util.adresse.codePostal" disabled>
 	    </div>
 	    <div class="colonne c2">
 	    	<label class="control-label" for="sm">Situation matrimoniale : </label>
-		    <select class="form-control" id="sm">
+		    <select class="form-control" ng-value ="util.situationMatrimoniale id="sm" disabled>
 		        <option>Célibataire</option>
 		        <option>Marié(e)</option>
 		        <option>Divorcé(e)</option>
 		        <option>veuf(ve)</option>
 		    </select>
 		    <label class="control-label" for="enfants">Nombre d'enfants : </label>
-		    <input type="text" class="form-control" id="enfants" value="{{option.id}}">
-		    <label class="control-label" for="pro">Profession : </label>
-		    <input type="text" class="form-control" id="pro" value="{{option.id}}">
-		    <label class="control-label" for="revenus">Vos revenus mensuels : </label>
-		    <input type="text" class="form-control" id="revenus" value="{{option.id}}">
-		    <h4>Documents : </h4>
-		    <a href="#">Fiche de salaire 1</a><br>
-		    <a href="#">Fiche de salaire 2</a><br>
-		    <a href="#">Fiche de salaire 3</a><br>
-		    <a href="#">Justificatif de domicile</a><br>
-		    <a href="#">Justificatif d'identité</a>
+		    <input type="text" class="form-control" ng-value ="util.nbEnfants" disabled>
+		    <label class="control-label" for="pro">Statut : </label>
+		    <input type="text" class="form-control" ng-value ="util.profession" id="pro" disabled>
+
 		</div>
 	</div>
 </div>

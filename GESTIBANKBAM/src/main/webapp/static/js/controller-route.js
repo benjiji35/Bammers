@@ -19,7 +19,16 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','Clien
 		console.log("contactCtrl::files="+$routeParams.files);*/                               
 }]);
 
-
+app.controller('root', [ 
+                       	function($scope, $location) {
+                       	var d =sessionStorage.getItem("pers");
+                       	var pers = JSON.parse(d);
+                       	$scope.util=pers;
+                       		console.log(pers.type);
+                       		// todo
+                       		//$location.url("views/see.html");
+                       		//$scope.role = 1;
+                       	}]);
 
 
 /*
@@ -30,6 +39,7 @@ app.controller('connectCtrl', ['$scope', '$location',
 	}]);
 */
 // register : no params
+
 app.controller('registerCtrl', ['$scope', '$location', 
 	function($scope, $location) {
 		//$location.url('/tpl');
@@ -51,6 +61,9 @@ app.controller('askCtrl', ['$scope', '$location',
 
 app.controller('seeCtrl', ['$scope', '$location', 
 	function($scope, $location) {
+//	var d =sessionStorage.getItem("pers");
+//	var pers = JSON.parse(d);
+//		console.log(pers.type);
 		// todo
 		//$location.url("views/see.html");
 		//$scope.role = 1;
@@ -62,7 +75,7 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
                        			ClientIdService.searchClient($routeParams.id).then(function(d) {
                        				self.user = d;
                        				$scope.user = d;
-                       				console.log($scope.user);
+                       				console.log($scope.user.comptes);
                        			}, function(errResponse) {
                        				console.error('Error while fetching Users');
                        			});
@@ -238,9 +251,19 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
 //rootCtrl
 app.controller('rootCtrl', ['$scope', '$location', 
     function($scope, $location) {
-    			
+       	var d =sessionStorage.getItem("pers");
+       	var pers = JSON.parse(d);
+       	$scope.util=pers;
+       		console.log(pers);
 		console.log("rootCtrl::");
 		console.log("=============");
+		ClientMdpService.fetchMdpClient().then(function(d) {
+			self.user = d;
+			$scope.news = d;
+			console.log($scope.news);
+		}, function(errResponse) {
+			console.error('Error while fetching Users');
+		});
     }]);
 
 app.controller('newClCtrl', ['$scope', '$location', 'ClientService',

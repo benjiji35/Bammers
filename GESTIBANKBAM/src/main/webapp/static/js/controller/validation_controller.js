@@ -28,27 +28,10 @@ app.controller(
 													
 													//var data = sessionStorage.getItem("pers");
 													
-																									
-													switch ($scope.personne.type){
-														case 1:
-															Console.log("Bienvenue chez BamBank")
-															break;
-														case 2:
-															$window.location = 'accueil.html#/see';
+																								
+															$window.location = 'accueil.html#';
 															console.log(pers);
-															break;
-														case 4:
-															$window.location = 'accueil_ag.html#/search_ag';
-															console.log(pers);
-															break;
-														case 8:
-															$window.location = 'accueil_ad.html#/affect';
-															console.log(pers);
-															break;
-														default:
-															$window.location = 'se_connecter.html';
-															break;
-													}
+
 												},
 												function(errResponse) {
 													$window.location = 'se_connecter';
