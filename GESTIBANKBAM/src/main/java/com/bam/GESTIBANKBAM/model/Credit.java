@@ -2,90 +2,30 @@ package com.bam.GESTIBANKBAM.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.util.BAMException;
 
-public class Credit implements Transaction {
-	private double montant;
-	private Date dateDebut;
-
-	public Credit(double montant, Date dateDebut) throws BAMException {
-		this.montant = montant;
+@Entity
+public class Credit extends Transaction {
+	public Credit(Compte compte, Date dateDebut, double montant) throws BAMException {
+		super(compte, dateDebut, dateDebut, montant);
 		if (montant < 0) {
 			throw new BAMException("a Credit operation must be positive: montant="+montant);
 		}
-		this.dateDebut = new Date(dateDebut.getTime());
+		super.sealTransaction(dateDebut);
 	}
 
 	@Override
-	public double getMontant() {
-		return montant;
+	public void update(BAMEvent e) {
+		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public Date getDateDebut() {
-		return new Date(dateDebut.getTime());
-	}
-
-	@Override
-	public Date getDateFin() {
-		return getDateDebut();
-	}
-
-	@Override
-	public void sealTransaction(Date dateFin) {
-	}
-
-	@Override
-	public boolean isSealed() {
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Credit [getMontant()=");
-		builder.append(getMontant());
-		builder.append(", getDateDebut()=");
-		builder.append(getDateDebut());
-		builder.append(", getDateFin()=");
-		builder.append(getDateFin());
-		builder.append(", isSealed()=");
-		builder.append(isSealed());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateDebut == null) ? 0 : dateDebut.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(montant);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Credit))
-			return false;
-		Credit other = (Credit) obj;
-		if (dateDebut == null) {
-			if (other.dateDebut != null)
-				return false;
-		} else if (!dateDebut.equals(other.dateDebut))
-			return false;
-		if (Double.doubleToLongBits(montant) != Double.doubleToLongBits(other.montant))
-			return false;
-		return true;
-	}
-
-	@Override
-	public void update(BAMEvent e) {}
 }

@@ -19,7 +19,7 @@ public interface BAMData {
 	public List<Employe> getAdmins();
 
 	// les operations C.R.U.D basiques pour Personne
-	public Personne findPersonne(String id);
+	public Personne findPersonne(Long id);
 	public boolean updatePersonne(Personne p);
 	public boolean createPersonne(Personne p);
 	public boolean deletePersonne(Personne p);

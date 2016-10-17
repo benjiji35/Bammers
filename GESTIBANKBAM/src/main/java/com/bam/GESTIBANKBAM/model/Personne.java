@@ -1,15 +1,42 @@
 package com.bam.GESTIBANKBAM.model;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class Personne implements Cloneable {
+@Entity
+@Inheritance (strategy=InheritanceType.JOINED)
+//@DiscriminatorColumn(name="ZZTYPE", discriminatorType=DiscriminatorType.INTEGER)
+//@Table (name="Personne")
+public class Personne implements Cloneable, Serializable {
+	@Transient
 	public static final int ROLE_UNAUTHENTICATED_USER = 1;
-	public static final int ROLE_CLIENT = 2;
-	public static final int ROLE_CONSEILLER = 4;
-	public static final int ROLE_ADMIN = 8;
+
+	@Transient
+	public static final int ROLE_CLIENT               = 2;
+
+	@Transient
+	public static final int ROLE_CONSEILLER           = 4;
+
+	@Transient
+	public static final int ROLE_ADMIN                = 8;
+
+	@Transient
+	public static final int TYPE_EMPLOYE              = ROLE_ADMIN | ROLE_CONSEILLER;
+
 
 	public enum SITUATION {
 		SINGLE,
@@ -18,28 +45,62 @@ public class Personne implements Cloneable {
 		WIDOWED
 	};
 
+	@Id
+	@GeneratedValue (strategy=GenerationType.AUTO)
+	private Long id;
+
+	@NotNull
+	@Column (nullable=false)
 	private String civilite;
+
+	@NotNull
+	@Column (nullable=false)
 	private String nom;
+
+	@NotNull
+	@Column (nullable=false)
 	private String prenom;
+
+	@NotNull
+	@Column (nullable=false)
 	private Date ddn;
+
+	@NotNull
+	@Column (nullable=false)
 	private int type;
-	private String id;
+
 	private String hashMdp;
+
+	@NotNull
+	@Embedded
+	@Column (nullable=false)
 	private Adresse adresse;
+
+	@NotNull
+	@Column (nullable=false)
 	private SITUATION situationMatrimoniale;
+
+	@NotNull
+	@Column (nullable=false)
 	private String profession;
+
+	@NotNull
+	@Column (nullable=false)
 	private int nbEnfants;
+
+	@NotNull
+	@Column (nullable=false)
 	private double income;
 
 	public Personne() {
-		this("0");
+		this(0L);
 	}
 
-	public Personne(String id) {
+	public Personne(Long id) {
 		setId(id);
 	}
 
-	public Personne(String civilite, String nom, String prenom, Date ddn, int type, String id, String hashMdp,
+	public Personne(String civilite, String nom, String prenom, Date ddn, int type, Long id, String hashMdp,
 			Adresse adresse) {
 		this();
 		this.civilite = civilite;
@@ -126,11 +187,11 @@ public class Personne implements Cloneable {
 		this.type = t; 
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

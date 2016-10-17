@@ -1,10 +1,32 @@
 package com.bam.GESTIBANKBAM.model;
 
-import java.util.Calendar;
 import java.util.Date;
 
-public class Notification {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+
+//@MappedSuperclass
+@Entity
+@Inheritance (strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Notification {
+	@Id
+	//@GeneratedValue (strategy=GenerationType.AUTO)
+	@GeneratedValue (strategy=GenerationType.TABLE)
+	private Long id;
+
+	@NotNull
+	@Column (nullable=false)
 	private String message;
+
+	@NotNull
+	@Column (nullable=false)
 	private Date date;
 
 	public Notification() {
@@ -23,19 +45,6 @@ public class Notification {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Notification [getMessage()=");
-		builder.append(getMessage());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", getDate()=");
-		builder.append(getDate());
-		builder.append("]");
-		return builder.toString();
 	}
 
 	@Override
@@ -75,5 +84,18 @@ public class Notification {
 
 	public Date getDate() {
 		return date;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Notification [getMessage()=");
+		builder.append(getMessage());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", getDate()=");
+		builder.append(getDate());
+		builder.append("]");
+		return builder.toString();
 	}
 }

@@ -2,23 +2,29 @@ package com.bam.GESTIBANKBAM.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
 
-public class Decouvert implements Transaction {
-	private Compte cpte;
-	private double montant;
-	private double agios;
-	private double taux;
-	private Date dateDebut;
-	private Date dateFin;
+@Entity
+public class Decouvert extends Transaction {
 
-	public Decouvert(Compte cpte, double agios, double taux, Date dateDebut) throws BAMException {
-		this.cpte = cpte;
+	@NotNull
+	@Column (nullable=false)
+	private double agios;
+
+	@NotNull
+	@Column (nullable=false)
+	private double taux;
+
+	public Decouvert(Compte compte, double agios, double taux, Date dateDebut) throws BAMException {
+		super(compte, dateDebut, null, 0);
 		this.agios = agios;
 		this.taux = taux;
-		this.dateDebut = new Date(dateDebut.getTime());
 		if (agios < 0 || taux < 0) {
 			throw new BAMException("agios and taux both must be positive. agios=" + 
 					agios +
@@ -33,36 +39,27 @@ public class Decouvert implements Transaction {
 
 	@Override
 	public double getMontant() {
-		double s = Math.abs(cpte.getSolde());
+		double s = Math.abs(getCompte().getSolde());
 		int d = BAMTools.getDiffInDays(getDateDebut(), new Date());
 
 		return (s * d * taux) / 365;
 	}
 
 	@Override
-	public Date getDateDebut() {
-		return new Date(dateDebut.getTime());
-	}
-
-	@Override
-	public Date getDateFin() {
-		if (isSealed()) {
-			return new Date(dateFin.getTime());
+	public void update(BAMEvent evt) {
+		Compte cpte = (Compte)evt.getSource();
+		if (getCompte() == null) {
+			setCompte(cpte);
 		}
-		return null;
-	}
-
-	@Override
-	public void update(BAMEvent e) {
-		Compte cpte = (Compte)e.getSource();
-		if (this.cpte == null) {
-			this.cpte = cpte;
-		}
-		switch (e.getType()) {
+		switch (evt.getType()) {
 		case NEW_TRANSACTION:
 			if (cpte.getSolde() >= 0) {
-				sealTransaction(new Date());
-				cpte.fireBAMEvent(e);
+				try {
+					sealTransaction(new Date());
+				} catch (BAMException e1) {
+					e1.printStackTrace(System.err);
+				}
+				cpte.fireBAMEvent(evt);
 			}
 			break;
 		case NEW_DAY:
@@ -78,16 +75,80 @@ public class Decouvert implements Transaction {
 		}
 	}
 
-	@Override
-	public void sealTransaction(Date dateFin) {
-		if (! isSealed()) {
-			this.dateFin = new Date(dateFin.getTime());
-		}
+	public double getAgios() {
+		return agios;
+	}
+
+	public void setAgios(double agios) {
+		this.agios = agios;
+	}
+
+	public double getTaux() {
+		return taux;
+	}
+
+	public void setTaux(double taux) {
+		this.taux = taux;
 	}
 
 	@Override
-	public boolean isSealed() {
-		return dateFin != null;
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Decouvert [getMontant()=");
+		builder.append(getMontant());
+		builder.append(", getAgios()=");
+		builder.append(getAgios());
+		builder.append(", getTaux()=");
+		builder.append(getTaux());
+		builder.append(", isSealed()=");
+		builder.append(isSealed());
+		builder.append(", getId()=");
+		builder.append(getId());
+		builder.append(", getCompte()=");
+		builder.append(getCompte());
+		builder.append(", getDateDebut()=");
+		builder.append(getDateDebut());
+		builder.append(", getDateFin()=");
+		builder.append(getDateFin());
+		builder.append(", toString()=");
+		builder.append(super.toString());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(agios);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(taux);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof Decouvert)) {
+			return false;
+		}
+		Decouvert other = (Decouvert) obj;
+		if (Double.doubleToLongBits(agios) != Double.doubleToLongBits(other.agios)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(taux) != Double.doubleToLongBits(other.taux)) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -3,8 +3,16 @@ package com.bam.GESTIBANKBAM.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Client extends Personne {
-	private ArrayList<Compte> comptes;
+	@OneToMany
+	private List<Compte> comptes;
+
+	@ManyToOne
 	private Employe conseiller;
 
 	public Client() {
@@ -13,7 +21,7 @@ public class Client extends Personne {
 		comptes = new ArrayList<Compte>();
 	}
 
-	public Client(String idClient) {
+	public Client(Long idClient) {
 		this();
 		setId(idClient);
 	}
@@ -42,10 +50,10 @@ public class Client extends Personne {
 	}
 
 	
-	public ArrayList<Compte> getComptes() {
+	public List<Compte> getComptes() {
 		return comptes;
 	}
-	public void setComptes(ArrayList<Compte> comptes) {
+	public void setComptes(List<Compte> comptes) {
 		System.out.println("Client.setCompte(comptes)="+comptes.size());
 		this.comptes = comptes;
 	}

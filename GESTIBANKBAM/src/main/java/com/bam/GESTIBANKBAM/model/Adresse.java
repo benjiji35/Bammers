@@ -1,11 +1,40 @@
 package com.bam.GESTIBANKBAM.model;
 
-public class Adresse implements Cloneable {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
+@Embeddable
+//@Table (name="Adresse")
+public class Adresse implements Cloneable, Serializable {
+	@NotNull
+	@Column (nullable=false)
 	private int numero;
+
+	@NotNull
+	@Column (nullable=false)
 	private String rue;
+
+	@NotNull
+	@Column (nullable=false)
 	private String ville;
+
+	@NotNull
+	@Column (nullable=false, length=5)
 	private String codePostal;
+
+	@NotNull
+	@Column (nullable=false)
 	private String telephone;
+
+	@NotNull
+	@Email
+	@Column (nullable=false)
 	private String mail;
 
 	public Adresse() {

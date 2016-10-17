@@ -2,13 +2,30 @@ package com.bam.GESTIBANKBAM.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+@Entity
+//@DiscriminatorValue (Personne.TYPE_EMPLOYE+"")
+//@Table (name="Employe")
 public class Employe extends Personne {
+	@NotNull
+	@Column (nullable=false)
 	private Date dateEntree;
-	private ArrayList<String> fonctions;
-	private ArrayList<Client> clients; 
 
-	private ArrayList<Notification> notifications; //(Not in constructor ?)
+	@NotNull
+	@Column (nullable=false)
+	private ArrayList<String> fonctions;
+
+	@OneToMany (mappedBy="conseiller")
+	private List<Client> clients; 
+
+	@OneToMany (mappedBy="employe")
+	private List<EmployeNotification> notifications; //(Not in constructor ?)
 
 	public Employe() {
 		this.setType(ROLE_CONSEILLER | ROLE_ADMIN);
@@ -16,7 +33,7 @@ public class Employe extends Personne {
 	}
 
 	public Employe(String matricule, Date dateEntree, ArrayList<String> fonctions,
-			ArrayList<Notification> notifications) {
+			ArrayList<EmployeNotification> notifications) {
 		this();
 		this.dateEntree = dateEntree;
 		this.fonctions = fonctions;
@@ -69,15 +86,19 @@ public class Employe extends Personne {
 		this.fonctions = fonctions;
 	}
 
-	public ArrayList<Notification> getNotifications() {
+	public List<EmployeNotification> getNotifications() {
 		return notifications;
 	}
 
-	public void addNotification(Notification ntf) {
+	public void addNotification(EmployeNotification ntf) {
 		notifications.add(ntf);
 	}
 
-	public void setNotifications(ArrayList<Notification> notifications) {
+	public void removeNotification(Notification ntf) {
+		notifications.remove(ntf);
+	}
+
+	public void setNotifications(List<EmployeNotification> notifications) {
 		this.notifications = notifications;
 	}
 
@@ -110,8 +131,46 @@ public class Employe extends Personne {
 		builder.append(getNotifications());
 		builder.append(", hashCode()=");
 		builder.append(hashCode());
+		builder.append(", getClients()=");
+		builder.append(getClients());
+		builder.append(", getCivilite()=");
+		builder.append(getCivilite());
+		builder.append(", getNom()=");
+		builder.append(getNom());
+		builder.append(", getPrenom()=");
+		builder.append(getPrenom());
+		builder.append(", getDdn()=");
+		builder.append(getDdn());
+		builder.append(", getType()=");
+		builder.append(getType());
+		builder.append(", getId()=");
+		builder.append(getId());
+		builder.append(", getHashMdp()=");
+		builder.append(getHashMdp());
+		builder.append(", getAdresse()=");
+		builder.append(getAdresse());
+		builder.append(", getNumero()=");
+		builder.append(getNumero());
+		builder.append(", getRue()=");
+		builder.append(getRue());
+		builder.append(", getVille()=");
+		builder.append(getVille());
+		builder.append(", getCodePostal()=");
+		builder.append(getCodePostal());
+		builder.append(", getTelephone()=");
+		builder.append(getTelephone());
+		builder.append(", getMail()=");
+		builder.append(getMail());
 		builder.append(", toString()=");
 		builder.append(super.toString());
+		builder.append(", getSituationMatrimoniale()=");
+		builder.append(getSituationMatrimoniale());
+		builder.append(", getNbEnfants()=");
+		builder.append(getNbEnfants());
+		builder.append(", getIncome()=");
+		builder.append(getIncome());
+		builder.append(", getProfession()=");
+		builder.append(getProfession());
 		builder.append("]");
 		return builder.toString();
 	}
@@ -120,6 +179,7 @@ public class Employe extends Personne {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((clients == null) ? 0 : clients.hashCode());
 		result = prime * result + ((dateEntree == null) ? 0 : dateEntree.hashCode());
 		result = prime * result + ((fonctions == null) ? 0 : fonctions.hashCode());
 		result = prime * result + ((notifications == null) ? 0 : notifications.hashCode());
@@ -128,28 +188,52 @@ public class Employe extends Personne {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (!(obj instanceof Employe))
+		}
+		if (!(obj instanceof Employe)) {
 			return false;
+		}
 		Employe other = (Employe) obj;
+		if (clients == null) {
+			if (other.clients != null) {
+				return false;
+			}
+		} else if (!clients.equals(other.clients)) {
+			return false;
+		}
 		if (dateEntree == null) {
-			if (other.dateEntree != null)
+			if (other.dateEntree != null) {
 				return false;
-		} else if (!dateEntree.equals(other.dateEntree))
+			}
+		} else if (!dateEntree.equals(other.dateEntree)) {
 			return false;
+		}
 		if (fonctions == null) {
-			if (other.fonctions != null)
+			if (other.fonctions != null) {
 				return false;
-		} else if (!fonctions.equals(other.fonctions))
+			}
+		} else if (!fonctions.equals(other.fonctions)) {
 			return false;
+		}
 		if (notifications == null) {
-			if (other.notifications != null)
+			if (other.notifications != null) {
 				return false;
-		} else if (!notifications.equals(other.notifications))
+			}
+		} else if (!notifications.equals(other.notifications)) {
 			return false;
+		}
 		return true;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
 	}
 }

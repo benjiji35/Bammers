@@ -1,100 +1,88 @@
 package com.bam.GESTIBANKBAM.service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bam.GESTIBANKBAM.data.BAMData;
-import com.bam.GESTIBANKBAM.data.BAMDataFactory;
+import com.bam.GESTIBANKBAM.dao.PersonneDAO;
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Personne;
 
 @Service("personneService")
+public class PersonneServiceImpl implements PersonneService<Personne> {
+	
+	@Autowired
+	private PersonneDAO personneDAO;
 
-public class PersonneServiceImpl implements PersonneService {
-	
-	private static BAMData bd;
-	private static List<Personne> personnes;
-	
-	static{
-		bd = BAMDataFactory.getBAMData();
-		personnes = bd.getPersonnes();
-	};
-	
 	@Override
-	public Personne findById(String id) {
-		for(Personne pers : personnes){
-			if(pers.getId().equalsIgnoreCase(id)){
-				return pers;
-			}
-		}
-		return null;
+	public Personne findById(Long id) {
+		return (Personne)personneDAO.findById(id);
 	}
 
 	@Override
 	public List<Personne> findByNom(String nom) {
-		// TODO Auto-generated method stub
-		return null;
+		return personneDAO.findByNom(nom);
 	}
 
 	@Override
 	public List<Personne> findByPrenom(String prenom) {
-		// TODO Auto-generated method stub
-		return null;
+		return personneDAO.findByPrenom(prenom);
+	}
+
+	@Override
+	public List<Personne> findByAdresse(Adresse adr) {
+		return personneDAO.findByAdresse(adr);
 	}
 
 	@Override
 	public List<Personne> findByNomAndPrenom(String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return null;
+		return personneDAO.findByNomAndPrenom(nom, prenom);
 	}
 
 	@Override
-	public List<Personne> findByPrenomAndVille(String prenom, String ville) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Personne> findByNomAndAdresse(String nom, Adresse adr) {
+		return personneDAO.findByNomAndAdresse(nom, adr);
 	}
 
 	@Override
-	public void savePersonne(Personne prs) {
-		// TODO Auto-generated method stub
-		
+	public List<Personne> findByPrenomAndAdresse(String prenom, Adresse adr) {
+		return personneDAO.findByPrenomAndAdresse(prenom, adr);
 	}
 
 	@Override
-	public void updatePersonne(Personne prs) {
-		// TODO Auto-generated method stub
-		
+	public List<Personne> findByNomAndPrenomAndAdresse(String nom, String prenom, Adresse adr) {
+		return personneDAO.findByNomAndPrenomAndAdresse(nom, prenom, adr);
 	}
 
 	@Override
-	public void deletePersonneById(String id) {
-		// TODO Auto-generated method stub
-		
+	public void deleteById(Long id) {
+		personneDAO.deleteById(id);
 	}
 
 	@Override
-	public List<Personne> findAllPersonnes() {
-		// TODO Auto-generated method stub
-		return personnes;
+	public List<Personne> findAll() {
+		return personneDAO.findAll(null);
 	}
 
 	@Override
-	public void deleteAllPersonnes() {
-		// TODO Auto-generated method stub
-		
+	public void deleteAll() {
+		personneDAO.deleteAll();
 	}
 
 	@Override
-	public boolean isPersonneExist(Personne prs) {
-		// TODO Auto-generated method stub
-		return false;
+	public void save(Personne prs) {
+		personneDAO.save(prs);
 	}
 
+	@Override
+	public void update(Personne prs) {
+		// TODO VERIF
+		personneDAO.save(prs);
+	}
 
+	@Override
+	public boolean isExists(Personne prs) {
+		return personneDAO.isExists(prs);
+	}
 }

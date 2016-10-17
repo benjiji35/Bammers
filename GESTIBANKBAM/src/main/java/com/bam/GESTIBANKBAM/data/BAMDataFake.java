@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -17,10 +16,10 @@ import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.CommandeChequier;
 import com.bam.GESTIBANKBAM.model.Compte;
 import com.bam.GESTIBANKBAM.model.Compte.CompteType;
+import com.bam.GESTIBANKBAM.model.CompteNotification;
 import com.bam.GESTIBANKBAM.model.Credit;
 import com.bam.GESTIBANKBAM.model.Debit;
 import com.bam.GESTIBANKBAM.model.Employe;
-import com.bam.GESTIBANKBAM.model.Notification;
 import com.bam.GESTIBANKBAM.model.Personne;
 import com.bam.GESTIBANKBAM.model.Transaction;
 import com.bam.GESTIBANKBAM.util.BAMException;
@@ -72,61 +71,61 @@ public class BAMDataFake implements BAMData {
 		admins      = new ArrayList<Employe>();
 
 		personnes.add(new Personne(
-				"Mr", "AKLI", "Abdel", BAMTools.parseDate("25-03-1968"), Personne.ROLE_CLIENT, "C1", "m1m3r123908652",
+				"Mr", "AKLI", "Abdel", BAMTools.parseDate("25-03-1968"), Personne.ROLE_CLIENT, 1L, "m1m3r123908652",
 				new Adresse(859, "place jean jaures", "nantes", "44000", "+33656961528", "akli.abdel@tiko.com")));
 
 		personnes.add(new Personne(
-				"Mme", "JANIK", "Émilie", BAMTools.parseDate("04-08-1970"), Personne.ROLE_CLIENT, "C3", "k1h3r12356571",
+				"Mme", "JANIK", "Émilie", BAMTools.parseDate("04-08-1970"), Personne.ROLE_CLIENT, 2L, "k1h3r12356571",
 				new Adresse(1, "cours gambetta", "nimes", "32000", "+33784283626", "janik.émilie@tiko.com")));
 
 		personnes.add(new Personne(
-				"Mr", "ZALCBERG", "Mathis", BAMTools.parseDate("17-01-1951"), Personne.ROLE_CLIENT, "C5", "g1k3r12303480",
+				"Mr", "ZALCBERG", "Mathis", BAMTools.parseDate("17-01-1951"), Personne.ROLE_CLIENT, 5L, "g1k3r12303480",
 				new Adresse(172, "avenue foch", "lille", "59000", "+33619357656", "zalcberg.mathis@bito.com")));
 
 		personnes.add(new Personne(
-				"Mr", "Mitterand", "Lucas", BAMTools.parseDate("15-02-1950"), Personne.ROLE_CLIENT, "C7", "t1k3r12392556",
+				"Mr", "Mitterand", "Lucas", BAMTools.parseDate("15-02-1950"), Personne.ROLE_CLIENT, 7L, "t1k3r12392556",
 				new Adresse(390, "avenue du docteur long", "carcasonne", "11000", "+33744587413", "mitterand.lucas@abc.com")));
 		
 		personnes.add(new Personne(
-				"Mr", "BEDIKIAN", "Tristan", BAMTools.parseDate("13-08-1969"), Personne.ROLE_CLIENT, "C9", "g1k3r123468070",
+				"Mr", "BEDIKIAN", "Tristan", BAMTools.parseDate("13-08-1969"), Personne.ROLE_CLIENT, 9L, "g1k3r123468070",
 				new Adresse(479, "route de bayonne", "lyon", "69000", "+33781554541", "bedikian.tristan@tito.com")));
 
 		personnes.add(new Personne(
-				"Mme", "Platini", "Sofia", BAMTools.parseDate("26-12-1990"), Personne.ROLE_CLIENT, "C11", "k1h3r123799726",
+				"Mme", "Platini", "Sofia", BAMTools.parseDate("26-12-1990"), Personne.ROLE_CLIENT, 11L, "k1h3r123799726",
 				new Adresse(264, "cours gambetta", "nimes", "32000", "+33775476831", "platini.sofia@bito.com")));
 
 		personnes.add(new Personne(
-				"Mr", "Patel", "Tommy", BAMTools.parseDate("06-11-1955"), Personne.ROLE_CLIENT, "C13", "j1g3r123341539",
+				"Mr", "Patel", "Tommy", BAMTools.parseDate("06-11-1955"), Personne.ROLE_CLIENT, 13L, "j1g3r123341539",
 				new Adresse(422, "alles jules guesdes", "montpellier", "34000", "+33642697233", "patel.tommy@toto.com")));
 
 		personnes.add(new Personne(
-				"Mme", "AFONSO", "Stephanie", BAMTools.parseDate("20-11-1958"), Personne.ROLE_CLIENT, "C15", "m1m3r12337584",
+				"Mme", "AFONSO", "Stephanie", BAMTools.parseDate("20-11-1958"), Personne.ROLE_CLIENT, 15L, "m1m3r12337584",
 				new Adresse(169, "cours laplace", "lyon", "69000", "+33757691287", "afonso.stephanie@toto.com")));
 
 		personnes.add(new Personne(
-				"Mme", "WINTERMAN", "Alicia", BAMTools.parseDate("20-01-1980"), Personne.ROLE_CLIENT, "C17", "j1g3r123161922",
+				"Mme", "WINTERMAN", "Alicia", BAMTools.parseDate("20-01-1980"), Personne.ROLE_CLIENT, 17L, "j1g3r123161922",
 				new Adresse(766, "rue des tulipes", "grenoble", "38000", "+33666326755", "winterman.alicia@bito.com")));
 
 		personnes.add(new Personne(
-				"Mr", "Chirac", "Toto", BAMTools.parseDate("16-02-1957"), Personne.ROLE_CLIENT, "C19", "g1k3r123142832",
+				"Mr", "Chirac", "Toto", BAMTools.parseDate("16-02-1957"), Personne.ROLE_CLIENT, 19L, "g1k3r123142832",
 				new Adresse(51, "avenue foch", "carcasonne", "11000", "+33688223746", "chirac.toto@tiko.com")));
 
 		// Conseillers
 		personnes.add(new Personne(
-				"Mr", "BEZDIKIAN", "Édouard", BAMTools.parseDate("12-08-1960"), Personne.ROLE_CONSEILLER, "A21", "m1m3r123912558",
+				"Mr", "BEZDIKIAN", "Édouard", BAMTools.parseDate("12-08-1960"), Personne.ROLE_CONSEILLER, 21L, "m1m3r123912558",
 				new Adresse(185, "route de bayonne", "montauban", "82000", "+33771317258", "bezdikian.édouard@bito.com")));
 
 		personnes.add(new Personne(
-				"Mme", "KEVORKIAN", "Arianne", BAMTools.parseDate("27-01-1990"), Personne.ROLE_CONSEILLER, "A23", "m1m3r123526496",
+				"Mme", "KEVORKIAN", "Arianne", BAMTools.parseDate("27-01-1990"), Personne.ROLE_CONSEILLER, 23L, "m1m3r123526496",
 				new Adresse(524, "alles jules guesdes", "rennes", "35000", "+33728753383", "kevorkian.arianne@tito.com")));
 
 		personnes.add(new Personne(
-				"Mr", "MALOSSI", "Simon", BAMTools.parseDate("24-12-1951"), Personne.ROLE_CONSEILLER, "A27", "k1h3r123722356", 
+				"Mr", "MALOSSI", "Simon", BAMTools.parseDate("24-12-1951"), Personne.ROLE_CONSEILLER, 27L, "k1h3r123722356", 
 				new Adresse(328, "rue des sardines", "montauban", "82000", "+33789295523", "malossi.simon@bito.com")));
 
 		// Admins
 		personnes.add(new Personne(
-				"Mme", "SOLARZ", "Alicia", BAMTools.parseDate("18-12-1979"), Personne.ROLE_ADMIN, "X25", "j1g3r123305972", 
+				"Mme", "SOLARZ", "Alicia", BAMTools.parseDate("18-12-1979"), Personne.ROLE_ADMIN, 25L, "j1g3r123305972", 
 				new Adresse(658, "place jean jaures", "le mans", "72000", "+33728744142", "solarz.alicia@tito.com")));
 
 		for (Personne p : personnes) {
@@ -310,7 +309,7 @@ public class BAMDataFake implements BAMData {
 						(mois < 10? "0"+mois: ""+mois) + "-" +
 						(annee);
 				i_mdp = rnd.nextInt(10000) % mdp.length;
-				personnes.add(createNewPersonne("C"+counter.incrementAndGet(),
+				personnes.add(createNewPersonne(counter.incrementAndGet(),
 						titre,
 						nom[i_nom],
 						prenom,
@@ -420,7 +419,7 @@ public class BAMDataFake implements BAMData {
 		return c;
 	}
 
-	private Personne createNewPersonne(String id, String civilite, String nom, String prenom, Date ddn, String mdp) {//, String mail) {
+	private Personne createNewPersonne(Long id, String civilite, String nom, String prenom, Date ddn, String mdp) {//, String mail) {
 		Personne pers = new Personne();
 		pers.setId(id);
 		pers.setCivilite(civilite);
@@ -467,7 +466,7 @@ public class BAMDataFake implements BAMData {
 		return adm;
 	}
 
-	private ArrayList<Compte> createDummyComptes(String id) throws BAMException {
+	private ArrayList<Compte> createDummyComptes(Long id) throws BAMException {
 		ArrayList<Compte> cpts = new ArrayList<Compte>();
 		Random rnd = new Random();
 		final int n = 1 + rnd.nextInt(5);
@@ -476,7 +475,7 @@ public class BAMDataFake implements BAMData {
 			Compte c = new Compte(3000+rnd.nextInt(10000),
 					1200,
 					CompteType.AVEC_AUTORISATION,
-					id+"-cpt-"+(i+1));
+					Long.parseLong(id+""+(i+1)));
 			c.setTransactions(createDummyTransactions(id+"-tr-"+i));
 			c.setChequiers(createDummyChequiers(c, id+"-chq-"+i));
 			c.setNotifications(createDummyNotifications(id+"-ntf-"+i));
@@ -495,11 +494,13 @@ public class BAMDataFake implements BAMData {
 			Transaction t;
 			if (i % step == 0) {
 				step = 1 + rnd.nextInt(9);
-				t = new Debit(-1-rnd.nextInt(100), BAMTools.addToCalendar(new Date(), 
-						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)));
+				t = new Debit(null, BAMTools.addToCalendar(new Date(), 
+						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)),
+						-1-rnd.nextInt(100));
 			} else {
-				t = new Credit(100+rnd.nextInt(200), BAMTools.addToCalendar(new Date(), 
-						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)));
+				t = new Credit(null, BAMTools.addToCalendar(new Date(), 
+						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)),
+						100+rnd.nextInt(200));
 			}
 			trcts.add(t);
 		}
@@ -515,15 +516,15 @@ public class BAMDataFake implements BAMData {
 		for (int i=0; i < n; i++) {
 			CommandeChequier cc = new CommandeChequier(c, 
 					1+rnd.nextInt(3),
-					c.getNumCpt()+"-chq-"+id+"-"+(i+1));
+					Long.parseLong(c.getNumCpt()+""+id+""+(i+1)));
 			cc.commander();
 			chqs.add(cc);
 		}
 		return chqs;
 	}
 
-	private ArrayList<Notification> createDummyNotifications(String id) {
-		ArrayList<Notification> ntfs = new ArrayList<Notification>();
+	private List<CompteNotification> createDummyNotifications(String id) {
+		List<CompteNotification> ntfs = new ArrayList<CompteNotification>();
 		Random rnd = new Random();
 		final int n = 1 + rnd.nextInt(10); 
 		String[] strs = new String[] {
@@ -541,7 +542,7 @@ public class BAMDataFake implements BAMData {
 		};
 
 		for (int i=0; i < n; i++) {
-			Notification notif = new Notification(strs[rnd.nextInt(strs.length)], 
+			CompteNotification notif = new CompteNotification(strs[rnd.nextInt(strs.length)], 
 					BAMTools.addToCalendar(new Date(), 0, 0, -rnd.nextInt(131)));
 			ntfs.add(notif);
 		}
@@ -642,7 +643,7 @@ public class BAMDataFake implements BAMData {
 	}
 
 	@Override
-	public Personne findPersonne(String id) {
+	public Personne findPersonne(Long id) {
 		Personne p = null;
 
 		if (id != null) {
@@ -664,7 +665,7 @@ public class BAMDataFake implements BAMData {
 	@Override
 	public boolean updatePersonne(Personne p) {
 		boolean result = false;
-		String id      = p.getId();
+		Long id      = p.getId();
 		final int len  = personnes.size();
 
 		for (int idx = 0; idx < len; idx++) {
@@ -694,7 +695,7 @@ public class BAMDataFake implements BAMData {
 	@Override
 	public boolean deletePersonne(Personne p) {
 		final int len  = personnes.size();
-		String id      = p.getId();
+		Long id      = p.getId();
 		boolean result = false;
 
 		for (int idx = 0; idx < len; idx++) {
@@ -719,7 +720,7 @@ public class BAMDataFake implements BAMData {
 
 	@Override
 	public Client findClient(Client c) {
-		String id = c.getId();
+		Long id = c.getId();
 		Client clt = null;
 
 		for (Client cc : clients) {
@@ -734,7 +735,7 @@ public class BAMDataFake implements BAMData {
 	@Override
 	public boolean updateClient(Client c) {
 		final int len  = clients.size();
-		String id      = c.getId();
+		Long id      = c.getId();
 		boolean result = false;
 
 		for (int idx = 0; idx < len; idx++) {
@@ -750,7 +751,7 @@ public class BAMDataFake implements BAMData {
 	@Override
 	public boolean deleteClient(Client c) {
 		final int len  = clients.size();
-		String id      = c.getId(); 
+		Long id      = c.getId(); 
 		boolean result = false;
 
 		for (int idx = 0; idx < len; idx++) {
@@ -768,7 +769,7 @@ public class BAMDataFake implements BAMData {
 		final int len  = (e.getType() == Employe.ROLE_CONSEILLER? 
 				conseillers.size():
 					admins.size());
-		String id      = e.getId();
+		Long id      = e.getId();
 		boolean dup    = false;
 		List<Employe> emps = (e.getType() == Employe.ROLE_CONSEILLER?
 				conseillers:
@@ -792,7 +793,7 @@ public class BAMDataFake implements BAMData {
 		final int len = (e.getType() == Employe.ROLE_ADMIN?
 				admins.size():
 				conseillers.size());
-		String id = e.getId();
+		Long id = e.getId();
 		List<Employe> emps = (e.getType() == Employe.ROLE_ADMIN?
 				admins:
 				conseillers);
@@ -814,7 +815,7 @@ public class BAMDataFake implements BAMData {
 		List<Employe> emps = (e.getType() == Employe.ROLE_ADMIN?
 				admins:
 				conseillers);
-		String id      = e.getId();
+		Long id      = e.getId();
 		boolean result = false;
 
 		for (int idx = 0; idx < len; idx++) {
@@ -835,7 +836,7 @@ public class BAMDataFake implements BAMData {
 		List<Employe> emps = (e.getType() == Employe.ROLE_ADMIN?
 				admins:
 				conseillers);
-		String id      = e.getId();
+		Long id      = e.getId();
 		boolean result = false;
 
 		for (int idx = 0; idx < len; idx++) {

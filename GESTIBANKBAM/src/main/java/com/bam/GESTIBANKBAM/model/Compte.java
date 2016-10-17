@@ -2,10 +2,21 @@ package com.bam.GESTIBANKBAM.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.event.BAMListener;
 
+@Entity
 public class Compte implements Cloneable {
 	public enum CompteType {
 		SANS_AUTORISATION,
@@ -13,15 +24,33 @@ public class Compte implements Cloneable {
 		REMUNERATEUR
 	};
 
+	@NotNull
+	@Column (nullable=false)
 	private double solde;
-	private double debit;
-	private CompteType type;
-	private String numCpt;
-	private ArrayList<Notification> notifications;
-	private ArrayList<CommandeChequier> chequiers;
-	private ArrayList<Transaction> transactions;
 
-	private ArrayList<BAMListener> listeners;
+	@NotNull
+	@Column (nullable=false)
+	private double debit;
+
+	@NotNull
+	@Column (nullable=false)
+	private CompteType type;
+
+	@Id
+	@GeneratedValue (strategy=GenerationType.AUTO)
+	private Long numCpt;
+
+	@OneToMany (mappedBy="compte")
+	private List<CompteNotification> notifications;
+
+	@OneToMany (mappedBy="compte")
+	private List<CommandeChequier> chequiers;
+
+	@OneToMany (mappedBy="compte")
+	private List<Transaction> transactions;
+
+	@Transient
+	private List<BAMListener> listeners;
 
 	
 	public Compte() {
@@ -32,14 +61,14 @@ public class Compte implements Cloneable {
 		this(0, 0, type, null);
 	}
 
-	public Compte(double solde, double debit, CompteType type, String numCpt) {
+	public Compte(double solde, double debit, CompteType type, Long numCpt) {
 		this(solde, debit, type, numCpt, null, null, null);
-		notifications = new ArrayList<Notification>();
+		notifications = new ArrayList<CompteNotification>();
 		chequiers     = new ArrayList<CommandeChequier>();
 		transactions  = new ArrayList<Transaction>();
 	}
 
-	public Compte(double solde, double debit, CompteType type, String numCpt, ArrayList<Notification> notifications, ArrayList<CommandeChequier> chequiers,
+	public Compte(double solde, double debit, CompteType type, Long numCpt, List<CompteNotification> notifications, ArrayList<CommandeChequier> chequiers,
 			ArrayList<Transaction> transactions) {
 		this.solde = solde;
 		this.debit = debit;
@@ -98,7 +127,7 @@ public class Compte implements Cloneable {
         }
 	}
 
-	public ArrayList<Transaction> getTransactions() {
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
@@ -106,23 +135,31 @@ public class Compte implements Cloneable {
 		return 0;
 	}
 
-	public String getNumCpt() {
+	public Long getNumCpt() {
 		return numCpt;
 	}
 
-	public void setNumCpt(String numCpt) {
+	public void setNumCpt(Long numCpt) {
 		this.numCpt = numCpt;
 	}
 
-	public ArrayList<Notification> getNotifications() {
+	public List<CompteNotification> getNotifications() {
 		return notifications;
 	}
 
-	public void setNotifications(ArrayList<Notification> notifications) {
+	public void setNotifications(List<CompteNotification> notifications) {
 		this.notifications = notifications;
 	}
 
-	public ArrayList<CommandeChequier> getChequiers() {
+	public void addNotification(CompteNotification ntf) {
+		notifications.add(ntf);
+	}
+
+	public void removeNotification(CompteNotification ntf) {
+		notifications.remove(ntf);
+	}
+
+	public List<CommandeChequier> getChequiers() {
 		return chequiers;
 	}
 
