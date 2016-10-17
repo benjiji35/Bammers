@@ -5,10 +5,11 @@
 		<title>Page de connexion</title>
 		<meta http-equiv="Content-Type" content="charset=utf-8" />
 		<meta http-equiv="Content-Language" content="fr" />
-        <link rel= "stylesheet" type="text/css" href="css/bootstrap.css">
 		<link rel= "stylesheet" type="text/css" href="style/css/se_connecter.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href ="style/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="style/css/home.css" rel="stylesheet" media="all" type="text/css"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" ></script>
@@ -23,45 +24,61 @@
 
 	</head>
 	  	
-			<header>
-				<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
-			</header>
+<header>
+	<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
+	<!-- barre de navigation -->
+	<nav class="navbar">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="index.html">Accueil</a></li>
+<!-- 	      <li><a href="#">A propos</a></li> -->
+<!-- 	      <li><a href="#">Actualités</a></li> -->
+<!-- 	      <li><a href="#">Services</a></li> -->
+	      <li><a href="contact.html">Contact</a></li>
+	    </ul>
+	    </div>
+	  </div>
+	</nav>
+	<!-- boutons -->
+	<div id="connexion" class ="navbar">
+		<input type="button" value="Devenir client" class ="btn btn - primary btn -xs"   onclick="javascript:location.href='newclient.html'">
+		<input type="button" value="Connexion" class ="btn btn - primary btn -xs"   onclick="javascript:location.href='se_connecter.html'">
+	</div>
+</header>
 <body ng-app="myApp">
 		
 		<ul class =" breadcrumb ">
             <li ><a href ="index.html">Accueil </a></li >
             <li class =" active " >Acceder a vos comptes</li >
         </ul >
-		<br><br><br>
+		<br>
 		
 	<div id="formulaire">
 	<form ng-controller="connectCtrl" >
 		<legend>BIENVENUE SUR L'ESPACE DE CONNEXION</legend>
 		<p>
 			<label for="n1"><h4>1. Saisissez votre identifiant</h4></label>
-			<br>
 			<div id="Identifiant">
 				<input type="text" ng-model="id" name="username" class= "form-inline" placeholder="Identifiant" required>&nbsp; &nbsp; &nbsp; &nbsp; 
 				<a href="url">Identifiant oublié?</a><br><br>
 				<input type="checkbox">&nbsp; Memoriser mon identifiant sur mon navigateur
 			</div>
 		</p>
-		<br><br>
+		<br>
 
 		<p>
 			<label for="n2"><h4>2. Saisissez votre mot de passe</h4></label>
-			<br>
 			<div id=MotdePasse>
 				<input ng-model="mdp" placeholder="Mot de passe" class= "form-inline" type="password" name="password"  required> &nbsp; &nbsp; &nbsp; &nbsp;
 				<a href="url">Mot de passe oublié?</a><br><br>
 				<button type="button" class="btn btn-danger  btn-xs">Effacer</button>
 			</div>
 		</p>
-		<br><br><br>
+		<br>
 
 		<p>
 			<label for="n3"><h4>3. Accéder à votre espace</h4></label>
-			<br>
 			<button type="submit"  ng-click= "valid()" class= "btn btn-success btn-sm">Accéder</button>
 		</p>
 

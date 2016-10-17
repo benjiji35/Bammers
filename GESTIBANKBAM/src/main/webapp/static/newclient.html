@@ -18,25 +18,25 @@
 	<title>Devenir client</title>
 </head>
 <header>
-<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
+	<a href="index.html" class="navbar-left"><img id ="logo" src="img/logo.jpg"></a>
+	<!-- barre de navigation -->
 	<nav class="navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="index.html">Accueil</a></li>
-<!--       <li><a href="#">A propos</a></li> -->
-<!--       <li><a href="#">Actualités</a></li> -->
-<!--       <li><a href="#">Services</a></li> -->
-<!--       <li><a href="#">Actualités</a></li> -->
-      <li><a href="#">Contact</a></li>
-    </ul>
-    </div>
-  </div>
-  
-</nav>
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="index.html">Accueil</a></li>
+<!-- 	      <li><a href="#">A propos</a></li> -->
+<!-- 	      <li><a href="#">Actualités</a></li> -->
+<!-- 	      <li><a href="#">Services</a></li> -->
+	      <li><a href="contact.html">Contact</a></li>
+	    </ul>
+	    </div>
+	  </div>
+	</nav>
+	<!-- boutons -->
 	<div id="connexion" class ="navbar">
-		<input type="button" value="Devenir client" class ="btn btn-default"   onclick="javascript:location.href='newclient.html'">
-		<input type="button" value="Connexion" class ="btn btn-default"   onclick="javascript:location.href='#'">
+		<input type="button" value="Devenir client" class ="btn btn - primary btn -xs"   onclick="javascript:location.href='newclient.html'">
+		<input type="button" value="Connexion" class ="btn btn - primary btn -xs"   onclick="javascript:location.href='se_connecter.html'">
 	</div>
 </header>
 <body ng-app="myApp">
@@ -91,13 +91,13 @@
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="cp">Code Postal : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.codePostal" required>
+	      <input type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.codePostal" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="telephone">Telephone : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="telephone" placeholder="Entrez votre telephone" ng-model="client.adresse.telephone" required>
+	      <input type="tel" class="form-control" id="telephone" placeholder="Entrez votre telephone" ng-model="client.adresse.telephone" required>
 	    </div>
   		</div>
   		<div class="form-group">

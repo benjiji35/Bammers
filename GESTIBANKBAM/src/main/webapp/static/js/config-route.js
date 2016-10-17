@@ -101,7 +101,7 @@ app.config(['$routeProvider', function($routeProvider) {
 //			controller: 'sm_ctrlr'})
 		.when('/', {
 			templateUrl: 'views/root.html',
-			controller: 'rootCtrl'})
+			controller: ''})
 
 		.otherwise({redirectTo: '/'})
 }]);
