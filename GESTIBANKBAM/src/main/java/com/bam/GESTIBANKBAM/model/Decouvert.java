@@ -13,6 +13,11 @@ import com.bam.GESTIBANKBAM.utils.BAMTools;
 @Entity
 public class Decouvert extends Transaction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	@Column (nullable=false)
 	private double agios;
@@ -21,8 +26,8 @@ public class Decouvert extends Transaction {
 	@Column (nullable=false)
 	private double taux;
 
-	public Decouvert(Compte compte, double agios, double taux, Date dateDebut) throws BAMException {
-		super(compte, dateDebut, null, 0);
+	public Decouvert(double agios, double taux, Date dateDebut) throws BAMException {
+		super(dateDebut, null, agios);
 		this.agios = agios;
 		this.taux = taux;
 		if (agios < 0 || taux < 0) {
@@ -39,40 +44,14 @@ public class Decouvert extends Transaction {
 
 	@Override
 	public double getMontant() {
-		double s = Math.abs(getCompte().getSolde());
-		int d = BAMTools.getDiffInDays(getDateDebut(), new Date());
+		Date date = (isSealed()? getDateFin(): null);
+		int d = BAMTools.getDiffInDays(getDateDebut(), date);
 
-		return (s * d * taux) / 365;
+		return (getAgios() * d * taux) / 365;
 	}
 
 	@Override
 	public void update(BAMEvent evt) {
-		Compte cpte = (Compte)evt.getSource();
-		if (getCompte() == null) {
-			setCompte(cpte);
-		}
-		switch (evt.getType()) {
-		case NEW_TRANSACTION:
-			if (cpte.getSolde() >= 0) {
-				try {
-					sealTransaction(new Date());
-				} catch (BAMException e1) {
-					e1.printStackTrace(System.err);
-				}
-				cpte.fireBAMEvent(evt);
-			}
-			break;
-		case NEW_DAY:
-			break;
-		case BALANCE_WAS_NEGATIVE_THEN_BECOME_POSITIVE:
-			break;
-		case BALANCE_WAS_POSITIVE_THEN_BECOME_NEGATIVE:
-			break;
-		case TRANSACTION_SEALED:
-			break;
-			default:
-				;
-		}
 	}
 
 	public double getAgios() {
@@ -94,26 +73,24 @@ public class Decouvert extends Transaction {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Decouvert [getMontant()=");
+		builder.append("Decouvert [getMontant=");
 		builder.append(getMontant());
-		builder.append(", getAgios()=");
+		builder.append(", getAgios=");
 		builder.append(getAgios());
-		builder.append(", getTaux()=");
+		builder.append(", getTaux=");
 		builder.append(getTaux());
-		builder.append(", isSealed()=");
-		builder.append(isSealed());
-		builder.append(", getId()=");
-		builder.append(getId());
-		builder.append(", getCompte()=");
-		builder.append(getCompte());
-		builder.append(", getDateDebut()=");
-		builder.append(getDateDebut());
-		builder.append(", getDateFin()=");
-		builder.append(getDateFin());
-		builder.append(", toString()=");
-		builder.append(super.toString());
-		builder.append(", hashCode()=");
+		builder.append(", hashCode=");
 		builder.append(hashCode());
+		builder.append(", isSealed=");
+		builder.append(isSealed());
+		builder.append(", getId=");
+		builder.append(getId());
+		builder.append(", getDateDebut=");
+		builder.append(getDateDebut());
+		builder.append(", getDateFin=");
+		builder.append(getDateFin());
+		builder.append(", toString=");
+		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
 	}
@@ -132,22 +109,17 @@ public class Decouvert extends Transaction {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (!(obj instanceof Decouvert)) {
+		if (!(obj instanceof Decouvert))
 			return false;
-		}
 		Decouvert other = (Decouvert) obj;
-		if (Double.doubleToLongBits(agios) != Double.doubleToLongBits(other.agios)) {
+		if (Double.doubleToLongBits(agios) != Double.doubleToLongBits(other.agios))
 			return false;
-		}
-		if (Double.doubleToLongBits(taux) != Double.doubleToLongBits(other.taux)) {
+		if (Double.doubleToLongBits(taux) != Double.doubleToLongBits(other.taux))
 			return false;
-		}
 		return true;
 	}
 

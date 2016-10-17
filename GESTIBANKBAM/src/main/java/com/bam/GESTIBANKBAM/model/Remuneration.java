@@ -4,10 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
@@ -16,6 +12,11 @@ import com.bam.GESTIBANKBAM.utils.BAMTools;
 
 @Entity
 public class Remuneration extends Transaction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// the difference between the balance and the minimum threshold
 	@NotNull
@@ -31,8 +32,8 @@ public class Remuneration extends Transaction {
 	private double taux;
 
 
-	public Remuneration(Compte compte, double delta, double seuil, double taux, Date dateDebut) throws BAMException {
-		super(compte, dateDebut, null, 0);
+	public Remuneration(double delta, double seuil, double taux, Date dateDebut) throws BAMException {
+		super(dateDebut, null, 0);
 		this.delta = delta;
 		this.seuilMin = seuil;
 		this.taux = taux;
@@ -61,19 +62,9 @@ public class Remuneration extends Transaction {
 
 	@Override
 	public double getMontant() {
-		double s = getCompte().getSolde() - seuilMin;
-		Date date = (isSealed()? getDateFin(): new Date());
+		Date date = (isSealed()? getDateFin(): null);
 
-		return delta * BAMTools.getDiffInDays(date, getDateDebut()) * taux / 365;
-//		if (s == delta) {
-//			// no change, so we do not seal the transaction
-//		} else if (s < delta) {
-//			
-//		} else {
-//			
-//		}
-//
-//		return ;
+		return getDelta() * BAMTools.getDiffInDays(date, getDateDebut()) * taux / 365;
 	}
 
 	@Override
@@ -85,20 +76,6 @@ public class Remuneration extends Transaction {
 
 	@Override
 	public void update(BAMEvent e) {
-		double s = getCompte().getSolde() - seuilMin;
-
-		switch (e.getType()) {
-		case NEW_DAY:
-			break;
-		case NEW_TRANSACTION:
-			break;
-		case BALANCE_WAS_NEGATIVE_THEN_BECOME_POSITIVE:
-			break;
-		case BALANCE_WAS_POSITIVE_THEN_BECOME_NEGATIVE:
-			break;
-		case TRANSACTION_SEALED:
-			break;
-		}
 	}
 
 	public double getDelta() {
@@ -119,5 +96,62 @@ public class Remuneration extends Transaction {
 
 	public void setTaux(double taux) {
 		this.taux = taux;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Remuneration [getTaux=");
+		builder.append(getTaux());
+		builder.append(", getMontant=");
+		builder.append(getMontant());
+		builder.append(", getDelta=");
+		builder.append(getDelta());
+		builder.append(", getSeuilMin=");
+		builder.append(getSeuilMin());
+		builder.append(", hashCode=");
+		builder.append(hashCode());
+		builder.append(", isSealed=");
+		builder.append(isSealed());
+		builder.append(", getId=");
+		builder.append(getId());
+		builder.append(", getDateDebut=");
+		builder.append(getDateDebut());
+		builder.append(", getDateFin=");
+		builder.append(getDateFin());
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(delta);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(seuilMin);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(taux);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Remuneration))
+			return false;
+		Remuneration other = (Remuneration) obj;
+		if (Double.doubleToLongBits(delta) != Double.doubleToLongBits(other.delta))
+			return false;
+		if (Double.doubleToLongBits(seuilMin) != Double.doubleToLongBits(other.seuilMin))
+			return false;
+		if (Double.doubleToLongBits(taux) != Double.doubleToLongBits(other.taux))
+			return false;
+		return true;
 	}
 }

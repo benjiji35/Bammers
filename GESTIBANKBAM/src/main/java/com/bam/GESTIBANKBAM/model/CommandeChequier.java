@@ -1,5 +1,7 @@
 package com.bam.GESTIBANKBAM.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class CommandeChequier {
+public class CommandeChequier implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum STATE {
 		INIT, 
 		CANCELED, 
@@ -19,9 +26,6 @@ public class CommandeChequier {
 		REJECTED
 	};
 
-	@NotNull
-	@ManyToOne
-	private Compte compte;
 
 	@NotNull
 	@Column (nullable=false)
@@ -30,6 +34,9 @@ public class CommandeChequier {
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private Long numCheque;
+
+	@ManyToOne
+	private Compte compte;
 
 	@NotNull
 	@Column (nullable=false)
@@ -40,11 +47,11 @@ public class CommandeChequier {
 		nombre = -1;
 	}
 
-	public CommandeChequier(Compte c, int n, Long nc) {
-		compte    = c;
-		nombre    = n;
-		numCheque = nc;
-		state     = STATE.INIT;
+	public CommandeChequier(Compte compte, int n, Long nc) {
+		this.compte = compte;
+		nombre      = n;
+		numCheque   = nc;
+		state       = STATE.INIT;
 	}
 
 	public void commander() {
@@ -84,15 +91,15 @@ public class CommandeChequier {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CommandeChequier [getNombre()=");
+		builder.append("CommandeChequier [getNombre=");
 		builder.append(getNombre());
-		builder.append(", getNumCheque()=");
+		builder.append(", getNumCheque=");
 		builder.append(getNumCheque());
-		builder.append(", getState()=");
+		builder.append(", getState=");
 		builder.append(getState());
-		builder.append(", hashCode()=");
+		builder.append(", hashCode=");
 		builder.append(hashCode());
-		builder.append(", getCompte()=");
+		builder.append(", getCompte=");
 		builder.append(getCompte());
 		builder.append("]");
 		return builder.toString();

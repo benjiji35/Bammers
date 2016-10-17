@@ -22,6 +22,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 //@DiscriminatorColumn(name="ZZTYPE", discriminatorType=DiscriminatorType.INTEGER)
 //@Table (name="Personne")
 public class Personne implements Cloneable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Transient
 	public static final int ROLE_UNAUTHENTICATED_USER = 1;
 
@@ -69,6 +74,7 @@ public class Personne implements Cloneable, Serializable {
 	@Column (nullable=false)
 	private int type;
 
+	@Column (nullable=true)
 	private String hashMdp;
 
 	@NotNull

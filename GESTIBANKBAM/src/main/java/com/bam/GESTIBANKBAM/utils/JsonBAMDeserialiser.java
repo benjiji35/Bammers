@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 public class JsonBAMDeserialiser extends JsonDeserializer<Date> {
 
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {

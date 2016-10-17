@@ -89,9 +89,11 @@ public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements Pers
 
 	@Override
 	public List<Personne> findAll(Object ref) {
-		return (List<Personne>)getEntityManager()
-				.createQuery("SELECT p FROM Personne p ORDER BY p.id ASC")
+		List<Personne> ma_liste = (List<Personne>)getEntityManager()
+				.createQuery("SELECT p FROM Personne p")
 				.getResultList();
+
+		return ma_liste;
 	}
 
 	@Override

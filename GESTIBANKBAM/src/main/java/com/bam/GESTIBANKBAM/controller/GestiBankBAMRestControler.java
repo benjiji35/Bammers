@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -243,11 +244,11 @@ public class GestiBankBAMRestControler {
 			Transaction t;
 			if (i % step == 0) {
 				step = 1 + rnd.nextInt(9);
-				t = new Debit(null, BAMTools.addToCalendar(new Date(), 
+				t = new Debit(BAMTools.addToCalendar(new Date(), 
 						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)),
 						-1-rnd.nextInt(100));
 			} else {
-				t = new Credit(null, BAMTools.addToCalendar(new Date(), 
+				t = new Credit(BAMTools.addToCalendar(new Date(), 
 						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)),
 						100+rnd.nextInt(200));
 			}
@@ -310,6 +311,8 @@ public class GestiBankBAMRestControler {
 
 	@Autowired
 	EmployeService employeService; 
+	
+	private static final Logger logger = Logger.getLogger(GestiBankBAMRestControler.class);
 
 	// -------------------Retrieve All Clients--------------------------------------------------------
 

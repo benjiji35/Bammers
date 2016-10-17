@@ -12,6 +12,11 @@ import org.hibernate.validator.constraints.Email;
 @Embeddable
 //@Table (name="Adresse")
 public class Adresse implements Cloneable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	@Column (nullable=false)
 	private int numero;

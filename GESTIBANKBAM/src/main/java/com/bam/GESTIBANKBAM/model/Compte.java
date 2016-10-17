@@ -1,5 +1,6 @@
 package com.bam.GESTIBANKBAM.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +18,15 @@ import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.event.BAMListener;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
 @Entity
-public class Compte implements Cloneable {
+public class Compte implements Cloneable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum CompteType {
 		SANS_AUTORISATION,
 		AVEC_AUTORISATION,
@@ -44,13 +49,13 @@ public class Compte implements Cloneable {
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private Long numCpt;
 
-	@OneToMany (mappedBy="compte", cascade=CascadeType.PERSIST)
+	@OneToMany (mappedBy="compte", cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<CompteNotification> notifications;
 
-	@OneToMany (mappedBy="compte", cascade=CascadeType.PERSIST)
+	@OneToMany (mappedBy="compte", cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<CommandeChequier> chequiers;
 
-	@OneToMany (mappedBy="compte", cascade=CascadeType.PERSIST)
+	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<Transaction> transactions;
 
 	@Transient

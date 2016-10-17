@@ -494,11 +494,11 @@ public class BAMDataFake implements BAMData {
 			Transaction t;
 			if (i % step == 0) {
 				step = 1 + rnd.nextInt(9);
-				t = new Debit(null, BAMTools.addToCalendar(new Date(), 
+				t = new Debit(BAMTools.addToCalendar(new Date(), 
 						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)),
 						-1-rnd.nextInt(100));
 			} else {
-				t = new Credit(null, BAMTools.addToCalendar(new Date(), 
+				t = new Credit(BAMTools.addToCalendar(new Date(), 
 						-rnd.nextInt(2), -rnd.nextInt(13), -rnd.nextInt(31)),
 						100+rnd.nextInt(200));
 			}

@@ -7,13 +7,22 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 //@DiscriminatorValue (Personne.TYPE_EMPLOYE+"")
 //@Table (name="Employe")
 public class Employe extends Personne {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	@Column (nullable=false)
 	private Date dateEntree;
@@ -22,10 +31,10 @@ public class Employe extends Personne {
 	@Column (nullable=false)
 	private ArrayList<String> fonctions;
 
-	@OneToMany (mappedBy="conseiller", cascade=CascadeType.PERSIST)
+	@OneToMany (mappedBy="conseiller", cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<Client> clients; 
 
-	@OneToMany (mappedBy="employe", cascade=CascadeType.PERSIST)
+	@OneToMany (mappedBy="employe", cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<EmployeNotification> notifications; //(Not in constructor ?)
 
 	public Employe() {
@@ -70,11 +79,13 @@ public class Employe extends Personne {
 		}
 		return false;
 	}
-
+	
+	@JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
 	public Date getDateEntree() {
 		return dateEntree;
 	}
-
+    
+	@JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
 	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
 	}
