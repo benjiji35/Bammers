@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,9 @@ import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.event.BAMListener;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @Entity
 public class Compte implements Cloneable {
@@ -40,13 +44,13 @@ public class Compte implements Cloneable {
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private Long numCpt;
 
-	@OneToMany (mappedBy="compte")
+	@OneToMany (mappedBy="compte", cascade=CascadeType.PERSIST)
 	private List<CompteNotification> notifications;
 
-	@OneToMany (mappedBy="compte")
+	@OneToMany (mappedBy="compte", cascade=CascadeType.PERSIST)
 	private List<CommandeChequier> chequiers;
 
-	@OneToMany (mappedBy="compte")
+	@OneToMany (mappedBy="compte", cascade=CascadeType.PERSIST)
 	private List<Transaction> transactions;
 
 	@Transient
@@ -127,6 +131,7 @@ public class Compte implements Cloneable {
         }
 	}
 
+	@JsonIgnore
 	public List<Transaction> getTransactions() {
 		return transactions;
 	}
@@ -143,6 +148,8 @@ public class Compte implements Cloneable {
 		this.numCpt = numCpt;
 	}
 
+	//@JsonGetter
+	@JsonIgnore
 	public List<CompteNotification> getNotifications() {
 		return notifications;
 	}
@@ -159,6 +166,7 @@ public class Compte implements Cloneable {
 		notifications.remove(ntf);
 	}
 
+	@JsonIgnore
 	public List<CommandeChequier> getChequiers() {
 		return chequiers;
 	}

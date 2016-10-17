@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -21,10 +22,10 @@ public class Employe extends Personne {
 	@Column (nullable=false)
 	private ArrayList<String> fonctions;
 
-	@OneToMany (mappedBy="conseiller")
+	@OneToMany (mappedBy="conseiller", cascade=CascadeType.PERSIST)
 	private List<Client> clients; 
 
-	@OneToMany (mappedBy="employe")
+	@OneToMany (mappedBy="employe", cascade=CascadeType.PERSIST)
 	private List<EmployeNotification> notifications; //(Not in constructor ?)
 
 	public Employe() {

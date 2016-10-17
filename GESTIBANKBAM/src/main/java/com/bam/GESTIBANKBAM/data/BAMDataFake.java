@@ -38,16 +38,16 @@ public class BAMDataFake implements BAMData {
 
 	static {
 		try {
-			System.out.println("BAMData:: DEBUT creation personnes, clients, conseillers et admins...");
+//			System.out.println("BAMData:: DEBUT creation personnes, clients, conseillers et admins...");
 			bd = new BAMDataFake(null);
-			File fa = new File ("d:\\bamdatafake-admins.txt");
-			File fadm = new File ("d:\\bamdatafake-admins.txt");
-			File fagt = new File ("d:\\bamdatafake-conseillers.txt");
-			File fclt = new File ("d:\\bamdatafake-clients.txt");
-			BAMTools.print(fadm, bd.getAdmins(), ">>> Admins:");
-			BAMTools.print(fagt, bd.getConseillers(), ">>> Conseillers:");
-			BAMTools.print(fclt, bd.getClients(), ">>> Clients:");
-			System.out.println("BAMData:: FIN >>> creation personnes, clients, conseillers et admins...");
+//			File fa = new File ("d:\\bamdatafake-admins.txt");
+//			File fadm = new File ("d:\\bamdatafake-admins.txt");
+//			File fagt = new File ("d:\\bamdatafake-conseillers.txt");
+//			File fclt = new File ("d:\\bamdatafake-clients.txt");
+//			BAMTools.print(fadm, bd.getAdmins(), ">>> Admins:");
+//			BAMTools.print(fagt, bd.getConseillers(), ">>> Conseillers:");
+//			BAMTools.print(fclt, bd.getClients(), ">>> Clients:");
+//			System.out.println("BAMData:: FIN >>> creation personnes, clients, conseillers et admins...");
 		} catch (ParseException pe) {
 			pe.printStackTrace(System.err);
 			throw new ExceptionInInitializerError(pe);
