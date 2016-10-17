@@ -253,10 +253,13 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
         }]);
 
 //rootCtrl
-app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService',
-    function($scope, $location,ClientMdpService) {
-       	var d =sessionStorage.getItem("pers");
-       	var pers = JSON.parse(d);
+app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window',
+    function($scope, $location,ClientMdpService, $window) {
+		var d = null;
+		var pers = null;
+       	d =sessionStorage.getItem("pers");
+       	pers = JSON.parse(d);
+       	if(pers!=null){
        	$scope.util=pers;
        		console.log(pers);
 		console.log("rootCtrl::");
@@ -267,7 +270,9 @@ app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService',
 			console.log($scope.news);
 		}, function(errResponse) {
 			console.error('Error while fetching Users');
-		});
+		});}else{
+			$window.location = 'index.html#';
+		}
     }]);
 
 app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
