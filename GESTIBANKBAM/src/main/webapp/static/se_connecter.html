@@ -57,6 +57,9 @@
 	<div id="formulaire">
 	<form ng-controller="connectCtrl" >
 		<legend>BIENVENUE SUR L'ESPACE DE CONNEXION</legend>
+			<h3 ng-show="con==false"><font color="red"><b>
+			Erreur de mot de passe ou d'identifiant
+		</b></font></h3>
 		<p>
 			<label for="n1"><h4>1. Saisissez votre identifiant</h4></label>
 			<div id="Identifiant">
@@ -72,7 +75,7 @@
 			<div id=MotdePasse>
 				<input ng-model="mdp" placeholder="Mot de passe" class= "form-inline" type="password" name="password"  required> &nbsp; &nbsp; &nbsp; &nbsp;
 				<a href="url">Mot de passe oublié?</a><br><br>
-				<button type="button" class="btn btn-danger  btn-xs">Effacer</button>
+				<button type="button" class="btn btn-danger  btn-xs" ng-click="mdp=null">Effacer</button>
 			</div>
 		</p>
 		<br>

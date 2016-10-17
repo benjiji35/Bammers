@@ -91,7 +91,7 @@
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="cp">Code Postal : </label>
 	    <div class="col-sm-3">
-	      <input type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.codePostal" required>
+	      <input type="number" min="0"  max="99999" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="client.adresse.codePostal" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -120,7 +120,7 @@
 		<div class="form-group">
 	    <label class="control-label col-sm-2" for="enfants">Nombre d'enfants : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants" ng-model="client.enfants" required>
+	      <input type="number" min="0" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants" ng-model="client.enfants" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -132,7 +132,7 @@
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="revenus">Vos revenus mensuels : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="revenus" placeholder="Entrez vos revenus mensuels" ng-model="client.salaire" required>
+	      <input type="number" min="0" class="form-control" id="revenus" placeholder="Entrez vos revenus mensuels" ng-model="client.salaire" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -155,7 +155,7 @@
   		</div>
 		<div class="form-group">        
 		  <div class="col-sm-offset-2 col-sm-10">
-		    <button type="submit" class="btn btn-default">Valider ma demande</button>
+		    <button type="submit" class="btn btn-default"ng-disabled="myForm.$invalid">Valider ma demande</button>
 		  </div>
 		</div>
 	  </form>
