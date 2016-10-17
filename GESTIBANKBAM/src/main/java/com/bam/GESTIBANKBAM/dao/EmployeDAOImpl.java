@@ -11,11 +11,11 @@ import com.bam.GESTIBANKBAM.model.Employe;
 import com.bam.GESTIBANKBAM.model.Personne;
 
 @Repository("employeDAO")
-public class EmployeDAOImpl extends AbstractDAO<String, Employe> implements EmployeDAO {
+public class EmployeDAOImpl extends AbstractDAO<Long, Employe> implements EmployeDAO {
 
 	@Override
 	public Employe findById(Long id) {
-		return findById(id);
+		return super.getByKey(id);
 	}
 
 	@Override
