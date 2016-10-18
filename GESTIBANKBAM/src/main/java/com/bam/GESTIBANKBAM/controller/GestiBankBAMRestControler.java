@@ -303,4 +303,25 @@ public class GestiBankBAMRestControler {
 		System.out.println("Client founded :" + employe.toString());
 		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
 	}
+	// -------------------Create a Conseiller--------------------------------------------------------
+
+		@RequestMapping(value = "/conseiller/", method = RequestMethod.POST)
+		public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsBuilder ucBuilder) {
+			System.out.println("Creating Cons " + cons.getNom() + " - " + cons.getPrenom());
+
+			if (employeService.isExists(cons)) {
+				System.out.println("A Client with name " + cons.getNom() + " " + cons.getPrenom() + " already exist");
+				return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			}
+			else {
+				employeService.save(cons);
+				System.out.println(">>> " + cons);
+			}
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(ucBuilder.path("/conseiller/{id}").buildAndExpand(cons.getId()).toUri());
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
+	
 }
+
