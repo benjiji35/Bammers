@@ -81,6 +81,26 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
                        			});
                        		} ]);
 
+app.controller('compteCtrl', [ '$scope', '$location', 'ClientIdService',
+                          		'$routeParams',
+                          		function($scope, $location, ClientIdService, $routeParams) {
+									console.log("test");
+                          			ClientIdService.searchClient($routeParams.id).then(function(d) {
+                          				self.user = d;
+                          				var cpt = $routeParams.cpt;
+                          				var compte = user.compte;
+                          				angular.forEach(compte, function(compte, key){
+                          					console.log(user);
+                          			      if(compte.numCpt==cpt)
+                          			         console.log("username is thomas");
+                          			   });
+                          				$scope.user = d;
+                          				
+                          			}, function(errResponse) {
+                          				console.error('Error while fetching Users');
+                          			});
+                          		} ]);
+
 app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService',
                           		'$routeParams',
                           		function($scope, $location, EmployeService, $routeParams) {
@@ -283,6 +303,17 @@ app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
       console.log(client);
       ClientService.createClient(client);
     };
+
+}]);
+
+app.controller('newConsCtrl', ['$scope', '$location', 'EmployeService',
+                             function($scope, $location, EmployeService) {
+	$scope.cons = {};
+
+   $scope.submit = function(cons) {
+     console.log("test");
+     EmployeService.createCons(cons);
+   };
 
 }]);
 app.controller(
