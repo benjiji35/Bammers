@@ -59,7 +59,7 @@ public class GestiBankBAMRestControler {
 	@RequestMapping(value = "/client/", method = RequestMethod.GET)
 	public ResponseEntity<List<Client>> listAllClients() {
 		List<Client> clients = clientService.findAll();
-		if (clients.isEmpty()) {
+		if (clients == null || clients.isEmpty()) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
 
@@ -70,16 +70,18 @@ public class GestiBankBAMRestControler {
 	@RequestMapping(value = "/mdpClient/", method = RequestMethod.GET)
 	public ResponseEntity<List<Client>> listMdpClient() {
 		List<Client> clients = clientService.findAll();
-		if (clients.isEmpty()) {
+		if (clients == null || clients.isEmpty()) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
 
 		List<Client> clientsSansMdp = new ArrayList<>();
 		for (Client c : clients) {
 			if (c.getHashMdp() == null) {
-				if (c.getConseiller() != null)
+				//if (c.getConseiller() != null)
+				if (clientService.getConseiller(c) == null) {
 					// System.out.println(c);
 					clientsSansMdp.add(c);
+				}
 			}
 		}
 
@@ -90,14 +92,15 @@ public class GestiBankBAMRestControler {
 	@RequestMapping(value = "/newClient/", method = RequestMethod.GET)
 	public ResponseEntity<List<Client>> listNewClient() {
 		System.out.println("test");
-		List<Client> client = clientService.findAll();
+		List<Client> clients = clientService.findAll();
 
-		if (client.isEmpty()) {
+		if (clients == null || clients.isEmpty()) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
 		List<Client> clientsSansConseiller = new ArrayList<>();
-		for (Client c : client) {
-			if (c.getConseiller() == null) {
+		for (Client c : clients) {
+			//if (c.getConseiller() == null) {
+			if (clientService.getConseiller(c) == null) {
 				// System.out.println(c);
 				clientsSansConseiller.add(c);
 			}
@@ -147,7 +150,8 @@ public class GestiBankBAMRestControler {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
 
-		if (client.getConseiller() == null) {
+		//if (client.getConseiller() == null) {
+		if (clientService.getConseiller(client) == null) {
 			clientService.save(client);
 			System.out.println(">>> " + client);
 		}
@@ -177,7 +181,6 @@ public class GestiBankBAMRestControler {
 		currentClient.setDdn(client.getDdn());
 		currentClient.setHashMdp(client.getHashMdp());
 		currentClient.setAdresse(client.getAdresse());
-		currentClient.setConseiller(client.getConseiller());
 		System.out.println("client::" + currentClient);
 
 		clientService.update(currentClient);
@@ -207,7 +210,6 @@ public class GestiBankBAMRestControler {
 			currentClient.setHashMdp(password);
 		}
 		currentClient.setAdresse(client.getAdresse());
-		currentClient.setConseiller(client.getConseiller());
 		System.out.println("client::" + currentClient);
 
 		clientService.update(currentClient);

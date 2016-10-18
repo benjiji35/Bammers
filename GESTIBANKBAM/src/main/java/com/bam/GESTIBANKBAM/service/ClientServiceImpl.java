@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bam.GESTIBANKBAM.dao.ClientDAO;
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Employe;
 
 @Service("clientService")
 public class ClientServiceImpl implements ClientService {
@@ -31,28 +32,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public List<Client> findByAdresse(Adresse adr) {
-		return clientDAO.findByAdresse(adr);
-	}
-
-	@Override
 	public List<Client> findByNomAndPrenom(String nom, String prenom) {
 		return clientDAO.findByNomAndPrenom(nom, prenom);
-	}
-
-	@Override
-	public List<Client> findByNomAndAdresse(String nom, Adresse adr) {
-		return clientDAO.findByNomAndAdresse(nom, adr);
-	}
-
-	@Override
-	public List<Client> findByPrenomAndAdresse(String prenom, Adresse adr) {
-		return clientDAO.findByPrenomAndAdresse(prenom, adr);
-	}
-
-	@Override
-	public List<Client> findByNomAndPrenomAndAdresse(String nom, String prenom, Adresse adr) {
-		return clientDAO.findByNomAndPrenomAndAdresse(nom, prenom, adr);
 	}
 
 	@Override
@@ -73,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public List<Client> findAll() {
-		return clientDAO.findAll(null);
+		return clientDAO.findAll();
 	}
 
 	@Override
@@ -89,6 +70,12 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public List<Client> findByNomAndPrenomAndCompte(String nom, String prenom, String cpte) {
 		return clientDAO.findByNomAndPrenomAndCompte(nom, prenom, cpte);
+	}
+
+	@Override
+	public Employe getConseiller(Client clt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //

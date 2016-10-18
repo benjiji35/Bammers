@@ -157,7 +157,6 @@ public class BAMDataFake implements BAMData {
 			idx = rnd.nextInt(conseillers.size());
 			Employe emp = conseillers.get(idx);
 			emp.addClient(clt);
-			clt.setConseiller(emp);
 		}
 	}
 
@@ -209,7 +208,6 @@ public class BAMDataFake implements BAMData {
 			idx = rnd.nextInt(conseillers.size());
 			emp = conseillers.get(idx);
 			emp.addClient(clt);
-			clt.setConseiller(emp);
 		}
 	}
 
@@ -408,13 +406,10 @@ public class BAMDataFake implements BAMData {
 		int year = 20 + rnd.nextInt(20);
 		int month =  1 + rnd.nextInt(12);
 		int days = 1 + rnd.nextInt(28);
-		ArrayList<String> fcts = new ArrayList<String>(); 
 
-		fcts.add("conseiller");
-		fcts.add("banquier");
 		c.setType(Personne.ROLE_CONSEILLER);
 		c.setDateEntree(BAMTools.addToCalendar(c.getDdn(), year, month, days));
-		c.setFonctions(fcts);
+		c.setFonctions("conseiller");
 		System.out.println("creation conseiller="+c);
 		return c;
 	}
@@ -450,7 +445,6 @@ public class BAMDataFake implements BAMData {
 
 	private Employe createNewAdmin(Personne p) {
 		Employe adm = new Employe(p);
-		ArrayList<String> fcts = new ArrayList<String>();
 		Random rnd = new Random();
 		int year   = 30 + rnd.nextInt(20);
 		int month  = 1  + rnd.nextInt(12);
@@ -458,10 +452,9 @@ public class BAMDataFake implements BAMData {
 
 		adm.setType(Personne.ROLE_ADMIN); 
 
-		fcts.add("administrateur");
-		fcts.add("banquier");
+
 		adm.setDateEntree(BAMTools.addToCalendar(adm.getDdn(), year, month, day));
-		adm.setFonctions(fcts);
+		adm.setFonctions("administrateur");
 		System.out.println("creation admin="+adm);
 		return adm;
 	}
@@ -514,7 +507,7 @@ public class BAMDataFake implements BAMData {
 		final int n = 1 + rnd.nextInt(10);
 
 		for (int i=0; i < n; i++) {
-			CommandeChequier cc = new CommandeChequier(c, 
+			CommandeChequier cc = new CommandeChequier(
 					1+rnd.nextInt(3),
 					Long.parseLong(c.getNumCpt()+""+id+""+(i+1)));
 			cc.commander();

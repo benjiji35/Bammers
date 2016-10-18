@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
@@ -11,6 +12,7 @@ import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
 
 @Entity
+@Table (name="Decouvert")
 public class Decouvert extends Transaction {
 
 	/**
@@ -68,59 +70,6 @@ public class Decouvert extends Transaction {
 
 	public void setTaux(double taux) {
 		this.taux = taux;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Decouvert [getMontant=");
-		builder.append(getMontant());
-		builder.append(", getAgios=");
-		builder.append(getAgios());
-		builder.append(", getTaux=");
-		builder.append(getTaux());
-		builder.append(", hashCode=");
-		builder.append(hashCode());
-		builder.append(", isSealed=");
-		builder.append(isSealed());
-		builder.append(", getId=");
-		builder.append(getId());
-		builder.append(", getDateDebut=");
-		builder.append(getDateDebut());
-		builder.append(", getDateFin=");
-		builder.append(getDateFin());
-		builder.append(", toString=");
-		builder.append(super.toString());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(agios);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(taux);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof Decouvert))
-			return false;
-		Decouvert other = (Decouvert) obj;
-		if (Double.doubleToLongBits(agios) != Double.doubleToLongBits(other.agios))
-			return false;
-		if (Double.doubleToLongBits(taux) != Double.doubleToLongBits(other.taux))
-			return false;
-		return true;
 	}
 
 }

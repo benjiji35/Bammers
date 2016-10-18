@@ -11,17 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Inheritance (strategy=InheritanceType.JOINED)
 //@DiscriminatorColumn(name="ZZTYPE", discriminatorType=DiscriminatorType.INTEGER)
-//@Table (name="Personne")
+@Table (name="Personne")
 public class Personne implements Cloneable, Serializable {
+
+
 	/**
 	 * 
 	 */
@@ -68,6 +70,7 @@ public class Personne implements Cloneable, Serializable {
 
 	@NotNull
 	@Column (nullable=false)
+	@Temporal (TemporalType.DATE)
 	private Date ddn;
 
 	@NotNull
@@ -170,12 +173,12 @@ public class Personne implements Cloneable, Serializable {
 		this.prenom = prenom;
 	}
 	
-    @JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
+    //@JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
 	public Date getDdn() {
 		return ddn;
 	}
     
-    @JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
+    //@JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
 	public void setDdn(Date ddn) {
 		this.ddn = ddn;
 	}
@@ -302,132 +305,6 @@ public class Personne implements Cloneable, Serializable {
 		setAdresse(a);
 	}
 
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Personne [getCivilite()=");
-		builder.append(getCivilite());
-		builder.append(", getNom()=");
-		builder.append(getNom());
-		builder.append(", getPrenom()=");
-		builder.append(getPrenom());
-		builder.append(", getDdn()=");
-		builder.append(getDdn());
-		builder.append(", getType()=");
-		builder.append(getType());
-		builder.append(", getId()=");
-		builder.append(getId());
-		builder.append(", getHashMdp()=");
-		builder.append(getHashMdp());
-		builder.append(", getAdresse()=");
-		builder.append(getAdresse());
-		builder.append(", getNumero()=");
-		builder.append(getNumero());
-		builder.append(", getRue()=");
-		builder.append(getRue());
-		builder.append(", getVille()=");
-		builder.append(getVille());
-		builder.append(", getCodePostal()=");
-		builder.append(getCodePostal());
-		builder.append(", getTelephone()=");
-		builder.append(getTelephone());
-		builder.append(", getMail()=");
-		builder.append(getMail());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", getSituationMatrimoniale()=");
-		builder.append(getSituationMatrimoniale());
-		builder.append(", getNbEnfants()=");
-		builder.append(getNbEnfants());
-		builder.append(", getIncome()=");
-		builder.append(getIncome());
-		builder.append(", getProfession()=");
-		builder.append(getProfession());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result + ((civilite == null) ? 0 : civilite.hashCode());
-		result = prime * result + ((ddn == null) ? 0 : ddn.hashCode());
-		result = prime * result + ((hashMdp == null) ? 0 : hashMdp.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(income);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + nbEnfants;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((profession == null) ? 0 : profession.hashCode());
-		result = prime * result + ((situationMatrimoniale == null) ? 0 : situationMatrimoniale.hashCode());
-		result = prime * result + type;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Personne))
-			return false;
-		Personne other = (Personne) obj;
-		if (adresse == null) {
-			if (other.adresse != null)
-				return false;
-		} else if (!adresse.equals(other.adresse))
-			return false;
-		if (civilite == null) {
-			if (other.civilite != null)
-				return false;
-		} else if (!civilite.equals(other.civilite))
-			return false;
-		if (ddn == null) {
-			if (other.ddn != null)
-				return false;
-		} else if (!ddn.equals(other.ddn))
-			return false;
-		if (hashMdp == null) {
-			if (other.hashMdp != null)
-				return false;
-		} else if (!hashMdp.equals(other.hashMdp))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (Double.doubleToLongBits(income) != Double.doubleToLongBits(other.income))
-			return false;
-		if (nbEnfants != other.nbEnfants)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (prenom == null) {
-			if (other.prenom != null)
-				return false;
-		} else if (!prenom.equals(other.prenom))
-			return false;
-		if (profession == null) {
-			if (other.profession != null)
-				return false;
-		} else if (!profession.equals(other.profession))
-			return false;
-		if (situationMatrimoniale != other.situationMatrimoniale)
-			return false;
-		if (type != other.type)
-			return false;
-		return true;
-	}
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
@@ -11,6 +12,7 @@ import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
 
 @Entity
+@Table (name="Remuneration")
 public class Remuneration extends Transaction {
 
 	/**
@@ -96,62 +98,5 @@ public class Remuneration extends Transaction {
 
 	public void setTaux(double taux) {
 		this.taux = taux;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Remuneration [getTaux=");
-		builder.append(getTaux());
-		builder.append(", getMontant=");
-		builder.append(getMontant());
-		builder.append(", getDelta=");
-		builder.append(getDelta());
-		builder.append(", getSeuilMin=");
-		builder.append(getSeuilMin());
-		builder.append(", hashCode=");
-		builder.append(hashCode());
-		builder.append(", isSealed=");
-		builder.append(isSealed());
-		builder.append(", getId=");
-		builder.append(getId());
-		builder.append(", getDateDebut=");
-		builder.append(getDateDebut());
-		builder.append(", getDateFin=");
-		builder.append(getDateFin());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(delta);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(seuilMin);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(taux);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof Remuneration))
-			return false;
-		Remuneration other = (Remuneration) obj;
-		if (Double.doubleToLongBits(delta) != Double.doubleToLongBits(other.delta))
-			return false;
-		if (Double.doubleToLongBits(seuilMin) != Double.doubleToLongBits(other.seuilMin))
-			return false;
-		if (Double.doubleToLongBits(taux) != Double.doubleToLongBits(other.taux))
-			return false;
-		return true;
 	}
 }

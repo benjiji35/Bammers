@@ -10,11 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 //@MappedSuperclass
 @Entity
 @Inheritance (strategy=InheritanceType.TABLE_PER_CLASS)
+@Table (name="Notification")
 public abstract class Notification implements Serializable {
 	/**
 	 * 
@@ -32,6 +36,7 @@ public abstract class Notification implements Serializable {
 
 	@NotNull
 	@Column (nullable=false)
+	@Temporal (TemporalType.DATE)
 	private Date date;
 
 	public Notification() {
@@ -52,55 +57,11 @@ public abstract class Notification implements Serializable {
 		this.message = message;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Notification))
-			return false;
-		Notification other = (Notification) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (message == null) {
-			if (other.message != null)
-				return false;
-		} else if (!message.equals(other.message))
-			return false;
-		return true;
-	}
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
 	public Date getDate() {
 		return date;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Notification [getMessage()=");
-		builder.append(getMessage());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", getDate()=");
-		builder.append(getDate());
-		builder.append("]");
-		return builder.toString();
 	}
 }

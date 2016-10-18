@@ -10,7 +10,7 @@ import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Personne;
 
 @Service("personneService")
-public class PersonneServiceImpl implements PersonneService<Personne> {
+public class PersonneServiceImpl implements PersonneService {
 	
 	@Autowired
 	private PersonneDAO personneDAO;
@@ -56,18 +56,8 @@ public class PersonneServiceImpl implements PersonneService<Personne> {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		personneDAO.deleteById(id);
-	}
-
-	@Override
 	public List<Personne> findAll() {
 		return personneDAO.findAll(null);
-	}
-
-	@Override
-	public void deleteAll() {
-		personneDAO.deleteAll();
 	}
 
 	@Override
@@ -77,12 +67,25 @@ public class PersonneServiceImpl implements PersonneService<Personne> {
 
 	@Override
 	public void update(Personne prs) {
-		// TODO VERIF
-		personneDAO.save(prs);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public boolean isExists(Personne prs) {
-		return personneDAO.isExists(prs);
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -9,15 +9,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 //@DiscriminatorValue (Personne.TYPE_EMPLOYE+"")
-//@Table (name="Employe")
+@Table (name="Employe")
 public class Employe extends Personne {
+
 	/**
 	 * 
 	 */
@@ -25,16 +26,15 @@ public class Employe extends Personne {
 
 	@NotNull
 	@Column (nullable=false)
+	@Temporal (TemporalType.DATE)
 	private Date dateEntree;
 
-	@NotNull
-	@Column (nullable=false)
-	private ArrayList<String> fonctions;
+	private String fonctions;
 
-	@OneToMany (mappedBy="conseiller", cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<Client> clients; 
 
-	@OneToMany (mappedBy="employe", cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<EmployeNotification> notifications; //(Not in constructor ?)
 
 	public Employe() {
@@ -42,7 +42,7 @@ public class Employe extends Personne {
 		configure();
 	}
 
-	public Employe(String matricule, Date dateEntree, ArrayList<String> fonctions,
+	public Employe(String matricule, Date dateEntree, String fonctions,
 			ArrayList<EmployeNotification> notifications) {
 		this();
 		this.dateEntree = dateEntree;
@@ -69,7 +69,7 @@ public class Employe extends Personne {
 		if (getType() == Personne.ROLE_CONSEILLER) {
 			clients = new ArrayList<Client>();
 		}
-		fonctions = new ArrayList<String>();
+		fonctions = "";
 	}
 
 	public boolean addClient(Client c) {
@@ -80,21 +80,21 @@ public class Employe extends Personne {
 		return false;
 	}
 	
-	@JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
+	//@JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
 	public Date getDateEntree() {
 		return dateEntree;
 	}
     
-	@JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
+	//@JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
 	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
 	}
 
-	public ArrayList<String> getFonctions() {
+	public String getFonctions() {
 		return fonctions;
 	}
 
-	public void setFonctions(ArrayList<String> fonctions) {
+	public void setFonctions(String fonctions) {
 		this.fonctions = fonctions;
 	}
 
@@ -130,115 +130,6 @@ public class Employe extends Personne {
 
 	public void setAdmin() {
 		this.setType(ROLE_ADMIN);
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Employe [getDateEntree()=");
-		builder.append(getDateEntree());
-		builder.append(", getFonctions()=");
-		builder.append(getFonctions());
-		builder.append(", getNotifications()=");
-		builder.append(getNotifications());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", getClients()=");
-		builder.append(getClients());
-		builder.append(", getCivilite()=");
-		builder.append(getCivilite());
-		builder.append(", getNom()=");
-		builder.append(getNom());
-		builder.append(", getPrenom()=");
-		builder.append(getPrenom());
-		builder.append(", getDdn()=");
-		builder.append(getDdn());
-		builder.append(", getType()=");
-		builder.append(getType());
-		builder.append(", getId()=");
-		builder.append(getId());
-		builder.append(", getHashMdp()=");
-		builder.append(getHashMdp());
-		builder.append(", getAdresse()=");
-		builder.append(getAdresse());
-		builder.append(", getNumero()=");
-		builder.append(getNumero());
-		builder.append(", getRue()=");
-		builder.append(getRue());
-		builder.append(", getVille()=");
-		builder.append(getVille());
-		builder.append(", getCodePostal()=");
-		builder.append(getCodePostal());
-		builder.append(", getTelephone()=");
-		builder.append(getTelephone());
-		builder.append(", getMail()=");
-		builder.append(getMail());
-		builder.append(", toString()=");
-		builder.append(super.toString());
-		builder.append(", getSituationMatrimoniale()=");
-		builder.append(getSituationMatrimoniale());
-		builder.append(", getNbEnfants()=");
-		builder.append(getNbEnfants());
-		builder.append(", getIncome()=");
-		builder.append(getIncome());
-		builder.append(", getProfession()=");
-		builder.append(getProfession());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((clients == null) ? 0 : clients.hashCode());
-		result = prime * result + ((dateEntree == null) ? 0 : dateEntree.hashCode());
-		result = prime * result + ((fonctions == null) ? 0 : fonctions.hashCode());
-		result = prime * result + ((notifications == null) ? 0 : notifications.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (!(obj instanceof Employe)) {
-			return false;
-		}
-		Employe other = (Employe) obj;
-		if (clients == null) {
-			if (other.clients != null) {
-				return false;
-			}
-		} else if (!clients.equals(other.clients)) {
-			return false;
-		}
-		if (dateEntree == null) {
-			if (other.dateEntree != null) {
-				return false;
-			}
-		} else if (!dateEntree.equals(other.dateEntree)) {
-			return false;
-		}
-		if (fonctions == null) {
-			if (other.fonctions != null) {
-				return false;
-			}
-		} else if (!fonctions.equals(other.fonctions)) {
-			return false;
-		}
-		if (notifications == null) {
-			if (other.notifications != null) {
-				return false;
-			}
-		} else if (!notifications.equals(other.notifications)) {
-			return false;
-		}
-		return true;
 	}
 
 	public List<Client> getClients() {

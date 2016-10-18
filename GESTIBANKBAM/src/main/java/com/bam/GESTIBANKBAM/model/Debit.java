@@ -3,11 +3,13 @@ package com.bam.GESTIBANKBAM.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.util.BAMException;
 
 @Entity
+@Table (name="Debit")
 public class Debit extends Transaction {
 	/**
 	 * 

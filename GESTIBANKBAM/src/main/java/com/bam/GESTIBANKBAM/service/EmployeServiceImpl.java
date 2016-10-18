@@ -35,26 +35,6 @@ public class EmployeServiceImpl implements EmployeService {
 	}
 
 	@Override
-	public List<Employe> findByAdresse(Adresse adr) {
-		return employeDAO.findByAdresse(adr);
-	}
-
-	@Override
-	public List<Employe> findByNomAndAdresse(String nom, Adresse adr) {
-		return employeDAO.findByNomAndAdresse(nom, adr);
-	}
-
-	@Override
-	public List<Employe> findByPrenomAndAdresse(String prenom, Adresse adr) {
-		return employeDAO.findByPrenomAndAdresse(prenom, adr);
-	}
-
-	@Override
-	public List<Employe> findByNomAndPrenomAndAdresse(String nom, String prenom, Adresse adr) {
-		return employeDAO.findByNomAndPrenomAndAdresse(nom, prenom, adr);
-	}
-
-	@Override
 	public void save(Employe prs) {
 		employeDAO.save(prs);
 	}
@@ -72,7 +52,7 @@ public class EmployeServiceImpl implements EmployeService {
 
 	@Override
 	public List<Employe> findAll() {
-		return employeDAO.findAll(null);
+		return employeDAO.findAll();
 	}
 
 	@Override

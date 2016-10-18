@@ -10,7 +10,7 @@ import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Personne;
 
 @Repository ("personneDAO")
-public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements PersonneDAO<Personne> {
+public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements PersonneDAO {
 
 	@Override
 	public Personne findById(Long id) {
@@ -87,6 +87,7 @@ public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements Pers
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Personne> findAll(Object ref) {
 		List<Personne> ma_liste = (List<Personne>)getEntityManager()
