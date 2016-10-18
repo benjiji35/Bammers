@@ -17,6 +17,7 @@ public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements Pers
 		return getByKey(id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Personne> findByNom(String nom) {
 		try {
@@ -30,6 +31,7 @@ public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements Pers
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Personne> findByPrenom(String prenom) {
 		try {
@@ -48,6 +50,7 @@ public class PersonneDAOImpl extends AbstractDAO<Long, Personne> implements Pers
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Personne> findByNomAndPrenom(String nom, String prenom) {
 		try {

@@ -74,8 +74,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Employe getConseiller(Client clt) {
-		// TODO Auto-generated method stub
-		return null;
+		return clientDAO.getConseiller(clt);
 	}
 
 //

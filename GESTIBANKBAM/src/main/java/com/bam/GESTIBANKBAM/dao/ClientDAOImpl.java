@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Employe;
+import com.bam.GESTIBANKBAM.model.Personne;
 
 
 @Repository ("clientDAO")
@@ -81,5 +83,27 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 	@Override
 	public boolean isExists(Client clt) {
 		return findById(clt.getId()) != null;
+	}
+
+	@Override
+	public Employe getConseiller(Client clt) {
+		List<Employe> conseillers = (List<Employe>) getEntityManager()
+				.createQuery("SELECT e FROM Employe e ")
+				.getResultList();
+		Employe agt = null;
+		List<Client> clts = null;
+		for (Employe e : conseillers) {
+			if (e.getType() == Personne.ROLE_CONSEILLER) {
+				clts = e.getClients();
+				for (Client c : clts) {
+					if (c.getId() == clt.getId()) {
+						agt = e;
+						return agt;
+					}
+				}
+			}
+		}
+		System.out.println(">>> OK");
+		return agt;
 	}
 }
