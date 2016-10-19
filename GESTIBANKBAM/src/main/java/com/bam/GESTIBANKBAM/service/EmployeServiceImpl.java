@@ -2,6 +2,8 @@ package com.bam.GESTIBANKBAM.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Employe;
 
 @Service("employeService")
+@Transactional
 public class EmployeServiceImpl implements EmployeService {
 	@Autowired
 	private EmployeDAO employeDAO;

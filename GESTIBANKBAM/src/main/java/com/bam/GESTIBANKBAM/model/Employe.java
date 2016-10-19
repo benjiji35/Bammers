@@ -31,10 +31,10 @@ public class Employe extends Personne {
 
 	private String fonctions;
 
-	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@OneToMany (cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private List<Client> clients; 
 
-	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@OneToMany (cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private List<EmployeNotification> notifications; //(Not in constructor ?)
 
 	public Employe() {
