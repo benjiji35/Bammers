@@ -312,5 +312,51 @@ HttpHeaders headers = new HttpHeaders();
 headers.setLocation(ucBuilder.path("/notif/").buildAndExpand(pub.getMessage()).toUri());
 return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 }
+// -------------------Create a Conseiller--------------------------------------------------------
+
+@RequestMapping(value = "/conseiller/", method = RequestMethod.POST)
+public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsBuilder ucBuilder) {
+	System.out.println("Creating Cons " + cons.getNom() + " - " + cons.getPrenom());
+	String password = BAMTools.genPassword(20);
+	cons.setHashMdp(password);
+
+	if (employeService.isExists(cons)) {
+		System.out.println("A Client with name " + cons.getNom() + " " + cons.getPrenom() + " already exist");
+		return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+	}
+	else {
+		employeService.save(cons);
+		System.out.println(">>> " + cons);
+	}
+
+	HttpHeaders headers = new HttpHeaders();
+	headers.setLocation(ucBuilder.path("/conseiller/{id}").buildAndExpand(cons.getId()).toUri());
+	return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+}
+
+//------------------- Update a Client --------------------------------------------------------
+
+	@RequestMapping(value = "/Client/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Client> updateClient(@PathVariable("id") Long id, @RequestBody Client client ) {
+		
+
+		Client currentClient = clientService.findById(id);
+		if (currentClient == null) {
+			System.out.println("Client with id " + id + " not found");
+			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+		}
+		System.out.println(">>> update client::::" + client);
+		currentClient.setCivilite(client.getCivilite());
+		currentClient.setNom(client.getNom());
+		currentClient.setPrenom(client.getPrenom());
+		System.out.println("client DDN::" + client.getDdn());
+		currentClient.setDdn(client.getDdn());
+		currentClient.setHashMdp(client.getHashMdp());
+		currentClient.setAdresse(client.getAdresse());
+		currentClient.setNbEnfants(client.getNbEnfants());
+		clientService.update(currentClient);;
+		System.out.println(">>> update client::" + currentClient);
+		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
+	}
 }
 

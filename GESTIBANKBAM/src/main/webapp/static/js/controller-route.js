@@ -81,6 +81,25 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
                                 });
                             } ]);
 
+app.controller('compteCtrl', [ '$scope', '$location', 'ClientIdService',
+                               '$routeParams',
+                               function($scope, $location, ClientIdService, $routeParams) {
+                                   console.log("hello id");
+                                   ClientIdService.searchClient($routeParams.id).then(function(d) {
+                                       self.user = d;
+                                       console.log("user est : " + user);
+                                       var comptes = user.comptes;
+                                       for (var int = 0; int < comptes.length; int++) {
+										if(cpt==comptes[int]) = comptes[int];
+										
+									}
+                                       $scope.user = d;
+                                       console.log($scope.user.comptes);
+                                   }, function(errResponse) {
+                                       console.error('Error while fetching Users');
+                                   });
+                               } ]);
+
 app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService',
                                 '$routeParams',
                                 function($scope, $location, EmployeService, $routeParams) {
