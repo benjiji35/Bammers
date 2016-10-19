@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
@@ -13,6 +14,7 @@ import com.bam.GESTIBANKBAM.utils.BAMTools;
 
 @Entity
 @Table (name="Remuneration")
+//@DiscriminatorValue (value=Remuneration.TYPE+"")
 public class Remuneration extends Transaction {
 
 	/**
@@ -20,10 +22,8 @@ public class Remuneration extends Transaction {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// the difference between the balance and the minimum threshold
-	@NotNull
-	@Column (nullable=false)
-	private double delta;
+	@Transient
+	public static final int TYPE = 8;
 
 	@NotNull
 	@Column (nullable=false)
@@ -33,10 +33,12 @@ public class Remuneration extends Transaction {
 	@Column (nullable=false)
 	private double taux;
 
+	public Remuneration() {
+		setType(TYPE);
+	}
 
-	public Remuneration(double delta, double seuil, double taux, Date dateDebut) throws BAMException {
-		super(dateDebut, null, 0);
-		this.delta = delta;
+	public Remuneration(double solde, double seuil, double taux, Date dateDebut) throws BAMException {
+		super(TYPE, dateDebut, null, solde, true);
 		this.seuilMin = seuil;
 		this.taux = taux;
 		dateDebut = new Date(dateDebut.getTime());
@@ -64,9 +66,15 @@ public class Remuneration extends Transaction {
 
 	@Override
 	public double getMontant() {
-		Date date = (isSealed()? getDateFin(): null);
+		double m = 0;
 
-		return getDelta() * BAMTools.getDiffInDays(date, getDateDebut()) * taux / 365;
+		if (isSealed()) {
+			Date date = getDateFin();
+			m = Math.abs((super.getMontant() - getSeuilMin()) * 
+					BAMTools.getDiffInDays(date, getDateDebut()) * taux / 365);
+		}
+
+		return m;
 	}
 
 	@Override
@@ -74,18 +82,25 @@ public class Remuneration extends Transaction {
 		if (isSealed()) {
 			return;
 		}
+		setDateFin(dateFin);
 	}
 
 	@Override
 	public void update(BAMEvent e) {
-	}
+		Object source = e.getSource();
+		Compte cpte   = (source instanceof Compte? (Compte)source: null);
+		double balance;
 
-	public double getDelta() {
-		return delta;
-	}
-
-	public void setDelta(double delta) {
-		this.delta = delta;
+		if (cpte != null) {
+			balance = cpte.getBalance();
+			if (balance < getSeuilMin()) {
+				try {
+					sealTransaction(new Date());
+				} catch (BAMException e1) {
+					e1.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 	public double getSeuilMin() {

@@ -466,7 +466,6 @@ public class BAMDataFake implements BAMData {
 
 		for (int i=0; i < n; i++) {
 			Compte c = new Compte(3000+rnd.nextInt(10000),
-					1200,
 					CompteType.AVEC_AUTORISATION,
 					Long.parseLong(id+""+(i+1)));
 			c.setTransactions(createDummyTransactions(id+"-tr-"+i));
@@ -481,7 +480,7 @@ public class BAMDataFake implements BAMData {
 		ArrayList<Transaction> trcts = new ArrayList<Transaction>();
 		Random rnd = new Random();
 		final int n = 1 + rnd.nextInt(100);
-		int step = 1 + rnd.nextInt(9);
+		int step    = 1 + rnd.nextInt(9);
 
 		for (int i=0; i<n; i++) {
 			Transaction t;

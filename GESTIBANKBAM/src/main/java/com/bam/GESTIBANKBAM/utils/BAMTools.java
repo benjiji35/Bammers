@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -105,10 +104,30 @@ public class BAMTools {
 		}	
 	}
 
-	public static List<String> genPassword(int qt) {
+	public static List<String> genPasswords(int passwordLength) {
 		//boolean lowercases, boolean uppercases, boolean arabicdigits, boolean hexa, boolean punct, int passwordLength
-		PasswordGenerator pg = new PasswordGenerator(true, true, true, true, true, qt);
+		PasswordGenerator pg = new PasswordGenerator(true, true, true, true, true, passwordLength);
 
-		return pg.next(qt);
+		return pg.next(passwordLength);
+	}
+
+	public static String getPassword(int passwordLength) {
+		List<String> list = genPasswords(passwordLength);
+
+		return list.get(0);
+	}
+
+	public static boolean isLastDayOfMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		int day;
+
+		cal.setTime(date);
+		day = cal.get(Calendar.DAY_OF_MONTH);
+		cal.set(Calendar.DAY_OF_MONTH, day+1);
+		return (cal.get(Calendar.DAY_OF_MONTH) < day);
+	}
+
+	public static boolean isLastDayOfMonth() {
+		return isLastDayOfMonth(new Date());
 	}
 }

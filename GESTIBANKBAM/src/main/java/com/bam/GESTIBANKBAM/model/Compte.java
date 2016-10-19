@@ -2,6 +2,7 @@ package com.bam.GESTIBANKBAM.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import javax.validation.constraints.NotNull;
 
 import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.event.BAMListener;
+import com.bam.GESTIBANKBAM.util.BAMException;
+import com.bam.GESTIBANKBAM.utils.BAMTools;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -37,11 +40,20 @@ public class Compte implements Cloneable, Serializable {
 
 	@NotNull
 	@Column (nullable=false)
-	private double solde;
+	private double tauxRemuneration;
 
 	@NotNull
 	@Column (nullable=false)
-	private double debit;
+	private double tauxDecouvert;
+
+	@NotNull
+	@Column (nullable=false)
+	// montantAutorisationDecouvert
+	private double montantAutorisationDecouvert;
+
+	@NotNull
+	@Column (nullable=false)
+	private double montantSeuilMinRemuneration;
 
 	@NotNull
 	@Column (nullable=false)
@@ -63,32 +75,38 @@ public class Compte implements Cloneable, Serializable {
 	@Transient
 	private List<BAMListener> listeners;
 
-	
+
+	private void setTaux() {
+		setTauxDecouvert(18/100);
+		setTauxRemuneration(2/100);
+	}
+
 	public Compte() {
 		this(CompteType.SANS_AUTORISATION);
+		setTaux();
 	}
 
 	public Compte(CompteType type) {
-		this(0, 0, type, null);
+		this(0, type, null);
 	}
 
-	public Compte(double solde, double debit, CompteType type, Long numCpt) {
-		this(solde, debit, type, numCpt, null, null, null);
+	public Compte(double debit, CompteType type, Long numCpt) {
+		this(debit, type, numCpt, null, null, null);
 		notifications = new ArrayList<CompteNotification>();
 		chequiers     = new ArrayList<CommandeChequier>();
 		transactions  = new ArrayList<Transaction>();
 	}
 
-	public Compte(double solde, double debit, CompteType type, Long numCpt, List<CompteNotification> notifications, ArrayList<CommandeChequier> chequiers,
+	public Compte(double debit, CompteType type, Long numCpt, List<CompteNotification> notifications, ArrayList<CommandeChequier> chequiers,
 			ArrayList<Transaction> transactions) {
-		this.solde = solde;
-		this.debit = debit;
+		this.montantAutorisationDecouvert = debit;
 		this.type = type;
 		this.numCpt = numCpt;
 		this.notifications = notifications;
 		this.chequiers = chequiers;
 		this.transactions = transactions;
 		this.listeners = new ArrayList<BAMListener>();
+		setTaux();
 		addBAMListener(new BAMListener() {
 			@Override
 			public void update(BAMEvent e) {
@@ -104,19 +122,27 @@ public class Compte implements Cloneable, Serializable {
 		return false;
 	}
 
-	public boolean addTransaction(Transaction t) {
+	public boolean addTransaction(Transaction t) throws Throwable {
+		boolean success = false;
+		double balance;
+		double mar     = getMontantSeuilMinRemuneration(); 
+
 		if (checkIt(t)) {
-			transactions.add(t);
-			solde += t.getMontant();
-			fireBAMEvent(new BAMEvent(this, t, BAMEvent.TYPE.NEW_TRANSACTION));
-			for (Transaction tt : transactions) {
-				if (! tt.isSealed()) {
-					// TODO
-				}
+			processTransaction(t);
+			balance = getBalance();
+			if (balance < 0) {
+				processTransaction(new Decouvert(balance, getTauxDecouvert(), new Date()));
+			} else if (balance >= mar) {
+				processTransaction(new Remuneration(balance, mar, getTauxRemuneration(), new Date()));
 			}
-			return true;
+			success = true;
 		}
-		return false;
+		return success;
+	}
+
+	private void processTransaction(Transaction t) {
+		transactions.add(t);
+		fireBAMEvent(new BAMEvent(this, t, BAMEvent.TYPE.NEW_TRANSACTION));
 	}
 
 	public void commanderChequier() {
@@ -124,11 +150,11 @@ public class Compte implements Cloneable, Serializable {
 	}
 
 	private boolean checkIt(Transaction t) {
-		return (t.getMontant() + getSolde() <= getDebit());
+		return (t.getMontant() + getBalance() <= getMontantAutorisationDecouvert());
 	}
 
-	public double getDebit() {
-		return debit;
+	public double getMontantAutorisationDecouvert() {
+		return montantAutorisationDecouvert;
 	}
 
 	protected void fireBAMEvent(BAMEvent bamEvent) {
@@ -138,13 +164,23 @@ public class Compte implements Cloneable, Serializable {
         }
 	}
 
-	@JsonIgnore
+	//@JsonIgnore
 	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
-	public double getSolde() {
-		return 0;
+	public double getBalance() {
+		double solde = 0;
+
+		for (Transaction t : getTransactions()) {
+			if (t.isWaitForMonthEnd()) {
+				if (BAMTools.isLastDayOfMonth() == false) {
+					continue;
+				}
+			}
+			solde += t.getMontant();
+		}
+		return solde;
 	}
 
 	public Long getNumCpt() {
@@ -156,7 +192,7 @@ public class Compte implements Cloneable, Serializable {
 	}
 
 	//@JsonGetter
-	@JsonIgnore
+	//@JsonIgnore
 	public List<CompteNotification> getNotifications() {
 		return notifications;
 	}
@@ -173,7 +209,7 @@ public class Compte implements Cloneable, Serializable {
 		notifications.remove(ntf);
 	}
 
-	@JsonIgnore
+	//@JsonIgnore
 	public List<CommandeChequier> getChequiers() {
 		return chequiers;
 	}
@@ -194,11 +230,33 @@ public class Compte implements Cloneable, Serializable {
 		this.type = type;
 	}
 
-	public void setSolde(double solde) {
-		this.solde = solde;
+	public void setMontantAutorisationDecouvert(double debit) {
+		if (getType() != CompteType.SANS_AUTORISATION) {
+			this.montantAutorisationDecouvert = debit;
+		}
 	}
 
-	public void setDebit(double debit) {
-		this.debit = debit;
+	public double getMontantSeuilMinRemuneration() {
+		return montantSeuilMinRemuneration;
+	}
+
+	public void setMontantSeuilMinRemuneration(double montantSeuilMinRemuneration) {
+		this.montantSeuilMinRemuneration = montantSeuilMinRemuneration;
+	}
+
+	public double getTauxRemuneration() {
+		return tauxRemuneration;
+	}
+
+	public void setTauxRemuneration(double tauxRemuneration) {
+		this.tauxRemuneration = tauxRemuneration;
+	}
+
+	public double getTauxDecouvert() {
+		return tauxDecouvert;
+	}
+
+	public void setTauxDecouvert(double tauxDecouvert) {
+		this.tauxDecouvert = tauxDecouvert;
 	}
 }
