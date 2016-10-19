@@ -88,11 +88,6 @@ app.controller('compteCtrl', [ '$scope', '$location', 'ClientIdService',
                                    ClientIdService.searchClient($routeParams.id).then(function(d) {
                                        self.user = d;
                                        console.log("user est : " + user);
-                                       var comptes = user.comptes;
-                                       for (var int = 0; int < comptes.length; int++) {
-										if(cpt==comptes[int]) = comptes[int];
-										
-									}
                                        $scope.user = d;
                                        console.log($scope.user.comptes);
                                    }, function(errResponse) {

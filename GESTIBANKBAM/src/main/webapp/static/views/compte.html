@@ -1,0 +1,40 @@
+ <div class="panel-header">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#">Accueil</a></li>
+						<li><a href="#search_ag">Recherche</a>
+						<li class="active">Fiche client : {{user.nom}} {{user.prenom}} </li>
+					</ul>
+				</div>
+</div>
+<div class="panel-body" >
+	<legend>Fiche Client</legend>
+	<div >
+<div class="table-responsive">          
+	  <table class="table">
+	  <caption>Liste des comptes</caption>
+	    <thead>
+	      <tr>
+			<th>Compte</th>
+			<th>Numéro</th>
+			<th>Solde</th>
+			<th>Modifier découvert</th>
+			<th>Modifier seuil d'intérêts</th>
+			<th>Chéquier</th>
+			<th>Virement</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="cpt in user.comptes">
+	        <td></td>
+	        <td><a ng-href="#compte/{{user.id}}/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
+	        <td>{{cpt.balance}}€</td>
+	        <td><a href="#">{{montantAutorisationDecouvert}}€</a></td>
+	        <td><a href="#">{{montantSeuilMinRemuneration}}€</a></td>
+	        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
+	        <td><input type='button' onClick='' value = 'Virement' class="btn btn-default"/></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	 </div>
+	    </div>
