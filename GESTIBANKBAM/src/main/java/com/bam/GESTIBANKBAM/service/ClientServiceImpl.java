@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.dao.ClientDAO;
+import com.bam.GESTIBANKBAM.dao.EmployeDAO;
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
 
@@ -17,6 +18,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	private ClientDAO clientDAO;
+	
 
 	@Override
 	public Client findById(Long id) {
@@ -79,6 +81,16 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Employe getConseiller(Client clt) {
 		return clientDAO.getConseiller(clt);
+	}
+
+	
+
+	@Override
+	public void addConseillerToClient(Long idClient, Employe c) {
+		Client currentCli = findById(idClient);
+		c.addClient(currentCli);
+		save(currentCli);
+		 
 	}
 
 //

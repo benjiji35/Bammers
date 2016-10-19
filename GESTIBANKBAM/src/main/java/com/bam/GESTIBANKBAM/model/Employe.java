@@ -14,9 +14,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-//@DiscriminatorValue (Personne.TYPE_EMPLOYE+"")
-@Table (name="Employe")
+// @DiscriminatorValue (Personne.TYPE_EMPLOYE+"")
+@Table(name = "Employe")
 public class Employe extends Personne {
 
 	/**
@@ -25,25 +27,24 @@ public class Employe extends Personne {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-	@Column (nullable=false)
-	@Temporal (TemporalType.DATE)
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date dateEntree;
 
 	private String fonctions;
 
-	@OneToMany (cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
-	private List<Client> clients; 
+	@OneToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER, mappedBy = "conseiller")
+	private List<Client> clients;
 
-	@OneToMany (cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
-	private List<EmployeNotification> notifications; //(Not in constructor ?)
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	private List<EmployeNotification> notifications; // (Not in constructor ?)
 
 	public Employe() {
 		this.setType(ROLE_CONSEILLER | ROLE_ADMIN);
 		configure();
 	}
 
-	public Employe(String matricule, Date dateEntree, String fonctions,
-			ArrayList<EmployeNotification> notifications) {
+	public Employe(String matricule, Date dateEntree, String fonctions, ArrayList<EmployeNotification> notifications) {
 		this();
 		this.dateEntree = dateEntree;
 		this.fonctions = fonctions;
@@ -73,19 +74,23 @@ public class Employe extends Personne {
 	}
 
 	public boolean addClient(Client c) {
+		if (getClients().contains(c))
+			return true;
 		if (getType() == Personne.ROLE_CONSEILLER) {
-			clients.add(c);
+			getClients().add(c);
+			c.setConseiller(this);
 			return true;
 		}
 		return false;
+
 	}
-	
-	//@JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
+
+	// @JsonSerialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMSerialiser.class)
 	public Date getDateEntree() {
 		return dateEntree;
 	}
-    
-	//@JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
+
+	// @JsonDeserialize(using=com.bam.GESTIBANKBAM.utils.JsonBAMDeserialiser.class)
 	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
 	}

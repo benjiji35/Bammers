@@ -234,10 +234,10 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
                 }
             );  
             console.log("hello id");
-            $scope.submit= function(client, id){
-                console.log(client);
-                
-                ClientServiceNew.updateUser(client, id)     
+            $scope.submit= function(idcl,idcons){
+                console.log(idcl);
+                console.log(idcons);                
+                ClientServiceNew.updateUser(idcl,idcons)     
                 .then(
                         ClientServiceNew.fetchNewClients() 
                         .then(

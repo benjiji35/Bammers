@@ -26,10 +26,10 @@ function fetchNewClients() {
     return deferred.promise;
 }
 
-function updateUser(client, id) {
+function updateUser(idcl,idcons) {
     var deferred = $q.defer();
     console.log("Blabla");
-    $http.put(CLIENTS_REST_SERVICE_URI+id, client)
+    $http.put(CLIENTS_REST_SERVICE_URI+'idcl-'+idcl+'/idcons-'+idcons)
         .then(
         function (response) {
             deferred.resolve(response.data);

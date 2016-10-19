@@ -21,6 +21,8 @@ public interface ClientService {
 
 	List<Client> findAll(); 
 	
+	void addConseillerToClient(Long idClient, Employe c);
+	
 	void deleteAll();
 	
 	boolean isExists(Client clt);

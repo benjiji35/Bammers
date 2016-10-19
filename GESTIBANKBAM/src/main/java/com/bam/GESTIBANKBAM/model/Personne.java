@@ -354,4 +354,7 @@ public class Personne implements Cloneable, Serializable {
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
+	
+	
+	
 }

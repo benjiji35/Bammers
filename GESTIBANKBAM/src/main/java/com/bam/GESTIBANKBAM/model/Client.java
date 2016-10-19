@@ -6,25 +6,19 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="Client")
-public class Client extends Personne {
-	@Override
-	public String toString() {
-		return String.format("Client [getComptes()=%s, toString()=%s]", getComptes(), super.toString());
-	}
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-	/**
-	 * 
-	 */
+@Entity
+@Table(name = "Client")
+public class Client extends Personne {
+
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-	private List<Compte> comptes;
-
+	/* Constructeurs */
 	public Client() {
 		super();
 		this.setType(ROLE_CLIENT);
@@ -51,11 +45,31 @@ public class Client extends Personne {
 		super.setDdn(p.getDdn());
 	}
 
+	/**
+	 * Attributs
+	 */
+	@ManyToOne
+	private Employe conseiller;
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	private List<Compte> comptes;
+
+	/* getters and setters */
+	@JsonIgnore
+	public Employe getConseiller() {
+		return conseiller;
+	}
+
+	public void setConseiller(Employe conseiller) {
+		this.conseiller = conseiller;
+	}
+
 	public List<Compte> getComptes() {
 		return comptes;
 	}
+
 	public void setComptes(List<Compte> comptes) {
-		System.out.println("Client.setCompte(comptes)="+comptes.size());
+		System.out.println("Client.setCompte(comptes)=" + comptes.size());
 		this.comptes = comptes;
 	}
 
@@ -64,5 +78,9 @@ public class Client extends Personne {
 		super.setType(ROLE_CLIENT);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Client [getComptes()=%s, toString()=%s]", getComptes(), super.toString());
+	}
 
 }
