@@ -109,11 +109,11 @@
   		<div class="form-group">
 		  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
 		  <div class="col-sm-3">
-		    <select class="form-control" id="sm" ng-model="client.ssm" required>
-	        <option>Célibataire</option>
-	        <option>Marié(e)</option>
-	        <option>Divorcé(e)</option>
-	        <option>veuf(ve)</option>
+		    <select class="form-control" id="situationMatrimoniale" ng-model="client.situationMatrimoniale" required>
+	        <option value="0">Célibataire</option>
+	        <option value="1">Marié(e)</option>
+	        <option value="2">Divorcé(e)</option>
+	        <option value="3">veuf(ve)</option>
 	      </select>
 		  </div>
 		</div>
@@ -126,7 +126,7 @@
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="pro">Votre profession : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="pro" placeholder="Entrez votre profession" ng-model="client.pro" required>
+	      <input type="text" class="form-control" id="profession" placeholder="Entrez votre profession" ng-model="client.profession" required>
 	    </div>
   		</div>
   		<div class="form-group">

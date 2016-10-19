@@ -2,15 +2,17 @@ package com.bam.GESTIBANKBAM.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.dao.ClientDAO;
-import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
 
 @Service("clientService")
+@Transactional
 public class ClientServiceImpl implements ClientService {
 
 	@Autowired
@@ -37,8 +39,10 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void save(Client prs) {
-		clientDAO.save(prs);
+	public void save(Client client) {
+		if (client != null) {
+			clientDAO.save(client);
+		}
 	}
 
 	@Override

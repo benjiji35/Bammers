@@ -35,6 +35,7 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 		return clients;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Client> findByNomAndPrenomAndCompte(String nom, String prenom, String cpte) {
 		List <Client> clients = getEntityManager()
@@ -49,9 +50,9 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 
 
 	@Override
-	public void save(Client clt) {
-		// TODO Auto-generated method stub
-		
+	public void save(Client client) {
+		System.out.println(">>> persisting client::"+client);
+		persist(client);
 	}
 
 	@Override

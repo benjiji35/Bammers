@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Entity
 @Table (name="Client")
 public class Client extends Personne {
+	@Override
+	public String toString() {
+		return String.format("Client [getComptes()=%s, toString()=%s]", getComptes(), super.toString());
+	}
+
 	/**
 	 * 
 	 */

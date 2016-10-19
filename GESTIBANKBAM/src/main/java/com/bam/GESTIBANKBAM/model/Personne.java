@@ -77,6 +77,15 @@ public class Personne implements Cloneable, Serializable {
 	@Column (nullable=false)
 	private int type;
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Personne [getCivilite()=%s, getNom()=%s, getPrenom()=%s, getDdn()=%s, getType()=%s, getId()=%s, getHashMdp()=%s, getAdresse()=%s, getNumero()=%s, getRue()=%s, getVille()=%s, getCodePostal()=%s, getTelephone()=%s, getMail()=%s, getSituationMatrimoniale()=%s, getNbEnfants()=%s, getIncome()=%s, getProfession()=%s]",
+				getCivilite(), getNom(), getPrenom(), getDdn(), getType(), getId(), getHashMdp(), getAdresse(),
+				getNumero(), getRue(), getVille(), getCodePostal(), getTelephone(), getMail(),
+				getSituationMatrimoniale(), getNbEnfants(), getIncome(), getProfession());
+	}
+
 	@Column (nullable=true)
 	private String hashMdp;
 
