@@ -111,7 +111,7 @@ public class BAMTools {
 		return pg.next(passwordLength);
 	}
 
-	public static String getPassword(int passwordLength) {
+	public static String genPassword(int passwordLength) {
 		List<String> list = genPasswords(passwordLength);
 
 		return list.get(0);

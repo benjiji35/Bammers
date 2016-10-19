@@ -48,8 +48,8 @@ public class EmployeDAOImpl extends AbstractDAO<Long, Employe>
 
 	@Override
 	public void save(Employe pers) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(">>> persisting client::"+pers);
+		persist(pers);
 	}
 
 	@Override

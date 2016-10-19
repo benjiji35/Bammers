@@ -12,30 +12,30 @@
 	<div >
 	    <div class="colonne c1">
 		    <label class="control-label" for="nom">Nom</label>
-		    <input class="form-control" ng-value ="user.nom" ng-disabled="checked">
+		    <input class="form-control" ng-value ="user.nom" ng-model="user.nom" ng-disabled="checked">
 		    <label class="control-label" for="prenom">Prénom</label>
-		    <input class="form-control" ng-value ="user.prenom" ng-disabled="checked">
+		    <input class="form-control" ng-value ="user.prenom" ng-model="user.prenom" ng-disabled="checked">
 		    <label class="control-label" for="date">Date de naissance : </label>
-		    <input class="form-control" ng-value ="user.ddn" ng-disabled="checked">
+		    <input class="form-control" ng-value ="user.ddn" ng-model="user.ddn" ng-disabled="checked">
 		    <label class="control-label" for="adresse">Adresse : </label>
-		    <input class="form-control" ng-value ="user.adresse.numero + ' ' + user.adresse.rue" ng-disabled="checked">
+		    <input class="form-control" ng-value ="user.adresse.numero + ' ' + user.adresse.rue" ng-model="user.adresse.rue" ng-disabled="checked">
 		    <label class="control-label" for="ville">Ville : </label>
-		    <input class="form-control" ng-value ="user.adresse.ville" ng-disabled="checked">
+		    <input class="form-control" ng-value ="user.adresse.ville" ng-model="user.adresse.ville" ng-disabled="checked">
 		    <label class="control-label" for="cp">Code Postal : </label>
-		    <input class="form-control" ng-value ="user.adresse.codePostal" ng-disabled="checked">
+		    <input class="form-control" ng-value ="user.adresse.codePostal" ng-model="user.adresse.codePostal" ng-disabled="checked">
 	    </div>
 	    <div class="colonne c2">
 	    	<label class="control-label" for="sm">Situation matrimoniale : </label>
-		    <select class="form-control" id="sm" ng-disabled="checked">
+		    <select class="form-control" id="sm" ng-model="user.situationMatrimoniale" ng-disabled="checked">
 		        <option>Célibataire</option>
 		        <option>Marié(e)</option>
 		        <option>Divorcé(e)</option>
 		        <option>veuf(ve)</option>
 		    </select>
 		    <label class="control-label" for="enfants">Nombre d'enfants : </label>
-		    <input type="text" class="form-control" ng-value ="user.nbEnfants" id="enfants" ng-disabled="checked">
+		    <input type="text" class="form-control" ng-value ="user.nbEnfants" ng-model="user.nbEnfants" id="enfants" ng-disabled="checked">
 		    <label class="control-label" for="pro">Profession : </label>
-		    <input type="text" class="form-control" ng-value ="user.profession" id="pro" ng-disabled="checked">
+		    <input type="text" class="form-control" ng-value ="user.profession" id="pro" ng-model="user.profession" ng-disabled="checked">
 		    <label class="control-label" for="revenus">Vos revenus mensuels : </label>
 		    <input type="text" class="form-control" id="revenus" ng-disabled="checked">
 		    <h4>Documents : </h4>

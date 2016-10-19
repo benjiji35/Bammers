@@ -9,14 +9,14 @@ app.factory(
 						'$q',
 						function($http, $q) {
 
-							var REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/notif/';
+							var NOTIFEMPLOYE_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/notifEmploye/';
 
 							var factory = {
-									createNotif : createNotif,
+									createEmployeNotif : createEmployeNotif,
 							};
 							return factory;
 
-							function createNotif(pub) {
+							function createEmployeNotif(pub,) {
 							    var deferred = $q.defer();
 							    $http.post(REST_SERVICE_URI, pub)
 							        .then(

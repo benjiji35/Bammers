@@ -3,12 +3,12 @@
 					<ul class="breadcrumb">
 						<li><a href="#">Accueil</a></li>
 						<li><a href="#search_ag">Recherche</a>
-						<li class="active">Fiche client : {{cons.nom}} {{cons.prenom}} </li>
+						<li class="active">Fiche conseiller : {{cons.nom}} {{cons.prenom}} </li>
 					</ul>
 				</div>
 </div>
 <div class="panel-body" >
-	<legend>Fiche Client</legend>
+	<legend>Fiche Conseiller</legend>
 	<div class="parent">
 	    <div class="colonne c1">
 		    <label class="control-label" for="nom">Nom</label>
@@ -25,19 +25,22 @@
 		    <input class="form-control" ng-value ="cons.adresse.codePostal" ng-disabled="checked">
 	    </div>
 	    <div class="colonne c2">
-	    	<label class="control-label" for="sm">Situation matrimoniale : </label>
-		    <select class="form-control" id="sm" ng-disabled="checked">
-		        <option>Célibataire</option>
-		        <option>Marié(e)</option>
-		        <option>Divorcé(e)</option>
-		        <option>veuf(ve)</option>
-		    </select>
+	    <label class="control-label" for="enfants">Telephone : </label>
+		    <input type="text" class="form-control"ng-value ="cons.adresse.telephone" id="telephone" ng-disabled="checked">
+	    <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
+		  <select class="form-control" id="sm" ng-model="cons.situationMatrimoniale"  ng-disabled="checked">
+	        <option value="0">Célibataire</option>
+	        <option value="1">Marié(e)</option>
+	        <option value="2">Divorcé(e)</option>
+	        <option value="3">veuf(ve)</option>
+	      </select>
 		    <label class="control-label" for="enfants">Nombre d'enfants : </label>
-		    <input type="text" class="form-control" id="enfants" ng-disabled="checked">
-		    <label class="control-label" for="pro">Profession : </label>
-		    <input type="text" class="form-control" id="pro" ng-disabled="checked">
-		    <label class="control-label" for="revenus">Vos revenus mensuels : </label>
-		    <input type="text" class="form-control" id="revenus" ng-disabled="checked">
+		    <input type="text" class="form-control" id="enfants" ng-value ="cons.nbEnfants" ng-disabled="checked">
+		    <label class="control-label" for="pro">Statut :  </label>
+		    <input type="text" class="form-control" ng-value ="cons.profession" id="pro" ng-disabled="checked">
+		    <label class="control-label" for="pro">Date d'entrée :  </label>
+		    <input type="date" class="form-control" ng-value ="cons.dateEntree" id="pro" disabled>
+		    
 		    
 		</div>
 	</div>

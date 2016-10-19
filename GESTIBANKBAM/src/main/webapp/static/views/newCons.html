@@ -21,74 +21,86 @@
 	   <div class="form-group">
 	        <label class="control-label col-sm-2" for="nom">Nom</label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom" ng-model="cons.nom" required>
+	      <input type="text" class="form-control" id="nom" placeholder="Entrez le nom" ng-model="cons.nom" required>
 	    </div>
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label col-sm-2" for="prenom">Prénom</label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom" ng-model="cons.prenom" required>
+	      <input type="text" class="form-control" id="prenom" placeholder="Entrez le prénom" ng-model="cons.prenom" required>
 	    </div>
   		</div>	
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="date">Date de naissance : </label>
 	    <div class="col-sm-3">
-	      <input type="date" class="form-control" id="date" placeholder="Entrez votre date de naissance" ng-model="cons.ddn" required>
+	      <input type="date" class="form-control" id="date" placeholder="Entrez la date de naissance" ng-model="cons.ddn" required>
 	    </div>
   		</div>	
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="adresse">Numero : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="adresse" placeholder="Entrez votre adresse"ng-model="cons.adresse.numero" required>
+	      <input type="text" class="form-control" id="adresse" placeholder="Entrez le numéro de rue"ng-model="cons.adresse.numero" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="rue">Rue : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="rue" placeholder="Entrez votre rue" ng-model="cons.adresse.rue" required>
+	      <input type="text" class="form-control" id="rue" placeholder="Entrez la rue" ng-model="cons.adresse.rue" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="ville">Ville : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="ville" placeholder="Entrez votre ville" ng-model="cons.adresse.ville" required>
+	      <input type="text" class="form-control" id="ville" placeholder="Entrez la ville" ng-model="cons.adresse.ville" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="cp">Code Postal : </label>
 	    <div class="col-sm-3">
-	      <input type="number" min="0"  max="99999" class="form-control" id="cp" placeholder="Entrez votre code postal" ng-model="cons.adresse.codePostal" required>
+	      <input type="number" min="0"  max="99999" class="form-control" id="cp" placeholder="Entrez le code postal" ng-model="cons.adresse.codePostal" required>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="telephone">Telephone : </label>
 	    <div class="col-sm-3">
-	      <input type="tel" class="form-control" id="telephone" placeholder="Entrez votre telephone" ng-model="cons.adresse.telephone" required>
+	      <input type="tel" class="form-control" id="telephone" placeholder="Entrez le telephone" ng-model="cons.adresse.telephone" required>
 	    </div>
   		</div>
   		<div class="form-group">
 		  <label class="control-label col-sm-2" for="email">Email:</label>
 		  <div class="col-sm-3">
-		    <input type="email" class="form-control" id="email" placeholder="Entrez votre email : " ng-model="cons.adresse.mail" required>
+		    <input type="email" class="form-control" id="email" placeholder="Entrez le email : " ng-model="cons.adresse.mail" required>
 		  </div>
 		</div>
   		<div class="form-group">
 		  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
 		  <div class="col-sm-3">
-		    <select class="form-control" id="sm" ng-model="cons.ssm" required>
-	        <option>Célibataire</option>
-	        <option>Marié(e)</option>
-	        <option>Divorcé(e)</option>
-	        <option>veuf(ve)</option>
+		    <select class="form-control" id="sm" ng-model="cons.situationMatrimoniale" required>
+	        <option value="0">Célibataire</option>
+	        <option value="1">Marié(e)</option>
+	        <option value="2">Divorcé(e)</option>
+	        <option value="3">veuf(ve)</option>
 	      </select>
 		  </div>
 		</div>
 		<div class="form-group">
 	    <label class="control-label col-sm-2" for="enfants">Nombre d'enfants : </label>
 	    <div class="col-sm-3">
-	      <input type="number" min="0" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants" ng-model="cons.enfants" required>
+	      <input type="number" min="0" class="form-control" id="enfants" placeholder="Entrez votre nombre d'enfants" ng-model="cons.nbEnfants" required>
 	    </div>
   		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="ville">Statut : </label>
+	    <div class="col-sm-3">
+	      <input type="text" class="form-control" id="ville" placeholder="Entrez le poste" ng-model="cons.profession" required>
+	    </div>
+  		</div>
+  		<div class="form-group">
+	    <label class="control-label col-sm-2" for="date">Date d'entrée : </label>
+	    <div class="col-sm-3">
+	      <input type="date" class="form-control" id="date" placeholder="Entrez la date d'entrée" ng-model="cons.dateEntree" required>
+	    </div>
+  		</div>	
 		<div class="form-group">        
 		  <div class="col-sm-offset-2 col-sm-10">
 		    <button type="submit" class="btn btn-default">Valider ma demande</button>

@@ -299,13 +299,14 @@ app.controller('notif_ctrl', ['$scope', '$location', 'NotificationService',
 
 }]);
 
-app.controller('newConsCtrl', ['$scope', '$location', 'EmployeService',
-                             function($scope, $location, EmployeService) {
+app.controller('newConsCtrl', ['$scope', '$location', 'EmployeService','$window',
+                             function($scope, $location, EmployeService,$window) {
     $scope.cons = {};
 
    $scope.submit = function(cons) {
      console.log("test");
      EmployeService.createCons(cons);
+     $window.location = 'accueil.html#/search_ad';
    };
 
 }]);

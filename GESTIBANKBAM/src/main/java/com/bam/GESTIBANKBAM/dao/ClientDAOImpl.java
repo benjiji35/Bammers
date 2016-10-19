@@ -40,7 +40,7 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 	public List<Client> findByNomAndPrenomAndCompte(String nom, String prenom, String cpte) {
 		List <Client> clients = getEntityManager()
 				.createQuery("SELECT p FROM Personne p WHERE nom LIKE  :name AND prenom like :prenom " +
-						"comptes like :compte")
+						"compte like :compte")
 				.setParameter("name", nom)
 				.setParameter("prenom", prenom)
 				.setParameter("compte", cpte)
