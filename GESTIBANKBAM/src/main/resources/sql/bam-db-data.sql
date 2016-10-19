@@ -8,12 +8,14 @@ INSERT INTO `Employe` VALUES ('2012-09-27 00:00:00','administrateur',1);
 INSERT INTO `Employe` VALUES ('2012-12-07 00:00:00','conseiller',2);
 INSERT INTO `Employe` VALUES ('2013-05-26 00:00:00','conseiller',3);
 INSERT INTO `Employe` VALUES ('2014-08-18 00:00:00','conseiller',4);
-INSERT INTO `Client` VALUES (5);
-INSERT INTO `bambank`.`Employe_Client` (`Employe_id`, `clients_id`) VALUES (3, 5);
+
+INSERT INTO `bambank`.`Client` (`id`, `conseiller_id`) VALUES ('5', '3');
 
 INSERT INTO `bambank`.`Compte` (`numCpt`, `montantAutorisationDecouvert`, `montantSeuilMinRemuneration`, `tauxDecouvert`, `tauxRemuneration`, `type`) VALUES ('123', '0', '0', '0.18', '0.02', '0');
 INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('5', '123');
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('0', '2015-06-09', '2015-06-09', '20000', '1', 'FALSE');
+
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('1', '2016-10-19', '2016-10-19', '30000', '1', FALSE);
+
 INSERT INTO `bambank`.`Credit` (`id`) VALUES ('1');
 INSERT INTO `bambank`.`Compte_Transaction` (`Compte_numCpt`, `transactions_id`) VALUES ('123', '1');
 
