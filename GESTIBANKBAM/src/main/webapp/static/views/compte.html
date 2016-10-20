@@ -3,7 +3,7 @@
 					<ul class="breadcrumb">
 						<li><a href="#">Accueil</a></li>
 						<li><a href="#search_ag">Recherche</a>
-						<li class="active">D�tail compte : {{cpt.numCpt}} </li>
+						<li class="active">Détail compte : {{cpt.numCpt}} </li>
 					</ul>
 				</div>
 </div>
@@ -14,9 +14,9 @@
 		<table class="table">
  			<thead>
 		 		<tr>
-		    		<th>Libell�</th>
-		    		<th>Cr�dit</th>
-		    		<th>D�bit</th>
+		    		<th>Libellé</th>
+		    		<th>Crédit</th>
+		    		<th>Débit</th>
 		    		<th>Date</th>
 		    		
 		  		</tr>
@@ -24,8 +24,8 @@
   			<tbody>
 		  		<tr ng-repeat="t in cpt.transactions">
 		    		<td></td>
-		   			<td>{{t.montant}}€</td>
-		    		<td>{{t.montant}}</td>
+		   			<td><span ng-if="t.type==1">{{t.montant}}€</span></td>
+		    		<td><span ng-if="t.type==2">{{t.montant}}€</span></td>
 		    		<td>{{t.dateFin}}</td>
 		   		</tr>
   			</tbody>
