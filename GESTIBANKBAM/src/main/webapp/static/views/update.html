@@ -25,9 +25,9 @@
 	    </div>
 	    <div class="colonne c2">
 	    	<label class="control-label" for="sm">Situation matrimoniale : </label>
-		    <select class="form-control" ng-value ="util.situationMatrimoniale" id="sm" disabled>
+		    <select class="form-control" ng-model="util.situationMatrimoniale" ng-init ="util.situationMatrimoniale" id="sm" disabled>
 		        <option>Célibataire</option>
-		        <option>Marié(e)</option>
+		        <option ng-value="MARRIED">Marié(e)</option>
 		        <option>Divorcé(e)</option>
 		        <option>veuf(ve)</option>
 		    </select>
