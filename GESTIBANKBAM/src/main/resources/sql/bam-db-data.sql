@@ -33,16 +33,16 @@ INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('9
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('1', '2016-10-19', '2016-10-19', '30000', '1', FALSE);
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('2', '2016-01-19', '2016-01-19', '500', '1', FALSE);
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('3', '2016-02-19', '2016-02-19', '3000', '1', FALSE);
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('4', '2016-03-02', '2016-03-02', '7000', '2', FALSE);
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('5', '2016-03-12', '2016-03-12', '5080', '2', FALSE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('4', '2016-03-02', '2016-03-02', '-7000', '2', FALSE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('5', '2016-03-12', '2016-03-12', '-5080', '2', FALSE);
 
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('6', '2016-03-12', '2016-03-12', '7020', '1', FALSE);
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('7', '2016-04-17', '2016-04-17', '180', '2', FALSE);
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('8', '2016-05-24', '2016-05-24', '70', '2', FALSE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('7', '2016-04-17', '2016-04-17', '-180', '2', FALSE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('8', '2016-05-24', '2016-05-24', '-70', '2', FALSE);
 
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('9', '2016-07-22', '2016-07-22', '10000', '1', FALSE);
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('10', '2016-07-31', '2016-07-31', '5000', '2', FALSE);
-INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('11', '2016-08-02', '2016-08-02', '3000', '2', FALSE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('10', '2016-07-31', '2016-07-31', '-5000', '2', FALSE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('11', '2016-08-02', '2016-08-02', '-3000', '2', FALSE);
 
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('12', '2016-09-16', '2016-09-16', '7340', '1', FALSE);
 
