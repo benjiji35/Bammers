@@ -48,21 +48,22 @@ public class Client extends Personne {
 	/**
 	 * Attributs
 	 */
-	@ManyToOne
-	private Employe conseiller;
+//	@ManyToOne
+//	private Employe conseiller;
+	private Long conseillerId;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	private List<Compte> comptes;
 
 	/* getters and setters */
-	@JsonIgnore
-	public Employe getConseiller() {
-		return conseiller;
-	}
-
-	public void setConseiller(Employe conseiller) {
-		this.conseiller = conseiller;
-	}
+//	@JsonIgnore
+//	public Employe getConseiller() {
+//		return conseiller;
+//	}
+//
+//	public void setConseiller(Employe conseiller) {
+//		this.conseiller = conseiller;
+//	}
 
 	public List<Compte> getComptes() {
 		return comptes;
@@ -81,6 +82,14 @@ public class Client extends Personne {
 	@Override
 	public String toString() {
 		return String.format("Client [getComptes()=%s, toString()=%s]", getComptes(), super.toString());
+	}
+
+	public Long getConseillerId() {
+		return conseillerId;
+	}
+
+	public void setConseillerId(Long conseillerId) {
+		this.conseillerId = conseillerId;
 	}
 
 }

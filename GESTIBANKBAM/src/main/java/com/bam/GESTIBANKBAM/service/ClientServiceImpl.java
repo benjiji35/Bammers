@@ -92,7 +92,14 @@ public class ClientServiceImpl implements ClientService {
 		save(currentCli);
 		 
 	}
-
+	
+//	@Override
+//	public void addMdpToClient(Long idClient, Client c ) {
+//		Client currentCli = findById(idClient);
+//		c.getHashMdp();
+//		save(currentCli);
+//		 
+//	}
 //
 // #########################################################################
 // #########################################################################
