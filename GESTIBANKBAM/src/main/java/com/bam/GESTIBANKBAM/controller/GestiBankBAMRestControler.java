@@ -187,27 +187,26 @@ public class GestiBankBAMRestControler {
 
 		Client currentClient = clientService.findById(id);
 		System.out.println("on tient le bon bout");
+
 		if (currentClient == null) {
 			System.out.println("Client with id " + id + " not found");
 			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
 		}
 
-		currentClient.setCivilite(client.getCivilite());
-		currentClient.setNom(client.getNom());
-		currentClient.setPrenom(client.getPrenom());
 		System.out.println("client DDN::" + client.getDdn());
-		currentClient.setDdn(client.getDdn());
+
 		if (client.getHashMdp() == null) {
 			String password = BAMTools.genPassword(20);
 			currentClient.setHashMdp(password);
+			// clientService.sendMail(client);
 		}
-		currentClient.setAdresse(client.getAdresse());
-		System.out.println("client::" + currentClient);
+
+		System.out.println("validClient() client::" + currentClient);
 
 		clientService.update(currentClient);
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
 	}
-
+	
 	// ------------------- Delete a Client --------------------------------------------------------
 
 	@RequestMapping(value = "/client/{id}", method = RequestMethod.DELETE)
