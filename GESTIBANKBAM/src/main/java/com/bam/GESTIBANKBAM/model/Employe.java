@@ -33,7 +33,7 @@ public class Employe extends Personne {
 
 	private String fonctions;
 
-	@OneToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER, mappedBy = "conseiller")
+	@OneToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
 	private List<Client> clients;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
@@ -78,7 +78,7 @@ public class Employe extends Personne {
 			return true;
 		if (getType() == Personne.ROLE_CONSEILLER) {
 			getClients().add(c);
-			c.setConseiller(this);
+			c.setConseillerId(getId());
 			return true;
 		}
 		return false;

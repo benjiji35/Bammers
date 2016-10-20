@@ -82,11 +82,7 @@ public class GestiBankBAMRestControler {
 		List<Client> clientsSansMdp = new ArrayList<>();
 		for (Client c : clients) {
 			if (c.getHashMdp() == null) {
-				//if (c.getConseiller() != null)
-				if (clientService.getConseiller(c) == null) {
-					// System.out.println(c);
-					clientsSansMdp.add(c);
-				}
+				clientsSansMdp.add(c);
 			}
 		}
 
@@ -187,22 +183,22 @@ public class GestiBankBAMRestControler {
 
 		Client currentClient = clientService.findById(id);
 		System.out.println("on tient le bon bout");
+		
 		if (currentClient == null) {
 			System.out.println("Client with id " + id + " not found");
 			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
 		}
 
-		currentClient.setCivilite(client.getCivilite());
-		currentClient.setNom(client.getNom());
-		currentClient.setPrenom(client.getPrenom());
+		
 		System.out.println("client DDN::" + client.getDdn());
-		currentClient.setDdn(client.getDdn());
+		
 		if (client.getHashMdp() == null) {
 			String password = BAMTools.genPassword(20);
 			currentClient.setHashMdp(password);
+			//clientService.sendMail(client);
 		}
-		currentClient.setAdresse(client.getAdresse());
-		System.out.println("client::" + currentClient);
+		
+		System.out.println("validClient() client::" + currentClient);
 
 		clientService.update(currentClient);
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
@@ -361,20 +357,5 @@ public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsB
 		clientService.update(currentClient);;
 		System.out.println(">>> update client::" + currentClient);
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
-	}
-
-
-//-------------------Retrieve Single compte--------------------------------------------------------
-
-	@RequestMapping(value = "/compte/{cpt}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Compte> getCompte(@PathVariable("cpt") Long cpt) {
-		System.out.println("Fetching User with id " + cpt);
-		Compte compte =  compteService.findByNum(cpt);
-		if (compte == null) {
-			System.out.println("Compte with number " + cpt + " not found");
-			return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND);
-		}
-		System.out.println("Compte founded :" + compte.toString());
-		return new ResponseEntity<Compte>(compte, HttpStatus.OK);
 	}
 }
