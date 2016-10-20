@@ -30,4 +30,6 @@ public interface ClientService {
 	Employe getConseiller(Client clt);
 
 	public List<Client> findByNomAndPrenomAndCompte(String nom, String prenom, String cpte);
+
+	boolean sendMail(Client clt);
 }

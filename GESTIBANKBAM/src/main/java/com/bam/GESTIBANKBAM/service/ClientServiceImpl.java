@@ -92,6 +92,12 @@ public class ClientServiceImpl implements ClientService {
 		save(currentCli);
 		 
 	}
+
+	@Override
+	public boolean sendMail(Client clt) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 //	@Override
 //	public void addMdpToClient(Long idClient, Client c ) {
