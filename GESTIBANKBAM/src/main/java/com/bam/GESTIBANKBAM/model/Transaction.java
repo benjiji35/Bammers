@@ -54,6 +54,8 @@ public abstract class Transaction implements Serializable, BAMListener {
 	@Column (nullable=false)
 	private int type;
 
+	@NotNull
+	@Column (nullable=false)
 	private boolean waitForMonthEnd;
 
 	@Transient
