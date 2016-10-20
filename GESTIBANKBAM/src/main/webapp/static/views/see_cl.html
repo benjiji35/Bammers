@@ -68,7 +68,7 @@
 	    <tbody>
 	      <tr ng-repeat="cpt in user.comptes">
 	        <td></td>
-	        <td><a ng-href="#compte/{{user.id}}/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
+	        <td><a ng-href="#compte/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
 	        <td>{{cpt.balance}}€</td>
 	        <td><a href="#">{{montantAutorisationDecouvert}}€</a></td>
 	        <td><a href="#">{{montantSeuilMinRemuneration}}€</a></td>

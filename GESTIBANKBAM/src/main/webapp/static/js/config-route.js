@@ -96,7 +96,7 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/see_cl/:id', {
 			templateUrl: 'views/see_cl.html',
 			controller: 'see_clCtrl'})
-		.when('/compte/:id/:cpt', {
+		.when('/compte/:cpt', {
 			templateUrl: 'views/compte.html',
 			controller: 'compteCtrl'})
 		.when('/see_con/:id', {

@@ -5,16 +5,13 @@ angular.module('myApp').factory('CompteService', ['$http', '$q', function($http,
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/compte/';
 
 var factory = {
-		fetchCompte: fetchCompte,
-		createClient: createClient,
-		srcClient : srcClient,
-        updateClient : updateClient
+		fetchCompte: fetchCompte
 };
 return factory;
 /*recherche de tous les utilisateurs */
-function fetchCompte() {
+function fetchCompte(cpt) {
     var deferred = $q.defer();
-    $http.get(CLIENTS_REST_SERVICE_URI)
+    $http.get(CLIENTS_REST_SERVICE_URI+cpt)
         .then(
         function (response) {
             deferred.resolve(response.data);
@@ -26,3 +23,4 @@ function fetchCompte() {
     );
     return deferred.promise;
 }
+}]);

@@ -3,38 +3,33 @@
 					<ul class="breadcrumb">
 						<li><a href="#">Accueil</a></li>
 						<li><a href="#search_ag">Recherche</a>
-						<li class="active">Fiche client : {{user.nom}} {{user.prenom}} </li>
+						<li class="active">Dï¿½tail compte : {{cpt.numCpt}} </li>
 					</ul>
 				</div>
 </div>
 <div class="panel-body" >
 	<legend>Fiche Client</legend>
 	<div >
-<div class="table-responsive">          
-	  <table class="table">
-	  <caption>Liste des comptes</caption>
-	    <thead>
-	      <tr>
-			<th>Compte</th>
-			<th>Numéro</th>
-			<th>Solde</th>
-			<th>Modifier découvert</th>
-			<th>Modifier seuil d'intérêts</th>
-			<th>Chéquier</th>
-			<th>Virement</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr ng-repeat="cpt in user.comptes">
-	        <td></td>
-	        <td><a ng-href="#compte/{{user.id}}/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
-	        <td>{{cpt.balance}}€</td>
-	        <td><a href="#">{{montantAutorisationDecouvert}}€</a></td>
-	        <td><a href="#">{{montantSeuilMinRemuneration}}€</a></td>
-	        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
-	        <td><input type='button' onClick='' value = 'Virement' class="btn btn-default"/></td>
-	      </tr>
-	    </tbody>
-	  </table>
-	 </div>
-	    </div>
+<div class="table-responsive">
+		<table class="table">
+ 			<thead>
+		 		<tr>
+		    		<th>Libellï¿½</th>
+		    		<th>Crï¿½dit</th>
+		    		<th>Dï¿½bit</th>
+		    		<th>Date</th>
+		    		
+		  		</tr>
+	  		</thead>
+  			<tbody>
+		  		<tr ng-repeat="t in cpt.transactions">
+		    		<td></td>
+		   			<td>{{t.montant}}â‚¬</td>
+		    		<td>{{t.montant}}</td>
+		    		<td>{{t.dateFin}}</td>
+		   		</tr>
+  			</tbody>
+  		</table>
+  	<pre><h4>Solde : {{cpt.balance}}â‚¬</h4></pre>
+ </div>
+ </div>

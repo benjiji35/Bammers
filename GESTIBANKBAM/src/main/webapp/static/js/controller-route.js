@@ -71,7 +71,7 @@ app.controller('seeCtrl', ['$scope', '$location',
 app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
                             '$routeParams',
                             function($scope, $location, ClientIdService, $routeParams) {
-                                console.log("hello id");
+                                console.log("hello toi");
                                 ClientIdService.searchClient($routeParams.id).then(function(d) {
                                     self.user = d;
                                     $scope.user = d;
@@ -81,17 +81,16 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
                                 });
                             } ]);
 
-app.controller('compteCtrl', [ '$scope', '$location', 'ClientIdService',
-                               '$routeParams',
-                               function($scope, $location, ClientIdService, $routeParams) {
+app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routeParams',
+                               function($scope, $location, CompteService, $routeParams) {
                                    console.log("hello id");
-                                   ClientIdService.searchClient($routeParams.id).then(function(d) {
-                                       self.user = d;
-                                       console.log("user est : " + user);
-                                       $scope.user = d;
-                                       console.log($scope.user.comptes);
+                                   CompteService.fetchCompte($routeParams.cpt).then(function(d) {
+                                       self.cpt= d;
+                                       console.log("cpt : " + cpt);
+                                       $scope.cpt = d;
+                                       console.log($scope.cpt);
                                    }, function(errResponse) {
-                                       console.error('Error while fetching Users');
+                                       console.error('Error while fetching Compte');
                                    });
                                } ]);
 

@@ -35,6 +35,7 @@ import com.bam.GESTIBANKBAM.model.Notification;
 import com.bam.GESTIBANKBAM.model.Personne;
 import com.bam.GESTIBANKBAM.model.Transaction;
 import com.bam.GESTIBANKBAM.service.ClientService;
+import com.bam.GESTIBANKBAM.service.CompteService;
 import com.bam.GESTIBANKBAM.service.EmployeService;
 import com.bam.GESTIBANKBAM.service.PersonneService;
 import com.bam.GESTIBANKBAM.util.BAMException;
@@ -52,6 +53,9 @@ public class GestiBankBAMRestControler {
 
 	@Autowired
 	EmployeService employeService; 
+	
+	@Autowired
+	CompteService compteService;
 	
 	private static final Logger logger = Logger.getLogger(GestiBankBAMRestControler.class);
 
@@ -358,5 +362,19 @@ public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsB
 		System.out.println(">>> update client::" + currentClient);
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
 	}
-}
 
+
+//-------------------Retrieve Single compte--------------------------------------------------------
+
+	@RequestMapping(value = "/compte/{cpt}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Compte> getCompte(@PathVariable("cpt") Long cpt) {
+		System.out.println("Fetching User with id " + cpt);
+		Compte compte =  compteService.findByNum(cpt);
+		if (compte == null) {
+			System.out.println("Compte with number " + cpt + " not found");
+			return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND);
+		}
+		System.out.println("Compte founded :" + compte.toString());
+		return new ResponseEntity<Compte>(compte, HttpStatus.OK);
+	}
+}
