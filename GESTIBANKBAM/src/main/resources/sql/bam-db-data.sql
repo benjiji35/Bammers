@@ -13,10 +13,10 @@ INSERT INTO `Employe` VALUES ('2012-12-07 00:00:00','conseiller',2);
 INSERT INTO `Employe` VALUES ('2013-05-26 00:00:00','conseiller',3);
 INSERT INTO `Employe` VALUES ('2014-08-18 00:00:00','conseiller',4);
 
-INSERT INTO `bambank`.`Client` (`id`, `conseiller_id`) VALUES ('5', '3');
-INSERT INTO `bambank`.`Client` (`id`, `conseiller_id`) VALUES ('6', '4');
-INSERT INTO `bambank`.`Client` (`id`, `conseiller_id`) VALUES ('7', '3');
-INSERT INTO `bambank`.`Client` (`id`, `conseiller_id`) VALUES ('8', '3');
+INSERT INTO `bambank`.`Client` (`id`, `conseillerId`) VALUES ('5', '3');
+INSERT INTO `bambank`.`Client` (`id`, `conseillerId`) VALUES ('6', '4');
+INSERT INTO `bambank`.`Client` (`id`, `conseillerId`) VALUES ('7', '3');
+INSERT INTO `bambank`.`Client` (`id`, `conseillerId`) VALUES ('8', '3');
 
 INSERT INTO `bambank`.`Compte` (`numCpt`, `montantAutorisationDecouvert`, `montantSeuilMinRemuneration`, `tauxDecouvert`, `tauxRemuneration`, `type`) VALUES ('123', '0', '0', '0.18', '0.02', '0');
 INSERT INTO `bambank`.`Compte` (`numCpt`, `montantAutorisationDecouvert`, `montantSeuilMinRemuneration`, `tauxDecouvert`, `tauxRemuneration`, `type`) VALUES ('200', '0', '0', '0.18', '0.02', '0');

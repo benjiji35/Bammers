@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.dao.ClientDAO;
-import com.bam.GESTIBANKBAM.dao.EmployeDAO;
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
+import com.bam.GESTIBANKBAM.utils.MailSender;
 
 @Service("clientService")
 @Transactional
@@ -95,8 +95,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public boolean sendMail(Client clt) {
-		// TODO Auto-generated method stub
-		return false;
+		return MailSender.sendMail(clt);
 	}
 	
 //	@Override
