@@ -30,10 +30,10 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr ng-repeat="">
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
+		      <tr ng-repeat="c in util.comptes">
+		        <td></td>
+		        <td>{{c.numCpt}}</td>
+		        <td>{{c.balance}}</td>
 		        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
 		      </tr>
 		    </tbody>

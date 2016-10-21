@@ -83,7 +83,7 @@ public class GestiBankBAMRestControler {
 		for (Client c : clients) {
 			if (c.getHashMdp() == null) {
 				//if (c.getConseiller() != null)
-				if (clientService.getConseiller(c) == null) {
+				if (c.getConseillerId() == null) {
 					// System.out.println(c);
 					clientsSansMdp.add(c);
 				}
@@ -105,7 +105,7 @@ public class GestiBankBAMRestControler {
 		List<Client> clientsSansConseiller = new ArrayList<>();
 		for (Client c : clients) {
 			//if (c.getConseiller() == null) {
-			if (clientService.getConseiller(c) == null) {
+			if (c.getConseillerId() == null) {
 				// System.out.println(c);
 				clientsSansConseiller.add(c);
 			}
@@ -158,10 +158,10 @@ public class GestiBankBAMRestControler {
 		}
 
 		//if (client.getConseiller() == null) {
-		if (clientService.getConseiller(client) == null) {
+		
 			clientService.save(client);
 			System.out.println(">>> " + client);
-		}
+
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/client/{id}").buildAndExpand(client.getId()).toUri());

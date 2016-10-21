@@ -62,6 +62,7 @@
 			<th>Modifier découvert</th>
 			<th>Modifier seuil d'intérêts</th>
 			<th>Chéquier</th>
+			<th></th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -69,9 +70,10 @@
 	        <td></td>
 	        <td><a ng-href="#compte/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
 	        <td>{{cpt.balance}}€</td>
-	        <td><a href="#">{{montantAutorisationDecouvert}}€</a></td>
-	        <td><a href="#">{{montantSeuilMinRemuneration}}€</a></td>
+	        <td><input type="text" class="form-control" ng-value="{{cpt.montantAutorisationDecouvert}}"/></td>
+	        <td><input type="text" class="form-control" ng-value="{{cpt.montantSeuilMinRemuneration}}"/></td>
 	        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
+	        <td><input type='button' onClick='' value = 'Valider modifications' class="btn btn-default"/></td>
 	      </tr>
 	    </tbody>
 	  </table>
