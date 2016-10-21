@@ -40,6 +40,7 @@ import com.bam.GESTIBANKBAM.service.EmployeService;
 import com.bam.GESTIBANKBAM.service.PersonneService;
 import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
+import com.bam.GESTIBANKBAM.utils.MailSender;
 
 @RestController
 public class GestiBankBAMRestControler {

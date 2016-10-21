@@ -5,8 +5,8 @@ INSERT INTO `Personne` VALUES (4,'53000','bambank35000@gmail.com',37,'rue du dé
 INSERT INTO `Personne` VALUES (5,'31000','bambank35000@gmail.com',118,'route de bayonne','+33562324589','toulouse','mme','1990-07-14 00:00:00','kiki123',2500,2,'egbo','mela','vendeuse',3,2);
 INSERT INTO `Personne` VALUES (6,'34000','bambank35000@gmail.com',34,'place belcourt','+33495097652','montpellier','mme','1988-10-22 00:00:00','kilo123',2750,2,'gonzales','maria','consultante',3,2);
 INSERT INTO `Personne` VALUES (7,'75000','bambank35000@gmail.com',72,'avenue du general de gaulles','+33142977630','paris','mme','1994-09-13 00:00:00','balto123',3790,2,'bower','jessica','consultante',3,2);
-INSERT INTO `Personne` VALUES (8,'75000','bambank35000@gmail.com',13,'esplanade de la paix','+33142977630','paris','mme','1987-11-27 00:00:00','bilbon123',3990,2,'al-khatabi','mohammed','medecin',2,5);
-INSERT INTO `Personne` VALUES (9,'75000','bambank35000@gmail.com',13,'esplanade de la paix','+33142977630','paris','mme','1987-11-27 00:00:00','bilbon123',5190,2,'benrubi','elliot','architecte',3,3);
+INSERT INTO `Personne` VALUES (8,'75000','bambank35000@gmail.com',13,'esplanade de la paix','+33142977630','paris','mme','1987-11-27 00:00:00','bilbon123',3990,2,'al-khatabi','mohammed','medecin',2,2);
+INSERT INTO `Personne` VALUES (9,'75000','bambank35000@gmail.com',13,'esplanade de la paix','+33142977630','paris','mme','1987-11-27 00:00:00','bilbon123',5190,2,'benrubi','elliot','architecte',3,2);
 
 INSERT INTO `Employe` VALUES ('2012-09-27 00:00:00','administrateur',1);
 INSERT INTO `Employe` VALUES ('2012-12-07 00:00:00','conseiller',2);

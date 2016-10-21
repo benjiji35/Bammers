@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Personne;
 
 public class MailSender {
 
@@ -32,29 +33,37 @@ public class MailSender {
 		System.out.println("MailServer:: properties::");
 		config.list(System.out);
 	};
-	
-	public static boolean sendMail(Client clt) {
+
+	public static boolean sendMail(Personne prs) {
 		boolean status = true;
+		Client clt     = (prs instanceof Client)? (Client)prs: null;
 
 		String host     = config.getProperty("mail.smtp.host");
 		int    port     = Integer.parseInt(config.getProperty("mail.protocol.port", "25"));
-		String[] tos    = clt.getMail().split("\\s");
+		String[] tos    = prs.getMail().split("\\s");
 		String[] bcc    = config.getProperty("bambank.mail.bcc").split("\\s");
 		String from     = config.getProperty("bambank.mail.from");
-		String subject  = config.getProperty("bambank.mail.account.open.notification.subject");
-		String body_tpl = config.getProperty("bambank.mail.account.open.notification.body");
+		String account_subject  = config.getProperty("bambank.mail.account.open.notification.subject");
+		String person_subject   = config.getProperty("bambank.mail.access.credential.notification.subject");
+		String body_account_tpl = config.getProperty("bambank.mail.account.open.notification.body");
+		String body_person_tpl  = config.getProperty("bambank.mail.access.credential.notification.body");
 		String password = config.getProperty("bambank.mail.password");
 		boolean debug   = true;
 
-		String civility = ("mr".equalsIgnoreCase(clt.getCivilite())? "Sir": "Madam");
+		String civility = ("mr".equalsIgnoreCase(prs.getCivilite())? "Sir": "Madam");
 		String eol      = System.getProperty("line.separator");
 		StringBuffer credentials = new StringBuffer();
 		// create some properties and get the default Session
 		Properties props = new Properties();
-		
 
 		props.put("mail.smtp.host", host);
 		props.put("mail.protocol.port", ""+port);
+		props.put("mail.smtp.port", config.getProperty("mail.smtp.port"));
+		props.put("mail.smtp.auth", config.getProperty("mail.smtp.auth"));
+		props.put("mail.smtp.starttls.enable", config.getProperty("mail.smtp.starttls.enable"));
+		props.put("mail.smtp.socketFactory.class", config.getProperty("mail.smtp.socketFactory.class"));
+		props.put("mail.smtp.socketFactory.port", config.getProperty("mail.smtp.socketFactory.port"));
+		props.put("mail.smtp.socketFactory.fallback", config.getProperty("mail.smtp.socketFactory.fallback"));
 		Session session = Session.getInstance(props);
 		session.setDebug(debug);
 		try {
@@ -73,29 +82,41 @@ public class MailSender {
 			}
 			msg.setRecipients(Message.RecipientType.TO, addressTo);
 			msg.setRecipients(Message.RecipientType.BCC, addressBcc);
-			msg.setSubject(subject);
 			msg.setSentDate(new Date());
 			// create and fill the first message part
 			MimeBodyPart mbp1 = new MimeBodyPart();
-			mbp1.setText(MessageFormat.format(body_tpl, 
-					civility, 
-					eol, 
-					clt.getComptes().get(0).getTransactions().get(0).getDateDebut(),
-					clt.getId(), 
-					clt.getHashMdp()));
+			if (clt == null) {
+				// it is a password remembrance assistance request
+				// in other words, the user does not remember a part of (or all the whole of) his credentials
+				msg.setSubject(person_subject);
+				mbp1.setText(MessageFormat.format(body_person_tpl, 
+						civility, 
+						eol, 
+						prs.getId(), 
+						prs.getHashMdp()));
+			} else {
+				// it is a password generation
+				msg.setSubject(account_subject);
+				mbp1.setText(MessageFormat.format(body_account_tpl, 
+						civility, 
+						eol, 
+						clt.getComptes().get(0).getTransactions().get(0).getDateDebut(),
+						prs.getId(), 
+						prs.getHashMdp()));
+			}
 			// create and fill the second message part
 			MimeBodyPart mbp2 = new MimeBodyPart();
 			credentials.append("BAMBank website access credentials:")
 				.append("------------------------------------")
 				.append(eol)
 				.append(eol)
-				.append(" ").append(clt.getNom()).append(" ").append(clt.getPrenom())
+				.append(" ").append(prs.getNom()).append(" ").append(prs.getPrenom())
 				.append(eol)
 				.append(eol)
-				.append("  - Login:").append(clt.getId())
+				.append("  - Login:").append(prs.getId())
 				.append(eol)
 				.append(eol)
-				.append("  - Password:").append(clt.getHashMdp())
+				.append("  - Password:").append(prs.getHashMdp())
 				.append(eol)
 				.append(eol)
 				.append(eol).append(eol).append(eol).append(eol)
