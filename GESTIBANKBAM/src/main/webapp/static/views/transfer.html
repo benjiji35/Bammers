@@ -9,8 +9,9 @@
 <div class="panel-body">
 <legend>VIREMENT</legend><br><br>
 	<br><br>
-      <form class="form-horizontal">
-
+      <form class="form-horizontal" name="myForm" ng-submit="submit(cpt_origine, cpt_dest, mont)">
+		<span ng-show="ok=0">Erreur</span>
+		<span ng-show="ok=1">ok</span>
         <div class="form-group">
                 <label class="control-label col-sm-2" for="cpt_src">Compte Origine :</label>
             <div class="col-sm-3">
@@ -21,14 +22,14 @@
         <div class="form-group">
                 <label class="control-label col-sm-2" for="cpt_dest">Compte Destination :</label>
             <div class="col-sm-3">
-                 <input type="text" class="form-control" id="cpt_dest" placeholder="Compte Destination">
+                 <input type="text" class="form-control" id="cpt_dest" ng-model="cpt_dest" placeholder="Compte Destination">
             </div>
         </div>
 
         <div class="form-group">
                 <label class="control-label col-sm-2" for="montant">Montant :</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="leMontant" placeholder="montant">
+                <input type="text" class="form-control" id="Montant" ng-model="mont" placeholder="montant">
             </div>
         </div>
 
@@ -36,7 +37,7 @@
       
         <div class="form-group">        
             <div class="col-sm-offset-2 col-sm-10">
-                <button onclick="validateTransaction();" type="submit" class="btn btn-success btn-sm">Envoyer</button>
+            	<input type="submit" value="Envoyer" class="btn btn-success btn-sm"/>
             </div>
         </div>
 

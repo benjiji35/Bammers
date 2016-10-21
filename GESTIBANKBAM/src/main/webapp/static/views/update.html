@@ -23,9 +23,9 @@
 		    <label class="control-label" for="cp">Code Postal : </label>
 		    <input class="form-control" ng-value ="util.adresse.codePostal" disabled>
 	    </div>
-	    <div class="colonne c2">
+	    <div class="colonne c2" ng-init ="util.situationMatrimoniale">
 	    	<label class="control-label" for="sm">Situation matrimoniale : </label>
-		    <select class="form-control" ng-model="util.situationMatrimoniale" ng-init ="util.situationMatrimoniale" id="sm" disabled>
+		    <select class="form-control" ng-model="util.situationMatrimoniale"  id="sm" disabled>
 		        <option>Célibataire</option>
 		        <option ng-value="MARRIED">Marié(e)</option>
 		        <option>Divorcé(e)</option>

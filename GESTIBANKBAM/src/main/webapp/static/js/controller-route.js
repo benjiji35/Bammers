@@ -107,9 +107,15 @@ app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService',
                                     });
                                 } ]);
 //transfer 
-app.controller('transferCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        // todo
+app.controller('transferCtrl', ['$scope', '$location','CompteService',
+    function($scope, $location,CompteService) {
+	console.log=($scope.cpt_origine);
+	$scope.submit = function (){
+		var cpt1=$scope.cpt_origine.numCpt;
+		var cpt2=$scope.cpt_dest;
+		var mont=$scope.mont;
+		CompteService.virer(cpt1, cpt2, mont);
+	};
     }]);
 
 //notify   
@@ -280,7 +286,7 @@ app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window'
         ClientMdpService.fetchMdpClient().then(function(d) {
             self.user = d;
             $scope.news = d;
-            console.log($scope.news);
+            //console.log($scope.news);
         }, function(errResponse) {
             console.error('Error while fetching Users');
         });}else{
@@ -294,6 +300,9 @@ app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
 
     $scope.submit = function(client) {
       console.log(client);
+      client.comptes[0].transactions[0].dateDebut=new Date();
+      client.comptes[0].transactions[0].dateFin=client.comptes[0].transactions[0].dateDebut;
+      client.comptes[0].transactions[0].type=1;
       ClientService.createClient(client);
     };
 

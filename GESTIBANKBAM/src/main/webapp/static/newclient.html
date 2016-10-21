@@ -153,6 +153,12 @@
 	      <input type="file" class="form-control" id="cni">
 	    </div>
   		</div>
+  		<div class="form-group">
+			  <label class="control-label col-sm-3" for="ouv">Montant pour l'ouverture (minimum 10€) : </label>
+			  <div class="col-sm-3">          
+			    <input type="number" min="10" class="form-control" id="ouv" ng-model="client.comptes[0].transactions[0].montant" placeholder="Entrez le montant désiré : ">
+			  </div>
+			</div>
 		<div class="form-group">        
 		  <div class="col-sm-offset-2 col-sm-10">
 		    <button type="submit" class="btn btn-default"ng-disabled="myForm.$invalid">Valider ma demande</button>

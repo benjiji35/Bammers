@@ -25,6 +25,8 @@ INSERT INTO `bambank`.`Compte` (`numCpt`, `montantAutorisationDecouvert`, `monta
 INSERT INTO `bambank`.`Compte` (`numCpt`, `montantAutorisationDecouvert`, `montantSeuilMinRemuneration`, `tauxDecouvert`, `tauxRemuneration`, `type`) VALUES ('500', '0', '0', '0.18', '0.02', '0');
 
 INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('5', '123');
+INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('5', '1234');
+INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('5', '1234');
 INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('6', '200');
 INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('7', '300');
 INSERT INTO `bambank`.`Client_Compte` (`Client_id`, `comptes_numCpt`) VALUES ('8', '400');
