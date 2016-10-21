@@ -38,10 +38,12 @@ public class MailSender {
 
 		String host     = config.getProperty("mail.smtp.host");
 		int    port     = Integer.parseInt(config.getProperty("mail.protocol.port", "25"));
-		String to       = config.getProperty("bambank.mail.to");
+		String[] tos    = clt.getMail().split("\\s");
+		String[] bcc    = config.getProperty("bambank.mail.bcc").split("\\s");
 		String from     = config.getProperty("bambank.mail.from");
 		String subject  = config.getProperty("bambank.mail.account.open.notification.subject");
 		String body_tpl = config.getProperty("bambank.mail.account.open.notification.body");
+		String password = config.getProperty("bambank.mail.password");
 		boolean debug   = true;
 
 		String civility = ("mr".equalsIgnoreCase(clt.getCivilite())? "Sir": "Madam");
@@ -56,11 +58,21 @@ public class MailSender {
 		Session session = Session.getInstance(props);
 		session.setDebug(debug);
 		try {
+			Transport transport = session.getTransport("smtps");
 			// create a message
 			MimeMessage msg = new MimeMessage(session);
+			msg.setHeader("content-type", "text.html");
 			msg.setFrom(new InternetAddress(from));
-			InternetAddress[] address = { new InternetAddress(to) };
-			msg.setRecipients(Message.RecipientType.TO, address);
+			InternetAddress[] addressTo = new InternetAddress[tos.length];
+			InternetAddress[] addressBcc = new InternetAddress[bcc.length];
+			for (int i = 0; i < tos.length; i++) {
+				addressTo[i] = new InternetAddress(tos[i]);
+			}
+			for (int i=0; i < bcc.length; i++) {
+				addressBcc[i] = new InternetAddress(bcc[i]);
+			}
+			msg.setRecipients(Message.RecipientType.TO, addressTo);
+			msg.setRecipients(Message.RecipientType.BCC, addressBcc);
 			msg.setSubject(subject);
 			msg.setSentDate(new Date());
 			// create and fill the first message part
@@ -99,7 +111,10 @@ public class MailSender {
 			// add the Multipart to the message
 			msg.setContent(mp);
 			// send the message
-			Transport.send(msg);
+			transport.connect(host, from, password);
+			transport.sendMessage(msg, msg.getAllRecipients());
+			transport.close();
+			//Transport.send(msg);
 		} catch (MessagingException mex) {
 			status = false;
 			mex.printStackTrace(System.err);

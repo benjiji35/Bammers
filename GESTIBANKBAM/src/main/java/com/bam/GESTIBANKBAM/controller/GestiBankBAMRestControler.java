@@ -125,8 +125,6 @@ public class GestiBankBAMRestControler {
 			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
 		}
 		System.out.println("Client founded :" + client.toString());
-		// TODO - remove the line below [for testing only]
-		clientService.sendMail(client);
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}
 
