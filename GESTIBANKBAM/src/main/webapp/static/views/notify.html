@@ -13,17 +13,15 @@
 	  <caption>Liste des comptes</caption>
 	    <thead>
 	      <tr>
-			<th>Type</th>
-			<th>Auteur</th>
+			<th>Date</th>
 			<th>Message</th>
-			<th>Supprimer</th>
+			<th></th>
 	      </tr>
 	    </thead>
-	    <tbody>
-	      <tr ng-repeat="">
-	        <td ng-bind=""></td>
-	        <td ng-bind=""></td>
-	        <td ng-bind=""></td>
+	    <tbody ng-repeat="n in notif">
+	      <tr ng-repeat="notif in n.notifications">
+	        <td>{{notif.date}}</td>
+	        <td>{{notif.message}}</td>
 	        <td><input type='button' onClick='' value = 'Supprimer' class="btn btn-default"/></td>
 	      </tr>
 	    </tbody>

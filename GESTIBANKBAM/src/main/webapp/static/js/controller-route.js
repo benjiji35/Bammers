@@ -121,7 +121,12 @@ app.controller('transferCtrl', ['$scope', '$location','CompteService',
 //notify   
 app.controller('notifyCtrl', ['$scope', '$location', 
     function($scope, $location) {
-        // todo
+	var d = null;
+	var compte= null;
+	d =sessionStorage.getItem("pers");
+	pers = JSON.parse(d);
+	var compte = pers.comptes;
+	$scope.notif=compte;
     }]);
     
 //request       
