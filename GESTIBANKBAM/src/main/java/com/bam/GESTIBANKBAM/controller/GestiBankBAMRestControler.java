@@ -392,4 +392,22 @@ public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsB
 //			System.out.println("Compte founded :" + compte.toString());
 //			return new ResponseEntity<Compte>(compte, HttpStatus.OK);
 	}
+	//-------------------Faire un virement--------------------------------------------------------
+
+		@RequestMapping(value = "/clients/{clt}/{mont}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public void setOuverture(@PathVariable("clt") Long clt, @PathVariable("mont") double mont) throws Throwable {
+			System.out.println("Fetching User with id " + clt);
+//			Compte compte1 = compteService.findByNum(cpt1);
+//			Compte compte2 = compteService.findByNum(cpt2);
+//			compteService.setVirement(compte1, compte2, mont);
+			Client client = clientService.findById(clt);
+			Employe employe = employeService.findById(client.getConseillerId());
+			clientService.openNewCompte(client,employe, mont);
+//			if (compte == null) {
+//				System.out.println("Compte with number " + cpt + " not found");
+//				return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND);
+//			}
+//			System.out.println("Compte founded :" + compte.toString());
+//			return new ResponseEntity<Compte>(compte, HttpStatus.OK);
+	}
 }

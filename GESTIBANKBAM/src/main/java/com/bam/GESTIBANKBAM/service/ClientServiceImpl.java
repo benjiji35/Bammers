@@ -97,6 +97,11 @@ public class ClientServiceImpl implements ClientService {
 	public boolean sendMail(Client clt) {
 		return MailSender.sendMail(clt);
 	}
+
+	@Override
+	public void openNewCompte(Client clt, Employe cons, double mont) {
+		clientDAO.openNewCompte(clt, cons, mont);		
+	}
 	
 //	@Override
 //	public void addMdpToClient(Long idClient, Client c ) {

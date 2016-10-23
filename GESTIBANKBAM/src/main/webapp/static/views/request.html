@@ -4,7 +4,7 @@
 						<li><a href="#">Accueil</a></li>
 						<li class="active">Demande</li>
 						<li class="active" ng-show="choix==1">Commande chéquier</li>
-						<li class="active" ng-show="choix==2">Changer de type de compte</li>
+<!-- 						<li class="active" ng-show="choix==2">Changer de type de compte</li> -->
 						<li class="active" ng-show="choix==3">Ouvrir un nouveau compte</li>
 					</ul>
 				</div>
@@ -40,40 +40,40 @@
 		  </table>
 		 </div>
 	</div>
-	<div ng-show="choix==2">
-		<h4>Changer de type de compte</h4>
-		<div class="table-responsive">          
-		  <table class="table">
-		  <caption>Liste des comptes</caption>
-		    <thead>
-		      <tr>
-				<th>Compte</th>
-				<th>Numéro</th>
-				<th>Solde</th>
-				<th>Type</th>
-				<th>Demander la modification de type</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr ng-repeat="">
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
-		        <td><input type='button' onClick='' value = 'Modifier' class="btn btn-default"/></td>
-		      </tr>
-		    </tbody>
-		  </table>
-		 </div>
-	</div>
+<!-- 	<div ng-show="choix==2"> -->
+<!-- 		<h4>Changer de type de compte</h4> -->
+<!-- 		<div class="table-responsive">           -->
+<!-- 		  <table class="table"> -->
+<!-- 		  <caption>Liste des comptes</caption> -->
+<!-- 		    <thead> -->
+<!-- 		      <tr> -->
+<!-- 				<th>Compte</th> -->
+<!-- 				<th>Numéro</th> -->
+<!-- 				<th>Solde</th> -->
+<!-- 				<th>Type</th> -->
+<!-- 				<th>Demander la modification de type</th> -->
+<!-- 		      </tr> -->
+<!-- 		    </thead> -->
+<!-- 		    <tbody> -->
+<!-- 		      <tr ng-repeat=""> -->
+<!-- 		        <td ng-bind=""></td> -->
+<!-- 		        <td ng-bind=""></td> -->
+<!-- 		        <td ng-bind=""></td> -->
+<!-- 		        <td ng-bind=""></td> -->
+<!-- 		        <td><input type='button' onClick='' value = 'Modifier' class="btn btn-default"/></td> -->
+<!-- 		      </tr> -->
+<!-- 		    </tbody> -->
+<!-- 		  </table> -->
+<!-- 		 </div> -->
+<!-- 	</div> -->
 	<div ng-show="choix==3">
 		<h4>Ouvrir un nouveau compte</h4>
 		<div class="container" id="newcl">
-		  <form class="form-horizontal">
+		  <form class="form-horizontal" name="myForm" ng-submit="open(util, mont)">
 			<div class="form-group">
 			  <label class="control-label col-sm-3" for="ouv">Montant pour l'ouverture (minimum 10€) : </label>
 			  <div class="col-sm-3">          
-			    <input type="number" min="10" class="form-control" id="ouv" placeholder="Entrez le montant désiré : ">
+			    <input type="number" min="10" class="form-control" ng-model="mont" id="ouv" placeholder="Entrez le montant désiré : ">
 			  </div>
 			</div>
 			<div class="form-group">        

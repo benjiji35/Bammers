@@ -130,9 +130,13 @@ app.controller('notifyCtrl', ['$scope', '$location',
     }]);
     
 //request       
-app.controller('requestCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        // todo
+app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
+    function($scope, $location, ClientService) {
+        $scope.open=function(){
+        	var util =$scope.util;
+        	var mont= $scope.mont;
+        	ClientService.OpenNewCompte(util.id, mont);
+        }
     }]);
 
 //print         

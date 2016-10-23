@@ -1,12 +1,16 @@
 package com.bam.GESTIBANKBAM.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
+import com.bam.GESTIBANKBAM.model.EmployeNotification;
+import com.bam.GESTIBANKBAM.model.Notification;
 import com.bam.GESTIBANKBAM.model.Personne;
+import com.bam.GESTIBANKBAM.service.EmployeService;
 
 
 @Repository ("clientDAO")
@@ -107,4 +111,12 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 		System.out.println(">>> OK");
 		return agt;
 	}
-}
+
+
+
+	@Override
+	public void openNewCompte(Client client, Employe cons, double montant) {
+		Employe conseiller = getConseiller(client);
+		EmployeNotification ntf = new EmployeNotification("Votre client "+client.getCivilite()+" "+ client.getNom()+" "+client.getPrenom()+"souhaite ouvrir un compte avec", new Date());
+		conseiller.addNotification(ntf);
+	}}

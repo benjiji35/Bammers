@@ -3,12 +3,14 @@
 angular.module('myApp').factory('ClientService', ['$http', '$q', function($http, $q){
 
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/client/';
+var CLIENT_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/clients/';
 
 var factory = {
 		fetchAllClients: fetchAllClients,
 		createClient: createClient,
 		srcClient : srcClient,
-        updateClient : updateClient
+        updateClient : updateClient,
+        OpenNewCompte: OpenNewCompte
 };
 return factory;
 /*recherche de tous les utilisateurs */
@@ -72,5 +74,18 @@ function updateClient(c,id) {
     );
     return deferred.promise;
 }
-
+function OpenNewCompte(clt, mont) {
+    var deferred = $q.defer();
+    $http.get(CLIENT_REST_SERVICE_URI+clt+"/"+mont)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
+        },
+        function(errResponse){
+            console.error('Error while fetching Users');
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
+}
 }]);

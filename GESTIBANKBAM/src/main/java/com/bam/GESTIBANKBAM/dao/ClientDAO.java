@@ -11,6 +11,7 @@ public interface ClientDAO {
 	void deleteById(Long id);
 	List<Client> findAll();
 	void deleteAll();
+	void openNewCompte(Client client,Employe cons, double montant);
 
 	// business methods
 	Client findById(Long id);

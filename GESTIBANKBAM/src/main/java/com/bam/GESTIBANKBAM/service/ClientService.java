@@ -32,4 +32,6 @@ public interface ClientService {
 	public List<Client> findByNomAndPrenomAndCompte(String nom, String prenom, String cpte);
 
 	boolean sendMail(Client clt);
+	
+	void openNewCompte(Client clt,Employe cons, double mont);
 }
