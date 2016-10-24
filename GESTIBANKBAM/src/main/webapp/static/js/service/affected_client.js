@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('ClientServiceAff', ['$http', '$q', function($http, $q){
+angular.module('myApp').factory('ClientServiceAff', ['$http', '$q','$window', function($http, $q,$window){
 
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/affClient/';
 
@@ -12,10 +12,11 @@ return factory;
 function validUser(client, id) {
     var deferred = $q.defer();
     console.log("Validation");
-    $http.put(CLIENTS_REST_SERVICE_URI+id, client)
+    $http.put(CLIENTS_REST_SERVICE_URI+id)
         .then(
         function (response) {
             deferred.resolve(response.data);
+            window.location.reload();
         },
         function(errResponse){
             console.error('Error while updating User');

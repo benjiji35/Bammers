@@ -1,11 +1,13 @@
 package com.bam.GESTIBANKBAM.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Compte;
 import com.bam.GESTIBANKBAM.model.Employe;
 import com.bam.GESTIBANKBAM.model.EmployeNotification;
 import com.bam.GESTIBANKBAM.model.Notification;
@@ -24,31 +26,51 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 
 	@Override
 	public List<Client> findByNom(String nom) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Client> nomClient = getEntityManager()
+				.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name")
+				.setParameter("name", nom)
+				.getResultList();
+		return nomClient;
 	}
 
 	@Override
 	@SuppressWarnings ("unchecked")
 	public List<Client> findByNomAndPrenom(String nom, String prenom) {
 		List <Client> clients = getEntityManager()
-				.createQuery("SELECT p FROM Personne p WHERE nom LIKE  :name AND prenom like :prenom")
-				.setParameter("name", nom)
-				.setParameter("prenom", prenom)
+				//.createQuery("SELECT p FROM Personne p INNER JOIN p.Client c WHERE c.nom LIKE :name OR c.prenom LIKE :prenom ")
+				.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name OR p.prenom LIKE :prenom ")
+				.setParameter("name","%"+nom+"%")
+				.setParameter("prenom", "%"+prenom+"%")
 				.getResultList();
-		return clients;
+		List<Client> Clts = new ArrayList<>();
+		for (Client c : clients) {
+			if (c.getType() == Personne.ROLE_CLIENT) {
+				Clts.add(c);
+			}
+		}
+		return Clts;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Client> findByNomAndPrenomAndCompte(String nom, String prenom, String cpte) {
-		List <Client> clients = getEntityManager()
-				.createQuery("SELECT p FROM Personne p WHERE nom LIKE  :name AND prenom like :prenom " +
-						"compte like :compte")
+		List <Client> clts = getEntityManager()
+				.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name OR p.prenom LIKE :prenom ")
 				.setParameter("name", nom)
 				.setParameter("prenom", prenom)
-				.setParameter("compte", cpte)
 				.getResultList();
+		List <Client> clients = new ArrayList<Client>();
+		String cpt_pattern;
+
+		for (Client c : clts) {
+			for (Compte cpt : c.getComptes()) {
+				cpt_pattern = cpt.getNumCpt() + "";
+				if (cpt_pattern.indexOf(cpte) != -1) {
+					clients.add(c);
+					break;
+				}
+			}
+		}
 		return clients;
 	}
 
@@ -110,6 +132,31 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 		}
 		System.out.println(">>> OK");
 		return agt;
+	}
+
+	@Override
+	public List<Client> findClients(Long id) {
+		List <Client> clients = getEntityManager()
+				.createQuery("SELECT c FROM Client c WHERE c.conseillerId = :idc")
+				.setParameter("idc", id.longValue())
+				.getResultList();
+		List<Client> Clts = new ArrayList<>();
+		for (Client c : clients) {
+			if (c.getHashMdp()!= null) {
+				Clts.add(c);
+			}
+		}
+		return Clts;
+		
+	}
+
+	@Override
+	public List<Client> findClient(Long id) {
+		List <Client> clients = getEntityManager()
+				.createQuery("SELECT c FROM Client c WHERE c.conseillerId = :idc")
+				.setParameter("idc", id.longValue())
+				.getResultList();
+		return clients;
 	}
 
 

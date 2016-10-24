@@ -25,4 +25,6 @@ public interface EmployeService {
 	
 	public boolean isExists(Employe emp);
 
+	void modifyConseiller(Long id, Employe e);
+
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.bam.GESTIBANKBAM.dao.EmployeDAO;
+import com.bam.GESTIBANKBAM.dao.EmployeDAOImpl;
+import com.bam.GESTIBANKBAM.dao.PersonneDAO;
+import com.bam.GESTIBANKBAM.dao.PersonneDAOImpl;
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.CommandeChequier;
 import com.bam.GESTIBANKBAM.model.Compte;
+import com.bam.GESTIBANKBAM.model.Compte.CompteType;
+import com.bam.GESTIBANKBAM.model.CompteNotification;
 import com.bam.GESTIBANKBAM.model.Credit;
+import com.bam.GESTIBANKBAM.model.Debit;
 import com.bam.GESTIBANKBAM.model.Employe;
 import com.bam.GESTIBANKBAM.model.Notification;
 import com.bam.GESTIBANKBAM.model.Personne;
+import com.bam.GESTIBANKBAM.model.Transaction;
 import com.bam.GESTIBANKBAM.service.ClientService;
 import com.bam.GESTIBANKBAM.service.CompteService;
 import com.bam.GESTIBANKBAM.service.EmployeService;
 import com.bam.GESTIBANKBAM.service.PersonneService;
+import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
+import com.bam.GESTIBANKBAM.utils.MailSender;
 
 @RestController
 public class GestiBankBAMRestControler {
@@ -61,11 +73,23 @@ public class GestiBankBAMRestControler {
 
 		return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
 	}
+	
+	// -------------------Retrieve Filtered Clients--------------------------------------------------------
+
+		@RequestMapping(value = "/filteredClient/{id}", method = RequestMethod.GET)
+		public ResponseEntity<List<Client>> listClients(@PathVariable("id") Long id) {
+			List<Client> clients = clientService.findClients(id);
+			if (clients == null || clients.isEmpty()) {
+				return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
+			}
+
+			return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
+		}
 	// -------------------Retrieve All Clients--------------------------------------------------------
 
-	@RequestMapping(value = "/mdpClient/", method = RequestMethod.GET)
-	public ResponseEntity<List<Client>> listMdpClient() {
-		List<Client> clients = clientService.findAll();
+	@RequestMapping(value = "/mdpClient/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Client>> listMdpClient(@PathVariable("id") Long id) {
+		List<Client> clients = clientService.findClient(id);
 		if (clients == null || clients.isEmpty()) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
@@ -74,7 +98,7 @@ public class GestiBankBAMRestControler {
 		for (Client c : clients) {
 			if (c.getHashMdp() == null) {
 				//if (c.getConseiller() != null)
-				if (c.getConseillerId() == null) {
+				if (c.getConseillerId() != null) {
 					// System.out.println(c);
 					clientsSansMdp.add(c);
 				}
@@ -93,16 +117,16 @@ public class GestiBankBAMRestControler {
 		if (clients == null || clients.isEmpty()) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
 		}
-		List<Client> clientsSansConseiller = new ArrayList<>();
+		List<Client> clientsSansMdp = new ArrayList<>();
 		for (Client c : clients) {
 			//if (c.getConseiller() == null) {
-			if (c.getConseillerId() == null) {
+			if (c.getHashMdp() == null) {
 				// System.out.println(c);
-				clientsSansConseiller.add(c);
+				clientsSansMdp.add(c);
 			}
 		}
 
-		return new ResponseEntity<List<Client>>(clientsSansConseiller, HttpStatus.OK);
+		return new ResponseEntity<List<Client>>(clientsSansMdp, HttpStatus.OK);
 	}
 
 	// -------------------Retrieve Single Client--------------------------------------------------------
@@ -131,9 +155,40 @@ public class GestiBankBAMRestControler {
 		if (cl == null) {
 			return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
 		}
-		System.out.println("Client found :" + cl.toString());
+		System.out.println("Client found :" + cl);
 		return new ResponseEntity<List<Client>>(cl, HttpStatus.OK);
 	}
+	
+	// -------------------Retrieve Single Client By nom and prenom-------------------------------
+
+		@RequestMapping(value = "/client/nom-{nom}/prenom-{prenom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<Client>> getUsers(@PathVariable("nom") String nom, @PathVariable("prenom") String prenom) {
+			
+			System.out.println("Fetching Client with nom" + " " + nom+" "+"Fetching Client with prenom" + " " +prenom);
+			
+			List<Client> cl = clientService.findByNomAndPrenom(nom,prenom);
+			if (cl == null) {
+				return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
+			}
+			System.out.println("Client found :" + cl);
+			return new ResponseEntity<List<Client>>(cl, HttpStatus.OK);
+		}
+		
+	// -------------------Retrieve Single Client By nom ------------------------------------------------
+
+		@RequestMapping(value = "/client/nom-{nom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<Client>> getUser4(@PathVariable("nom") String nom) {
+			
+			System.out.println("Fetching Client with nom" + " " + nom);
+			
+			List<Client> cl = clientService.findByNom(nom);
+			if (cl == null) {
+				return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);
+			}
+			System.out.println("Client found :" + cl);
+			return new ResponseEntity<List<Client>>(cl, HttpStatus.OK);
+		}
+
 
 	// -------------------Create a Client--------------------------------------------------------
 
@@ -153,6 +208,7 @@ public class GestiBankBAMRestControler {
 		double salaire = Double.parseDouble((client.get("salaire")+""));
 		String civilite = (String)client.get("civilite");
 		LinkedHashMap<String, Object> comptes = (LinkedHashMap<String, Object>)client.get("comptes");
+
 
 		LinkedHashMap<String,Object> unCompte = (LinkedHashMap<String,Object>)comptes.values().iterator().next();
 //		LinkedHashMap<String, Object> unCompte =  (LinkedHashMap<String, Object>)client.get("0");
@@ -239,32 +295,58 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
 		
 	}
+	
+	// ------------------- Modify a Client --------------------------------------------------------
+
+		@RequestMapping(value = "/UpdateClient/{id}", method = RequestMethod.PUT)
+		public ResponseEntity<Client> modifyClients(@PathVariable("id") Long id, @RequestBody Client client) {
+		
+			System.out.println("Ajout du client :"+client);
+			
+			
+			if (client == null) {
+				System.out.println("Client with id " + id + " not found");
+				return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+			}
+			clientService.modifyClient(id, client);
+			System.out.println("after the function"+client.toString());
+			return new ResponseEntity<Client>(client, HttpStatus.OK);
+			
+		}
+		
+// --------------------------------- Modify a Conseiller ---------------------------------------------------
+
+		@RequestMapping(value = "/UpdateConseiller/{id}", method = RequestMethod.PUT)
+		public ResponseEntity<Employe> modifyConseillers(@PathVariable("id") Long id, @RequestBody Employe conseiller) {
+		
+			System.out.println("Ajout du conseiller :"+conseiller);
+			
+			
+			if (conseiller == null) {
+				System.out.println("conseiller with id " + id + " not found");
+				return new ResponseEntity<Employe>(HttpStatus.NOT_FOUND);
+			}
+			employeService.modifyConseiller(id, conseiller);
+			System.out.println("after the function"+conseiller.toString());
+			return new ResponseEntity<Employe>(conseiller, HttpStatus.OK);
+			
+		}
 
 	// ------------------- Validate a Client --------------------------------------------------------
 
 	@RequestMapping(value = "/affClient/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Client> validClient(@PathVariable("id") Long id, @RequestBody Client client) {
+	public ResponseEntity<Client> validClient(@PathVariable("id") Long id) {
 		System.out.println("Validating User " + id);
 
 		Client currentClient = clientService.findById(id);
-		System.out.println("on tient le bon bout");
+		System.out.println("on tient le bon bout"+currentClient);
 
 		if (currentClient == null) {
 			System.out.println("Client with id " + id + " not found");
 			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
 		}
-
-		System.out.println("client DDN::" + client.getDdn());
-
-		if (client.getHashMdp() == null) {
-			String password = BAMTools.genPassword(20);
-			currentClient.setHashMdp(password);
-			 clientService.sendMail(client);
-		}
-
-		System.out.println("validClient() client::" + currentClient);
-
-		clientService.update(currentClient);
+		clientService.addMdpToClient(id);
+		//MailSender.sendMail(currentClient);
 		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
 	}
 	
@@ -356,26 +438,21 @@ public class GestiBankBAMRestControler {
 		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
 	}
 	
-	//----------Notification--------------------------------------
+	// -------------------Retrieve All Conseiller by nom, prenom and id--------------------------------------------------------
+
+	@RequestMapping(value = "/searchConseiller/nom-{nom}/prenom-{prenom}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <List<Employe>> getConseillers(@PathVariable("nom") String nom, @PathVariable("prenom") String prenom) {
+		System.out.println("Fetching Conseiller with nom " + nom + "with prenom"+prenom);
+		
+		List<Employe> employe = employeService.findByNomAndPrenom(nom, prenom);
+		if (employe == null) {
+			System.out.println("Employe not found");
+			return new ResponseEntity <List<Employe>>(HttpStatus.NOT_FOUND);
+		}
+		System.out.println("Employe founded :" + employe.toString());
+		return new ResponseEntity <List<Employe>>(employe, HttpStatus.OK);
+	}
 	
-@RequestMapping(value = "/notif/", method = RequestMethod.POST)
-public ResponseEntity<Void> createNotif(@RequestBody Notification pub , UriComponentsBuilder ucBuilder) {
-	System.out.println("Creating notification " + pub.getMessage() + " - " + pub.getDate());
-
-//	if (clientService.isClientExist(client)) {
-//		System.out.println("A Client with name " + client.getNom() + " " + client.getPrenom() + " already exist");
-//		return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//	}
-//
-//	if (client.getConseiller() == null) {
-//		clientService.saveClient(client);
-//		System.out.println(">>> " + client);
-//	}
-
-HttpHeaders headers = new HttpHeaders();
-headers.setLocation(ucBuilder.path("/notif/").buildAndExpand(pub.getMessage()).toUri());
-return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-}
 // -------------------Create a Conseiller--------------------------------------------------------
 
 @RequestMapping(value = "/conseiller/", method = RequestMethod.POST)
@@ -398,30 +475,26 @@ public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsB
 	return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 }
 
-//------------------- Update a Client --------------------------------------------------------
+//----------Notification--------------------------------------
 
-	@RequestMapping(value = "/Client/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Client> updateClient(@PathVariable("id") Long id, @RequestBody Client client ) {
-		
+@RequestMapping(value = "/notif/", method = RequestMethod.POST)
+public ResponseEntity<Void> createNotif(@RequestBody Notification pub , UriComponentsBuilder ucBuilder) {
+System.out.println("Creating notification " + pub.getMessage() + " - " + pub.getDate());
 
-		Client currentClient = clientService.findById(id);
-		if (currentClient == null) {
-			System.out.println("Client with id " + id + " not found");
-			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-		}
-		System.out.println(">>> update client::::" + client);
-		currentClient.setCivilite(client.getCivilite());
-		currentClient.setNom(client.getNom());
-		currentClient.setPrenom(client.getPrenom());
-		System.out.println("client DDN::" + client.getDdn());
-		currentClient.setDdn(client.getDdn());
-		currentClient.setHashMdp(client.getHashMdp());
-		currentClient.setAdresse(client.getAdresse());
-		currentClient.setNbEnfants(client.getNbEnfants());
-		clientService.update(currentClient);;
-		System.out.println(">>> update client::" + currentClient);
-		return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
-	}
+//if (clientService.isClientExist(client)) {
+//	System.out.println("A Client with name " + client.getNom() + " " + client.getPrenom() + " already exist");
+//	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+//}
+//
+//if (client.getConseiller() == null) {
+//	clientService.saveClient(client);
+//	System.out.println(">>> " + client);
+//}
+
+HttpHeaders headers = new HttpHeaders();
+headers.setLocation(ucBuilder.path("/notif/").buildAndExpand(pub.getMessage()).toUri());
+return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+}
 
 
 //-------------------Retrieve Single compte--------------------------------------------------------
@@ -445,24 +518,6 @@ public ResponseEntity<Void> createCons(@RequestBody Employe cons, UriComponentsB
 			Compte compte1 = compteService.findByNum(cpt1);
 			Compte compte2 = compteService.findByNum(cpt2);
 			compteService.setVirement(compte1, compte2, mont);
-//			if (compte == null) {
-//				System.out.println("Compte with number " + cpt + " not found");
-//				return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND);
-//			}
-//			System.out.println("Compte founded :" + compte.toString());
-//			return new ResponseEntity<Compte>(compte, HttpStatus.OK);
-	}
-	//-------------------Faire un virement--------------------------------------------------------
-
-		@RequestMapping(value = "/clients/{clt}/{mont}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-		public void setOuverture(@PathVariable("clt") Long clt, @PathVariable("mont") double mont) throws Throwable {
-			System.out.println("Fetching User with id " + clt);
-//			Compte compte1 = compteService.findByNum(cpt1);
-//			Compte compte2 = compteService.findByNum(cpt2);
-//			compteService.setVirement(compte1, compte2, mont);
-			Client client = clientService.findById(clt);
-			Employe employe = employeService.findById(client.getConseillerId());
-			clientService.openNewCompte(client,employe, mont);
 //			if (compte == null) {
 //				System.out.println("Compte with number " + cpt + " not found");
 //				return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND);

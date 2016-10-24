@@ -10,6 +10,7 @@ public interface ClientDAO {
 	void save(Client clt);
 	void deleteById(Long id);
 	List<Client> findAll();
+	List<Client> findClients(Long id);
 	void deleteAll();
 	void openNewCompte(Client client,Employe cons, double montant);
 
@@ -21,4 +22,6 @@ public interface ClientDAO {
 	List<Client> findByPrenom(String prenom);
 	List<Client> findByNomAndPrenom(String nom, String prenom);
 	List<Client> findByNomAndPrenomAndCompte(String name, String prenom, String cpte);
+	List<Client> findClient(Long id);
+	
 }

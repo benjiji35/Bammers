@@ -50,7 +50,7 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'askCtrl'})
 		.when('/see', {
 			templateUrl: 'views/see.html',
-			controller: 'seeCtrl'})
+			controller: ''})
 		.when('/transfer', {
 			templateUrl: 'views/transfer.html',
 			controller: 'transferCtrl'})
@@ -66,13 +66,13 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/update', {
 			templateUrl: 'views/update.html',
 			controller: 'updateCtrl'})
-		.when('/search_ag', {
+		.when('/search_ag/:id', {
 			templateUrl: 'views/search_ag.html',
 			controller: 'search_agCtrl'})
 		.when('/search_ad', {
 			templateUrl: 'views/search_ad.html',
 			controller: 'search_adCtrl'})
-		.when('/consult_ag', {
+		.when('/consult_ag/:id', {
 			templateUrl: 'views/consult_ag.html',
 			controller: 'consult_agCtrl'})
 		.when('/search_ad', {

@@ -33,5 +33,13 @@ public interface ClientService {
 
 	boolean sendMail(Client clt);
 	
+	List<Client> findClients(Long id);
+
+	void addMdpToClient(Long idClient);
+	
+	void modifyClient(Long idClient, Client c);
+
+	List<Client> findClient(Long id);
+	
 	void openNewCompte(Client clt,Employe cons, double mont);
 }

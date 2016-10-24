@@ -12,41 +12,34 @@
 	<div class="parent">
 	    <div class="colonne c1">
 		    <label class="control-label" for="nom">Nom</label>
-		    <input class="form-control" ng-value ="cons.nom" ng-disabled="checked">
+		    <input class="form-control" ng-model="cons.nom" ng-disabled="checked">
 		    <label class="control-label" for="prenom">Prénom</label>
-		    <input class="form-control" ng-value ="cons.prenom" ng-disabled="checked">
+		    <input class="form-control"  ng-model="cons.prenom" ng-disabled="checked">
 		    <label class="control-label" for="date">Date de naissance : </label>
-		    <input class="form-control" ng-value ="cons.ddn" ng-disabled="checked">
+		    <input class="form-control"  ng-model="cons.ddn" ng-disabled="checked">
 		    <label class="control-label" for="adresse">Adresse : </label>
-		    <input class="form-control" ng-value ="cons.adresse.numero + ' ' + cons.adresse.rue" ng-disabled="checked">
+		    <input class="form-control" ng-model ="cons.adresse.numero + ' ' + cons.adresse.rue"  ng-disabled="checked">
 		    <label class="control-label" for="ville">Ville : </label>
-		    <input class="form-control" ng-value ="cons.adresse.ville" ng-disabled="checked">
+		    <input class="form-control" ng-model="cons.adresse.ville" ng-disabled="checked">
 		    <label class="control-label" for="cp">Code Postal : </label>
-		    <input class="form-control" ng-value ="cons.adresse.codePostal" ng-disabled="checked">
+		    <input class="form-control" ng-model="cons.adresse.codePostal" ng-disabled="checked">
 	    </div>
 	    <div class="colonne c2">
-	    <label class="control-label" for="enfants">Telephone : </label>
-		    <input type="text" class="form-control"ng-value ="cons.adresse.telephone" id="telephone" ng-disabled="checked">
-	    <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
-		  <select class="form-control" id="sm" ng-model="cons.situationMatrimoniale"  ng-disabled="checked">
-	        <option value="0">Célibataire</option>
-	        <option value="1">Marié(e)</option>
-	        <option value="2">Divorcé(e)</option>
-	        <option value="3">veuf(ve)</option>
-	      </select>
+	    	<label class="control-label" for="enfants">Telephone : </label>
+		    <input type="text" class="form-control"ng-model ="cons.adresse.telephone" id="telephone" ng-disabled="checked">
+	  		<label class="control-label" for="sm">Situation matrimoniale : </label>
+		    <input class="form-control" id="sm" ng-model="cons.situationMatrimoniale" ng-disabled="checked">
 		    <label class="control-label" for="enfants">Nombre d'enfants : </label>
-		    <input type="text" class="form-control" id="enfants" ng-value ="cons.nbEnfants" ng-disabled="checked">
-		    <label class="control-label" for="pro">Statut :  </label>
-		    <input type="text" class="form-control" ng-value ="cons.profession" id="pro" ng-disabled="checked">
+		    <input type="text" class="form-control"  ng-model="cons.nbEnfants" id="enfants" ng-disabled="checked">
+		    <label class="control-label" for="pro">Status : </label>
+		    <input type="text" class="form-control"  id="pro" ng-model="cons.profession" ng-disabled="checked">
 		    <label class="control-label" for="pro">Date d'entrée :  </label>
-		    <input type="date" class="form-control" ng-value ="cons.dateEntree" id="pro" disabled>
-		    
-		    
+		    <input type="date" class="form-control" id="pro" ng-model="cons.dateEntree" ng-disabled="checked">  
 		</div>
 	</div>
 	Verrouiller les informations : <input type="checkbox" ng-model="checked" ng-init="checked=true"/>
 	<div ng-hide="checked">
-		<input type="button" value="Valider les modifications" class="btn btn-default">
+		<input type="button" value="Valider les modifications" ng-click = "sen(cons,cons.id)" class="btn btn-default" >
 		<input type="button" value="Annuler les modifications" class="btn btn-default">
 	</div>
 </div>

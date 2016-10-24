@@ -1,4 +1,4 @@
-<div class="panel-header" ng-app="">
+<div class="panel-header">
             	<div id="navigation_help">
 					<ul class="breadcrumb">
 						<li><a href="#">Accueil</a></li>
@@ -8,57 +8,26 @@
 </div>
 <div class="panel-body">
 	<legend>COMPTES DETAILS</legend><br><br>
-	<pre><h4><a href="" ng-click="choix=1">Type: Compte Ordinaire </a></h4></pre>
-	<div class="table-responsive" ng-show="choix==1">
-		<table class="table">
- 			<thead>
-		 		<tr>
-		    		<th>Libellé</th>
-		    		<th>Débit</th>
-		    		<th>Crédit</th>
-		    		<th>Date</th>
-		    		
-		  		</tr>
-	  		</thead>
-  			<tbody>
-		  		<tr>
-		    		<td></td>
-		   			<td></td>
-		    		<td></td>
-		    		<td></td>
-		   		</tr>
-  			</tbody>
-  		</table>
-  	<pre><h4>Solde : $300</h4></pre>
+	 <div class="table-responsive">          
+	  <table class="table">
+	  <caption>Liste des comptes</caption>
+	    <thead>
+	      <tr>
+			<th>Compte</th>
+			<th>Numéro</th>
+			<th>Solde</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="cpt in util.comptes">
+	        <td></td>
+	        <td><a ng-href="#compte/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
+	        <td>{{cpt.balance}}€</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	 </div>
  </div>
-<br><br>
- <pre><h4><a href="" ng-click="choix=2">Type: Compte R&eacute;num&eacute;r&eacute;</a></h4></pre>
-	<div class="table-responsive" ng-show="choix==2">
-	<table class="table">
-		
- 		<thead>
- 		<tr>
-    		<th>Libelle</th>
-    		<th>Debit</th>
-    		<th>Credit</th>
-    		<th>date</th>
-    		
-  		</tr>
-  		</thead>
 
-  		<tbody>
-		  		<tr>
-		    		<td></td>
-		   			<td></td>
-		    		<td></td>
-		    		<td></td>
-		   		</tr>
-  			</tbody>
-
-  	</table>
-  	
-  	<pre><h4>Solde : $300</h4></pre>
-	
-</div>
 </div>	
 	

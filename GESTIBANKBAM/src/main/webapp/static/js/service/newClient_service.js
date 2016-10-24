@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('ClientServiceNew', ['$http', '$q', function($http, $q){
+angular.module('myApp').factory('ClientServiceNew', ['$http', '$q','$window', function($http, $q, $window){
 
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/newClient/';
 
@@ -33,6 +33,7 @@ function updateUser(idcl,idcons) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            $window.location.reload();
         },
         function(errResponse){
             console.error('Error while updating User');

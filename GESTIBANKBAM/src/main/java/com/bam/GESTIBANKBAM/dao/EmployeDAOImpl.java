@@ -1,5 +1,6 @@
 package com.bam.GESTIBANKBAM.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -35,15 +36,20 @@ public class EmployeDAOImpl extends AbstractDAO<Long, Employe>
 
 	@Override
 	public List<Employe> findByNomAndPrenom(String nom, String prenom) {
-		try {
-			return (List<Employe>)getEntityManager()
-				.createQuery("SELECT e FROM Employe e WHERE e.nom LIKE :nom AND e.prenom LIKE :prenom ")
-				.setParameter("nom", nom)
-				.setParameter("prenom", prenom).getResultList();
-		} catch (NoResultException nre) {
-			nre.printStackTrace(System.err);
-			return null;
-		}
+		List<Employe> employe = getEntityManager()
+				//.createQuery("SELECT p FROM Personne p,Employe e WHERE p.id = e.id  WHERE p.nom LIKE :nom OR p.prenom LIKE :prenom ")
+				.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name OR p.prenom LIKE :prenom ")
+				.setParameter("name","%"+ nom+"%")
+				.setParameter("prenom","%"+ prenom+"%")
+				.getResultList();
+		
+		List<Employe> emp = new ArrayList<>();
+			for (Employe e : employe){
+				if (e.getType()== Personne.ROLE_CONSEILLER){
+				emp.add(e);
+				}
+			}
+			return emp;
 	}
 
 	@Override

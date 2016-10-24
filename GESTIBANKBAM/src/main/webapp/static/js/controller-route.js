@@ -1,5 +1,5 @@
 app.controller('mainCtrl', function($scope) {});
-app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 'ClientServiceNew', 'UploadFileService', 
+app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 'ClientServiceNew',
     function($scope, $routeParams, $location,$q, ClientService,ClientServiceNew) {
     var self = this;
     self.users=[];
@@ -59,26 +59,28 @@ app.controller('askCtrl', ['$scope', '$location',
         console.log("askCtrl::");
     }]);
 
-app.controller('seeCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-//  var d =sessionStorage.getItem("pers");
-//  var pers = JSON.parse(d);
-//      console.log(pers.type);
-        // todo
-        //$location.url("views/see.html");
-        //$scope.role = 1;
+app.controller('seeCtrl', ['$scope', '$location', 'CompteService','$routeParams',
+                           function($scope, $location, CompteService, $routeParams) {
+    console.log("Compte view");
     }]);
-app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService',
+
+app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','ClientUpdateService',
                             '$routeParams',
-                            function($scope, $location, ClientIdService, $routeParams) {
+                            function($scope, $location, ClientIdService,ClientUpdateService, $routeParams) {
                                 console.log("hello toi");
                                 ClientIdService.searchClient($routeParams.id).then(function(d) {
                                     self.user = d;
                                     $scope.user = d;
-                                    console.log($scope.user.comptes);
+                                    console.log($scope.user);
                                 }, function(errResponse) {
                                     console.error('Error while fetching Users');
                                 });
+                                
+                                $scope.send= function (client,id){
+                               	 console.log(client);
+                               	 console.log(id);
+                               	 ClientUpdateService.UpdateClient(client,id);
+                               }                         
                             } ]);
 
 app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routeParams',
@@ -94,9 +96,9 @@ app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routePar
                                    });
                                } ]);
 
-app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService',
+app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService','ConseillerUpdateService',
                                 '$routeParams',
-                                function($scope, $location, EmployeService, $routeParams) {
+                                function($scope, $location, EmployeService,ConseillerUpdateService, $routeParams) {
                                     console.log("hello id");
                                     EmployeService.searchCons($routeParams.id).then(function(d) {
                                         self.cons = d;
@@ -105,6 +107,11 @@ app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService',
                                     }, function(errResponse) {
                                         console.error('Error while fetching Users');
                                     });
+                                    $scope.sen= function (conseiller,id){
+                                      	 console.log(conseiller);
+                                       	 console.log(id);
+                                       	 ConseillerUpdateService.UpdateConseiller(conseiller,id);
+                                       }   
                                 } ]);
 //transfer 
 app.controller('transferCtrl', ['$scope', '$location','CompteService',
@@ -152,10 +159,10 @@ app.controller('updateCtrl', ['$scope', '$location',
     }]);
 
 //search_ag     
-app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
-  function($scope, $location, ClientService){
+app.controller('search_agCtrl',  ['$scope', '$location','ClientService','$routeParams','ClientFilterService','$window',
+  function($scope, $location, ClientService,$routeParams,ClientFilterService,$window){
     console.log("fetching All Clients");
-    ClientService.fetchAllClients()
+    ClientFilterService.fetchFilteredClients($routeParams.id)
         .then(
         function(d) {
             self.users = d;
@@ -165,15 +172,17 @@ app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
             console.error('Error while fetching Users');
         }
     );
-    console.log("Entered"); 
-    $scope.sm = function (nom,prenom,cpte){
-    ClientService.srcClient(nom,prenom,cpte)
+    
+    $scope.sm = function (nom,prenom){
+    	 console.log("Entered"); 
+    ClientService.srcClient(nom,prenom)
+    
     .then(
             function(d) {
                 self.users = d;
                 $scope.users=d;
                 console.log($scope.users);
-                $window.location = 'accueil_ag.html#/search_ag';
+                
             },
             function(errResponse){
                 console.error('Error while fetching Users');
@@ -184,8 +193,8 @@ app.controller('search_agCtrl',  ['$scope', '$location','ClientService',
 ]);
 
 //search_ad
-app.controller('search_adCtrl', ['$scope', '$location','EmployeService',
-     function($scope, $location, EmployeService)
+app.controller('search_adCtrl', ['$scope', '$location','EmployeService','EmpSearchService',
+     function($scope, $location, EmployeService,EmpSearchService)
      {
             console.log("hello2");
             EmployeService.fetchConseiller()
@@ -198,19 +207,30 @@ app.controller('search_adCtrl', ['$scope', '$location','EmployeService',
                 function(errResponse){
                     console.error('Error while fetching Users');
                 }
-            );  
+            ); 
+            
+            $scope.srcCons = function (nom,prenom){
+            	console.log(nom,prenom);
+            	EmpSearchService.fetchCons(nom,prenom)
+            	  .then(
+                          function(d) {
+                              self.cons = d;
+                              $scope.cons=d;
+                              console.log($scope.cons);
+                          },
+                          function(errResponse){
+                              console.error('Error while fetching Users');
+                          }
+                      ); 
+            }
 }]);
 
-app.controller('valid_Ctrl', ['$scope', '$location','ClientService','$routeParams',
-                                 function($scope, $location, ClientService,$routeParams)
-                                 {
-                                    }]);
                         
 //consult_agCtrl
 app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','ClientServiceAff','$routeParams',
         function($scope, $location, ClientMdpService,ClientServiceAff,$routeParams) {
-            console.log("helloMdp");
-            ClientMdpService.fetchMdpClient().then(function(d) {
+            ClientMdpService.fetchMdpClient($routeParams.id).then(function(d) {
+            	console.log(">> fetchMdpClient");
                 self.user = d;
                 $scope.user = d;
                 console.log($scope.user);
@@ -221,18 +241,6 @@ app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','Cl
             $scope.valid= function(client, id){
                 console.log(client);
                 ClientServiceAff.validUser(client, id)
-                    .then(
-                            ClientMdpService.fetchMdpClient() 
-                        .then(
-                                function(d) {
-                                    self.user = d;
-                                    $scope.user=d;
-                },
-                                function(errResponse){
-                                    console.error('Error while fetching Users');
-                }
-            ));
-                
                 }
         } ]);
 //affectCtrl
@@ -266,23 +274,12 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
                 console.log(idcl);
                 console.log(idcons);                
                 ClientServiceNew.updateUser(idcl,idcons)     
-                .then(
-                        ClientServiceNew.fetchNewClients() 
-                        .then(
-                                function(d) {
-                                    self.users = d;
-                                    $scope.users=d;
-                },
-                                function(errResponse){
-                                    console.error('Error while fetching Users');
-                }
-            ));
-                }
+               }
         }]);
 
 //rootCtrl
-app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window',
-    function($scope, $location,ClientMdpService, $window) {
+app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window','$routeParams',
+    function($scope, $location,ClientMdpService, $window,$routeParams) {
         var d = null;
         var pers = null;
         d =sessionStorage.getItem("pers");
@@ -292,10 +289,10 @@ app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window'
             console.log(pers);
         console.log("rootCtrl::");
         console.log("=============");
-        ClientMdpService.fetchMdpClient().then(function(d) {
+        ClientMdpService.fetchMdpClient($routeParams.id).then(function(d) {
             self.user = d;
             $scope.news = d;
-            //console.log($scope.news);
+            console.log($scope.news);
         }, function(errResponse) {
             console.error('Error while fetching Users');
         });}else{
@@ -316,8 +313,7 @@ app.controller('newClCtrl', ['$scope', '$location', 'ClientService', 'UploadFile
   $scope.uploadFile = function(fd, sid, key) { //, field) {
   	UploadFileService.uploadFile(fd, sid, key);
   }; 
-
-
+     
     $scope.submit = function(client) {
       console.log(client);
       client.comptes[0].transactions[0].dateDebut=new Date();
@@ -381,52 +377,7 @@ app.controller(
             }} ]);
 
 
-//app.controller(
-//
-//'searchPrenomCtrl',
-//[
-//      '$scope',
-//      '$location',
-//      'ClientService',
-//      '$routeParams',
-//      function($scope, $location, ClientService,$routeParams) {
-//          console.log("hello");
-//          ClientService.srcClientPrenom($routeParams.prenom) 
-//                      .then
-//                          (function(d) {
-//                                  $scope.nm = d;                                                  
-//                                  console
-//                                          .log($scope.nm);
-//                                                                                      
-//                              },
-//                              function(errResponse) {
-//                                  console.error = ("Invalid entry");
-//                              });                     
-//
-//      } ]);
-//app.controller(
-//
-//'searchNomPrenomCtrl',
-//[
-//      '$scope',
-//      '$location',
-//      'ClientService',
-//      '$routeParams',
-//      function($scope, $location, ClientService,$routeParams) {
-//          console.log("hello");
-//          ClientService.srcClientNomPrenom($routeParams.nom , $routeParams.prenom) 
-//                      .then
-//                          (function(d) {
-//                                  $scope.nm = d;                                                  
-//                                  console
-//                                          .log($scope.nm);
-//                                                                                      
-//                              },
-//                              function(errResponse) {
-//                                  console.error = ("Invalid entry");
-//                              });                     
-//
-//      } ]);
+
 
 
 

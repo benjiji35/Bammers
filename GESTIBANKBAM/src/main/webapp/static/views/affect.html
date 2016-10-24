@@ -10,7 +10,7 @@
   <legend>Affectation</legend>
  <div class="table-responsive">          
   <table class="table">
-  <caption>Vous avez {{users.length}} liste de client</caption>
+  <caption>Vous avez {{users.length}} liste de client à affecter</caption>
     <thead>
       <tr>
     <th>Nom</th>
@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="c in users">
+      <tr ng-repeat="c in users | filter:{conseillerId: null}">
         <td>{{c.nom}}</td>
         <td>{{c.prenom}}</td>
         <td><a ng-href="#see_cl/{{c.id}}">Détails</a></td>
@@ -33,6 +33,25 @@
             </select>
         </td>
         <td><input ng-disabled="checked" type ="button" class="btn btn-default" ng-click = "submit(c.id, conseiller.id)" value="Valider"></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table">
+  <caption>Liste des clients affectés et en cours de validations</caption>
+    <thead>
+      <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Détails</th>
+    <th>Conseiller</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cl in users | filter:{conseillerId: '!!'}">
+        <td>{{cl.nom}}</td>
+        <td>{{cl.prenom}}</td>
+        <td><a ng-href="#see_cl/{{cl.id}}">Détails</a></td>
+        <td>{{cl.conseillerId}}</td>		
       </tr>
     </tbody>
   </table>

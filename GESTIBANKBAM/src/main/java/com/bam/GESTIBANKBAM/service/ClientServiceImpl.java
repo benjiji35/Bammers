@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.bam.GESTIBANKBAM.dao.ClientDAO;
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
+import com.bam.GESTIBANKBAM.model.Transaction;
+import com.bam.GESTIBANKBAM.utils.BAMTools;
 import com.bam.GESTIBANKBAM.utils.MailSender;
 
 @Service("clientService")
@@ -97,19 +99,100 @@ public class ClientServiceImpl implements ClientService {
 	public boolean sendMail(Client clt) {
 		return MailSender.sendMail(clt);
 	}
-
+	
 	@Override
 	public void openNewCompte(Client clt, Employe cons, double mont) {
 		clientDAO.openNewCompte(clt, cons, mont);		
 	}
 	
-//	@Override
-//	public void addMdpToClient(Long idClient, Client c ) {
-//		Client currentCli = findById(idClient);
-//		c.getHashMdp();
-//		save(currentCli);
-//		 
-//	}
+	@Override
+	public List<Client> findClients(Long id) {
+		return clientDAO.findClients(id); 
+	}
+	
+	@Override
+	public void addMdpToClient(Long id) {
+		Client currentCli = findById(id);
+		
+		if (currentCli.getHashMdp() == null) {
+			String password = BAMTools.genPassword(20);
+			currentCli.setHashMdp(password);
+		}
+		save(currentCli);
+		MailSender.sendMail(currentCli);
+	}
+
+	@Override
+	public void modifyClient(Long id, Client c) {
+		Client currentCli = findById(id);
+	
+//		currentCli.setSituationMatrimoniale(c.getSituationMatrimoniale());
+//		if (c.getNom()==null || c.getNom().equals("undefined")) {
+//			;//to get rid of undefined in javascript
+//		}
+//		else if (c.getNom()!=null){	
+//			currentCli.setNom(c.getNom());	
+//		}
+//		if (c.getPrenom()==null || c.getPrenom().equals("undefined")) {
+//			;//to get rid of undefined in javascript
+//		}
+//		else if (c.getPrenom()!=null){	
+//			currentCli.setPrenom(c.getPrenom());	
+//		}
+//		if (c.getAdresse()==null || c.getAdresse().equals("undefined")) {
+//			;//to get rid of undefined in javascript
+//		}
+//		else if (c.getAdresse()!=null){	
+//			currentCli.setAdresse(c.getAdresse());	
+//		}
+		if (c.getVille()==null || c.getVille().equals("undefined")) {
+			;//to get rid of undefined in javascript
+		}
+		else if (c.getVille()!=null){	
+			currentCli.setVille(c.getVille());	
+		}
+		if (c.getCodePostal()==null || c.getCodePostal().equals("undefined")) {
+			;//do nothing to get rid of undefined in javascript
+		}
+		else if (c.getCodePostal()!=null){	
+			currentCli.setCodePostal(c.getCodePostal());	
+		}
+//		if (c.getMail()==null || c.getMail().equals("undefined")) {
+//			;//do nothing to get rid of undefined in javascript
+//		}
+//		else if (c.getMail()!=null){	
+//			currentCli.setMail(c.getMail());	
+//		}
+//		if (c.getNbEnfants()== 0) {
+//			;//to get rid of undefined in javascript
+//		}
+//		else if (c.getNbEnfants()!=0){	
+//			currentCli.setNom(c.getNom());	
+//		}
+//		if (c.getProfession()== null || c.getProfession().equals("undefined")) {
+//			;//to get rid of undefined in javascript
+//		}
+//		else if (c.getProfession()!=null){	
+//			currentCli.setProfession(c.getProfession());	
+//		}
+//		if (c.getIncome()== 0) {
+//			;//to get rid of undefined in javascript
+//		}
+//		else if (c.getIncome()!=0){	
+//			currentCli.setIncome(c.getIncome());	
+//		}
+		
+		update(currentCli);
+		
+	}
+
+	@Override
+	public List<Client> findClient(Long id) {
+		return clientDAO.findClient(id);
+	}
+	
+	
+	
 //
 // #########################################################################
 // #########################################################################

@@ -45,9 +45,9 @@ function createClient(client) {
     return deferred.promise;
 }
 
-function srcClient(nom,prenom,cpte) {
+function srcClient(nom,prenom) {
     var deferred = $q.defer();
-    $http.get(CLIENTS_REST_SERVICE_URI+ 'nom-'+nom+'/prenom-'+prenom+'/cpte-'+cpte)
+        $http.get(CLIENTS_REST_SERVICE_URI+ 'nom-'+nom+'/prenom-'+prenom)
         .then( 
         function (response) {
             deferred.resolve(response.data);

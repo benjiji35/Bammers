@@ -3,28 +3,18 @@
 
         <form>         
             <br><br>
+            
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="nom" placeholder="nom">
+                <input type="text" class="form-control" id="nom" ng-model="conseiller.nom"  placeholder="nom">
             </div>      
                
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="prenom" placeholder="prénom">
+                <input type="text" class="form-control" id="prenom" ng-model="conseiller.prenom"  placeholder="prénom">
             </div>   
-
-<!--             <div class="col-sm-2"> -->
-<!--                 <input type="date" class="form-control" id="date de naissance" placeholder="date de naissance"> -->
-<!--             </div>       -->
-                
-<!--             <div class="col-sm-2"> -->
-<!--                 <input type="text" class="form-control" id="ville" placeholder="ville"> -->
-<!--             </div>           -->
-                
-             <div class="col-sm-2">
-
-                <input type="text" class="form-control" id="matricule" placeholder="matricule">
-
-            </div>
-            <input type="submit" value="Rechercher" class="btn btn-default"/>
+                         
+            <div class="col-sm-2">
+           		 <input type="button" class="form-control" ng-click="srcCons(conseiller.nom,conseiller.prenom)" value= "Recherche">
+           	</div>
          </form>
     <br><br><br><br><br><br>
     <div class="table-responsive">         
