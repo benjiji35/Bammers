@@ -32,7 +32,7 @@ public class HelloWorldConfiguration extends WebMvcConfigurerAdapter{
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
 
-	//@Bean (name="multipartResolver")
+	@Bean (name="multipartResolver")
 	public CommonsMultipartResolver getResolver() throws IOException {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 

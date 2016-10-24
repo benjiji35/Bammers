@@ -2,8 +2,9 @@ package com.bam.GESTIBANKBAM.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,29 +19,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.bam.GESTIBANKBAM.dao.EmployeDAO;
-import com.bam.GESTIBANKBAM.dao.EmployeDAOImpl;
-import com.bam.GESTIBANKBAM.dao.PersonneDAO;
-import com.bam.GESTIBANKBAM.dao.PersonneDAOImpl;
 import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
-import com.bam.GESTIBANKBAM.model.CommandeChequier;
 import com.bam.GESTIBANKBAM.model.Compte;
-import com.bam.GESTIBANKBAM.model.Compte.CompteType;
-import com.bam.GESTIBANKBAM.model.CompteNotification;
 import com.bam.GESTIBANKBAM.model.Credit;
-import com.bam.GESTIBANKBAM.model.Debit;
 import com.bam.GESTIBANKBAM.model.Employe;
 import com.bam.GESTIBANKBAM.model.Notification;
 import com.bam.GESTIBANKBAM.model.Personne;
-import com.bam.GESTIBANKBAM.model.Transaction;
 import com.bam.GESTIBANKBAM.service.ClientService;
 import com.bam.GESTIBANKBAM.service.CompteService;
 import com.bam.GESTIBANKBAM.service.EmployeService;
 import com.bam.GESTIBANKBAM.service.PersonneService;
-import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
-import com.bam.GESTIBANKBAM.utils.MailSender;
 
 @RestController
 public class GestiBankBAMRestControler {
@@ -148,22 +138,92 @@ public class GestiBankBAMRestControler {
 	// -------------------Create a Client--------------------------------------------------------
 
 	@RequestMapping(value = "/client/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
-		System.out.println("Creating Client " + client.getNom() + " - " + client.getPrenom());
+//	public ResponseEntity<Void> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Void> createClient(@RequestBody HashMap<String, Object> client, UriComponentsBuilder ucBuilder) {	
+		String nom = (String)client.get("nom");
+		String prenom = (String)client.get("prenom");
+		String profession = (String)client.get("profession");
+		Date ddn        = BAMTools.parseDate((String)client.get("ddn"));
 
-		if (clientService.isExists(client)) {
-			System.out.println("A Client with name " + client.getNom() + " " + client.getPrenom() + " already exist");
+		LinkedHashMap<String,Object> adresse    = (LinkedHashMap<String,Object>)client.get("adresse");
+
+		int situationMatrimoniale = Integer.parseInt(((String)client.get("situationMatrimoniale")));
+		//int enfants = Integer.parseInt(((String)client.get("enfants")));
+		int enfants = (Integer)client.get("enfants");
+		double salaire = Double.parseDouble((client.get("salaire")+""));
+		String civilite = (String)client.get("civilite");
+		LinkedHashMap<String, Object> comptes = (LinkedHashMap<String, Object>)client.get("comptes");
+
+		LinkedHashMap<String,Object> unCompte = (LinkedHashMap<String,Object>)comptes.values().iterator().next();
+//		LinkedHashMap<String, Object> unCompte =  (LinkedHashMap<String, Object>)client.get("0");
+		LinkedHashMap<String, Object> transactions = (LinkedHashMap<String, Object>)unCompte.get("transactions");
+		LinkedHashMap<String, Object> uneTransaction =  (LinkedHashMap<String, Object>)transactions.get("0");
+		double montant = Double.parseDouble(uneTransaction.get("montant")+"");
+		Date dateDebut = new Date();//(Date)uneTransaction.get("dateDebut");
+//		Date dateFin   = dateDebut; //(Date)uneTransaction.get("dateFin");
+		//int type = Integer.parseInt(((String)uneTransaction.get("type")));
+		//comptes={
+		//	0={transactions={
+		//		0={montant=1000, dateDebut=2016-10-24T09:46:30.172Z, dateFin=2016-10-24T09:46:30.172Z, type=1}}}} 
+		
+		System.out.println("createClient()::");
+		System.out.println("nom="+nom);
+		Personne.SITUATION sm;
+		switch (situationMatrimoniale) {
+			case 0:
+				sm = Personne.SITUATION.SINGLE;
+				break;
+			case 1:
+				sm = Personne.SITUATION.MARRIED;
+				break;
+			case 2:
+				sm = Personne.SITUATION.DIVORCED;
+				break;
+			case 3:
+				default:
+				sm = Personne.SITUATION.WIDOWED;
+		};
+		Compte cpt = new Compte();
+		Credit credit = null;
+		Client clt = new Client();
+		Adresse adr = new Adresse();
+		adr.setNumero(Integer.parseInt((String) adresse.get("numero")));
+		adr.setRue((String) adresse.get("rue"));
+		adr.setCodePostal(adresse.get("codePostal")+"");
+		adr.setVille((String) adresse.get("ville"));
+		adr.setTelephone((String) adresse.get("telephone"));
+		adr.setMail((String) adresse.get("mail"));
+		clt.setType(Personne.ROLE_CLIENT);
+		clt.setCivilite(civilite);
+		clt.setNom(nom);
+		clt.setPrenom(prenom);
+		clt.setProfession(profession);
+		clt.setDdn(ddn);
+		clt.setIncome(salaire);
+		clt.setSituationMatrimoniale(sm);
+		clt.setNbEnfants(enfants);
+		clt.setAdresse(adr);
+		try {
+			credit = new Credit(dateDebut, montant);
+			cpt.addTransaction(credit);
+		} catch (Throwable t) {
+			t.printStackTrace(System.err);
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} 
+		clt.addCompte(cpt);
+
+		System.out.println("Creating Client " + clt.getNom() + " - " + clt.getPrenom());
+
+		if (clientService.isExists(clt)) {
+			System.out.println("A Client with name " + clt.getNom() + " " + clt.getPrenom() + " already exist");
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		} else {
+			clientService.save(clt);
+			System.out.println(">>> " + clt);
 		}
 
-		//if (client.getConseiller() == null) {
-		
-			clientService.save(client);
-			System.out.println(">>> " + client);
-
-
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/client/{id}").buildAndExpand(client.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/client/{id}").buildAndExpand(clt.getId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 

@@ -1,5 +1,5 @@
 app.controller('mainCtrl', function($scope) {});
-app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 'ClientServiceNew',
+app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','ClientService', 'ClientServiceNew', 'UploadFileService', 
     function($scope, $routeParams, $location,$q, ClientService,ClientServiceNew) {
     var self = this;
     self.users=[];
@@ -303,9 +303,20 @@ app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window'
         }
     }]);
 
-app.controller('newClCtrl', ['$scope', '$location', 'ClientService',
-                              function($scope, $location, ClientService) {
-    $scope.client = {};
+app.controller('newClCtrl', ['$scope', '$location', 'ClientService', 'UploadFileService', 
+                              function($scope, $location, ClientService, UploadFileService) {
+	var fd = new FormData();
+	$scope.client = {};
+  //Take the first selected file
+	fd.append("file", fd);
+
+
+  //$scope.sid =
+  //$scope.sid = Math.floor(Math.random() * 100000000);
+  $scope.uploadFile = function(fd, sid, key) { //, field) {
+  	UploadFileService.uploadFile(fd, sid, key);
+  }; 
+
 
     $scope.submit = function(client) {
       console.log(client);

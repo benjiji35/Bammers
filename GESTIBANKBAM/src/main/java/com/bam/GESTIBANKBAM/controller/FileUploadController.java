@@ -142,9 +142,11 @@ public class FileUploadController {
 	}
 
 	//@RequestMapping(value = "/singleUpload/s-{sid}/k-{key}", method = RequestMethod.POST)
-	@RequestMapping (value= "/singleUpload/s-{sid}", method= RequestMethod.POST)
+	@RequestMapping (value= "/singleUpload/s-{sid}/k-{key}", method= RequestMethod.POST)
+
 	public ResponseEntity<Void> singleFileUpload(@Valid FileModel fileModel, BindingResult result, ModelMap model,
-			@PathVariable ("sid") String sid
+			@PathVariable ("sid") String sid,
+			@PathVariable ("key") String key
 			)
 			throws IOException {
 
@@ -158,7 +160,7 @@ public class FileUploadController {
 			String base = UPLOAD_LOCATION_TEMP;
 			File ud = null;
 			String dir = sessionToDirectory.get(sid);
-			String s   = fileModel.getFile().getOriginalFilename();
+			String s   = multipartFile.getOriginalFilename();
 
 			if (dir == null) {
 				// generate a random directory name

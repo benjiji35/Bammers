@@ -53,6 +53,7 @@ public class Client extends Personne {
 //	private Employe conseiller;
 	private Long conseillerId;
 
+	// TODO
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	private List<Compte> comptes;
 
@@ -68,6 +69,9 @@ public class Client extends Personne {
 //		this.conseiller = conseiller;
 //	}
 
+	public void addCompte(Compte cpt) {
+		comptes.add(cpt);
+	}
 	public List<Compte> getComptes() {
 		return comptes;
 	}
