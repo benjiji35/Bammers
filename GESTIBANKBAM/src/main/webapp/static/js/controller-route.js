@@ -149,7 +149,13 @@ app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
 //print         
 app.controller('printCtrl', ['$scope', '$location', 
     function($scope, $location) {
-        // todo
+	 	$scope.PrintElem=function printToCart(printSectionId){
+         var innerContents = document.getElementById(printSectionId).innerHTML;
+         var popupWindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+         popupWindow.document.open();
+         popupWindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="static/css/print.css" window.print(); /></head><body >' + innerContents + '</html>');
+         popupWindow.document.close();
+	 	};
     }]);
 
 //update        
@@ -482,6 +488,13 @@ app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routePar
                                    }, function(errResponse) {
                                        console.error('Error while fetching Compte');
                                    });
+                                   $scope.PrintElem=function printToCart(printSectionId){
+                                       var innerContents = document.getElementById(printSectionId).innerHTML;
+                                       var popupWindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+                                       popupWindow.document.open();
+                                       popupWindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="static/css/print.css" window.print(); /></head><body >' + innerContents + '</html>');
+                                       popupWindow.document.close();
+                              	 	};
                                } ]);
 
 app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService','ConseillerUpdateService',

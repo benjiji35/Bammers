@@ -32,6 +32,7 @@ app.factory(
 															.error('Error while connecting');
 													deferred
 															.reject(errResponse);
+													$window.alert("Connexion impossible. Merci de vérifier vos identifiants de connexion");
 												});
 								return deferred.promise; // here i did return
 															// deffered promise

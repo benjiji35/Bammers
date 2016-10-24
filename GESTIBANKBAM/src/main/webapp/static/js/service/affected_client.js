@@ -16,6 +16,7 @@ function validUser(client, id) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            $window.alert("Le client a bien été validé");
             window.location.reload();
         },
         function(errResponse){

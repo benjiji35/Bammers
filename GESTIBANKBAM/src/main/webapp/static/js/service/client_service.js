@@ -36,10 +36,12 @@ function createClient(client) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            $window.alert("Votre demande a bien été enregistrée et sera traitée dans les meileurs délais");
             window.location.reload();
         },
         function(errResponse){
             console.error('Error while creating User');
+            $window.alert("Une erreur s'est produite merci de vérifier vos informations et de réessayer votre demande");
             deferred.reject(errResponse);
         }
     );

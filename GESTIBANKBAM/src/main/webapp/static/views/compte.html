@@ -9,26 +9,29 @@
 <div class="panel-body" >
 	<legend>Fiche Client</legend>
 	<div >
-<div class="table-responsive">
-		<table class="table">
- 			<thead>
-		 		<tr>
-		    		<th>Libellé</th>
-		    		<th>Crédit</th>
-		    		<th>Débit</th>
-		    		<th>Date</th>
-		    		
-		  		</tr>
-	  		</thead>
-  			<tbody>
-		  		<tr ng-repeat="t in cpt.transactions">
-		    		<td></td>
-		   			<td><span ng-if="t.type==1">{{t.montant}}€</span></td>
-		    		<td><span ng-if="t.type==2">{{t.montant}}€</span></td>
-		    		<td>{{t.dateFin | date:'yyyy-MM-dd HH:mm:ss'}} </td>
-		   		</tr>
-  			</tbody>
-  		</table>
-  	<pre><h4>Solde : {{cpt.balance}}€</h4></pre>
- </div>
+	<div class="table-responsive">
+		<div class="form-group" id="test">
+			<table class="table">
+	 			<thead>
+			 		<tr>
+			    		<th>Libellé</th>
+			    		<th>Crédit</th>
+			    		<th>Débit</th>
+			    		<th>Date</th>
+			    		
+			  		</tr>
+		  		</thead>
+	  			<tbody>
+			  		<tr ng-repeat="t in cpt.transactions">
+			    		<td></td>
+			   			<td><span ng-if="t.type==1">{{t.montant}}€</span></td>
+			    		<td><span ng-if="t.type==2">{{t.montant}}€</span></td>
+			    		<td>{{t.dateFin | date:'yyyy-MM-dd HH:mm:ss'}} </td>
+			   		</tr>
+	  			</tbody>
+	  		</table>
+	  		<pre><h4>Solde : {{cpt.balance}}€</h4></pre>
+ 		</div>
+ 		<input type="button" value="Imprimer ce rib" ng-click="PrintElem('test')" />
+ 	</div>
  </div>

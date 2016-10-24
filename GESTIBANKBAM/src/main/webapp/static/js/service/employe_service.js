@@ -45,9 +45,11 @@ function fetchConseiller() {
             .then(
             function (response) {
                 deferred.resolve(response.data);
+                $window.alert("Le conseiller a bien été créé");
             },
             function(errResponse){
                 console.error('Error while creating Employe');
+                $window.alert("Erreur lors de la création du conseiller");
                 deferred.reject(errResponse);
             }
         );

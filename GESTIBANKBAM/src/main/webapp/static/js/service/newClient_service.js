@@ -33,10 +33,12 @@ function updateUser(idcl,idcons) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            $window.alert("Le client a bien été mis à jour");
             $window.location.reload();
         },
         function(errResponse){
             console.error('Error while updating User');
+            $window.alert("Erreur lors de la mise à jour du client");
             deferred.reject(errResponse);
         }
     );

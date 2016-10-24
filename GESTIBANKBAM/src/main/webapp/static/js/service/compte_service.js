@@ -31,10 +31,12 @@ function virer(cpt1, cpt2, mont) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            $window.alert("Votre virement de "+mont+" vers le compte "+cpt2+" a bien été effectué");
             window.location.reload();
         },
         function(errResponse){
             console.error('Error while transfer');
+            $window.alert("Votre virement n'a pas été effectué merci de vérifier votre solde et de rééditer votre demande");
             deferred.reject(errResponse);
         }
     );
