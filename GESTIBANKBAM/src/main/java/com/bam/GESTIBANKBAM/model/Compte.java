@@ -22,7 +22,6 @@ import com.bam.GESTIBANKBAM.event.BAMEvent;
 import com.bam.GESTIBANKBAM.event.BAMListener;
 import com.bam.GESTIBANKBAM.util.BAMException;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table (name="Compte")
@@ -132,12 +131,29 @@ public class Compte implements Cloneable, Serializable {
 			balance = getBalance();
 			if (balance < 0) {
 				processTransaction(new Decouvert(balance, getTauxDecouvert(), new Date()));
-			} else if (balance >= mar) {
+			} else if (balance >= mar && getType() == CompteType.REMUNERATEUR) {
 				processTransaction(new Remuneration(balance, mar, getTauxRemuneration(), new Date()));
 			}
 			success = true;
 		}
 		return success;
+	}
+
+	public int sealTransactions() {
+		Date dateFin = new Date();
+		int counter = 0;
+
+		if (BAMTools.isLastDayOfMonth()) {
+			for (Transaction t : getTransactions()) {
+				try {
+					t.sealTransaction(dateFin);
+					counter++;
+				} catch (BAMException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return counter;
 	}
 
 	private void processTransaction(Transaction t) {
@@ -151,10 +167,20 @@ public class Compte implements Cloneable, Serializable {
 
 	private boolean checkIt(Transaction t) {
 		double m = t.getMontant();
+		double b;
 		boolean ok = true;
+		CompteType ct = getType();
 
 		if (m < 0) {
-			ok = getBalance() + m > getMontantAutorisationDecouvert();
+			b = getBalance();
+			if (b + m < 0) {
+				if (ct == CompteType.AVEC_AUTORISATION || ct == CompteType.REMUNERATEUR) {
+					ok = b + m > getMontantAutorisationDecouvert(); 
+				} else {
+					ok = false;
+				}
+			}
+//			ok = getBalance() + m > getMontantAutorisationDecouvert();
 		}
 		return ok;
 	}

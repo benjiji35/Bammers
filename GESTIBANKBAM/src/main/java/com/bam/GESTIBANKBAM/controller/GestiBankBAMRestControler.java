@@ -59,8 +59,45 @@ public class GestiBankBAMRestControler {
 	
 	@Autowired
 	CompteService compteService;
+
+	private Thread bamBank;
 	
 	private static final Logger logger = Logger.getLogger(GestiBankBAMRestControler.class);
+
+	{
+		bamBank = new Thread(new Runnable() {
+			private boolean work = true;
+
+			@SuppressWarnings("unused")
+			private void stopWork() {
+				work = false;
+			}
+
+			private boolean mustWork() {
+				return work;
+			}
+
+			@SuppressWarnings("static-access")
+			@Override
+			public void run() {
+				List<Compte> les_comptes = null;
+
+				while (mustWork()) {
+					if (BAMTools.isLastDayOfMonth()) {
+						les_comptes = compteService.findAll();
+						for (Compte c : les_comptes) {
+							c.sealTransactions();
+						}
+					}
+					try {
+						Thread.currentThread().sleep(24*3600*1000L);
+					} catch (InterruptedException e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}});
+		bamBank.start();
+	};
 
 	// -------------------Retrieve All Clients--------------------------------------------------------
 
@@ -192,6 +229,7 @@ public class GestiBankBAMRestControler {
 
 	// -------------------Create a Client--------------------------------------------------------
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/client/", method = RequestMethod.POST)
 //	public ResponseEntity<Void> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
 	public ResponseEntity<Void> createClient(@RequestBody HashMap<String, Object> client, UriComponentsBuilder ucBuilder) {	
@@ -203,7 +241,6 @@ public class GestiBankBAMRestControler {
 		LinkedHashMap<String,Object> adresse    = (LinkedHashMap<String,Object>)client.get("adresse");
 
 		int situationMatrimoniale = Integer.parseInt(((String)client.get("situationMatrimoniale")));
-		//int enfants = Integer.parseInt(((String)client.get("enfants")));
 		int enfants = (Integer)client.get("enfants");
 		double salaire = Double.parseDouble((client.get("salaire")+""));
 		String civilite = (String)client.get("civilite");
@@ -211,16 +248,10 @@ public class GestiBankBAMRestControler {
 
 
 		LinkedHashMap<String,Object> unCompte = (LinkedHashMap<String,Object>)comptes.values().iterator().next();
-//		LinkedHashMap<String, Object> unCompte =  (LinkedHashMap<String, Object>)client.get("0");
 		LinkedHashMap<String, Object> transactions = (LinkedHashMap<String, Object>)unCompte.get("transactions");
 		LinkedHashMap<String, Object> uneTransaction =  (LinkedHashMap<String, Object>)transactions.get("0");
 		double montant = Double.parseDouble(uneTransaction.get("montant")+"");
-		Date dateDebut = new Date();//(Date)uneTransaction.get("dateDebut");
-//		Date dateFin   = dateDebut; //(Date)uneTransaction.get("dateFin");
-		//int type = Integer.parseInt(((String)uneTransaction.get("type")));
-		//comptes={
-		//	0={transactions={
-		//		0={montant=1000, dateDebut=2016-10-24T09:46:30.172Z, dateFin=2016-10-24T09:46:30.172Z, type=1}}}} 
+		Date dateDebut = new Date();
 		
 		System.out.println("createClient()::");
 		System.out.println("nom="+nom);

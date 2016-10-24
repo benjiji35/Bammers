@@ -1,6 +1,6 @@
 package com.bam.GESTIBANKBAM.service;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.dao.CompteDao;
 import com.bam.GESTIBANKBAM.model.Compte;
-import com.bam.GESTIBANKBAM.model.Credit;
-import com.bam.GESTIBANKBAM.model.Debit;
 import com.bam.GESTIBANKBAM.util.BAMException;
 @Service("compteService")
 @Transactional
@@ -28,6 +26,11 @@ public class CompteServiceImpl implements CompteService {
 		compteDAO.setVirement(cpt1, cpt2, mont);
 //		compteDAO.save(cpt1);
 //		compteDAO.save(cpt2);
+	}
+
+	@Override
+	public List<Compte> findAll() {
+		return compteDAO.findAll();
 	}
 
 }

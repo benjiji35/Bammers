@@ -1,9 +1,9 @@
 package com.bam.GESTIBANKBAM.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
-
 
 import com.bam.GESTIBANKBAM.model.Compte;
 import com.bam.GESTIBANKBAM.model.CompteNotification;
@@ -49,6 +49,16 @@ public class CompteDaoImpl extends AbstractDAO<Long, Compte> implements CompteDa
 //			compteCredite.getTransactions().add(credit);
 //			compteDebiteur.getNotifications().add(messageDebit);
 //			compteCredite.getNotifications().add(messageCredit);		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Compte> findAll() {
+		List<Compte> les_comptes = (List<Compte>)getEntityManager()
+				.createQuery("SELECT c FROM Compte c")
+				.getResultList();
+
+		return les_comptes;
 	}
 
 }

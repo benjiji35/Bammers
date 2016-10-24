@@ -139,73 +139,11 @@
   		</div>
  
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="salary1">Vos 3 derniers bulletins de salaire : </label>
-	    <div class="col-sm-3">
-<!-- 	    	<input type="file" id="salary1" name="file"  -->
-<!-- 	    		onchange="angular.element(this).scope().uploadFile(file, angular.element(this).scope().sid, 'salary1')" required /> -->
-<!--  <script> -->
-<!-- var sid = Math.floor(Math.random() * 1000000);//"xx";  -->
-
-<!-- function uploadFile(file){ -->
-<!--     var url = '/SpringAngularStartProject/singleUpload/s-' + sid; -->
-<!--     var xhr = new XMLHttpRequest(); -->
-<!--     var fd = new FormData(); -->
-
-
-<!-- //     $http.post(url, fd, { -->
-<!-- //         withCredentials: true, -->
-<!-- //         headers: {'Content-Type': undefined }, -->
-<!-- //         transformRequest: angular.identity}) -->
-<!-- //         .then( -->
-<!-- //             function (response) { -->
-<!-- //                 deferred.resolve(); -->
-<!-- //             }, -->
-<!-- //             function(errResponse){ -->
-<!-- //                 console.error('Error while saving file::'); -->
-<!-- //                 console.log(errResponse); -->
-<!-- //                 deferred.reject(errResponse); -->
-<!-- //             } -->
-<!-- //         ); -->
-<!-- //         return deferred.promise;	 -->
-<!-- //     } -->
-<!--      xhr.open("POST", url, true); -->
-<!--     xhr.onreadystatechange = function() { -->
-<!--         if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) { -->
-<!--             // Every thing ok, file uploaded -->
-<!--             //sid = xhr.responseText; -->
-<!--             console.log(xhr.responseText); // handle response. -->
-<!--         } -->
-<!--     }; -->
-<!--     fd.append("file", file); -->
-<!--     //fd.append("sid", sid); -->
-<!--     xhr.send(fd); -->
-<!-- } -->
-
-<!-- var uploadsalary1 = document.querySelector('#salary1'); -->
-<!-- uploadsalary1.addEventListener('change', function () { -->
-<!-- 	    var file = this.file; -->
-
-
-<!-- // 	    for(var i=0; i<files.length; i++){ -->
-<!-- // 	        uploadFile(this.files[i]); // call the function to upload the file -->
-<!-- // 	    } -->
-<!-- // 	}, false); -->
-
-
-<!-- /* 		uploadFile(file); -->
-<!-- / 	}, false);*/ -->
-
-<!--   </script>   -->
-
-	    
-<!-- 	      <input type="file" id="file" name="file"  -->
-<!-- 			onchange="angular.element(this).scope().uploadFile(angular.element(this).file, angular.element(this).scope().sid, 'salary1')"	      	   -->
-<!-- 	      	required/> -->
-
-<!-- ngf-select="uploadFile(file, angular.element(this).scope().sid, 'salary1')" -->
-
-<!-- ngf-select="angular.element(this).scope().uploadFile(angular.element(this).file, angular.element(this).scope().sid, 'salary1')" -->
-
+	    <label class="control-label col-sm-2" for="salary1">Votre dernier bulletin de salaire : </label>
+	    <div class="col-sm-3">  
+	      <input type="file" id="file" name="file" 
+			onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().sid, 'salary1')"	      	  
+	      	required/>
  
 	    </div>
   		</div>
@@ -214,13 +152,17 @@
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="dom">Votre justificatif de domicile : </label>
 	    <div class="col-sm-3">
-	      <input type="file" class="form-control" id="dom">
+	      	<input type="file" id="domicile" name="domicile" 
+				onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().sid, 'domicile')"	      	  
+	      		required/>
 	    </div>
   		</div>
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="cni">Votre pièce d'identité : </label>
 	    <div class="col-sm-3">
-	      <input type="file" class="form-control" id="cni">
+	      	<input type="file" id="cni" name="cni" 
+				onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().sid, 'cni')"	      	  
+	      		required/>
 	    </div>
   		</div>
   		<div class="form-group">
