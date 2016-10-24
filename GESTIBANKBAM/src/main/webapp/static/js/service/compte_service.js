@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('CompteService', ['$http', '$q', function($http, $q){
+angular.module('myApp').factory('CompteService', ['$http', '$q','$window', function($http, $q,$window){
 
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/compte/';
 
@@ -31,6 +31,7 @@ function virer(cpt1, cpt2, mont) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            window.location.reload();
         },
         function(errResponse){
             console.error('Error while transfer');

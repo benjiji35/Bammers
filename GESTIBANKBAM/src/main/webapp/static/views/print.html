@@ -1,1 +1,23 @@
-Print
+<div class="panel-header">
+            	<div id="navigation_help">
+					<ul class="breadcrumb">
+						<li><a href="#/">Accueil</a></li>
+						<li class="active">RIB</li>
+					</ul>
+				</div>
+</div>
+<div class="panel-body">
+      <div class="form-horizontal" name="myForm" ng-repeat="c in util.comptes">
+        <div class="form-group" id="test">
+        <p><img id ="logo" src="img/logo.jpg"></p>
+        <br>
+        	<p>{{util.civilite}} {{util.nom}} {{util.prenom}}</p>
+           <p>   {{c.numCpt}}</p>
+         </div>
+          <div class="form-group">
+              <input type="button" value="Imprimer ce rib" ng-click="PrintElem('test')" />
+              
+              
+       
+       </div>
+</div>

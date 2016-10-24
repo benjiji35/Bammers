@@ -23,11 +23,10 @@ public class CompteDaoImpl extends AbstractDAO<Long, Compte> implements CompteDa
 		Debit debit = new Debit(new Date(), -mont);
 		Credit credit = new Credit(new Date(), mont);
 		boolean success = false;
-		String messageD = "Votre virement de" + mont + " vers le compte n°" + cpt2.getNumCpt() + "a bien été effectué." ;
-		String messageC = "Vous avez reçu un virement de " + mont + "du comtpe n°" + cpt1.getNumCpt();
+		String messageD = "Votre virement de " + mont + "€ vers le compte n° " + cpt2.getNumCpt() + " a bien été effectué." ;
+		String messageC = "Vous avez reçu un virement de " + mont + "€ du compte n°" + cpt1.getNumCpt();
 		CompteNotification messageDebit = new CompteNotification(messageD, new Date());
 		CompteNotification messageCredit = new CompteNotification(messageC, new Date());
-			
 		Compte compteDebiteur = findByNum(cpt1.getNumCpt());
 		Compte compteCredite = findByNum(cpt2.getNumCpt());
 		try {
@@ -35,13 +34,21 @@ public class CompteDaoImpl extends AbstractDAO<Long, Compte> implements CompteDa
 			if (success) {
 				update(compteCredite);
 				update(compteDebiteur);
-				compteCredite.addNotification(messageDebit);
-				compteDebiteur.addNotification(messageCredit);
+				compteCredite.addNotification(messageCredit);
+				compteDebiteur.addNotification(messageDebit);
 			}
 		} catch (Throwable e) {
 			e.printStackTrace(System.err);
 			
 		}		
+
+//		double solde = compteDebiteur.getBalance();
+//		double decauto = compteDebiteur.getMontantAutorisationDecouvert();
+//		if((solde-mont)>decauto){
+//			compteDebiteur.getTransactions().add(debit);
+//			compteCredite.getTransactions().add(credit);
+//			compteDebiteur.getNotifications().add(messageDebit);
+//			compteCredite.getNotifications().add(messageCredit);		}
 	}
 
 }

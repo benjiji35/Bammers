@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('ClientService', ['$http', '$q', function($http, $q){
+angular.module('myApp').factory('ClientService', ['$http', '$q','$window', function($http, $q, $window){
 
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/client/';
 var CLIENT_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/clients/';
@@ -36,6 +36,7 @@ function createClient(client) {
         .then(
         function (response) {
             deferred.resolve(response.data);
+            window.location.reload();
         },
         function(errResponse){
             console.error('Error while creating User');

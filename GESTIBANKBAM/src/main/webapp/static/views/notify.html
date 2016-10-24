@@ -20,7 +20,7 @@
 	    </thead>
 	    <tbody ng-repeat="n in notif">
 	      <tr ng-repeat="notif in n.notifications">
-	        <td>{{notif.date}}</td>
+	        <td>{{notif.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
 	        <td>{{notif.message}}</td>
 	        <td><input type='button' onClick='' value = 'Supprimer' class="btn btn-default"/></td>
 	      </tr>

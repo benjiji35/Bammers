@@ -25,7 +25,7 @@
 		    		<td></td>
 		   			<td><span ng-if="t.type==1">{{t.montant}}€</span></td>
 		    		<td><span ng-if="t.type==2">{{t.montant}}€</span></td>
-		    		<td>{{t.dateFin}}</td>
+		    		<td>{{t.dateFin | date:'yyyy-MM-dd HH:mm:ss'}} </td>
 		   		</tr>
   			</tbody>
   		</table>
