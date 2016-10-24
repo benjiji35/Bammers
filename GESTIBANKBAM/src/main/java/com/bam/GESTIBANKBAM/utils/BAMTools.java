@@ -117,6 +117,16 @@ public class BAMTools {
 		return list.get(0);
 	}
 
+	public static List<String> genNames(int namesLength) {
+		PasswordGenerator pg = new PasswordGenerator(false, namesLength);
+
+		return pg.next();
+	}
+
+	public static String genName(int nameLength) {
+		return genNames(nameLength).get(0);
+	}
+
 	public static boolean isLastDayOfMonth(Date date) {
 		Calendar cal = Calendar.getInstance();
 		int day;
