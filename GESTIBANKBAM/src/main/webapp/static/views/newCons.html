@@ -1,7 +1,7 @@
 <div class="panel-header">
               <div id="navigation_help">
           <ul class="breadcrumb">
-            <li><a href="#">Accueil</a></li>
+            <li><a href="#/">Accueil</a></li>
             <li class="active">Ajout conseiller</li>
           </ul>
         </div>
@@ -10,7 +10,7 @@
   <legend>Affectation</legend>
 	  <form class="form-horizontal" name="myForm" ng-submit="submit(cons)">
 	  <div class="form-group">
-		  <label class="control-label col-sm-2" for="civ">Civilité : </label>
+		  <label class="control-label col-sm-2" for="civ">CivilitÃ©: </label>
 		  <div class="col-sm-3">
 		    <select class="form-control" id="civ" ng-model="cons.civilite" required>
 	        <option>Monsieur</option>
@@ -25,9 +25,9 @@
 	    </div>
 	  </div>
 	  <div class="form-group">
-	    <label class="control-label col-sm-2" for="prenom">Prénom</label>
+	    <label class="control-label col-sm-2" for="prenom">PrÃ©nom</label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="prenom" placeholder="Entrez le prénom" ng-model="cons.prenom" required>
+	      <input type="text" class="form-control" id="prenom" placeholder="Entrez le prÃ©nom" ng-model="cons.prenom" required>
 	    </div>
   		</div>	
   		<div class="form-group">
@@ -37,9 +37,9 @@
 	    </div>
   		</div>	
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="adresse">Numero : </label>
+	    <label class="control-label col-sm-2" for="adresse">NumÃ©ro : </label>
 	    <div class="col-sm-3">
-	      <input type="text" class="form-control" id="adresse" placeholder="Entrez le numéro de rue"ng-model="cons.adresse.numero" required>
+	      <input type="text" class="form-control" id="adresse" placeholder="Entrez le numÃ©ro de rue"ng-model="cons.adresse.numero" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -61,9 +61,9 @@
 	    </div>
   		</div>
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="telephone">Telephone : </label>
+	    <label class="control-label col-sm-2" for="telephone">TÃ©lÃ©phone : </label>
 	    <div class="col-sm-3">
-	      <input type="tel" class="form-control" id="telephone" placeholder="Entrez le telephone" ng-model="cons.adresse.telephone" required>
+	      <input type="tel" class="form-control" id="telephone" placeholder="Entrez le tÃ©lÃ©phone" ng-model="cons.adresse.telephone" pattern="0[1-9](([-. ]?| *)[0-9]{2}){4}" required>
 	    </div>
   		</div>
   		<div class="form-group">
@@ -76,9 +76,9 @@
 		  <label class="control-label col-sm-2" for="sm">Situation matrimoniale : </label>
 		  <div class="col-sm-3">
 		    <select class="form-control" id="sm" ng-model="cons.situationMatrimoniale" required>
-	        <option value="0">Célibataire</option>
-	        <option value="1">Marié(e)</option>
-	        <option value="2">Divorcé(e)</option>
+	        <option value="0">CÃ©libataire</option>
+	        <option value="1">MariÃ©(e)</option>
+	        <option value="2">DivorcÃ©(e)</option>
 	        <option value="3">veuf(ve)</option>
 	      </select>
 		  </div>
@@ -96,9 +96,9 @@
 	    </div>
   		</div>
   		<div class="form-group">
-	    <label class="control-label col-sm-2" for="date">Date d'entrée : </label>
+	    <label class="control-label col-sm-2" for="date">Date d'entrï¿½e : </label>
 	    <div class="col-sm-3">
-	      <input type="date" class="form-control" id="date" placeholder="Entrez la date d'entrée" ng-model="cons.dateEntree" required>
+	      <input type="date" class="form-control" id="date" placeholder="Entrez la date d'entrï¿½e" ng-model="cons.dateEntree" required>
 	    </div>
   		</div>	
 		<div class="form-group">        

@@ -1,7 +1,7 @@
 <div class="panel-header">
               <div id="navigation_help">
           <ul class="breadcrumb">
-            <li><a href="#">Accueil</a></li>
+            <li><a href="#/">Accueil</a></li>
             <li class="active">Affectation</li>
           </ul>
         </div>
@@ -10,7 +10,7 @@
   <legend>Affectation</legend>
  <div class="table-responsive">          
   <table class="table">
-  <caption>Vous avez {{users.length}} liste de client à affecter</caption>
+  <caption>Vous avez {{users.length}} clients en cours de validation </caption>
     <thead>
       <tr>
     <th>Nom</th>
@@ -28,7 +28,7 @@
         <td><a ng-href="#see_cl/{{c.id}}">Détails</a></td>
    		<td><input type="checkbox" class="form-control" ng-model="checked" ng-init="checked=true"></td> 
 		
-        <td><select class="form-control" ng-disabled="checked" ng-options="option.nom for option in cons" ng-model="conseiller">
+        <td><select class="form-control" ng-disabled="!checked" ng-options="option.nom for option in cons" ng-model="conseiller">
 <!--             <option ng-value={{option.id}} ></option> -->
             </select>
         </td>
