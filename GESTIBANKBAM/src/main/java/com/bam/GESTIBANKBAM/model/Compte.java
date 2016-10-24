@@ -150,7 +150,13 @@ public class Compte implements Cloneable, Serializable {
 	}
 
 	private boolean checkIt(Transaction t) {
-		return (t.getMontant() + getBalance() <= getMontantAutorisationDecouvert());
+		double m = t.getMontant();
+		boolean ok = true;
+
+		if (m < 0) {
+			ok = getBalance() + m > getMontantAutorisationDecouvert();
+		}
+		return ok;
 	}
 
 	public double getMontantAutorisationDecouvert() {

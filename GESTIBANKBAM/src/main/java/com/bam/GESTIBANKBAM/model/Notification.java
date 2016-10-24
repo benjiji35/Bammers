@@ -36,7 +36,7 @@ public abstract class Notification implements Serializable {
 
 	@NotNull
 	@Column (nullable=false)
-	@Temporal (TemporalType.DATE)
+	@Temporal (TemporalType.TIMESTAMP)
 	private Date date;
 
 	public Notification() {

@@ -42,10 +42,10 @@ public abstract class Transaction implements Serializable, BAMListener {
 
 	@NotNull
 	@Column (nullable=false)
-	@Temporal (TemporalType.DATE)
+	@Temporal (TemporalType.TIMESTAMP)
 	private Date dateDebut;
 
-	@Temporal (TemporalType.DATE)
+	@Temporal (TemporalType.TIMESTAMP)
 	private Date dateFin;
 
 	private double montant;

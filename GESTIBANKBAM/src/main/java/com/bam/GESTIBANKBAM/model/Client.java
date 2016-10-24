@@ -1,6 +1,7 @@
 package com.bam.GESTIBANKBAM.model;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -55,6 +56,8 @@ public class Client extends Personne {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	private List<Compte> comptes;
 
+	private Hashtable<String, String> pathsToAttachedFiles;
+
 	/* getters and setters */
 //	@JsonIgnore
 //	public Employe getConseiller() {
@@ -90,6 +93,32 @@ public class Client extends Personne {
 
 	public void setConseillerId(Long conseillerId) {
 		this.conseillerId = conseillerId;
+	}
+
+	public Hashtable<String, String> getPathsToAttachedFiles() {
+		return pathsToAttachedFiles;
+	}
+
+	public void setPathsToAttachedFiles(Hashtable<String, String> pathsToAttachedFiles) {
+		this.pathsToAttachedFiles = pathsToAttachedFiles;
+	}
+
+	public boolean addFile(String key, String fileName) {
+		return addFile(key, fileName, false);
+	}
+
+	public boolean addFile(String key, String fileName, boolean overwrite) {
+		String f = pathsToAttachedFiles.get(key);
+		boolean added = false;
+
+		if (f != null && overwrite) {
+			pathsToAttachedFiles.put(key, fileName);
+			added = true;
+		} else {
+			pathsToAttachedFiles.put(key, fileName);
+			added = true;
+		}
+		return added;
 	}
 
 }
