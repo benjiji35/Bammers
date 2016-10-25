@@ -556,4 +556,19 @@ return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 //			System.out.println("Compte founded :" + compte.toString());
 //			return new ResponseEntity<Compte>(compte, HttpStatus.OK);
 	}
+		
+		//-------------------Commander un chequier--------------------------------------------------------
+
+		@RequestMapping(value = "/comptes/{cpt}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public void setVirement(@PathVariable("cpt") Long cpt) {
+			System.out.println("Fetching User with id " + cpt);
+			Compte compte = compteService.findByNum(cpt);
+			compteService.commanderChequier(compte);
+//			if (compte == null) {
+//				System.out.println("Compte with number " + cpt + " not found");
+//				return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND);
+//			}
+//			System.out.println("Compte founded :" + compte.toString());
+//			return new ResponseEntity<Compte>(compte, HttpStatus.OK);
+	}
 }

@@ -42,4 +42,6 @@ public interface ClientService {
 	List<Client> findClient(Long id);
 	
 	void openNewCompte(Client clt,Employe cons, double mont);
+	
+	void commanderChequier(Client clt, Long numCpt, Employe cons);
 }

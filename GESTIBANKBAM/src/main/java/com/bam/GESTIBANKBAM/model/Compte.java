@@ -162,7 +162,7 @@ public class Compte implements Cloneable, Serializable {
 	}
 
 	public void commanderChequier() {
-		// TODO
+		
 	}
 
 	private boolean checkIt(Transaction t) {

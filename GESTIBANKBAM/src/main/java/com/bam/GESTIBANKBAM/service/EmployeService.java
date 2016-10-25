@@ -2,6 +2,7 @@ package com.bam.GESTIBANKBAM.service;
 
 import java.util.List;
 
+import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
 
 
@@ -26,5 +27,7 @@ public interface EmployeService {
 	public boolean isExists(Employe emp);
 
 	void modifyConseiller(Long id, Employe e);
+	
+	void commanderChequier(Client clt, Long numCpt, Employe cons);
 
 }

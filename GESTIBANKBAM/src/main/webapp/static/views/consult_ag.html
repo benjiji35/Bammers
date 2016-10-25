@@ -22,17 +22,17 @@
 		  <table class="table">
 		    <thead>
 		      <tr>
-				<th>Auteur</th>
-				<th>Sujet</th>
+				<th>Message</th>
 				<th>Date</th>
+				<th>Client</th>
 				<th>Supprimer</th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr ng-repeat="">
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
-		        <td ng-bind=""></td>
+		      <tr ng-repeat="n in util.notifications">
+		        <td>{{n.message}}</td>
+		        <td>{{n.date  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+		        <td><a ng-href="#see_cl/{{n.idAuteur}}">Fiche client</a></td>
 		        <td><input type ="button" class="btn btn-default" value="Supprimer"></td>
 		      </tr>
 		    </tbody>

@@ -9,4 +9,5 @@ public interface CompteDao {
 	Compte findByNum(Long cpt);
 	public void setVirement(Compte cpt1, Compte cpt2, double mont) throws BAMException;
 	List<Compte> findAll();
+	void commanderChequier(Compte cpt);
 }

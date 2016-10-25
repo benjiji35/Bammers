@@ -9,4 +9,5 @@ public interface CompteService {
 	Compte findByNum(Long cpt);
 	void setVirement(Compte cpt1, Compte Cpt2, double mont) throws BAMException;
 	List<Compte> findAll();
+	void commanderChequier(Compte cpt);
 }

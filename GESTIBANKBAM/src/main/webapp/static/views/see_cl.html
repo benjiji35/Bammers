@@ -72,9 +72,9 @@
 	        <td></td>
 	        <td><a ng-href="#compte/{{cpt.numCpt}}">{{cpt.numCpt}}</a></td>
 	        <td>{{cpt.balance}}€</td>
-	        <td><input type="text" class="form-control" ng-model="{{cpt.montantAutorisationDecouvert}}"/></td>
-	        <td><input type="text" class="form-control" ng-model="{{cpt.montantSeuilMinRemuneration}}"/></td>
-	        <td><input type='button' onClick='' value = 'Commander' class="btn btn-default"/></td>
+	        <td><input type="text" class="form-control" ng-value="{{cpt.montantAutorisationDecouvert}}"/></td>
+	        <td><input type="text" class="form-control" ng-value="{{cpt.montantSeuilMinRemuneration}}"/></td>
+	        <td><input type='button' ng-click="commande(cpt.numCpt)" value = 'Commander' class="btn btn-default"/></td>
 	        <td><input type='button' onClick='' value = 'Valider modifications' class="btn btn-default"/></td>
 	      </tr>
 	    </tbody>

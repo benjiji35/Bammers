@@ -61,4 +61,13 @@ public class CompteDaoImpl extends AbstractDAO<Long, Compte> implements CompteDa
 		return les_comptes;
 	}
 
+	@Override
+	public void commanderChequier(Compte cpt) {
+		Compte compte = findByNum(cpt.getNumCpt());
+		compte.commanderChequier();
+		String message ="Votre chéquier pour votre compte n°"+compte.getNumCpt()+" a bien été commandé";
+		CompteNotification ntf = new CompteNotification(message, new Date());
+		compte.addNotification(ntf);
+	}
+
 }

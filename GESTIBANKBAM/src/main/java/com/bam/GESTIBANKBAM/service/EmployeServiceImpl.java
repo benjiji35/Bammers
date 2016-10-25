@@ -107,6 +107,12 @@ public class EmployeServiceImpl implements EmployeService {
 		save(currentEmp);
 
 	}
+
+	@Override
+	public void commanderChequier(Client clt, Long numCpt, Employe cons) {
+		employeDAO.commanderChequier(clt, numCpt, cons);
+		
+	}
 }
 
 //

@@ -190,6 +190,12 @@ public class ClientServiceImpl implements ClientService {
 	public List<Client> findClient(Long id) {
 		return clientDAO.findClient(id);
 	}
+
+	@Override
+	public void commanderChequier(Client clt, Long numCpt, Employe cons) {
+		clientDAO.commanderChequier(clt, numCpt,cons);
+		
+	}
 	
 	
 	

@@ -10,7 +10,8 @@ var factory = {
 		createClient: createClient,
 		srcClient : srcClient,
         updateClient : updateClient,
-        OpenNewCompte: OpenNewCompte
+        OpenNewCompte: OpenNewCompte,
+        commanderChequier:commanderChequier
 };
 return factory;
 /*recherche de tous les utilisateurs */
@@ -80,6 +81,21 @@ function updateClient(c,id) {
 function OpenNewCompte(clt, mont) {
     var deferred = $q.defer();
     $http.get(CLIENT_REST_SERVICE_URI+clt+"/"+mont)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
+        },
+        function(errResponse){
+            console.error('Error while fetching Users');
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
+}
+
+function commanderChequier(clt, cpt) {
+    var deferred = $q.defer();
+    $http.get(CLIENT_REST_SERVICE_URI+clt+"/"+cpt)
         .then(
         function (response) {
             deferred.resolve(response.data);

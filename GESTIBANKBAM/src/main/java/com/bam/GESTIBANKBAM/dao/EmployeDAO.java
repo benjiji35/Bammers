@@ -23,5 +23,6 @@ public interface EmployeDAO {
 	List<EmployeNotification> findNotifications(Employe emp);
 	void assignClient(Employe emp, Client clt);
 	List<Employe> findConseillers();
+	void commanderChequier(Client clt, Long numCpt, Employe cons);
 	
 }

@@ -164,6 +164,14 @@ public class ClientDAOImpl extends AbstractDAO<Long, Client>
 	@Override
 	public void openNewCompte(Client client, Employe cons, double montant) {
 		Employe conseiller = getConseiller(client);
-		EmployeNotification ntf = new EmployeNotification("Votre client "+client.getCivilite()+" "+ client.getNom()+" "+client.getPrenom()+"souhaite ouvrir un compte avec", new Date());
+		EmployeNotification ntf = new EmployeNotification("Votre client "+client.getCivilite()+" "+ client.getNom()+" "+client.getPrenom()+"souhaite ouvrir un compte avec", new Date(),client.getId());
 		conseiller.addNotification(ntf);
+	}
+
+	@Override
+	public void commanderChequier(Client clt, Long numCpt,Employe conseiller) {
+		System.out.println(conseiller);
+		EmployeNotification ntf = new EmployeNotification("Votre client "+clt.getCivilite()+" "+ clt.getNom()+" "+clt.getPrenom()+"souhaite commander un chéquier pour son compte n°"+numCpt+ ".", new Date(),clt.getId());
+		conseiller.addNotification(ntf);	
+		System.out.println(ntf);
 	}}

@@ -13,6 +13,7 @@ public interface ClientDAO {
 	List<Client> findClients(Long id);
 	void deleteAll();
 	void openNewCompte(Client client,Employe cons, double montant);
+	void commanderChequier(Client clt, Long numCpt, Employe cons);
 
 	// business methods
 	Client findById(Long id);

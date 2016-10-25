@@ -7,7 +7,8 @@ app.factory(
 				[
 						'$http',
 						'$q',
-						function($http, $q) {
+						'$window',
+						function($http, $q,$window) {
 
 							var REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/personne/';
 

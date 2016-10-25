@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('ConseillerUpdateService', ['$http', '$q','$window' function($http, $q,$window){
+angular.module('myApp').factory('ConseillerUpdateService', ['$http', '$q','$window', function($http, $q,$window){
 
 var CLIENT_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/UpdateConseiller/';
 

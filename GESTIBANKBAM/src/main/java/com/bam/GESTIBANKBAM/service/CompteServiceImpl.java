@@ -33,4 +33,10 @@ public class CompteServiceImpl implements CompteService {
 		return compteDAO.findAll();
 	}
 
+	@Override
+	public void commanderChequier(Compte cpt) {
+		compteDAO.commanderChequier(cpt);
+		
+	}
+
 }

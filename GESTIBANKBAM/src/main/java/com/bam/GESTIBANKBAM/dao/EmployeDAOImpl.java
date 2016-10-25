@@ -1,6 +1,7 @@
 package com.bam.GESTIBANKBAM.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -110,6 +111,16 @@ public class EmployeDAOImpl extends AbstractDAO<Long, Employe>
 	public List<Employe> findConseillers() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void commanderChequier(Client clt, Long numCpt,Employe conseiller) {
+		System.out.println(conseiller);
+		Employe cons = findById(conseiller.getId());
+		String message = "Votre client "+clt.getCivilite()+" "+ clt.getNom()+" "+clt.getPrenom()+" souhaite commander un chéquier pour son compte n°"+numCpt+ "." ;
+		System.out.println(cons);
+		EmployeNotification ntf = new EmployeNotification(message, new Date(),clt.getId());
+		cons.addNotification(ntf);	
+		System.out.println("il est ne le divin enfant bla bla bla bla" + ntf.toString());
 	}
 
 }

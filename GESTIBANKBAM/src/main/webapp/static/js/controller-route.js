@@ -9,92 +9,46 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','Clien
     self.remove = remove;
     self.reset = reset;
 
-
-        /*$scope.sujet = $routeParams.sujet;
-        $scope.msg = $routeParams.msg;
-        //$scope.absUrl  = $location.absUrl();
-        $scope.fichiers = $routeParams.fichiers;
-        /*console.log("contactCtrl::sujet="+$routeParams.sujet);
-        console.log("contactCtrl::msg="+$routeParams.msg);
-        console.log("contactCtrl::files="+$routeParams.files);*/                               
-}]);
-
-//app.controller('root', [ 
-//                          function($scope, $location) {
-//                          var d =sessionStorage.getItem("pers");
-//                          var pers = JSON.parse(d);
-//                          $scope.util=pers;
-//                              console.log(pers.type);
-//                              // todo
-//                              //$location.url("views/see.html");
-//                              //$scope.role = 1;
-//                          }]);
-
-
-/*
-app.controller('connectCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        //$location.url('/tpl');
-        console.log("connectCtrl::=");
-    }]);
-*/
-// register : no params
-
-app.controller('registerCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        //$location.url('/tpl');
-        console.log("registerCtrl::");
-    }]);
-
-app.controller('addCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        //$location.url('/tpl');
-        console.log("addCtrl::");
-    }]);
-
-
-app.controller('askCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        //$location.url('/tpl');
-        console.log("askCtrl::");
-    }]);
-
 app.controller('seeCtrl', ['$scope', '$location', 'CompteService','$routeParams',
                            function($scope, $location, CompteService, $routeParams) {
     console.log("Compte view");
     }]);
 
-app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','ClientUpdateService',
-                            '$routeParams',
-                            function($scope, $location, ClientIdService,ClientUpdateService, $routeParams) {
-                                console.log("hello toi");
-                                ClientIdService.searchClient($routeParams.id).then(function(d) {
-                                    self.user = d;
-                                    $scope.user = d;
-                                    console.log($scope.user);
-                                }, function(errResponse) {
-                                    console.error('Error while fetching Users');
-                                });
-                                
-                                $scope.send= function (client,id){
-                               	 console.log(client);
-                               	 console.log(id);
-                               	 ClientUpdateService.UpdateClient(client,id);
-                               }                         
-                            } ]);
+app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','ClientUpdateService','CompteService','$routeParams',
+        function($scope, $location, ClientIdService,ClientUpdateService, $routeParams,CompteService) {
+            console.log("hello toi");
+            ClientIdService.searchClient($routeParams.id).then(function(d) {
+                self.user = d;
+                $scope.user = d;
+                console.log($scope.user);
+            }, function(errResponse) {
+                console.error('Error while fetching Users');
+            });
+            
+            $scope.send= function (client,id){
+           	 console.log(client);
+           	 console.log(id);
+           	 ClientUpdateService.UpdateClient(client,id);
+           };  
+           $scope.commande= function(){
+               console.log("test");  
+               var cpt = $scope.cpt.numcpt;
+               CompteService.commanderChequier(cpt)   
+              }
+        } ]);
 
 app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routeParams',
-                               function($scope, $location, CompteService, $routeParams) {
-                                   console.log("hello id");
-                                   CompteService.fetchCompte($routeParams.cpt).then(function(d) {
-                                       self.cpt= d;
-                                       console.log("cpt : " + cpt);
-                                       $scope.cpt = d;
-                                       console.log($scope.cpt);
-                                   }, function(errResponse) {
-                                       console.error('Error while fetching Compte');
-                                   });
-                               } ]);
+       function($scope, $location, CompteService, $routeParams) {
+           console.log("hello id");
+           CompteService.fetchCompte($routeParams.cpt).then(function(d) {
+               self.cpt= d;
+               console.log("cpt : " + cpt);
+               $scope.cpt = d;
+               console.log($scope.cpt);
+           }, function(errResponse) {
+               console.error('Error while fetching Compte');
+           });
+       } ]);
 
 app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService','ConseillerUpdateService',
                                 '$routeParams',
@@ -458,9 +412,9 @@ app.controller('seeCtrl', ['$scope', '$location', 'CompteService','$routeParams'
     console.log("Compte view");
     }]);
 
-app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','ClientUpdateService',
+app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','CompteService','ClientUpdateService',
                             '$routeParams',
-                            function($scope, $location, ClientIdService,ClientUpdateService, $routeParams) {
+                            function($scope, $location, ClientIdService, CompteService,ClientUpdateService, $routeParams) {
                                 console.log("hello toi");
                                 ClientIdService.searchClient($routeParams.id).then(function(d) {
                                     self.user = d;
@@ -474,7 +428,11 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','ClientU
                                	 console.log(client);
                                	 console.log(id);
                                	 ClientUpdateService.UpdateClient(client,id);
-                               }                         
+                               };    
+                                $scope.commande= function(cpt){
+                                    console.log("test");  
+                                    CompteService.commanderChequier(cpt)   
+                                   }
                             } ]);
 
 app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routeParams',
@@ -539,7 +497,11 @@ app.controller('notifyCtrl', ['$scope', '$location',
     
 //request       
 app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
+    
     function($scope, $location, ClientService) {
+		$scope.commanderChequier = function(clt,numCpt){
+			ClientService.commanderChequier(clt,numCpt);
+		}
         $scope.open=function(){
         	var util =$scope.util;
         	var mont= $scope.mont;
