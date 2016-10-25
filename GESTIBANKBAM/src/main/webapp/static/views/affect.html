@@ -1,7 +1,7 @@
 <div class="panel-header">
               <div id="navigation_help">
           <ul class="breadcrumb">
-            <li><a href="#/">Accueil</a></li>
+            <li><a href="#">Accueil</a></li>
             <li class="active">Affectation</li>
           </ul>
         </div>
@@ -29,10 +29,8 @@
    		<td><input type="checkbox" class="form-control" ng-model="checked" ng-init="checked=true"></td> 
 		
         <td><select class="form-control" ng-disabled="!checked" ng-options="option.nom for option in cons" ng-model="conseiller">
-<!--             <option ng-value={{option.id}} ></option> -->
-            </select>
         </td>
-        <td><input ng-disabled="checked" type ="button" class="btn btn-default" ng-click = "submit(c.id, conseiller.id)" value="Valider"></td>
+        <td><input ng-disabled="checked" type ="button" class="btn btn-primary" ng-click = "submit(c.id, conseiller.id)" value="Valider"></td>
       </tr>
     </tbody>
   </table>

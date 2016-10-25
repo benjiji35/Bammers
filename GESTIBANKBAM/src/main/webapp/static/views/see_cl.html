@@ -41,18 +41,19 @@
 		    <label class="control-label" for="email">Email : </label>
 		    <input type="text" class="form-control" ng-value ="user.mail"  id="email" ng-disabled="checked">
 		    <h4>Documents : </h4>
-		    <a href="#">Fiche de salaire 1</a><br>
-		    <a href="#">Fiche de salaire 2</a><br>
-		    <a href="#">Fiche de salaire 3</a><br>
+		    <a href="#">Fiche de salaire </a><br>
 		    <a href="#">Justificatif de domicile</a><br>
-		    <a href="#">Justificatif d'identité</a>
+		    <a href="#">Justificatif d'identité</a><br><br>
 		</div>
 	</div>
 	Verrouiller les informations : <input type="checkbox" ng-model="checked" ng-init="checked=true"/>
 	<div ng-hide="checked">
-		<input type="button" value="Valider les modifications" ng-click = "send(users,user.id)" class="btn btn-default" >
-		<input type="button" value="Annuler les modifications" class="btn btn-default">
+		<input type="button" value="Valider les modifications" ng-click = "send(users,user.id)" class="btn btn-success" >
+		<input type="button" value="Annuler les modifications" class="btn btn-danger">
 	</div>
+  
+	
+	
 	 <div class="table-responsive">          
 	  <table class="table">
 	  <caption>Liste des comptes</caption>

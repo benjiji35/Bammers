@@ -1,11 +1,15 @@
 package com.bam.GESTIBANKBAM.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bam.GESTIBANKBAM.model.Client;
 import com.bam.GESTIBANKBAM.model.Employe;
 
 public interface ClientService {
+	Client buildClient(Map m);
+
+
 	Client findById(Long id);
 	
 	List<Client> findByNom(String nom);

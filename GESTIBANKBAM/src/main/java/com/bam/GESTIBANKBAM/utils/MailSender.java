@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Compte;
 import com.bam.GESTIBANKBAM.model.Personne;
 
 public class MailSender {
@@ -96,11 +97,12 @@ public class MailSender {
 						prs.getHashMdp()));
 			} else {
 				// it is a password generation
+				Compte compte = clt.getComptes().iterator().next();
 				msg.setSubject(account_subject);
 				mbp1.setText(MessageFormat.format(body_account_tpl, 
 						civility, 
 						eol, 
-						clt.getComptes().get(0).getTransactions().get(0).getDateDebut(),
+						compte.getTransactions().get(0).getDateDebut(),
 						prs.getId(), 
 						prs.getHashMdp()));
 			}

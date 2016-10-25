@@ -4,11 +4,15 @@ angular.module('myApp').factory('CompteService', ['$http', '$q','$window', funct
 
 var CLIENTS_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/compte/';
 var CLIENT_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/comptes/';
+var AGIO_REST_SERVICE_URI = 'http://localhost:8080/SpringAngularStartProject/ongoingTransactions/';
+
 
 var factory = {
 		fetchCompte: fetchCompte,
 		virer: virer,
 		commanderChequier: commanderChequier
+		virer: virer,
+		agio:agio
 };
 return factory;
 /*recherche de tous les utilisateurs */
@@ -33,7 +37,11 @@ function virer(cpt1, cpt2, mont) {
         .then(
         function (response) {
             deferred.resolve(response.data);
-            $window.alert("Votre virement de "+mont+" vers le compte "+cpt2+" a bien été effectué");
+            if (response.data == true) {
+            	$window.alert("Votre virement de "+mont+" vers le compte "+cpt2+" a bien été effectué");
+            } else {
+            	$window.alert("Votre virement de "+mont+" vers le compte "+cpt2+" a été refusé.");
+            }
             window.location.reload();
         },
         function(errResponse){
@@ -52,6 +60,20 @@ function commanderChequier(cpt) {
         function (response) {
             deferred.resolve(response.data);
             $window.alert("Le chéquier a bien été commandé pour le compte n°"+cpt);
+        },
+        function(errResponse){
+            console.error('Error while fetching Users');
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
+}
+function agio(numCpt) {
+    var deferred = $q.defer();
+    $http.get(AGIO_REST_SERVICE_URI+numCpt)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
         },
         function(errResponse){
             console.error('Error while fetching Users');

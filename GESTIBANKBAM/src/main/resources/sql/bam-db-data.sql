@@ -49,6 +49,10 @@ INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `t
 INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('12', '2016-09-16', '2016-09-16', '7340', '1', FALSE);
 
 
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('13', '2016-10-06', null, '3400', '4', TRUE);
+INSERT INTO `bambank`.`Transaction` (`id`, `dateDebut`, `dateFin`, `montant`, `type`, `waitForMonthEnd`) VALUES ('14', '2016-10-07', null, '-9690', '3', TRUE);
+
+
 
 INSERT INTO `bambank`.`Credit` (`id`) VALUES ('1');
 INSERT INTO `bambank`.`Credit` (`id`) VALUES ('2');
@@ -64,7 +68,12 @@ INSERT INTO `bambank`.`Debit` (`id`) VALUES ('9');
 INSERT INTO `bambank`.`Debit` (`id`) VALUES ('10');
 INSERT INTO `bambank`.`Debit` (`id`) VALUES ('11');
 
+INSERT INTO `bambank`.`Remuneration` (`id`, `taux`, `seuilMin`) VALUES ('13', 0.02, 1000);
+INSERT INTO `bambank`.`Decouvert` (`id`, `taux`) VALUES ('14', 0.18);
+
 INSERT INTO `bambank`.`Compte_Transaction` (`Compte_numCpt`, `transactions_id`) VALUES ('123', '1');
+INSERT INTO `bambank`.`Compte_Transaction` (`Compte_numCpt`, `transactions_id`) VALUES ('123', '13');
+INSERT INTO `bambank`.`Compte_Transaction` (`Compte_numCpt`, `transactions_id`) VALUES ('123', '14');
 
 INSERT INTO `bambank`.`Compte_Transaction` (`Compte_numCpt`, `transactions_id`) VALUES ('200', '2');
 INSERT INTO `bambank`.`Compte_Transaction` (`Compte_numCpt`, `transactions_id`) VALUES ('200', '3');

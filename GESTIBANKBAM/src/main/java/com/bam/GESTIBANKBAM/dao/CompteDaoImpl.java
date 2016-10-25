@@ -19,7 +19,7 @@ public class CompteDaoImpl extends AbstractDAO<Long, Compte> implements CompteDa
 	}
 
 	@Override
-	public void setVirement(Compte cpt1, Compte cpt2, double mont) throws BAMException {
+	public boolean setVirement(Compte cpt1, Compte cpt2, double mont) throws BAMException {
 		Debit debit = new Debit(new Date(), -mont);
 		Credit credit = new Credit(new Date(), mont);
 		boolean success = false;
@@ -39,8 +39,8 @@ public class CompteDaoImpl extends AbstractDAO<Long, Compte> implements CompteDa
 			}
 		} catch (Throwable e) {
 			e.printStackTrace(System.err);
-			
-		}		
+		}
+		return success;
 
 //		double solde = compteDebiteur.getBalance();
 //		double decauto = compteDebiteur.getMontantAutorisationDecouvert();

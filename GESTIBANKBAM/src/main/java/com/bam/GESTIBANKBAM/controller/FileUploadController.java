@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bam.GESTIBANKBAM.model.FileModel;
 import com.bam.GESTIBANKBAM.model.MultiFileModel;
+import com.bam.GESTIBANKBAM.service.BamMetaService;
 import com.bam.GESTIBANKBAM.service.ClientService;
 import com.bam.GESTIBANKBAM.util.FileValidator;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
@@ -37,9 +38,11 @@ public class FileUploadController {
 	@Autowired
 	private ClientService clientService;
 
+	@Autowired
+	private BamMetaService bamMetaService;
+
 	private static Properties config;
 
-	//private static String UPLOAD_LOCATION = "D:/bambank/";
 	private static final String UPLOAD_CONFIG = "/bambank/upload.properties";
 
 	private static final String UPLOAD_LOCATION_BASE;
@@ -143,7 +146,6 @@ public class FileUploadController {
 
 	//@RequestMapping(value = "/singleUpload/s-{sid}/k-{key}", method = RequestMethod.POST)
 	@RequestMapping (value= "/singleUpload/s-{sid}/k-{key}", method= RequestMethod.POST)
-
 	public ResponseEntity<Void> singleFileUpload(@Valid FileModel fileModel, BindingResult result, ModelMap model,
 			@PathVariable ("sid") String sid,
 			@PathVariable ("key") String key
@@ -181,6 +183,11 @@ public class FileUploadController {
 
 			String fileName = multipartFile.getOriginalFilename();
 			model.addAttribute("fileName", fileName);
+			try {
+				bamMetaService.addFilePath(sid, dir, key);
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
 			//return "success";
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 		}

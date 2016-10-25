@@ -1,5 +1,7 @@
 package com.bam.GESTIBANKBAM.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.dao.CompteDao;
 import com.bam.GESTIBANKBAM.model.Compte;
+import com.bam.GESTIBANKBAM.model.Transaction;
 import com.bam.GESTIBANKBAM.util.BAMException;
+import com.bam.GESTIBANKBAM.utils.BAMTools;
 @Service("compteService")
 @Transactional
 public class CompteServiceImpl implements CompteService {
@@ -22,8 +26,8 @@ public class CompteServiceImpl implements CompteService {
 	}
 
 	@Override
-	public void setVirement(Compte cpt1, Compte cpt2, double mont) throws BAMException {
-		compteDAO.setVirement(cpt1, cpt2, mont);
+	public boolean setVirement(Compte cpt1, Compte cpt2, double mont) throws BAMException {
+		return compteDAO.setVirement(cpt1, cpt2, mont);
 //		compteDAO.save(cpt1);
 //		compteDAO.save(cpt2);
 	}
@@ -39,4 +43,29 @@ public class CompteServiceImpl implements CompteService {
 		
 	}
 
+	@Override
+	public List<Double> findOngoingTransactionAmounts(Long cpt) {
+		Compte compte = findByNum(cpt);
+		List <Double> ops = new ArrayList<Double>();
+		double d = 0, c = 0;
+		double m;
+		Date today = new Date();
+
+		if (compte == null) {
+			return null;
+		}
+		for (Transaction t : compte.getTransactions()) {
+			if ((BAMTools.isLastDayOfMonth() == false) && (t.isSealed() == false)) {
+				m = t.getMontant(today);
+				if (m < 0) {
+					d += m;
+				} else {
+					c += m;
+				}
+			}
+		}
+		ops.add(c);
+		ops.add(d);
+		return ops;
+	}
 }

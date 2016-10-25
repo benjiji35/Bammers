@@ -78,6 +78,16 @@ public class Remuneration extends Transaction {
 	}
 
 	@Override
+	public double getMontant(Date date) {
+		double m = 0;
+
+		m = Math.abs((super.getMontant() - getSeuilMin()) * 
+					BAMTools.getDiffInDays(date, getDateDebut()) * taux / 365);
+
+		return m;		
+	}
+
+	@Override
 	public void sealTransaction(Date dateFin) throws BAMException {
 		if (isSealed()) {
 			return;

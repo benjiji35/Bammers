@@ -102,6 +102,9 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/see_con/:id', {
 			templateUrl: 'views/see_con.html',
 			controller: 'see_conCtrl'})
+		.when('/agio/:numCpt', {
+			templateUrl: 'views/agio.html',
+			controller: 'agioCtrl'})
 //		.when('/search_nom/:nom/:prenom/:cpte', {
 //			templateUrl: 'views/search_ag.html',
 //			controller: 'sm_ctrlr'})

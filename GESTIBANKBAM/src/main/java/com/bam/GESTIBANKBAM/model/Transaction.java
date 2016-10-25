@@ -146,6 +146,10 @@ public abstract class Transaction implements Serializable, BAMListener {
 		this.montant = montant;
 	}
 
+	public double getMontant(Date date) {
+		return getMontant();
+	}
+
 	public int getType() {
 		return type;
 	}

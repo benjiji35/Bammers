@@ -1,16 +1,24 @@
 package com.bam.GESTIBANKBAM.service;
 
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.bam.GESTIBANKBAM.dao.ClientDAO;
+import com.bam.GESTIBANKBAM.model.Adresse;
 import com.bam.GESTIBANKBAM.model.Client;
+import com.bam.GESTIBANKBAM.model.Compte;
+import com.bam.GESTIBANKBAM.model.Credit;
 import com.bam.GESTIBANKBAM.model.Employe;
-import com.bam.GESTIBANKBAM.model.Transaction;
+import com.bam.GESTIBANKBAM.model.Personne;
 import com.bam.GESTIBANKBAM.utils.BAMTools;
 import com.bam.GESTIBANKBAM.utils.MailSender;
 
@@ -196,7 +204,83 @@ public class ClientServiceImpl implements ClientService {
 		clientDAO.commanderChequier(clt, numCpt,cons);
 		
 	}
+
+	@Override
+	public Client buildClient(Map client) {
+		Client clt = new Client();
+
+		try {
+			String nom = (String)client.get("nom");
+			String prenom = (String)client.get("prenom");
+			String profession = (String)client.get("profession");
+			Date ddn        = BAMTools.parseDate((String)client.get("ddn"));
 	
+			LinkedHashMap<String,Object> adresse    = (LinkedHashMap<String,Object>)client.get("adresse");
+	
+			int situationMatrimoniale = Integer.parseInt(((String)client.get("situationMatrimoniale")));
+			int enfants = (Integer)client.get("enfants");
+			double salaire = Double.parseDouble((client.get("salaire")+""));
+			String civilite = (String)client.get("civilite");
+			LinkedHashMap<String, Object> comptes = (LinkedHashMap<String, Object>)client.get("comptes");
+	
+	
+			LinkedHashMap<String,Object> unCompte = (LinkedHashMap<String,Object>)comptes.values().iterator().next();
+			LinkedHashMap<String, Object> transactions = (LinkedHashMap<String, Object>)unCompte.get("transactions");
+			LinkedHashMap<String, Object> uneTransaction =  (LinkedHashMap<String, Object>)transactions.get("0");
+			double montant = Double.parseDouble(uneTransaction.get("montant")+"");
+			Date dateDebut = new Date();
+			
+			System.out.println("createClient()::");
+			System.out.println("nom="+nom);
+			Personne.SITUATION sm;
+			switch (situationMatrimoniale) {
+				case 0:
+					sm = Personne.SITUATION.SINGLE;
+					break;
+				case 1:
+					sm = Personne.SITUATION.MARRIED;
+					break;
+				case 2:
+					sm = Personne.SITUATION.DIVORCED;
+					break;
+				case 3:
+					default:
+					sm = Personne.SITUATION.WIDOWED;
+			};
+			Compte cpt = new Compte();
+			Credit credit = null;
+			Adresse adr = new Adresse();
+			adr.setNumero(Integer.parseInt((String) adresse.get("numero")));
+			adr.setRue((String) adresse.get("rue"));
+			adr.setCodePostal(adresse.get("codePostal")+"");
+			adr.setVille((String) adresse.get("ville"));
+			adr.setTelephone((String) adresse.get("telephone"));
+			adr.setMail((String) adresse.get("mail"));
+			clt.setType(Personne.ROLE_CLIENT);
+			clt.setCivilite(civilite);
+			clt.setNom(nom);
+			clt.setPrenom(prenom);
+			clt.setProfession(profession);
+			clt.setDdn(ddn);
+			clt.setIncome(salaire);
+			clt.setSituationMatrimoniale(sm);
+			clt.setNbEnfants(enfants);
+			clt.setAdresse(adr);
+			try {
+				credit = new Credit(dateDebut, montant);
+				cpt.addTransaction(credit);
+			} catch (Throwable t) {
+				t.printStackTrace(System.err);
+				//return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			} 
+			clt.addCompte(cpt);
+	
+			System.out.println("Creating Client " + clt.getNom() + " - " + clt.getPrenom());
+		} catch (Exception e) {
+			clt = null;
+		}
+		return clt;
+	}
 	
 	
 //

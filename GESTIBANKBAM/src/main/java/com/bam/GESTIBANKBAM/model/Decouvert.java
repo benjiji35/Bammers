@@ -61,6 +61,18 @@ public class Decouvert extends Transaction {
 	}
 
 	@Override
+	public double getMontant(Date date) {
+		double m = 0;
+		int d;
+
+		d    = BAMTools.getDiffInDays(getDateDebut(), date);
+		m    = -1 * Math.abs((super.getMontant() * d * getTaux()) / 365);
+
+		return m;
+	}
+ 
+
+	@Override
 	public void update(BAMEvent evt) {
 		Object source = evt.getSource();
 		Compte cpte   = (source instanceof Compte? (Compte)source: null);

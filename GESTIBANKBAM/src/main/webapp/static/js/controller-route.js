@@ -6,8 +6,56 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','Clien
 
     self.submit = submit;
     self.edit = edit;
-    self.remove = remove;
+    self.remove = remove;                        
     self.reset = reset;
+
+
+        /*
+		 * $scope.sujet = $routeParams.sujet; $scope.msg = $routeParams.msg;
+		 * //$scope.absUrl = $location.absUrl(); $scope.fichiers =
+		 * $routeParams.fichiers;
+		 * /*console.log("contactCtrl::sujet="+$routeParams.sujet);
+		 * console.log("contactCtrl::msg="+$routeParams.msg);
+		 * console.log("contactCtrl::files="+$routeParams.files);
+		 */                               
+}]);
+
+// app.controller('root', [
+// function($scope, $location) {
+// var d =sessionStorage.getItem("pers");
+// var pers = JSON.parse(d);
+// $scope.util=pers;
+// console.log(pers.type);
+// // todo
+// //$location.url("views/see.html");
+// //$scope.role = 1;
+// }]);
+
+
+/*
+ * app.controller('connectCtrl', ['$scope', '$location', function($scope,
+ * $location) { //$location.url('/tpl'); console.log("connectCtrl::="); }]);
+ */
+// register : no params
+
+app.controller('registerCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+        // $location.url('/tpl');
+        console.log("registerCtrl::");
+    }]);
+
+app.controller('addCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+        // $location.url('/tpl');
+        console.log("addCtrl::");
+    }]);
+
+
+app.controller('askCtrl', ['$scope', '$location', 
+    function($scope, $location) {
+        // $location.url('/tpl');
+        console.log("askCtrl::");
+    }]);
 
 app.controller('seeCtrl', ['$scope', '$location', 'CompteService','$routeParams',
                            function($scope, $location, CompteService, $routeParams) {
@@ -37,18 +85,38 @@ app.controller('see_clCtrl', [ '$scope', '$location', 'ClientIdService','ClientU
               }
         } ]);
 
-app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routeParams',
-       function($scope, $location, CompteService, $routeParams) {
-           console.log("hello id");
-           CompteService.fetchCompte($routeParams.cpt).then(function(d) {
-               self.cpt= d;
-               console.log("cpt : " + cpt);
-               $scope.cpt = d;
-               console.log($scope.cpt);
-           }, function(errResponse) {
-               console.error('Error while fetching Compte');
-           });
-       } ]);
+app.controller('compteCtrl', [ '$scope', '$location', 'CompteService','$routeParams', 
+                               function($scope, $location, CompteService, $routeParams) {
+                                   console.log("hello id");
+                                   CompteService.fetchCompte($routeParams.cpt).then(function(d) {
+                                       self.cpt= d;
+                                       console.log("cpt : " + cpt);
+                                       $scope.cpt = d;
+                                       console.log($scope.cpt);
+                                   }, function(errResponse) {
+                                       console.error('Error while fetching Compte');
+                                   });
+                               }
+                            ]);
+                                   
+
+app.controller('agioCtrl', [ '$scope', '$location', 'CompteService','$routeParams',
+                               function($scope, $location, CompteService, $routeParams) {
+										
+										CompteService.agio($routeParams.numCpt)
+										.then  
+                                			   (function(d) {
+                                	            	
+                                	            	self.agio = d;
+                                	                $scope.agio=d;
+                                	                console.log($scope.agio);
+                                	                
+                                	            },
+                                	            function(errResponse){
+                                	                console.error('Error while fetching Users');
+                                	            }
+                                	        );
+                                                         } ])                           
 
 app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService','ConseillerUpdateService',
                                 '$routeParams',
@@ -67,7 +135,7 @@ app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService','Conseil
                                        	 ConseillerUpdateService.UpdateConseiller(conseiller,id);
                                        }   
                                 } ]);
-//transfer 
+// transfer
 app.controller('transferCtrl', ['$scope', '$location','CompteService',
     function($scope, $location,CompteService) {
 	console.log=($scope.cpt_origine);
@@ -79,7 +147,7 @@ app.controller('transferCtrl', ['$scope', '$location','CompteService',
 	};
     }]);
 
-//notify   
+// notify
 app.controller('notifyCtrl', ['$scope', '$location', 
     function($scope, $location) {
 	var d = null;
@@ -90,7 +158,7 @@ app.controller('notifyCtrl', ['$scope', '$location',
 	$scope.notif=compte;
     }]);
     
-//request       
+// request
 app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
     function($scope, $location, ClientService) {
         $scope.open=function(){
@@ -100,7 +168,7 @@ app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
         }
     }]);
 
-//print         
+// print
 app.controller('printCtrl', ['$scope', '$location', 
     function($scope, $location) {
 	 	$scope.PrintElem=function printToCart(printSectionId){
@@ -112,13 +180,13 @@ app.controller('printCtrl', ['$scope', '$location',
 	 	};
     }]);
 
-//update        
+// update
 app.controller('updateCtrl', ['$scope', '$location', 
     function($scope, $location) {
         // todo
     }]);
 
-//search_ag     
+// search_ag
 app.controller('search_agCtrl',  ['$scope', '$location','ClientService','$routeParams','ClientFilterService','$window',
   function($scope, $location, ClientService,$routeParams,ClientFilterService,$window){
     console.log("fetching All Clients");
@@ -152,7 +220,7 @@ app.controller('search_agCtrl',  ['$scope', '$location','ClientService','$routeP
 }
 ]);
 
-//search_ad
+// search_ad
 app.controller('search_adCtrl', ['$scope', '$location','EmployeService','EmpSearchService',
      function($scope, $location, EmployeService,EmpSearchService)
      {
@@ -186,7 +254,7 @@ app.controller('search_adCtrl', ['$scope', '$location','EmployeService','EmpSear
 }]);
 
                         
-//consult_agCtrl
+// consult_agCtrl
 app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','ClientServiceAff','$routeParams',
         function($scope, $location, ClientMdpService,ClientServiceAff,$routeParams) {
             ClientMdpService.fetchMdpClient($routeParams.id).then(function(d) {
@@ -203,7 +271,7 @@ app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','Cl
                 ClientServiceAff.validUser(client, id)
                 }
         } ]);
-//affectCtrl
+// affectCtrl
 app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService','ClientServiceNew','$routeParams',
           function($scope, $location, ClientService,EmployeService,ClientServiceNew,$routeParams){
             console.log("welcome");
@@ -237,7 +305,7 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
                }
         }]);
 
-//rootCtrl
+// rootCtrl
 app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window','$routeParams',
     function($scope, $location,ClientMdpService, $window,$routeParams) {
         var d = null;
@@ -267,16 +335,15 @@ app.controller('newClCtrl', ['$scope', '$location', 'ClientService', 'UploadFile
 
 
 
-  //$scope.sid =
+  // $scope.sid =
   $scope.sid = Math.floor(Math.random() * 100000000);
-  $scope.uploadFile = function(files, sid, key) { //, field) {
+  $scope.uploadFile = function(files, sid, key) { // , field) {
 	  var fd = new FormData();
-	  console.log('kokfdfksjfksdf');
 	  console.log(sid);
 	  //Take the first selected file
-		//fd.append("file", files[0]);
+		fd.append("file", files[0]);
 
-  	//UploadFileService.uploadFile(fd, sid, key);
+  	UploadFileService.uploadFile(fd, sid, key);
   }; 
      
     $scope.submit = function(client) {
@@ -293,7 +360,7 @@ app.controller('notif_ctrl', ['$scope', '$location', 'NotificationService',
                              function($scope, $location, NotificationService) {
     
     console.log("hello");
-    //$scope.pub = {};
+    // $scope.pub = {};
 
    $scope.submit = function(pub) {
      console.log(pub);
@@ -358,52 +425,50 @@ app.controller('contactCtrl', ['$scope', '$routeParams', '$location','$q','Clien
     self.reset = reset;
 
 
-        /*$scope.sujet = $routeParams.sujet;
-        $scope.msg = $routeParams.msg;
-        //$scope.absUrl  = $location.absUrl();
-        $scope.fichiers = $routeParams.fichiers;
-        /*console.log("contactCtrl::sujet="+$routeParams.sujet);
-        console.log("contactCtrl::msg="+$routeParams.msg);
-        console.log("contactCtrl::files="+$routeParams.files);*/                               
+        /*
+		 * $scope.sujet = $routeParams.sujet; $scope.msg = $routeParams.msg;
+		 * //$scope.absUrl = $location.absUrl(); $scope.fichiers =
+		 * $routeParams.fichiers;
+		 * /*console.log("contactCtrl::sujet="+$routeParams.sujet);
+		 * console.log("contactCtrl::msg="+$routeParams.msg);
+		 * console.log("contactCtrl::files="+$routeParams.files);
+		 */                               
 }]);
 
-//app.controller('root', [ 
-//                          function($scope, $location) {
-//                          var d =sessionStorage.getItem("pers");
-//                          var pers = JSON.parse(d);
-//                          $scope.util=pers;
-//                              console.log(pers.type);
-//                              // todo
-//                              //$location.url("views/see.html");
-//                              //$scope.role = 1;
-//                          }]);
+// app.controller('root', [
+// function($scope, $location) {
+// var d =sessionStorage.getItem("pers");
+// var pers = JSON.parse(d);
+// $scope.util=pers;
+// console.log(pers.type);
+// // todo
+// //$location.url("views/see.html");
+// //$scope.role = 1;
+// }]);
 
 
 /*
-app.controller('connectCtrl', ['$scope', '$location', 
-    function($scope, $location) {
-        //$location.url('/tpl');
-        console.log("connectCtrl::=");
-    }]);
-*/
+ * app.controller('connectCtrl', ['$scope', '$location', function($scope,
+ * $location) { //$location.url('/tpl'); console.log("connectCtrl::="); }]);
+ */
 // register : no params
 
 app.controller('registerCtrl', ['$scope', '$location', 
     function($scope, $location) {
-        //$location.url('/tpl');
+        // $location.url('/tpl');
         console.log("registerCtrl::");
     }]);
 
 app.controller('addCtrl', ['$scope', '$location', 
     function($scope, $location) {
-        //$location.url('/tpl');
+        // $location.url('/tpl');
         console.log("addCtrl::");
     }]);
 
 
 app.controller('askCtrl', ['$scope', '$location', 
     function($scope, $location) {
-        //$location.url('/tpl');
+        // $location.url('/tpl');
         console.log("askCtrl::");
     }]);
 
@@ -472,7 +537,7 @@ app.controller('see_conCtrl', [ '$scope', '$location', 'EmployeService','Conseil
                                        	 ConseillerUpdateService.UpdateConseiller(conseiller,id);
                                        }   
                                 } ]);
-//transfer 
+// transfer
 app.controller('transferCtrl', ['$scope', '$location','CompteService',
     function($scope, $location,CompteService) {
 	console.log=($scope.cpt_origine);
@@ -484,7 +549,7 @@ app.controller('transferCtrl', ['$scope', '$location','CompteService',
 	};
     }]);
 
-//notify   
+// notify
 app.controller('notifyCtrl', ['$scope', '$location', 
     function($scope, $location) {
 	var d = null;
@@ -495,7 +560,7 @@ app.controller('notifyCtrl', ['$scope', '$location',
 	$scope.notif=compte;
     }]);
     
-//request       
+// request
 app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
     
     function($scope, $location, ClientService) {
@@ -509,7 +574,7 @@ app.controller('requestCtrl', ['$scope', '$location', 'ClientService',
         }
     }]);
 
-//print         
+// print
 app.controller('printCtrl', ['$scope', '$location', 
     function($scope, $location) {
 	$scope.PrintElem = function printToCart(printSectionId){
@@ -521,13 +586,13 @@ app.controller('printCtrl', ['$scope', '$location',
 	        };
     }]);
 
-//update        
+// update
 app.controller('updateCtrl', ['$scope', '$location', 
     function($scope, $location) {
         // todo
     }]);
 
-//search_ag     
+// search_ag
 app.controller('search_agCtrl',  ['$scope', '$location','ClientService','$routeParams','ClientFilterService','$window',
   function($scope, $location, ClientService,$routeParams,ClientFilterService,$window){
     console.log("fetching All Clients");
@@ -561,7 +626,7 @@ app.controller('search_agCtrl',  ['$scope', '$location','ClientService','$routeP
 }
 ]);
 
-//search_ad
+// search_ad
 app.controller('search_adCtrl', ['$scope', '$location','EmployeService','EmpSearchService',
      function($scope, $location, EmployeService,EmpSearchService)
      {
@@ -595,7 +660,7 @@ app.controller('search_adCtrl', ['$scope', '$location','EmployeService','EmpSear
 }]);
 
                         
-//consult_agCtrl
+// consult_agCtrl
 app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','ClientServiceAff','$routeParams',
         function($scope, $location, ClientMdpService,ClientServiceAff,$routeParams) {
             ClientMdpService.fetchMdpClient($routeParams.id).then(function(d) {
@@ -612,7 +677,7 @@ app.controller('consult_agCtrl', [ '$scope', '$location', 'ClientMdpService','Cl
                 ClientServiceAff.validUser(client, id)
                 }
         } ]);
-//affectCtrl
+// affectCtrl
 app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeService','ClientServiceNew','$routeParams',
           function($scope, $location, ClientService,EmployeService,ClientServiceNew,$routeParams){
             console.log("welcome");
@@ -646,7 +711,7 @@ app.controller('affectCtrl',  ['$scope', '$location','ClientService','EmployeSer
                }
         }]);
 
-//rootCtrl
+// rootCtrl
 app.controller('rootCtrl', ['$scope', '$location', 'ClientMdpService', '$window','$routeParams',
     function($scope, $location,ClientMdpService, $window,$routeParams) {
         var d = null;
@@ -673,7 +738,7 @@ app.controller('notif_ctrl', ['$scope', '$location', 'NotificationService',
                              function($scope, $location, NotificationService) {
     
     console.log("hello");
-    //$scope.pub = {};
+    // $scope.pub = {};
 
    $scope.submit = function(pub) {
      console.log(pub);

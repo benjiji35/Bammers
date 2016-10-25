@@ -14,7 +14,7 @@ function UpdateClient(client,id) {
     $http.put(CLIENT_REST_SERVICE_URI+id,client)
         .then(
         function (response) {
-            deferred.resolve(response.data);
+            deferred.resolve(response.data);         
         },
         function(errResponse){
             console.error('Error while updating User');

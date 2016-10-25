@@ -1,17 +1,14 @@
 package com.bam.GESTIBANKBAM.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Client")
@@ -23,7 +20,8 @@ public class Client extends Personne {
 	public Client() {
 		super();
 		this.setType(ROLE_CLIENT);
-		comptes = new ArrayList<Compte>();
+		comptes = new HashSet<Compte>();
+//		documents = new HashSet<BamFileModel>();
 	}
 
 	public Client(Long idClient) {
@@ -55,7 +53,10 @@ public class Client extends Personne {
 
 	// TODO
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	private List<Compte> comptes;
+	private Set<Compte> comptes;
+
+//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+//	private Set<BamFileModel> documents;
 
 	private Hashtable<String, String> pathsToAttachedFiles;
 
@@ -72,11 +73,11 @@ public class Client extends Personne {
 	public void addCompte(Compte cpt) {
 		comptes.add(cpt);
 	}
-	public List<Compte> getComptes() {
+	public Set<Compte> getComptes() {
 		return comptes;
 	}
 
-	public void setComptes(List<Compte> comptes) {
+	public void setComptes(Set<Compte> comptes) {
 		System.out.println("Client.setCompte(comptes)=" + comptes.size());
 		this.comptes = comptes;
 	}
@@ -125,4 +126,19 @@ public class Client extends Personne {
 		return added;
 	}
 
+//	public Set<BamFileModel> getDocuments() {
+//		return documents;
+//	}
+//
+//	public void setDocuments(Set<BamFileModel> documents) {
+//		this.documents = documents;
+//	}
+//
+//	public void addDocument(BamFileModel doc) {
+//		documents.add(doc);
+//	}
+//
+//	public void removeDocument(BamFileModel doc) {
+//		documents.remove(doc);
+//	}
 }

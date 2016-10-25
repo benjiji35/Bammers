@@ -141,7 +141,7 @@
   		<div class="form-group">
 	    <label class="control-label col-sm-2" for="salary1">Votre dernier bulletin de salaire : </label>
 	    <div class="col-sm-3">  
-	      <input type="file" id="file" name="file" 
+	      <input type="file" id="salary1" name="salary1" 
 			onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().sid, 'salary1')"	      	  
 	      	required/>
  
@@ -173,9 +173,16 @@
 		</div>
 		<div class="form-group">        
 		  <div class="col-sm-offset-2 col-sm-10">
-		    <button type="submit" class="btn btn-default"ng-disabled="myForm.$invalid">Valider ma demande</button>
+		    <input type="hidden" name="sid" value="angular.element(this).scope().sid" />
 		  </div>
 		</div>
+
+		<div class="form-group">        
+		  <div class="col-sm-offset-2 col-sm-10">
+		    <button type="submit" class="btn btn-default" ng-disabled="myForm.$invalid">Valider ma demande</button>
+		  </div>
+		</div>
+
 
 	  </form>
 	</div>
